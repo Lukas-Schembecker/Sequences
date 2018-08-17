@@ -1,11 +1,7 @@
 [prove off]
 [read Forster/Naturals.ftl]
-[read ramsey/sets.ftl]
-#[read nats.ftl]
-#[read ramsey/utils.ftl]
 [prove on]
-#[prove off]
-#[check off]
+#[prove off][check off]
 [prove on][check on]
 [sequence/-s]
 
@@ -86,19 +82,6 @@ qed.
 
 
 
-### Range
-
-Definition Range. 
-    Let a be a sequence. ran a = {a[n] | n is a natural number}. 
-
-Definition FinRange.
-    Let a be a sequence. a has finite range iff ran a is finite.
-
-Definition InfinRange.
-    Let a be a sequence. a has infinite range iff ran a is not finite.
-
-
-
 ### A convergent sequence is bounded
 
 Definition BoundedBy.
@@ -121,7 +104,7 @@ Proof.
     Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
 
     #Define b[k] = abs(a[k]) for k in NAT.
-    Take a real number K such that K = max(abs(x) + 1, maxN(a,N)).
+    Take a real number K such that K = max(1 + abs(x), maxN(a,N)).
 
     Let us show that a is bounded by K.
         Let n be a natural number.
@@ -132,7 +115,7 @@ Proof.
             end.
         Case n > N.
             We have dist(a[n],x) < 1.
-            We have abs(x) + 1 =< K (by MaxIneq).
+            We have 1 + abs(x) =< K (by MaxIneq).
 
             abs(a[n]) .= abs(a[n] + 0) (by Zero)
                       .= abs(a[n] + (x - x)) (by Neg)
@@ -144,36 +127,88 @@ Proof.
 
             We have dist(a[n],x) + abs(x) < 1 + abs(x) (by MixedAddInvariance).
             Hence abs(a[n]) =< 1 + abs(x) (by MixedTransitivity).
-            Therefore abs(a[n]) =< K (by ComAdd, LeqTransitivity).
+            Therefore abs(a[n]) =< K (by LeqTransitivity).
         end.
     end.
 qed.
 
 
 
-### Sequence 1/n converges to 0
+### Range
+
+Definition Range.
+    Let a be a sequence. ran(a) = {a[n] | n is a natural number}. 
+
+Definition RangeN.
+    Let a be a sequence. ranN(a,N) = {a[n] | n is a natural number such that n =< N}.
+
+Definition FiniteRange.
+    Let a be a sequence. a has finite range iff there exists an N such that ran(a) = ranN(a,N).
+
+Definition InfiniteRange.
+    Let a be a sequence. a has infinite range iff not (a has finite range).
+
+
+
+### Sequence 1/n converges to 0 and has infinite range
 
 Lemma. 
-    Let a be a sequence such that for every n such that n != 0 a[n] = inv(n).
-    Then a converges to 0.
+    Let a be a sequence such that for every n
+        ((If n = 0 then a[n] = 2) and (If n != 0 then a[n] = inv(n))).
+    Then a converges to 0 and a has infinite range.
 Proof.
-    Assume eps is a positive real number. 
-    Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
+    Let us show that a converges to 0.
+        Assume eps is a positive real number. 
+        Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
 
-    Let us show that for every n such that N < n dist(a[n],0) < eps.
-        Assume N < n. Then n != 0.
-        Let us show that inv(n) < eps.
-            We have N * eps < n * eps (by ComMult, MultInvariance).
-            Hence 1 < n * eps (by TransitivityOfOrder).
+        Let us show that for every n such that N < n dist(a[n],0) < eps.
+            Assume N < n. Then n != 0.
+            Let us show that inv(n) < eps.
+                We have N * eps < n * eps (by ComMult, MultInvariance).
+                Hence 1 < n * eps (by TransitivityOfOrder).
 
-            inv(n) is positive.
-            Hence inv(n) * 1 < inv(n) * (n * eps) (by MultInvariance).
-            We have inv(n) * 1 = inv(n) (by One).
-            inv(n) * (n * eps) .= (inv(n) * n) * eps (by AssMult)
-                               .= 1 * eps (by InvDummy)
-                               .= eps (by OneDummy).
+                inv(n) is positive.
+                Hence inv(n) * 1 < inv(n) * (n * eps) (by MultInvariance).
+                We have inv(n) * 1 = inv(n) (by One).
+                inv(n) * (n * eps) .= (inv(n) * n) * eps (by AssMult)
+                                   .= 1 * eps (by InvDummy)
+                                   .= eps (by OneDummy).
+            end.
+            Hence dist(a[n],0) = inv(n) < eps.
         end.
-        Hence dist(a[n],0) = inv(n) < eps.
+    end.
+
+    Let us show that a has infinite range.
+        Assume the contrary.
+        Take N such that ran(a) = ranN(a,N) (by FiniteRange).
+        Then a[N + 1] is an element of ran(a) (by OneNat, AddClosedNat, Range).
+
+        Let us show that a[N + 1] is not an element of ranN(a,N).
+            Let us show that for every n such that n =< N a[n] != a[N + 1].
+                Assume the contrary.
+                Take n such that n =< N and a[n] = a[N + 1].
+                Case n = 0.
+                    We have 2 = inv(N + 1).
+
+                    (2 * N) + 2 .= (2 * N) + (2 * 1) (by One)
+                                .= 2 * (N + 1) (by Distrib)
+                                .= inv(N + 1) * (N + 1)
+                                .= 1 (by InvDummy).
+                    Contradiction.
+                end.
+                Case n != 0.
+                    We have inv(n) = inv(N + 1).
+                    Then inv(inv(n)) = inv(inv(N + 1)).
+
+                    We have N + 1 != 0.
+                    Hence n = N + 1 (by InvRule1).
+                    Contradiction.
+                end.
+            end.
+            Hence a[N + 1] is not an element of ranN(a,N) (by RangeN).
+        end.
+
+        Contradiction.
     end.
 qed.
 
@@ -232,7 +267,7 @@ Definition LimitPointOfSet.
 #    for n in NAT.
 #
 #    Then for every n a[n] is an element of E.
-#    Let us show that a converges to x
+#    Let us show that a converges to x.
 #        Let eps be a positive real number.
 #        Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
 #
