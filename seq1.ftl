@@ -6,7 +6,7 @@
 [prove on]
 #[prove off]
 #[check off]
-
+[prove on][check on]
 [sequence/-s]
 
 Let NAT denote the set of natural numbers.
@@ -59,10 +59,10 @@ Lemma LimitUnique.
 Proof.
     Let us show that for every positive real number Eps dist(x,y) < Eps.
         Let eps be a positive real number.
-        Take a positive real number halfeps such that halfeps = eps * inv(2).
+        Take a positive real number halfeps such that halfeps = inv(2) * eps.
 
-        Take N1 such that for every n such that N1 < n dist(p[n],x) < halfeps.
-        Take N2 such that for every n such that N2 < n dist(p[n],y) < halfeps.
+        Take N1 such that for every n such that N1 < n dist(p[n],x) < halfeps (by Convergence).
+        Take N2 such that for every n such that N2 < n dist(p[n],y) < halfeps (by Convergence).
 
         For every n dist(x,y) =< dist(x,p[n]) + dist(p[n],y) (by DistTriangleIneq). 
         Take N3 such that N3 = max(N1,N2) + 1.
@@ -70,7 +70,16 @@ Proof.
 
         Hence dist(x,p[N3]) < halfeps and dist(p[N3],y) < halfeps (by DistSymm).
         Hence dist(x,p[N3]) + dist(p[N3],y) < halfeps + halfeps (by AddInvariance).
-        Hence dist(x,y) < 2 * halfeps = eps.
+        Hence dist(x,y) < halfeps + halfeps (by MixedTransitivity).
+
+        halfeps + halfeps .= (1 * halfeps) + (1 * halfeps) (by OneDummy)
+                          .= (1 + 1) * halfeps (by DistribDummy)
+                          .= 2 * (inv(2) * eps)
+                          .= (2 * inv(2)) * eps (by AssMult)
+                          .= 1 * eps (by Inverse)
+                          .= eps (by OneDummy).
+
+        Hence dist(x,y) < eps.
     end.
     Therefore x = y (by DistEqual).
 qed.
@@ -109,26 +118,30 @@ Lemma ConvergentImpBounded.
     Let a be a sequence. Assume that a converges. Then a is bounded.
 Proof.
     Take a real number x such that a converges to x.
-    Take N such that for every n such that N < n dist(a[n],x) < 1 (by OnePos).
+    Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
 
     #Define b[k] = abs(a[k]) for k in NAT.
-    Take a real number r such that K = max(abs(x) + 1, maxN(a,N)).
+    Take a real number K such that K = max(abs(x) + 1, maxN(a,N)).
 
     Let us show that a is bounded by K.
         Let n be a natural number.
         Case n =< N.
-            We have abs(a[n]) =< maxN(a,N).
+            We have abs(a[n]) =< maxN(a,N) (by MaxAbsN).
             We have maxN(a,N) =< K.
             Therefore abs(a[n]) =< K (by LeqTransitivity).
             end.
         Case n > N.
             We have dist(a[n],x) < 1.
             We have abs(x) + 1 =< K.
+
             abs(a[n]) .= abs(a[n] + 0) (by Zero)
-                      .= abs(a[n] + ((-x) + x)) (by Neg, ComAdd)
+                      .= abs(a[n] + (x - x)) (by Neg)
+                      .= abs(a[n] + ((-x) + x)) (by ComAdd)
                       .= abs((a[n] - x) + x) (by AssAdd).
+
             Hence abs(a[n]) =< abs(a[n] - x) + abs(x) (by AbsTriangleIneq).
             Hence abs(a[n]) =< dist(a[n],x) + abs(x).
+
             We have dist(a[n],x) + abs(x) < 1 + abs(x) (by MixedAddInvariance).
             Hence abs(a[n]) =< 1 + abs(x) (by MixedTransitivity).
             Therefore abs(a[n]) =< K.
@@ -146,6 +159,7 @@ Lemma.
 Proof.
     Assume eps is a positive real number. 
     Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
+
     Let us show that for every n such that N < n dist(a[n],0) < eps.
         Assume N < n. Then n != 0.
         Let us show that inv(n) < eps.
@@ -154,7 +168,8 @@ Proof.
             Therefore inv(n) * 1 < inv(n) * (n * eps).
             We have inv(n) * 1 = inv(n).
             inv(n) * (n * eps) .= (inv(n) * n) * eps (by AssMult)
-                               .= eps (by InvDummy, OneDummy).
+                               .= 1 * eps (by InvDummy)
+                               .= eps (by OneDummy).
         end.
     end.
 qed.
@@ -196,10 +211,10 @@ Lemma SumConv.
     Then a +' b converges to x + y.
 Proof.
     Let eps be a positive real number. 
-    Take a positive real number halfeps such that halfeps = eps * inv(2). 
+    Take a positive real number halfeps such that halfeps = inv(2) * eps. 
 
-    Take N1 such that for every n such that N1 < n dist(a[n],x) < halfeps.
-    Take N2 such that for every n such that N2 < n dist(b[n],y) < halfeps.
+    Take N1 such that for every n such that N1 < n dist(a[n],x) < halfeps (by Convergence).
+    Take N2 such that for every n such that N2 < n dist(b[n],y) < halfeps (by Convergence).
     Take N such that N = max(N1,N2).
     Then N1 =< N and N2 =< N.
 
@@ -213,12 +228,21 @@ Proof.
                                      .= abs((-x) + (a[n] + (b[n] - y))) (by AssAdd)
                                      .= abs(((-x) + a[n]) + (b[n] - y)) (by AssAdd)
                                      .= abs((a[n] - x) + (b[n] - y)) (by ComAdd).
-        abs((a[n] - x) + (b[n] - y)) =< abs(a[n] - x) + abs(b[n] - y)  (by AbsTriangleIneq).
+
+        We have abs((a[n] - x) + (b[n] - y)) =< abs(a[n] - x) + abs(b[n] - y)  (by AbsTriangleIneq).
         Hence abs((a[n] + b[n]) - (x + y)) =< dist(a[n],x) + dist(b[n],y).
 
         Hence dist(a[n],x) + dist(b[n],y) < halfeps + halfeps (by AddInvariance).
         Hence abs((a[n] + b[n]) - (x + y)) < halfeps + halfeps (by MixedTransitivity).
-        halfeps + halfeps = 2 * halfeps = eps.
+        Hence dist((a +' b)[n],(x + y)) < halfeps + halfeps.
+
+        halfeps + halfeps .= (1 * halfeps) + (1 * halfeps) (by OneDummy)
+                          .= (1 + 1) * halfeps (by DistribDummy)
+                          .= 2 * (inv(2) * eps)
+                          .= (2 * inv(2)) * eps (by AssMult)
+                          .= 1 * eps (by Inverse)
+                          .= eps (by OneDummy).
+
         Hence dist((a +' b)[n],(x + y)) < eps.
     end.
 qed.
@@ -256,7 +280,7 @@ Proof.
     cn converges to c (by ConstConv).
     Then ca converges to c + x (by SumConv).
 qed.
-[prove on][check on]
+
 Lemma ProdConstConv.
     Let a be a sequence. Let x,c be real numbers. Assume a converges to x.
     Let ca be a sequence such that for every natural number n ca[n] = c * a[n].
