@@ -741,6 +741,9 @@ Case x =< y. max(x,y) .= y (by Maximum) .= max(y,x) (by Maximum). end.
 Case y =< x. max(x,y) .= x (by Maximum) .= max(y,x) (by Maximum). end.
 qed.
 
+Lemma MaxIneqDummy.
+y =< max(x,y).
+
 [group MaxGr Maximum MaxIneq MaxSym]
 
 [group RealGr FieldGr AbsDist MaxGr]

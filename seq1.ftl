@@ -54,22 +54,22 @@ Proof.
 qed.
 
 Lemma LimitUnique.
-    Let p be a sequence. Let x, y be real numbers. Assume p converges to x and p converges to y.
+    Let a be a sequence. Let x, y be real numbers. Assume a converges to x and a converges to y.
     Then x = y.
 Proof.
-    Let us show that for every positive real number Eps dist(x,y) < Eps.
+    Let us show that for every positive real number eps dist(x,y) < eps.
         Let eps be a positive real number.
         Take a positive real number halfeps such that halfeps = inv(2) * eps.
 
-        Take N1 such that for every n such that N1 < n dist(p[n],x) < halfeps (by Convergence).
-        Take N2 such that for every n such that N2 < n dist(p[n],y) < halfeps (by Convergence).
+        Take N1 such that for every n such that N1 < n dist(a[n],x) < halfeps (by Convergence).
+        Take N2 such that for every n such that N2 < n dist(a[n],y) < halfeps (by Convergence).
 
-        For every n dist(x,y) =< dist(x,p[n]) + dist(p[n],y) (by DistTriangleIneq). 
+        For every n dist(x,y) =< dist(x,a[n]) + dist(a[n],y) (by DistTriangleIneq). 
         Take N3 such that N3 = max(N1,N2) + 1.
         Then N1 < N3 and N2 < N3.
 
-        Hence dist(x,p[N3]) < halfeps and dist(p[N3],y) < halfeps (by DistSymm).
-        Hence dist(x,p[N3]) + dist(p[N3],y) < halfeps + halfeps (by AddInvariance).
+        Hence dist(x,a[N3]) < halfeps and dist(a[N3],y) < halfeps (by DistSymm).
+        Hence dist(x,a[N3]) + dist(a[N3],y) < halfeps + halfeps (by AddInvariance).
         Hence dist(x,y) < halfeps + halfeps (by MixedTransitivity).
 
         halfeps + halfeps .= (1 * halfeps) + (1 * halfeps) (by OneDummy)
@@ -127,12 +127,12 @@ Proof.
         Let n be a natural number.
         Case n =< N.
             We have abs(a[n]) =< maxN(a,N) (by MaxAbsN).
-            We have maxN(a,N) =< K.
+            We have maxN(a,N) =< K (by MaxIneqDummy).
             Therefore abs(a[n]) =< K (by LeqTransitivity).
             end.
         Case n > N.
             We have dist(a[n],x) < 1.
-            We have abs(x) + 1 =< K.
+            We have abs(x) + 1 =< K (by MaxIneq).
 
             abs(a[n]) .= abs(a[n] + 0) (by Zero)
                       .= abs(a[n] + (x - x)) (by Neg)
@@ -144,14 +144,14 @@ Proof.
 
             We have dist(a[n],x) + abs(x) < 1 + abs(x) (by MixedAddInvariance).
             Hence abs(a[n]) =< 1 + abs(x) (by MixedTransitivity).
-            Therefore abs(a[n]) =< K.
+            Therefore abs(a[n]) =< K (by ComAdd, LeqTransitivity).
         end.
     end.
 qed.
 
 
 
-### Sequence 1/n converges to 1
+### Sequence 1/n converges to 0
 
 Lemma. 
     Let a be a sequence such that for every n such that n != 0 a[n] = inv(n).
@@ -165,12 +165,15 @@ Proof.
         Let us show that inv(n) < eps.
             We have N * eps < n * eps (by ComMult, MultInvariance).
             Hence 1 < n * eps (by TransitivityOfOrder).
-            Therefore inv(n) * 1 < inv(n) * (n * eps).
-            We have inv(n) * 1 = inv(n).
+
+            inv(n) is positive.
+            Hence inv(n) * 1 < inv(n) * (n * eps) (by MultInvariance).
+            We have inv(n) * 1 = inv(n) (by One).
             inv(n) * (n * eps) .= (inv(n) * n) * eps (by AssMult)
                                .= 1 * eps (by InvDummy)
                                .= eps (by OneDummy).
         end.
+        Hence dist(a[n],0) = inv(n) < eps.
     end.
 qed.
 
@@ -180,21 +183,79 @@ qed.
 
 Definition Neighb.
     Let eps be a positive real number. Let x be a real number.
-    Neighb(x,eps) = {y| y is a real number such that dist(x,y) < eps}.
+    Neighb(x,eps) = {y | y is a real number such that dist(y,x) < eps}.
+
+Lemma ConvNeighborhood.
+    Let a be a sequence. Let x be a real number.
+    a converges to x iff for every positive real number eps there exists a N
+    such that for every n such that N < n a[n] is an element of Neighb(x,eps).
+Proof.
+    Let us show that (If a converges to x then for every positive real number eps there exists a N
+    such that for every n such that N < n a[n] is an element of Neighb(x,eps)).
+        Assume a converges to x.
+        Let eps be a positive real number.
+        Take N such that for every n such that N < n dist(a[n],x) < eps (by Convergence).
+        Hence for every n such that N < n a[n] is an element of Neighb(x,eps) (by Neighb).
+    end.
+    
+    Let us show that (If for every positive real number eps there exists a N such that
+    for every n such that N < n a[n] is an element of Neighb(x,eps) then a converges to x).
+        Assume for every positive real number eps there exists a N such that
+            for every n such that N < n a[n] is an element of Neighb(x,eps).
+        Let eps be a positive real number.
+        Take N such that for every n such that N < n a[n] is an element of Neighb(x,eps).
+        Hence for every n such that N < n dist(a[n],x) < eps (by Neighb).
+    end.
+qed.
 
 Definition LimitPointOfSet.
-    Let E be a set. Assume that every element of E is a real number. A limit point of E
+    Let E be a set. Assume every element of E is a real number. A limit point of E
     is a real number x such that for every positive real number eps there exists an element
-    q of E such that q is an element of Neighb(x,eps) and q != x.
+    y of E such that y is an element of Neighb(x,eps) and y != x.
 
-#Definition BlobSet.
-#    Let a be a sequence. Let x be a real number. Let eps be a positive real number.
-#    Blob(x,eps) = { n | a[n] does not belong to Neighb(x,eps)}.
-
-
-#Lemma ConvNeighborhood.
-#(a converges to x) iff for every positive real number eps Blob(x,eps) is a finite set.
+#Lemma ConvLimitPoint.
+#    Let E be a subset of REAL. Let x be a limit point of E. Then there exists a sequence a
+#    such that a converges to x and for every n a[n] is an element of E.
 #Proof.
+#    Let us show that for every n such that n > 0 there exists an element y of E such that
+#    y is an element of Neighb(x,inv(n)) and y != x.
+#        Assume n > 0.
+#        Then inv(n) is a positive real number.
+#        Take an element y of E such that y is an element of Neighb(x,inv(n))
+#            and y != x (by LimitPointOfSet).
+#    end.
+#
+#    Define a[n] = Case n = 0 -> Choose an element y of E such that y is an element of
+#                                Neighb(x,1) and y != x in y,
+#                  Case n > 0 -> Choose an element y of E such that y is an element of
+#                                Neighb(x,inv(n)) and y != x in y
+#    for n in NAT.
+#
+#    Then for every n a[n] is an element of E.
+#    Let us show that a converges to x
+#        Let eps be a positive real number.
+#        Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
+#
+#        Let us show that for every n such that N < n dist(a[n],x) < eps.
+#            Assume N < n. Then n != 0.
+#            Then a[n] is an element of E such that a[n] is an element of Neighb(x,inv(n)).
+#            Hence dist(a[n],x) < inv(n).
+#
+#            Let us show that inv(n) < eps.
+#                We have N * eps < n * eps (by ComMult, MultInvariance).
+#                Hence 1 < n * eps (by TransitivityOfOrder).
+#
+#                inv(n) is positive.
+#                Hence inv(n) * 1 < inv(n) * (n * eps) (by MultInvariance).
+#                We have inv(n) * 1 = inv(n) (by One).
+#                inv(n) * (n * eps) .= (inv(n) * n) * eps (by AssMult)
+#                                   .= 1 * eps (by InvDummy)
+#                                   .= eps (by OneDummy).
+#            end.
+#            Hence dist(a[n],x) < eps (by TransitivityOfOrder).
+#        end.
+#    end.
+#qed.
 
 
 
@@ -275,6 +336,7 @@ Proof.
                   .= cn[n] + a[n]
                   .= (cn +' a)[n].
         end.
+        Hence ca = (cn +' a) (by SequenceEq).
     end.
 
     cn converges to c (by ConstConv).
@@ -321,8 +383,8 @@ Proof.
         end.
     end.
 qed.
-[exit]
 
+[exit]
 #[prove off]
 Lemma MinusRule5.
     Let a,b be real numbers. 
