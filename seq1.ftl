@@ -1,5 +1,5 @@
 [prove off]
-[read Forster/Naturals.ftl]
+[read Sequences/Naturals.ftl]
 [prove on]
 #[prove off][check off]
 [prove on][check on]
@@ -419,31 +419,28 @@ Proof.
     end.
 qed.
 
-[exit]
+
 #[prove off]
 Lemma MinusRule5.
     Let a,b be real numbers. 
-    Then (a * (-b)) = -(a * b) and ((-a) * b) = -(a * b).
+    Then (a * (-b)) = -(a * b) and ((-b) * a) = -(b * a).
 Proof.
-    a * (-b) = a * ((-1)*b) (by MinusRule4).
-    a * ((-1) * b) = (a * (-1)) * b (by AssMult).
-    (a * (-1)) * b = ((-1) * a) * b (by ComMult).
-    ((-1) * a) * b = (-1) * (a * b) (by AssMult).
-    (-1) * (a * b) = -(a * b).
-    Hence (a * (-b)) = -(a * b).
+        (1) a * (-b) .= a * ((-1)*b) (by MinusRule4)
+                     .= (a * (-1)) * b (by AssMult)
+                     .= ((-1) * a) * b (by ComMult)
+                     .= (-1) * (a * b) (by AssMult)
+                     .= -(a * b) (by MinusRule4).
 
-    ((-a) * b) = (b * (-a)) (by ComMult).
-    (b * (-a)) = -(b * a).
-    -(b * a) = -(a * b) (by ComMult).
+        ((-b) * a) .= -(b * a) (by ComMult, 1).
 qed.
 
 Lemma MinusRule6.
     Let a,b be real numbers. 
     Then ((-a) * (-b)) = a * b.
 Proof.
-    ((-a) * (-b)) = -(a * (-b)) (by MinusRule5).
-    -(a * (-b)) = -(-(a * b)) (by MinusRule5).
-    -(-(a * b)) = a * b (by MinusRule2).
+    ((-a) * (-b)) .= -(a * (-b)) (by MinusRule5)
+                  .= -(-(a * b)) (by MinusRule5)
+                  .= a * b (by MinusRule2).
 qed.
 
 Lemma SwapRuleLeq.
@@ -456,41 +453,42 @@ Lemma Binomi1.
     Let a,b,c,d be real numbers.
     Then (a + b) * (c + d) = ((a * c) + (b * c)) + ((a * d) + (b * d)) .
 Proof.
-    (a + b) * (c + d) = ((a + b) * c) + ((a + b) * d) (by Distrib).
-    ((a + b) * c) + ((a + b) * d) = ((a * c) + (b * c)) + ((a * d) + (b * d)) (by DistribDummy).
+    (a + b) * (c + d) .= ((a + b) * c) + ((a + b) * d) (by Distrib)
+                      .= ((a * c) + (b * c)) + ((a * d) + (b * d)) (by DistribDummy).
 qed.
 
 Lemma Binomi2.
     Let a,b,c,d be real numbers.
     Then (a - b) * (c - d) = ((a * c) - (b * c)) + (-(a * d) + (b * d)).
 Proof.
-    (a - b) * (c - d) = (a + (-b)) * (c + (-d)).
-    (a + (-b)) * (c + (-d)) = ((a * c) + ((-b) * c)) + ((a * (-d)) + ((-b) * (-d))) (by Binomi1).
-    ((a * c) + ((-b) * c)) + ((a * (-d)) + ((-b) * (-d))) = ((a * c) - (b * c)) + (-(a * d) + (b * d)) (by MinusRule5, MinusRule6).
+    (a - b) * (c - d) .= ((a * c) + ((-b) * c)) + ((a * (-d)) + ((-b) * (-d))) (by Binomi1)
+                      .= ((a * c) - (b * c)) + (-(a * d) + (b * d)) (by MinusRule5, MinusRule6).
 qed.
 
 Lemma Identity1.
     Let a,b,c,d be real numbers. 
-    Then (a*b) - (c*d) = ((a - c) * (b - d)) + ((c * (b - d)) + (d * (a - c))).
+    Then (a * b) - (c * d) = ((a - c) * (b - d)) + ((c * (b - d)) + (d * (a - c))).
 Proof.
-    ((a - c)*(b - d)) + ((c*(b - d)) + (d*(a - c))) = (((a*b) - (c*b)) + (-(a*d) + (c*d))) + ((c*(b - d)) + (d*(a - c))) (by Binomi2).
-    (((a*b) - (c*b)) + (-(a*d) + (c*d))) + ((c*(b - d)) + (d*(a - c))) = (((a*b) - (c*b)) + (-(a*d) + (c*d))) + ((c*(b + (-d))) + (d*(a + (-c)))).
-    (((a*b) - (c*b)) + (-(a*d) + (c*d))) + ((c*(b + (-d))) + (d*(a + (-c)))) = (((a*b) - (c*b)) + (-(a*d) + (c*d))) + (((c*b) + (c*(-d))) + ((d*a) + (d*(-c)))) (by Distrib).
-    (((a*b) - (c*b)) + (-(a*d) + (c*d))) + (((c*b) + (c*(-d))) + ((d*a) + (d*(-c)))) = (((a*b) - (c*b)) + (-(a*d) + (c*d))) + (((c*b) + (-(c*d))) + ((d*a) + (-(d*c)))) (by MinusRule5).
-    (((a*b) - (c*b)) + (-(a*d) + (c*d))) + (((c*b) + (-(c*d))) + ((d*a) + (-(d*c)))) = ((c*b) + (-(c*d))) + ((((a*b) - (c*b)) + (-(a*d) + (c*d))) + ((d*a) + (-(d*c)))) (by BubbleAdd).
-    ((c*b) + (-(c*d))) + ((((a*b) - (c*b)) + (-(a*d) + (c*d))) + ((d*a) + (-(d*c)))) = ((c*b) + (-(c*d))) + (((a*b) - (c*b)) + ((-(a*d) + (c*d)) + ((a*d) + (-(c*d))))) (by AssAdd, ComMult).
-    ((c*b) + (-(c*d))) + (((a*b) - (c*b)) + ((-(a*d) + (c*d)) + ((a*d) + (-(c*d))))) = ((c*b) + (-(c*d))) + (((a*b) - (c*b)) + ((-(a*d) + (c*d)) -(-((a*d) + (-(c*d)))))) (by MinusRule2). 
-    ((c*b) + (-(c*d))) + (((a*b) - (c*b)) + ((-(a*d) + (c*d)) - (-(a*d) + (c*d))))  = ((c*b) + (-(c*d))) + (((a*b) - (c*b)) + 0) (by Neg).
-    ((c*b) + (-(c*d))) + (((a*b) - (c*b)) + 0) = ((-(c*d)) + (c*b)) + (-(c*b) + (a*b)) (by ComAdd).
-    ((-(c*d)) + (c*b)) + (-(c*b) + (a*b)) = (-(c*d)) + ((c*b) + (-(c*b) + (a*b))) (by AssAdd).
-    (-(c*d)) + ((c*b) + (-(c*b) + (a*b))) = (-(c*d)) + (((c*b) -(c*b)) + (a*b)) (by AssAdd).
-    (-(c*d)) + (((c*b) -(c*b)) + (a*b)) = (-(c*d)) + (0 + (a*b)) (by Neg).
-    (-(c*d)) + (0 + (a*b)) = -(c*d) + (a*b).
-    -(c*d) + (a*b) = (a*b) - (c*d) (by ComAdd).
+    ((a - c)*(b - d)) + ((c*(b - d)) + (d*(a - c))) 
+        .= (((a * b) - (c * b)) + (-(a * d) + (c * d))) + ((c * (b - d)) + (d * (a - c))) (by Binomi2)
+        .= (((a * b) - (c * b)) + (-(a * d) + (c * d))) + (((c * b) + (c * (-d))) + ((d * a) + (d * (-c)))) (by Distrib)
+        .= (((a * b) - (c * b)) + (-(a * d) + (c * d))) + (((c * b) + (-(c * d))) + ((d * a) + (-(d * c)))) (by MinusRule5)
+        .= ((c * b) + (-(c * d))) + ((((a * b) - (c * b)) + (-(a * d) + (c * d))) + ((d * a) + (-(d * c)))) (by BubbleAdd)
+        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + ((-(a * d) + (c * d)) + ((a * d) + (-(c * d))))) (by AssAdd, ComMult)
+        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + ((-(a * d) + (c * d)) + (-(-((a * d) + (-(c * d))))))) (by MinusRule2)
+        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + ((-(a * d) + (c * d)) + (-(-(a * d) + (c * d))))) (by ComAdd, MinusRule3)
+        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + 0) (by Neg)
+        .= ((-(c * d)) + (c * b)) + (-(c * b) + (a * b)) (by ComAdd, Zero)
+        .= (-(c * d)) + ((c * b) + (-(c * b) + (a * b))) (by AssAdd)
+        .= (-(c * d)) + (((c * b) -(c * b)) + (a * b)) (by AssAdd)
+        .= -(c * d) + (0 + (a * b)) (by Neg)
+        .= -(c * d) + ((a * b) + 0) (by ComAdd)
+        .= -(c * d) + (a * b) (by Zero)
+        .= (a * b) - (c * d) (by ComAdd).
 qed.
 #[prove on]
 
-
+[exit]
 [prove off]
 Lemma ProdConv.
     Let s,t be sequences. Let x,y be real numbers. Assume s converges to x and t converges to y.
