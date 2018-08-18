@@ -11,7 +11,7 @@ Let REAL denote the set of real numbers.
 Let n, m, N, N1, N2, N3 denote natural numbers.
 
 
-
+[prove off]
 ### Sequences
 
 Definition Seq.
@@ -114,28 +114,32 @@ Proof.
     Take a real number K such that K = max(1 + abs(x), maxN(a,N)).
 
     Let us show that a is bounded by K.
-        Let n be a natural number.
-        Case n =< N.
-            We have abs(a[n]) =< maxN(a,N) (by MaxAbsN).
-            We have maxN(a,N) =< K (by MaxIneqDummy).
-            Therefore abs(a[n]) =< K (by LeqTransitivity).
+        Let us show that for every n abs(a[n]) =< K. 
+            Let n be a natural number.
+            We have n =< N or n > N.
+            Case n =< N.
+                We have abs(a[n]) =< maxN(a,N) (by MaxAbsN).
+                We have maxN(a,N) =< K (by MaxIneqDummy).
+                Therefore abs(a[n]) =< K (by LeqTransitivity).
             end.
-        Case n > N.
-            We have dist(a[n],x) < 1.
-            We have 1 + abs(x) =< K (by MaxIneq).
+            Case n > N.
+                We have dist(a[n],x) < 1.
+                We have 1 + abs(x) =< K (by MaxIneq).
 
-            abs(a[n]) .= abs(a[n] + 0) (by Zero)
-                      .= abs(a[n] + (x - x)) (by Neg)
-                      .= abs(a[n] + ((-x) + x)) (by ComAdd)
-                      .= abs((a[n] - x) + x) (by AssAdd).
+                abs(a[n]) .= abs(a[n] + 0) (by Zero)
+                          .= abs(a[n] + (x - x)) (by Neg)
+                          .= abs(a[n] + ((-x) + x)) (by ComAdd)
+                          .= abs((a[n] - x) + x) (by AssAdd).
 
-            Hence abs(a[n]) =< abs(a[n] - x) + abs(x) (by AbsTriangleIneq).
-            Hence abs(a[n]) =< dist(a[n],x) + abs(x).
+                Hence abs(a[n]) =< abs(a[n] - x) + abs(x) (by AbsTriangleIneq).
+                Hence abs(a[n]) =< dist(a[n],x) + abs(x).
 
-            We have dist(a[n],x) + abs(x) < 1 + abs(x) (by MixedAddInvariance).
-            Hence abs(a[n]) =< 1 + abs(x) (by MixedTransitivity).
-            Therefore abs(a[n]) =< K (by LeqTransitivity).
+                We have dist(a[n],x) + abs(x) < 1 + abs(x) (by MixedAddInvariance).
+                Hence abs(a[n]) =< 1 + abs(x) (by MixedTransitivity).
+                Therefore abs(a[n]) =< K (by LeqTransitivity).
+            end.
         end.
+        Hence a is bounded by K (by BoundedBy).
     end.
 qed.
 
@@ -343,6 +347,7 @@ Definition LimitPointOfSet.
 #    end.
 #qed.
 
+[prove on]
 
 
 ### Sum and Product of Sequences
@@ -559,9 +564,15 @@ Lemma ConstMultSum.
     Let a,b be sequences. Let x,y be real numbers such that for every n b[n] = y * (a[n] + (-x)). Assume a converges to x.
     Then b converges to 0.
 Proof.
-    [prove off]Take a sequence sum such that sum = (-x) +'' a. [prove on]
+    [prove off]Take a sequence sum such that for every n sum[n] = (-x) + a[n]. [prove on]
     sum converges to 0 (by SumConstConv, ComAdd, Neg).
-    We have b = y *'' sum.
+    Let us show that for every n b[n] = y * sum[n].
+    Proof.
+        b[n] .= y * (a[n] + (-x))
+             .= y * ((-x) + a[n]) (by ComAdd)
+             .= y * sum[n].
+    qed.
+    Hence b = y *'' sum (by SequenceEq).
     Hence b converges to 0 (by ProdConstConv, ComMult, ZeroMult).
 qed.
 
@@ -628,13 +639,35 @@ qed.
 #[prove on]
 
 
+Lemma AbsTriangleIneq2.
+    Let x,y be real numbers. Then abs(x) - abs(y) =< abs(x - y).
+Proof.
+    abs(x) .= abs(x + ((-y) + y)) (by Zero, Neg, ComAdd)
+           .= abs((x + (-y)) + y) (by AssAdd).
+    abs((x + (-y)) + y) =< abs(x - y) + abs(y) (by AbsTriangleIneq).
+    Hence abs(x) =< abs(x + (-y)) + abs(y).
+    abs(x) + (-abs(y)) =< (abs(x - y) + abs(y)) + (-abs(y)) (by LeqAddInvariance).
+    (abs(x - y) + abs(y)) + (-abs(y)) = abs(x - y) (by AssAdd, Neg, Zero).
+    Hence abs(x) - abs(y) =< abs(x - y) (by LeqTransitivity).
+qed.   
+    
+    
+
 #Lemma DivConv.
-#    Let a be a sequence. Let x be a real number. Assume a converges to x.
+#    Let a be a sequence. Let x be a real number such that x != 0. Assume a converges to x. 
+#    Assume for every n a[n] != 0.
 #    Let div(a) be a sequence such that for every natural number n (div(a))[n] = inv(a[n]).
 #    Then div(a) converges to inv(x).
 #Proof.
 #    Let eps be a positive real number.
-#    Take a natural number m such that abs(a[n],x)
+#    inv(2) * abs(x) is a positive real number.	
+#    Take a natural number m such that for every n such that m < n dist(x,a[n]) < inv(2) * abs(x) (by Convergence, DistDefinition).
+#    abs(a[n]) - abs(x) =< abs(a[n] - x) (by AbsTriangleIneq2).
+#    abs(a[n] - x) .= abs(-(a[n] - x)) (by AbsPosNeg)
+#                  .= abs(-a[n] - (-x)) (by MinusRule2).   
+#    abs(x - a[n]) < inv(2) * abs(x) (by DistDefinition).
+#    abs(a[n]) - abs(x) < inv(2) * abs(x) (by MixedTransitivity).
+#qed.
     
 
 
