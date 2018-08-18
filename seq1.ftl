@@ -119,8 +119,8 @@ Proof.
             Let n be a natural number.
             We have n =< N or n > N.
             Case n =< N.
-                We have abs(a[n]) =< maxN(a,N) (by MaxAbsN).
-                We have maxN(a,N) =< K (by MaxIneqDummy).
+                We have abs(a[n]) = b[n] =< maxN(b,N) (by MaxAbsN).
+                We have maxN(b,N) =< K (by MaxIneqDummy).
                 Therefore abs(a[n]) =< K (by LeqTransitivity).
             end.
             Case n > N.
