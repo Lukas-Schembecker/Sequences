@@ -488,56 +488,63 @@ Proof.
 qed.
 #[prove on]
 
-[exit]
-[prove off]
+#[exit]
+#[prove off]
+
+Signature Sqrt.
+Let x be a positive real number. sqrt(x) is a positive real number.
+
+Axiom Wurz.
+Let x be a positive real number. sqrt(x)*sqrt(x) = x.
+
 Lemma ProdConv.
-    Let s,t be sequences. Let x,y be real numbers. Assume s converges to x and t converges to y.
-    Let s *' t be a sequence such that for every natural number n (s *' t)[n] = s[n]*t[n].
-    Then s *' t converges to x * y.
-#Proof.
+    Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
+    Let a *' b be a sequence such that for every natural number n (a *' b)[n] = a[n]*b[n].
+    Then a *' b converges to x * y.
+Proof.
 #Strategie: zerteile (s[n]*t[n]) - (x*y) = ((s[n] - x)*(t[n] - y)) + ((x*(t[n] - y)) + (y*(s[n] - x))) in Teilfolgen und zeige erst die Konvergenz der Teile um daraus die Konvergenz des Ganzen zu folgern.
-#    Let a be a sequence such that for every natural number n a[n] = (s[n]-x)*(t[n]-y).
-#    Let us show that a converges to 0.
-#    proof.
-#        Assume eps is a positive real number. 
-#        Take a positive real number Eps such that Eps = sqrt(eps) (by Sqrt).
-#        Take a natural number N1 such that for every natural number n such that N1 < n dist(s[n],x) < Eps (by Convergence).
-#        Take a natural number N2 such that for every natural number n such that N2 < n dist(t[n],y) < Eps (by Convergence).
-#        Take a natural number N such that N = max(N1,N2).
-#        Assume n is a natural number such that N < n.
-#        dist(a[n],0) < eps.
-#        Proof.
-#            Then dist(s[n],x) < Eps and dist(t[n],y) < Eps.
-#            dist(s[n],x), dist(t[n],y) and Eps are nonnegative.
-#            Then dist(s[n],x)*dist(t[n],y) < eps (by NonNegMultInvariance, Wurz).
-#            Hence abs(s[n]-x)*abs(t[n]-y) < eps.
-#            Hence abs((s[n]-x)*(t[n]-y)) < eps (by AbsMult).
-#            Hence abs(((s[n]-x)*(t[n]-y)) - 0) < eps (by Zero, NegOfZero).
-#        qed.
-#        Hence a converges to 0.
-#    qed.
-#    Let b be a sequence such that for every natural number n b[n] = (x*(t[n] - y)) + (y*(s[n] - x)).
-#    Let us show that b converges to 0.
-#    proof.
-#        Let bs and bt be sequences such that for every natural number n bt[n] = x*(t[n] + (-y)) and bs[n] = y*(s[n] + (-x)).
-#        bt converges to 0 and bs converges to 0 (by SumConv, ProdConstConv). 
-#        We have b = bt +' bs.
-#        Hence b converges to 0 (by SumConv).
-#    qed.
-#    Let c be a sequence such that for every natural number n c[n] = (s[n]*t[n]) - (x*y).
-#    Let us show that c converges to 0.
-#    proof.
-#        Assume eps is a positive real number.
-#        Take a positive real number Eps such that Eps = eps * inv(2).
-#        Take a natural number N such that for every natural number n such that N < n a[n] < Eps (by Convergence).
-#        Assume n is a natural number such that N < n.
-#        We have (s[n]*t[n]) - (x*y) = ((s[n] - x)*(t[n] - y)) + ((x*(t[n] - y)) + (y*(s[n] - x))) (by Identity1).
-#        Hence we have c = a +' b.
-#        Therefore c converges to 0 (by SumConv).
-#    qed. 
-#    Hence s *' t converges to x*y.
-#qed.
-[prove on]
+    Let s1 be sequence such that for every n s1[n] = (a[n] - x) * (b[n] - y).
+    Let us show that s1 converges to 0.
+    proof.
+        Assume eps is a positive real number. 
+        Take a positive real number Eps such that Eps = sqrt(eps) (by Sqrt).
+        Take a N1 such that for every n such that N1 < n dist(a[n],x) < Eps (by Convergence).
+        Take a N2 such that for every n such that N2 < n dist(b[n],y) < Eps (by Convergence).
+        Take a N such that N = max(N1,N2).
+        Assume N < n.
+        dist(s1[n],0) < eps.
+        Proof.
+            Then dist(a[n],x) < Eps and dist(b[n],y) < Eps.
+            dist(a[n],x), dist(b[n],y) and Eps are nonnegative.
+            Then dist(a[n],x) * dist(b[n],y) < eps (by NonNegMultInvariance, Wurz).
+            Hence abs(a[n]-x) * abs(b[n]-y) < eps.
+            Hence abs((a[n]-x) * (b[n]-y)) < eps (by AbsMult).
+            Hence abs(((a[n]-x) * (b[n]-y)) - 0) < eps (by Zero, NegOfZero).
+        qed.
+        #Hence s1 converges to 0.
+    qed.
+    Let s2 be a sequence such that for every n s2[n] = (x * (b[n] - y)) + (y * (a[n] - x)).
+    Let us show that s2 converges to 0.
+    proof.
+        Let s2a and s2b be sequences such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)).
+        s2b converges to 0 and s2a converges to 0 (by SumConv, ProdConstConv). 
+        We have s2 = s2b +' s2a.
+        Hence s2 converges to 0 (by SumConv).
+    qed.
+    Let s3 be a sequence such that for every n s3[n] = (a[n] * b[n]) - (x * y).
+    Let us show that s3 converges to 0.
+    proof.
+        Assume eps is a positive real number.
+        Take a positive real number Eps such that Eps = eps * inv(2).
+        Take a N such that for every n such that N < n s1[n] < Eps (by Convergence).
+        Assume N < n.
+        We have (a[n]*b[n]) - (x*y) = ((a[n] - x)*(b[n] - y)) + ((x*(b[n] - y)) + (y*(a[n] - x))) (by Identity1).
+        Hence we have s3 = s1 +' s2.
+        Therefore s3 converges to 0 (by SumConv).
+    qed. 
+    Hence a *' b converges to x * y.
+qed.
+#[prove on]
 
 
 
@@ -619,7 +626,6 @@ Definition NegInf.
 Let a be a sequence. a converges to negative infinity iff for every real number K there exists a natural number N such that for every natural number n such that N < n a[n] =< K.
 
 # Define limsup liminf?
-
 
 
 
