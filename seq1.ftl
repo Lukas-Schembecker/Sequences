@@ -689,13 +689,44 @@ Definition Cauchy.
     A cauchy sequence is a sequence a such that for every positive real number eps there exists N such that
     for every n,m such that (N < n and N < m) dist(a[n],a[m]) < eps.
 
-[prove off]
 Lemma CauchyInR.
     Let a be a sequence. a is a cauchy sequence iff a is convergent.
 Proof.
+    Let us show that ((a is convergent) => (a is a cauchy sequence)).
+        Assume a is convergent.
+        Take a real number x such that a converges to x.
+        Let eps be a positive real number.
+        
+        Take a positive real number halfeps such that halfeps = inv(2) * eps.
+        Take N such that for every n such that N < n dist(a[n],x) < halfeps (by Convergence).
 
+        Let us show that for every n,m such that (N < n and N < m) dist(a[n],a[m]) < eps.
+            Assume N < n and N < m.
+            We have dist(a[n],x) < halfeps.
+            We have dist(a[m],x) < halfeps.
+
+            We have dist(a[n],a[m]) =< dist(a[n],x) + dist(x,a[m]) (by DistTriangleIneq).
+            Hence dist(a[n],a[m]) =< dist(a[n],x) + dist(a[m],x) (by DistSymm).
+            We have dist(a[n],x) + dist(a[m],x) < halfeps + halfeps (by AddInvariance).
+            Hence dist(a[n],a[m]) < halfeps + halfeps (by MixedTransitivity).
+        
+            halfeps + halfeps .= (1 * halfeps) + (1 * halfeps) (by OneDummy)
+                              .= (1 + 1) * halfeps (by DistribDummy)
+                              .= 2 * (inv(2) * eps)
+                              .= (2 * inv(2)) * eps (by AssMult)
+                              .= 1 * eps (by Inverse)
+                              .= eps (by OneDummy).
+
+            Hence dist(a[n],a[m]) < eps.
+       end.
+    end.
+
+    [prove off]
+    Let us show that ((a is a cauchy sequence) => (a is convergent)).
+    
+    end.
+    [prove on]
 qed.
-[prove on]
 
 
 
@@ -730,8 +761,6 @@ Lemma NotRuleOrder.
 Lemma MonIncCon.
     Let a be a monotonically increasing bounded sequence. Then a converges.
 Proof.
-    Assume a is bounded.
-
     For every n a[n] =< LeastUpper(a) (by UpperBound, LeastUpperBound).
     Let us show that for every positive real number eps there exists N such that (LeastUpper(a) - eps) < a[N].
         Assume the contrary.
@@ -813,11 +842,12 @@ Proof.
         Let us show that (-1) *'' a is bounded.
             Take a real number K such that for every n abs(a[n]) =< K (by BoundedSequence).
 
-            Let n be a natural number.
-            abs(((-1) *'' a)[n]) .= abs((-1) * a[n]) (by SequenceConstProd)
-                                 .= abs(-a[n]) (by MinusRule4)
-                                 .= abs(a[n]) (by AbsPosNeg).
-            Hence abs(((-1) *'' a)[n]) =< K.
+            Let us show that for every n abs(((-1) *'' a)[n]) =< K.
+                abs(((-1) *'' a)[n]) .= abs((-1) * a[n]) (by SequenceConstProd)
+                                     .= abs(-a[n]) (by MinusRule4)
+                                     .= abs(a[n]) (by AbsPosNeg).
+                Hence abs(((-1) *'' a)[n]) =< K.
+            end.
         end.
 
         Hence (-1) *'' a converges (by MonIncCon).
@@ -848,6 +878,3 @@ Definition NegInf.
     for every n such that N < n a[n] =< K.
 
 # Define limsup liminf?
-
-
-
