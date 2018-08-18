@@ -214,6 +214,51 @@ qed.
 
 
 
+### Sequence (-1)^n has finite range.
+
+Axiom EvenOrOdd.
+    There exists N such that n = 2 * N or n = (2 * N) + 1.
+
+Lemma.
+    Let a be a sequence such that for every n (a[2 * n] = 1 and a[(2 * n) + 1] = -1).
+    Then a has finite range.
+Proof.
+    Let us show that ran(a) = ranN(a,1).
+        Let us show that every element of ranN(a,1) is an element of ran(a).
+            Assume x is an element of ranN(a,1).
+            Take n such that n =< 1 and a[n] = x (by OneNat, RangeN).
+            Hence x is an element of ran(a) (by Range).
+        end.
+
+        Let us show that every element of ran(a) is an element of ranN(a,1).
+            Assume x is an element of ran(a).
+
+                Let us show that x = 1 or x = -1.
+                Take n such that a[n] = x (by Range).
+                Take N such that n = 2 * N or n = (2 * N) + 1 (by EvenOrOdd).
+                Then x = 1 or x = -1.
+            end.
+
+            We have a[0] = 1.
+            We have a[1] = -1.
+
+            Case x = 1.
+                Then x = a[0].
+                We have 0 =< 1.
+                Hence x is an element of ranN(a,1) (by ZeroNat, OneNat, RangeN).
+            end.
+            Case x = -1.
+                Then x = a[1].
+                We have 1 =< 1.
+                Hence x is an element of ranN(a,1) (by OneNat, RangeN).
+            end.
+        end.
+        Hence ranN(a,1) = ran(a).
+    end.
+qed.
+[exit]
+
+
 ### Neighborhood
 
 Definition Neighb.
