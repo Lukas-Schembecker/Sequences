@@ -305,9 +305,6 @@ Case x < a /\ y < b.
   end.
 qed.
 
-Lemma MixedAddInvariance.
-Let a,b be real numbers. x < a /\ y =< b => x + y < a + b.
-
 Lemma OrdMirror.
 x < y => -y < -x.
 Proof.
@@ -740,9 +737,6 @@ Proof.
 Case x =< y. max(x,y) .= y (by Maximum) .= max(y,x) (by Maximum). end.
 Case y =< x. max(x,y) .= x (by Maximum) .= max(y,x) (by Maximum). end.
 qed.
-
-Lemma MaxIneqDummy.
-y =< max(x,y).
 
 [group MaxGr Maximum MaxIneq MaxSym]
 
