@@ -95,8 +95,8 @@ Definition BoundedSequence.
 
 Signature MaxAbsN.
     Let a be a sequence. maxN(a,N) is a real number such that
-    (there exists n such that n =< N and maxN(a,N) = abs(a[n])) and
-    (for every n such that n =< N abs(a[n]) =< maxN(a,N)).
+    (there exists n such that n =< N and maxN(a,N) = a[n]) and
+    (for every n such that n =< N a[n] =< maxN(a,N)).
 
 Lemma MaxIneqDummy.
     Let a,b be real numbers. b =< max(a,b).
@@ -110,8 +110,9 @@ Proof.
     Take a real number x such that a converges to x.
     Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
 
+    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
     #Define b[k] = abs(a[k]) for k in NAT.
-    Take a real number K such that K = max(1 + abs(x), maxN(a,N)).
+    Take a real number K such that K = max(1 + abs(x), maxN(b,N)).
 
     Let us show that a is bounded by K.
         Let us show that for every n abs(a[n]) =< K. 
@@ -378,8 +379,8 @@ Lemma SumConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
     Then a +' b converges to x + y.
 Proof.
-    Let eps be a positive real number. 
-    Take a positive real number halfeps such that halfeps = inv(2) * eps. 
+    Let eps be a positive real number.
+    Take a positive real number halfeps such that halfeps = inv(2) * eps.
 
     Take N1 such that for every n such that N1 < n dist(a[n],x) < halfeps (by Convergence).
     Take N2 such that for every n such that N2 < n dist(b[n],y) < halfeps (by Convergence).
@@ -704,7 +705,7 @@ Definition MonInc.
     Let a be a sequence. a is monotonically increasing iff (for every n,m such that n =< m a[n] =< a[m]).
 
 Definition MonDec.
-    Let a be a sequence. a is monotonically decreasing iff (for every n,m such that n >= m a[n] >= a[m]).
+    Let a be a sequence. a is monotonically decreasing iff (for every n,m such that n =< m a[n] >= a[m]).
 
 Definition Mon.
     Let a be a sequence. a is monotonic iff a is monotonically increasing or a is monotonically decreasing.
@@ -726,78 +727,115 @@ Definition GreatestLowerBound.
 Lemma NotRuleOrder.
     Let a,b be real numbers. a < b iff not(a >= b).
 
-Lemma MonCon.
-    Let a be a monotonic sequence. Then a converges iff a is bounded.
+Lemma MonIncCon.
+    Let a be a monotonically increasing bounded sequence. Then a converges.
 Proof.
-    If a converges then a is bounded (by ConvergentImpBounded).
-    Let us show that if a is bounded then a converges.
-        Assume a is bounded.
+    Assume a is bounded.
 
-        Case a is monotonically increasing.
-            For every n a[n] =< LeastUpper(a) (by UpperBound, LeastUpperBound).
-            Let us show that for every positive real number eps there exists N such that (LeastUpper(a) - eps) < a[N].
-                Assume the contrary.
-                Take a positive real number eps such that for every N not((LeastUpper(a) - eps) < a[N]).
+    For every n a[n] =< LeastUpper(a) (by UpperBound, LeastUpperBound).
+    Let us show that for every positive real number eps there exists N such that (LeastUpper(a) - eps) < a[N].
+        Assume the contrary.
+        Take a positive real number eps such that for every N not((LeastUpper(a) - eps) < a[N]).
 
-                Let us show that for every n a[n] =< (LeastUpper(a) - eps).
-                    Let n be a natural number.
-                    We have not((LeastUpper(a) - eps) < a[n]).
-                    Therefore (LeastUpper(a) - eps) >= a[n] (by NotRuleOrder).
-                    Hence a[n] =< (LeastUpper(a) - eps).
-                end.
-                Hence (LeastUpper(a) - eps) is upper bound of a (by UpperBound).
-
-                LeastUpper(a) - (LeastUpper(a) - eps) .= LeastUpper(a) + (-LeastUpper(a) + eps) (by MinusRule1, MinusRule2)
-                                                      .= (LeastUpper(a) - LeastUpper(a)) + eps (by AssAdd)
-                                                      .= 0 + eps (by Neg)
-                                                      .= eps + 0 (by ComAdd)
-                                                      .= eps (by Zero).
-
-                Hence (LeastUpper(a) - eps) < LeastUpper(a).
-                Hence not((LeastUpper(a) - eps) >= LeastUpper(a)) (by NotRuleOrder).
-                Contradiction (by LeastUpperBound).
-            end.
-
-            Let us show that a converges to LeastUpper(a).
-                Let eps be a positive real number.
-                Take N such that (LeastUpper(a) - eps) < a[N].
-
-                Let us show that for every n such that N < n dist(a[n],LeastUpper(a)) < eps.
-                    Assume N < n.
-                    Hence a[N] =< a[n] (by MonInc).
-                    We have a[n] =< LeastUpper(a).
-                    Hence dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n]) = LeastUpper(a) - a[n].
-
-                    We have (LeastUpper(a) - eps) + eps < a[N] + eps (by MixedAddInvariance).
-                    We have ((LeastUpper(a) - eps) + eps) - a[N] < (a[N] + eps) - a[N] (by MixedAddInvariance).
-
-                    ((LeastUpper(a) - eps) + eps) - a[N] .= (LeastUpper(a) + (-eps + eps)) - a[N] (by AssAdd)
-                                                         .= (LeastUpper(a) + (eps - eps)) - a[N] (by ComAdd)
-                                                         .= (LeastUpper(a) + 0) - a[N] (by Neg)
-                                                         .= LeastUpper(a) - a[N] (by Zero).
-
-                    (a[N] + eps) - a[N] .= (eps + a[N]) - a[N] (by ComAdd)
-                                        .= eps + (a[N] - a[N]) (by AssAdd)
-                                        .= eps + 0 (by Neg)
-                                        .= eps (by Zero).
-
-                    Hence LeastUpper(a) - a[N] < eps.
-                    
-                    We have LeastUpper(a) - a[n] =< LeastUpper(a) - a[N].
-                    Hence dist(a[n],LeastUpper(a)) < eps (by MixedTransitivity).
-                end.
-            end.
-
-            Hence a converges (by Conv).
+        Let us show that for every n a[n] =< (LeastUpper(a) - eps).
+            Let n be a natural number.
+            We have not((LeastUpper(a) - eps) < a[n]).
+            Therefore (LeastUpper(a) - eps) >= a[n] (by NotRuleOrder).
+            Hence a[n] =< (LeastUpper(a) - eps).
         end.
-        Case a is monotonically decreasing.
-            # TODO improve
-            #Define b[n] = -a[n] for n in NAT.
-            [prove off]Take a sequence b such that for every n b[n] = -a[n].[prove on]
-            b is monotonically increasing.
-            Hence b converges.
-            Hence a converges.
+        Hence (LeastUpper(a) - eps) is upper bound of a (by UpperBound).
+
+        LeastUpper(a) - (LeastUpper(a) - eps) .= LeastUpper(a) + (-LeastUpper(a) + eps) (by MinusRule1, MinusRule2)
+                                              .= (LeastUpper(a) - LeastUpper(a)) + eps (by AssAdd)
+                                              .= 0 + eps (by Neg)
+                                              .= eps + 0 (by ComAdd)
+                                              .= eps (by Zero).
+
+        Hence (LeastUpper(a) - eps) < LeastUpper(a).
+        Hence not((LeastUpper(a) - eps) >= LeastUpper(a)) (by NotRuleOrder).
+        Contradiction (by LeastUpperBound).
+    end.
+
+    Let us show that a converges to LeastUpper(a).
+        Let eps be a positive real number.
+        Take N such that (LeastUpper(a) - eps) < a[N].
+
+        Let us show that for every n such that N < n dist(a[n],LeastUpper(a)) < eps.
+            Assume N < n.
+            Hence a[N] =< a[n] (by MonInc).
+            We have a[n] =< LeastUpper(a).
+            Hence dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n]) = LeastUpper(a) - a[n].
+
+            We have (LeastUpper(a) - eps) + eps < a[N] + eps (by MixedAddInvariance).
+            We have ((LeastUpper(a) - eps) + eps) - a[N] < (a[N] + eps) - a[N] (by MixedAddInvariance).
+
+            ((LeastUpper(a) - eps) + eps) - a[N] .= (LeastUpper(a) + (-eps + eps)) - a[N] (by AssAdd)
+                                                 .= (LeastUpper(a) + (eps - eps)) - a[N] (by ComAdd)
+                                                 .= (LeastUpper(a) + 0) - a[N] (by Neg)
+                                                 .= LeastUpper(a) - a[N] (by Zero).
+
+            (a[N] + eps) - a[N] .= (eps + a[N]) - a[N] (by ComAdd)
+                                .= eps + (a[N] - a[N]) (by AssAdd)
+                                .= eps + 0 (by Neg)
+                                .= eps (by Zero).
+
+            Hence LeastUpper(a) - a[N] < eps.
+            
+            We have LeastUpper(a) - a[n] =< LeastUpper(a) - a[N].
+            Hence dist(a[n],LeastUpper(a)) < eps (by MixedTransitivity).
         end.
+    end.
+qed.
+
+Lemma MonCon.
+    Let a be a monotonic sequence. a converges iff a is bounded.
+Proof.
+    We have (If a converges then a is bounded) (by ConvergentImpBounded).
+
+    Assume a is bounded.
+    Case a is monotonically increasing.
+        Then a converges (by MonIncCon). 
+    end.
+    Case a is monotonically decreasing.
+        Let us show that (-1) *'' a is monotonically increasing.
+            Assume n =< m.
+            Then a[n] >= a[m] (by MonDec).
+            Then -a[n] =< -a[m] (by OrdMirrorLeq).
+            
+            ((-1) *'' a)[n] .= (-1) * a[n]
+                            .= -a[n] (by MinusRule4).
+            ((-1) *'' a)[m] .= (-1) * a[m]
+                            .= -a[m] (by MinusRule4).
+
+            Hence ((-1) *'' a)[n] =< ((-1) *'' a)[m].
+        end.
+
+        Let us show that (-1) *'' a is bounded.
+            Take a real number K such that for every n abs(a[n]) =< K (by BoundedSequence).
+
+            Let n be a natural number.
+            abs(((-1) *'' a)[n]) .= abs((-1) * a[n]) (by SequenceConstProd)
+                                 .= abs(-a[n]) (by MinusRule4)
+                                 .= abs(a[n]) (by AbsPosNeg).
+            Hence abs(((-1) *'' a)[n]) =< K.
+        end.
+
+        Hence (-1) *'' a converges (by MonIncCon).
+        Take a real number x such that (-1) *'' a converges to x (by Conv).
+
+        Let us show that (-1) *'' ((-1) *'' a) = a.
+            Let us show that for every n ((-1) *'' ((-1) *'' a))[n] = a[n].
+                Let n be a natural number.
+                ((-1) *'' ((-1) *'' a))[n] .= (-1) * ((-1) *'' a)[n] (by SequenceConstProd)
+                                           .= (-1) * ((-1) * a[n]) (by SequenceConstProd)
+                                           .= -(-a[n]) (by MinusRule4)
+                                           .= a[n] (by MinusRule2).
+            end.
+            Hence (-1) *'' ((-1) *'' a) = a (by SequenceEq).
+        end.
+
+        Then (-1) *'' ((-1) *'' a) converges to (-1) * x (by ProdConstConv).
+        Hence a converges (by Conv).
     end.
 qed.
 
