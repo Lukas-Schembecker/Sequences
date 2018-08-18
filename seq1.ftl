@@ -4,11 +4,11 @@
 #[prove off][check off]
 [prove on][check on]
 [sequence/-s]
+[converge/-s]
 
 Let NAT denote the set of natural numbers.
 Let REAL denote the set of real numbers.
 Let n, N, N1, N2, N3 denote natural numbers.
-
 
 
 ### Sequences
@@ -302,6 +302,19 @@ Definition SequenceSum.
 Definition SequenceProd.
     Let a,b be sequences. a *' b is a sequence such that for every n (a *' b)[n] = a[n] * b[n].
 
+Definition SequenceConstSum.
+    Let a be a sequence. Let c be a real number. c +'' a is a sequence such that for every n (c +'' a)[n] = c + a[n].
+
+#Definition SequenceConstSumRev.
+#    Let a be a sequence. Let c be a real number. a +'' c is a sequence such that for every n (a +'' c)[n] = a[n] + c.
+
+Definition SequenceConstProd.
+    Let a be a sequence. Let c be a real number. c *'' a is a sequence such that for every n (c *'' a)[n] = c * a[n].
+
+#Definition SequenceConstProdRev.
+#    Let a be a sequence. Let c be a real number. a *'' c is a sequence such that for every n (a *'' c)[n] = a[n] * c.
+
+
 Lemma SumConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
     Then a +' b converges to x + y.
@@ -357,40 +370,38 @@ qed.
 
 Lemma SumConstConv.
     Let a be a sequence. Let x,c be real numbers. Assume a converges to x.
-    Let ca be a sequence such that for every n ca[n] = c + a[n].
-    Then ca converges to c + x.
+    Then c +'' a converges to c + x.
 Proof.
     # Define cn[n] = c for n in NAT.
     # b is a sequence.
     [prove off]Take a sequence cn such that for every n cn[n] = c.[prove on]
 
-    Let us show that ca = (cn +' a).
-        Let us show that for every n ca[n] = (cn +' a)[n].
+    Let us show that c +'' a = (cn +' a).
+        Let us show that for every n (c +'' a)[n] = (cn +' a)[n].
             Let n be a natural number.
-            ca[n] .= c + a[n]
-                  .= cn[n] + a[n]
-                  .= (cn +' a)[n].
+            (c +'' a)[n] .= c + a[n]
+                         .= cn[n] + a[n]
+                         .= (cn +' a)[n].
         end.
-        Hence ca = (cn +' a) (by SequenceEq).
+        Hence c +'' a = (cn +' a) (by SequenceEq).
     end.
 
     cn converges to c (by ConstConv).
-    Then ca converges to c + x (by SumConv).
+    Then c +'' a converges to c + x (by SumConv).
 qed.
 
 Lemma ProdConstConv.
     Let a be a sequence. Let x,c be real numbers. Assume a converges to x.
-    Let ca be a sequence such that for every natural number n ca[n] = c * a[n].
-    Then ca converges to c * x.
+    Then c *'' a converges to c * x.
 Proof.
     Case c = 0.
         We have c * x = 0.
-        Let us show that for every n ca[n] = 0. 
-            ca[n] .= c * a[n]
+        Let us show that for every n (c *'' a)[n] = 0. 
+            (c *'' a)[n] .= c * a[n]
                   .= 0 * a[n]
                   .= 0 (by ZeroMult).
         end.
-        Hence ca converges to c * x (by ConstConv).
+        Hence c *'' a converges to c * x (by ConstConv).
     end.
     Case c != 0.
         Let eps be a positive real number. 
@@ -486,7 +497,6 @@ Proof.
         .= -(c * d) + (a * b) (by Zero)
         .= (a * b) - (c * d) (by ComAdd).
 qed.
-#[prove on]
 
 #[exit]
 #[prove off]
@@ -497,13 +507,23 @@ Let x be a positive real number. sqrt(x) is a positive real number.
 Axiom Wurz.
 Let x be a positive real number. sqrt(x)*sqrt(x) = x.
 
+Lemma ConstMultSum.
+    Let a,b be sequences. Let x,y be real numbers such that for every n b[n] = y * (a[n] + (-x)). Assume a converges to x.
+    Then b converges to 0.
+Proof.
+    [prove off]Take a sequence sum such that sum = (-x) +'' a. [prove on]
+    sum converges to 0 (by SumConstConv, ComAdd, Neg).
+    We have b = y *'' sum.
+    Hence b converges to 0 (by ProdConstConv, ComMult, ZeroMult).
+qed.
+
 Lemma ProdConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
-    Let a *' b be a sequence such that for every natural number n (a *' b)[n] = a[n]*b[n].
+    Let a *' b be a sequence such that for every natural number n (a *' b)[n] = a[n] * b[n].
     Then a *' b converges to x * y.
 Proof.
 #Strategie: zerteile (s[n]*t[n]) - (x*y) = ((s[n] - x)*(t[n] - y)) + ((x*(t[n] - y)) + (y*(s[n] - x))) in Teilfolgen und zeige erst die Konvergenz der Teile um daraus die Konvergenz des Ganzen zu folgern.
-    Let s1 be sequence such that for every n s1[n] = (a[n] - x) * (b[n] - y).
+    [prove off] (1) Take a sequence s1 such that for every n s1[n] = (a[n] - x) * (b[n] - y). [prove off]
     Let us show that s1 converges to 0.
     proof.
         Assume eps is a positive real number. 
@@ -511,38 +531,50 @@ Proof.
         Take a N1 such that for every n such that N1 < n dist(a[n],x) < Eps (by Convergence).
         Take a N2 such that for every n such that N2 < n dist(b[n],y) < Eps (by Convergence).
         Take a N such that N = max(N1,N2).
-        Assume N < n.
-        dist(s1[n],0) < eps.
+        Let us show that for every n such that N < n dist(s1[n],0) < eps.
         Proof.
-            Then dist(a[n],x) < Eps and dist(b[n],y) < Eps.
+            Assume N < n.
+            dist(a[n],x) < Eps and dist(b[n],y) < Eps.
             dist(a[n],x), dist(b[n],y) and Eps are nonnegative.
             Then dist(a[n],x) * dist(b[n],y) < eps (by NonNegMultInvariance, Wurz).
-            Hence abs(a[n]-x) * abs(b[n]-y) < eps.
-            Hence abs((a[n]-x) * (b[n]-y)) < eps (by AbsMult).
-            Hence abs(((a[n]-x) * (b[n]-y)) - 0) < eps (by Zero, NegOfZero).
+            Hence abs(a[n] - x) * abs(b[n] - y) < eps.
+            Hence abs((a[n] - x) * (b[n] - y)) < eps (by AbsMult).
+            Hence abs(((a[n] - x) * (b[n] - y)) - 0) < eps (by Zero, NegOfZero).
         qed.
-        #Hence s1 converges to 0.
     qed.
-    Let s2 be a sequence such that for every n s2[n] = (x * (b[n] - y)) + (y * (a[n] - x)).
+    [prove off] (2) Take a sequence s2 such that for every n s2[n] = (x * (b[n] + (-y))) + (y * (a[n] + (-x))). [prove on]
     Let us show that s2 converges to 0.
     proof.
-        Let s2a and s2b be sequences such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)).
-        s2b converges to 0 and s2a converges to 0 (by SumConv, ProdConstConv). 
-        We have s2 = s2b +' s2a.
+        [prove off] Take sequences s2a, s2b such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)). [prove on]
+        s2a, s2b converge to 0 (by ConstMultSum). 
+        Let us show that for every n s2[n] = s2b[n] + s2a[n].
+        Proof.
+            s2[n] .= (x * (b[n] + (-y))) + (y * (a[n] + (-x)))
+                  .= s2b[n] + s2a[n].
+        qed.
         Hence s2 converges to 0 (by SumConv).
     qed.
-    Let s3 be a sequence such that for every n s3[n] = (a[n] * b[n]) - (x * y).
+    [prove off] (3) Take a sequence s3 such that for every n s3[n] = (a[n] * b[n]) - (x * y). [prove on]
     Let us show that s3 converges to 0.
     proof.
-        Assume eps is a positive real number.
-        Take a positive real number Eps such that Eps = eps * inv(2).
-        Take a N such that for every n such that N < n s1[n] < Eps (by Convergence).
-        Assume N < n.
-        We have (a[n]*b[n]) - (x*y) = ((a[n] - x)*(b[n] - y)) + ((x*(b[n] - y)) + (y*(a[n] - x))) (by Identity1).
-        Hence we have s3 = s1 +' s2.
+        Let us show that for every n s3[n] = s1[n] + s2[n].
+        Proof.
+            s3[n] .= (a[n] * b[n]) - (x * y) (by 3)
+                  .= ((a[n] - x) * (b[n] - y)) + ((x * (b[n] - y)) + (y * (a[n] - x))) (by Identity1)
+                  .= s1[n] + s2[n] (by 1,2).
+        qed.
         Therefore s3 converges to 0 (by SumConv).
     qed. 
-    Hence a *' b converges to x * y.
+    Let eps be a positive real number.
+    Take a N such that for every n such that N < n dist(s3[n],0) < eps (by Convergence).
+    Let us show that for every n such that N < n dist(a[n] * b[n],x * y) < eps.
+    Proof.
+        Assume N < n.
+        dist(s3[n],0) .= dist((a[n] * b[n]) - (x * y),0) (by 3)
+                      .= abs(((a[n] * b[n]) - (x * y)) - 0) (by DistDefinition)
+                      .= abs((a[n] * b[n]) - (x * y)) (by NegOfZero, Zero)
+                      .= dist(a[n] * b[n],x * y) (by DistDefinition).
+    qed.
 qed.
 #[prove on]
 
