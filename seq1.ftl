@@ -8,7 +8,8 @@
 
 Let NAT denote the set of natural numbers.
 Let REAL denote the set of real numbers.
-Let n, N, N1, N2, N3 denote natural numbers.
+Let n, m, N, N1, N2, N3 denote natural numbers.
+
 
 
 ### Sequences
@@ -93,9 +94,15 @@ Definition BoundedSequence.
     a is bounded by K.
 
 Signature MaxAbsN.
-    Let a be a sequence. Let N be a natural number. maxN(a,N) is a real number such that
-    (there exists a natural number n such that n =< N and maxN(a,N) = abs(a[n])) and
-    (for every natural number n such that n =< N abs(a[n]) =< maxN(a,N)).
+    Let a be a sequence. maxN(a,N) is a real number such that
+    (there exists n such that n =< N and maxN(a,N) = abs(a[n])) and
+    (for every n such that n =< N abs(a[n]) =< maxN(a,N)).
+
+Lemma MaxIneqDummy.
+    Let a,b be real numbers. b =< max(a,b).
+
+Lemma MixedAddInvariance.
+    Let a,b,c,d be real numbers. a < c /\ b =< d => a + b < c + d.
 
 Lemma ConvergentImpBounded.
     Let a be a sequence. Assume that a converges. Then a is bounded.
@@ -256,7 +263,6 @@ Proof.
         Hence ranN(a,1) = ran(a).
     end.
 qed.
-[exit]
 
 
 ### Neighborhood
@@ -499,12 +505,6 @@ Proof.
                   .= a * b (by MinusRule2).
 qed.
 
-Lemma SwapRuleLeq.
-    Let a,b be real numbers. Assume not(a < b). Then a >= b.
-
-
-
-
 Lemma Binomi1.
     Let a,b,c,d be real numbers.
     Then (a + b) * (c + d) = ((a * c) + (b * c)) + ((a * d) + (b * d)) .
@@ -628,79 +628,140 @@ qed.
 ### Subsequences
 
 Definition IndexSeq.
-A index sequence is a sequence i such that (for every natural number n i[n] is a natural number) and (for every natural number n i[n] < i[n+1]).
+    A index sequence is a sequence i such that (for every n i[n] is a natural number) and (for every n i[n] < i[n+1]).
 
 Definition SubSeq.
-Let a be a sequence and i be a index sequence. Subseq(a,i) is a sequence such that for every natural number n Subseq(a,i)[n] = a[i[n]].
+    Let a be a sequence and i be a index sequence. Subseq(a,i) is a sequence such that for every  n
+    Subseq(a,i)[n] = a[i[n]].
 
 # Mit Topologie Gruppe absprechen? (Closed/Compact)
 
 ### Cauchy
 
 Definition Cauchy.
-A cauchy sequence is a sequence a such that for every positive real number eps there exists a natural number N such that
-for every natural numbers n,m such that N < n and N < m dist(a[n],a[m]) < eps.
+    A cauchy sequence is a sequence a such that for every positive real number eps there exists N such that
+    for every n,m such that (N < n and N < m) dist(a[n],a[m]) < eps.
 
-Axiom CauchyInR.
-Let a be a sequence. a is a cauchy sequence iff a is convergent.
+[prove off]
+Lemma CauchyInR.
+    Let a be a sequence. a is a cauchy sequence iff a is convergent.
+Proof.
+
+qed.
+[prove on]
+
 
 
 ### Monotonic Sequences
 
 Definition MonInc.
-Let a be a sequence. a is monotonically increasing iff (for every natural number n a[n] =< a[n+1]).
+    Let a be a sequence. a is monotonically increasing iff (for every n,m such that n =< m a[n] =< a[m]).
 
 Definition MonDec.
-Let a be a sequence. a is monotonically decreasing iff (for every natural number n a[n] >= a[n+1]).
+    Let a be a sequence. a is monotonically decreasing iff (for every n,m such that n >= m a[n] >= a[m]).
 
 Definition Mon.
-Let a be a sequence. a is monotonic iff a is monotonically increasing or a is monotonically decreasing.
+    Let a be a sequence. a is monotonic iff a is monotonically increasing or a is monotonically decreasing.
 
-Definition UpperBound. Let a be a bounded sequence. Let K be a real number. K is upper bound of a iff (for every natural number n a[n] =< K).
+Definition UpperBound.
+    Let a be a bounded sequence. Let K be a real number. K is upper bound of a iff (for every n a[n] =< K).
 
-Definition LeastUpperBound. Let a be a bounded sequence. LeastUpper(a) is a real number K such that (K is upper bound of a) and (for every real number L such that L is upper bound of a K =< L).
+Definition LeastUpperBound.
+    Let a be a bounded sequence. LeastUpper(a) is a real number K such that (K is upper bound of a) and 
+    (for every real number L such that L is upper bound of a K =< L).
 
-Definition LowerBound. Let a be a bounded sequence. Let K be a real number. K is lower bound of a iff (for every natural number n a[n] >= K).
+Definition LowerBound.
+    Let a be a bounded sequence. Let K be a real number. K is lower bound of a iff (for every n a[n] >= K).
 
-Definition GreatestLowerBound. Let a be a bounded sequence. GreatestLower(a) is a real number K such that (K is lower bound of a) and (for every real number L such that L is lower bound of a L =< K).
+Definition GreatestLowerBound.
+    Let a be a bounded sequence. GreatestLower(a) is a real number K such that (K is lower bound of a) and
+    (for every real number L such that L is lower bound of a L =< K).
 
-#[prove off]
+Lemma NotRuleOrder.
+    Let a,b be real numbers. a < b iff not(a >= b).
+
 Lemma MonCon.
-Let a be a monotonic sequence. Then a converges iff a is bounded.
+    Let a be a monotonic sequence. Then a converges iff a is bounded.
 Proof.
     If a converges then a is bounded (by ConvergentImpBounded).
     Let us show that if a is bounded then a converges.
         Assume a is bounded.
 
         Case a is monotonically increasing.
-            For every natural number n a[n] =< LeastUpper(a).
-            Let us show that for every positive real number eps there exists a natural number n such that (LeastUpper(a) - eps) < a[n].
-                Assume not (for every positive real number eps there exists a natural number n such that (LeastUpper(a) - eps) < a[n]).
-                Take a positive real number eps such that for every natural number n not((LeastUpper(a) - eps) < a[n]).
-                Hence for every natural number n a[n] =< (LeastUpper(a) - eps).
-                Proof.
+            For every n a[n] =< LeastUpper(a) (by UpperBound, LeastUpperBound).
+            Let us show that for every positive real number eps there exists N such that (LeastUpper(a) - eps) < a[N].
+                Assume the contrary.
+                Take a positive real number eps such that for every N not((LeastUpper(a) - eps) < a[N]).
+
+                Let us show that for every n a[n] =< (LeastUpper(a) - eps).
                     Let n be a natural number.
                     We have not((LeastUpper(a) - eps) < a[n]).
-                    Therefore (LeastUpper(a) - eps) >= a[n] (by SwapRuleLeq).
+                    Therefore (LeastUpper(a) - eps) >= a[n] (by NotRuleOrder).
                     Hence a[n] =< (LeastUpper(a) - eps).
                 end.
                 Hence (LeastUpper(a) - eps) is upper bound of a (by UpperBound).
-                We have (LeastUpper(a) - eps) < LeastUpper(a).
-                Contradiction.
+
+                LeastUpper(a) - (LeastUpper(a) - eps) .= LeastUpper(a) + (-LeastUpper(a) + eps) (by MinusRule1, MinusRule2)
+                                                      .= (LeastUpper(a) - LeastUpper(a)) + eps (by AssAdd)
+                                                      .= 0 + eps (by Neg)
+                                                      .= eps + 0 (by ComAdd)
+                                                      .= eps (by Zero).
+
+                Hence (LeastUpper(a) - eps) < LeastUpper(a).
+                Hence not((LeastUpper(a) - eps) >= LeastUpper(a)) (by NotRuleOrder).
+                Contradiction (by LeastUpperBound).
             end.
+
+            Let us show that a converges to LeastUpper(a).
+                Let eps be a positive real number.
+                Take N such that (LeastUpper(a) - eps) < a[N].
+
+                Let us show that for every n such that N < n dist(a[n],LeastUpper(a)) < eps.
+                    Assume N < n.
+                    Hence a[N] =< a[n] (by MonInc).
+                    We have a[n] =< LeastUpper(a).
+                    Hence dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n]) = LeastUpper(a) - a[n].
+
+                    We have (LeastUpper(a) - eps) + eps < a[N] + eps (by MixedAddInvariance).
+                    We have ((LeastUpper(a) - eps) + eps) - a[N] < (a[N] + eps) - a[N] (by MixedAddInvariance).
+
+                    ((LeastUpper(a) - eps) + eps) - a[N] .= (LeastUpper(a) + (-eps + eps)) - a[N] (by AssAdd)
+                                                         .= (LeastUpper(a) + (eps - eps)) - a[N] (by ComAdd)
+                                                         .= (LeastUpper(a) + 0) - a[N] (by Neg)
+                                                         .= LeastUpper(a) - a[N] (by Zero).
+
+                    (a[N] + eps) - a[N] .= (eps + a[N]) - a[N] (by ComAdd)
+                                        .= eps + (a[N] - a[N]) (by AssAdd)
+                                        .= eps + 0 (by Neg)
+                                        .= eps (by Zero).
+
+                    Hence LeastUpper(a) - a[N] < eps.
+                    
+                    We have LeastUpper(a) - a[n] =< LeastUpper(a) - a[N].
+                    Hence dist(a[n],LeastUpper(a)) < eps (by MixedTransitivity).
+                end.
+            end.
+
+            Hence a converges (by Conv).
         end.
         Case a is monotonically decreasing.
-
+            # TODO improve
+            #Define b[n] = -a[n] for n in NAT.
+            [prove off]Take a sequence b such that for every n b[n] = -a[n].[prove on]
+            b is monotonically increasing.
+            Hence b converges.
+            Hence a converges.
         end.
     end.
 qed.
-[prove on]
 
 Definition PosInf.
-Let a be a sequence. a converges to positive infinity iff for every real number K there exists a natural number N such that for every natural number n such that N < n a[n] >= K.
+    Let a be a sequence. a converges to positive infinity iff for every real number K there exists N such that
+    for every n such that N < n a[n] >= K.
 
 Definition NegInf.
-Let a be a sequence. a converges to negative infinity iff for every real number K there exists a natural number N such that for every natural number n such that N < n a[n] =< K.
+    Let a be a sequence. a converges to negative infinity iff for every real number K there exists N such that
+    for every n such that N < n a[n] =< K.
 
 # Define limsup liminf?
 
