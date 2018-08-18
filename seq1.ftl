@@ -256,7 +256,7 @@ Proof.
         Hence ranN(a,1) = ran(a).
     end.
 qed.
-[exit]
+#[exit]
 
 
 ### Neighborhood
@@ -358,6 +358,9 @@ Definition SequenceConstProd.
 
 #Definition SequenceConstProdRev.
 #    Let a be a sequence. Let c be a real number. a *'' c is a sequence such that for every n (a *'' c)[n] = a[n] * c.
+
+Definition SequenceDiv.
+    Let a be a sequence. Assume for every n a[n] != 0. div(a) is a sequence such that for every n (div(a))[n] = inv(a[n]).
 
 
 Lemma SumConv.
@@ -562,6 +565,7 @@ Proof.
     Hence b converges to 0 (by ProdConstConv, ComMult, ZeroMult).
 qed.
 
+
 Lemma ProdConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
     Let a *' b be a sequence such that for every natural number n (a *' b)[n] = a[n] * b[n].
@@ -573,9 +577,9 @@ Proof.
     proof.
         Assume eps is a positive real number. 
         Take a positive real number Eps such that Eps = sqrt(eps) (by Sqrt).
-        Take a N1 such that for every n such that N1 < n dist(a[n],x) < Eps (by Convergence).
-        Take a N2 such that for every n such that N2 < n dist(b[n],y) < Eps (by Convergence).
-        Take a N such that N = max(N1,N2).
+        Take N1 such that for every n such that N1 < n dist(a[n],x) < Eps (by Convergence).
+        Take N2 such that for every n such that N2 < n dist(b[n],y) < Eps (by Convergence).
+        Take N such that N = max(N1,N2).
         Let us show that for every n such that N < n dist(s1[n],0) < eps.
         Proof.
             Assume N < n.
@@ -606,12 +610,12 @@ Proof.
         Proof.
             s3[n] .= (a[n] * b[n]) - (x * y) (by 3)
                   .= ((a[n] - x) * (b[n] - y)) + ((x * (b[n] - y)) + (y * (a[n] - x))) (by Identity1)
-                  .= s1[n] + s2[n] (by 1,2).
+                  .= s1[n] + s2[n] (by 1, 2).
         qed.
         Therefore s3 converges to 0 (by SumConv).
     qed. 
     Let eps be a positive real number.
-    Take a N such that for every n such that N < n dist(s3[n],0) < eps (by Convergence).
+    Take N such that for every n such that N < n dist(s3[n],0) < eps (by Convergence).
     Let us show that for every n such that N < n dist(a[n] * b[n],x * y) < eps.
     Proof.
         Assume N < n.
@@ -623,6 +627,15 @@ Proof.
 qed.
 #[prove on]
 
+
+#Lemma DivConv.
+#    Let a be a sequence. Let x be a real number. Assume a converges to x.
+#    Let div(a) be a sequence such that for every natural number n (div(a))[n] = inv(a[n]).
+#    Then div(a) converges to inv(x).
+#Proof.
+#    Let eps be a positive real number.
+#    Take a natural number m such that abs(a[n],x)
+    
 
 
 ### Subsequences
