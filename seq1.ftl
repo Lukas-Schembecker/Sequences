@@ -95,8 +95,8 @@ Definition BoundedSequence.
 
 Signature MaxAbsN.
     Let a be a sequence. maxN(a,N) is a real number such that
-    (there exists n such that n =< N and maxN(a,N) = abs(a[n])) and
-    (for every n such that n =< N abs(a[n]) =< maxN(a,N)).
+    (there exists n such that n =< N and maxN(a,N) = a[n]) and
+    (for every n such that n =< N a[n] =< maxN(a,N)).
 
 Lemma MaxIneqDummy.
     Let a,b be real numbers. b =< max(a,b).
@@ -110,14 +110,15 @@ Proof.
     Take a real number x such that a converges to x.
     Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
 
+    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
     #Define b[k] = abs(a[k]) for k in NAT.
-    Take a real number K such that K = max(1 + abs(x), maxN(a,N)).
+    Take a real number K such that K = max(1 + abs(x), maxN(b,N)).
 
     Let us show that a is bounded by K.
         Let n be a natural number.
         Case n =< N.
-            We have abs(a[n]) =< maxN(a,N) (by MaxAbsN).
-            We have maxN(a,N) =< K (by MaxIneqDummy).
+            We have abs(a[n]) = b[n] =< maxN(b,N) (by MaxAbsN).
+            We have maxN(b,N) =< K (by MaxIneqDummy).
             Therefore abs(a[n]) =< K (by LeqTransitivity).
             end.
         Case n > N.
