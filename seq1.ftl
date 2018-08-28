@@ -362,14 +362,8 @@ Definition SequenceProd.
 Definition SequenceConstSum.
     Let a be a sequence. Let c be a real number. c +'' a is a sequence such that for every n (c +'' a)[n] = c + a[n].
 
-#Definition SequenceConstSumRev.
-#    Let a be a sequence. Let c be a real number. a +'' c is a sequence such that for every n (a +'' c)[n] = a[n] + c.
-
 Definition SequenceConstProd.
     Let a be a sequence. Let c be a real number. c *'' a is a sequence such that for every n (c *'' a)[n] = c * a[n].
-
-#Definition SequenceConstProdRev.
-#    Let a be a sequence. Let c be a real number. a *'' c is a sequence such that for every n (a *'' c)[n] = a[n] * c.
 
 Definition SequenceDiv.
     Let a be a sequence. Assume for every n a[n] != 0. div(a) is a sequence such that for every n (div(a))[n] = inv(a[n]).
@@ -637,9 +631,10 @@ Proof.
                       .= dist(a[n] * b[n],x * y) (by DistDefinition).
     qed.
 qed.
-#[prove on]
 
 
+
+[prove on]
 Lemma AbsTriangleIneq2.
     Let x,y be real numbers. Then abs(x) - abs(y) =< abs(x - y).
 Proof.
@@ -651,25 +646,199 @@ Proof.
     (abs(x - y) + abs(y)) + (-abs(y)) = abs(x - y) (by AssAdd, Neg, Zero).
     Hence abs(x) - abs(y) =< abs(x - y) (by LeqTransitivity).
 qed.   
-    
+
+
+
+Lemma InvAdd.
+    Let a,b,c,d be real numbers. Assume (a != 0 and b != 0) and (c != 0 and d != 0). 
+    Then (a * inv(b)) + (c * inv(d)) = ((a * d) + (b * c)) * inv(b * d).
+Proof.
+    (a * inv(b)) + (c * inv(d)) .= ((a * inv(b)) * 1) + (1 * (c * inv(d))) (by One, OneDummy)
+                                .= ((a * inv(b)) * (d * inv(d))) + ((b * inv(b)) * (c * inv(d))) (by Inverse)
+                                .= (a * (inv(b) * (d * inv(d)))) + (b * (inv(b) * (c * inv(d)))) (by AssMult)
+                                .= (a * ((inv(b) * d) * inv(d))) + (b * ((inv(b) * c) * inv(d))) (by AssMult)
+                                .= (a * ((d * inv(b)) * inv(d))) + (b * ((c * inv(b)) * inv(d))) (by ComMult)
+                                .= (a * (d * (inv(b) * inv(d)))) + (b * (c * (inv(b) * inv(d)))) (by AssMult)
+                                .= ((a * d) * (inv(b) * inv(d))) + ((b * c) * (inv(b) * inv(d))) (by AssMult)
+                                .= ((a * d) * inv(b * d)) + ((b * c) * inv(b * d)) (by InvRule2)
+                                .= ((a * d) + (b * c)) * inv(b * d) (by DistribDummy).
+qed.
+
+
+
+Lemma InvCanc.
+    Let a, b be real numbers. Assume a != 0 and b != 0.
+    Then (a * inv(b)) * (b * inv(a)) = 1.
+Proof.
+    (a * inv(b)) * (b * inv(a)) .= ((a * inv(b)) * b) * inv(a) (by AssMult)
+                                .= (a * (inv(b) * b)) * inv(a) (by AssMult)
+                                .= (a * 1) * inv(a) (by InvDummy)
+                                .= a * inv(a) (by One)
+                                .= 1 (by Inverse).
+qed.
+
+
+Lemma NegMultInvariance.
+Let x, y, z be real numbers.
+(x < y /\ z < 0) => z * x > z * y.
+Proof.
+    Assume x < y /\ z < 0.
+    #Then -z > -0 = 0 (by OrdMirror, NegOfZero).
+    Therefore pos(-z).    
+    Hence (-z) * x < (-z) * y.
+    Hence -((-z) * x) > -((-z) * y) (by OrdMirror).
+    -((-z) * x) .= (-(-z)) * x (by MinusRule5)
+                .= z * x (by MinusRule2).
+    -((-z) * y) .= (-(-z)) * y (by MinusRule5)
+                .= z * y (by MinusRule2).
+qed.
+
+
+Lemma InvSwapIneq.
+    Let a, b, c, d be positive real numbers. Assume (a != 0 and b != 0) and (c != 0 and d != 0). 
+    If a * inv(b) < c * inv(d) then b * inv(a) > d * inv(c).
+Proof.
+    Assume a * inv(b) < c * inv(d).
+    We have pos(b * inv(a)) and pos(d * inv(c)).
+    (b * inv(a)) * (a * inv(b)) < (b * inv(a)) * (c * inv(d)) (by MultInvariance).
+    (b * inv(a)) * (a * inv(b)) = 1 (by InvCanc).
+    Hence 1 < (b * inv(a)) * (c * inv(d)).
+    (d * inv(c)) * 1 < (d * inv(c)) * ((b * inv(a)) * (c * inv(d))) (by MultInvariance).
+    d * inv(c) < (d * inv(c)) * ((b * inv(a)) * (c * inv(d))) (by One).
+    (d * inv(c)) * ((b * inv(a)) * (c * inv(d))) .= ((b * inv(a)) * (c * inv(d))) * (d * inv(c)) (by ComMult)
+                                                 .= (b * inv(a)) * ((c * inv(d)) * (d * inv(c))) (by AssMult)
+                                                 .= (b * inv(a)) * 1 (by InvCanc)
+                                                 .= b * inv(a) (by One).   
+qed.
+
+
+
+Lemma AbsInv.
+    Let x be a real number. Assume x != 0. Then abs(inv(x)) = inv(abs(x)).
+Proof.
+    We have pos(abs(inv(x))) and pos(inv(abs(x))).
+    pos(1) (by OnePos).
+    (1) Hence ( abs(inv(x)) = abs(abs(inv(x))) and inv(abs(x)) = abs(inv(abs(x))) ) and abs(1) = 1 (by AbsValue).
+    abs(inv(x)) .= abs(abs(inv(x))) (by 1)
+                .= abs(abs(inv(x)) * 1) (by One)
+                .= abs(abs(inv(x)) * (abs(x) * inv(abs(x)))) (by Inverse)
+                .= abs((abs(inv(x)) * abs(x)) * inv(abs(x))) (by AssMult)
+                .= abs(abs(inv(x) * x) * inv(abs(x))) (by AbsMult)
+                .= abs(abs(1) * inv(abs(x))) (by InvDummy)
+                .= abs(1 * inv(abs(x))) (by 1) 
+                .= abs(inv(abs(x))) (by OneDummy)
+                .= inv(abs(x)) (by 1).    
+qed.
+
+
+Lemma InvOne.
+    inv(1) = 1.
+Proof.
+    1 .= 1 * inv(1) (by Inverse)
+      .= inv(1) (by OneDummy).
+qed.   
     
 
-#Lemma DivConv.
-#    Let a be a sequence. Let x be a real number such that x != 0. Assume a converges to x. 
-#    Assume for every n a[n] != 0.
-#    Let div(a) be a sequence such that for every natural number n (div(a))[n] = inv(a[n]).
-#    Then div(a) converges to inv(x).
-#Proof.
-#    Let eps be a positive real number.
-#    inv(2) * abs(x) is a positive real number.	
-#    Take a natural number m such that for every n such that m < n dist(x,a[n]) < inv(2) * abs(x) (by Convergence, DistDefinition).
-#    abs(a[n]) - abs(x) =< abs(a[n] - x) (by AbsTriangleIneq2).
-#    abs(a[n] - x) .= abs(-(a[n] - x)) (by AbsPosNeg)
-#                  .= abs(-a[n] - (-x)) (by MinusRule2).   
-#    abs(x - a[n]) < inv(2) * abs(x) (by DistDefinition).
-#    abs(a[n]) - abs(x) < inv(2) * abs(x) (by MixedTransitivity).
-#qed.
+Lemma DivConv.
+    Let a be a sequence. Let x be a real number such that x != 0. Assume a converges to x. 
+    Assume for every n a[n] != 0.
+    Let div(a) be a sequence such that for every natural number n (div(a))[n] = inv(a[n]).
+    Then div(a) converges to inv(x).
+Proof.
+    Let eps be a positive real number.
+    inv(2) * abs(x) is a positive real number.	
+    Take a natural number m such that for every n such that m < n dist(a[n],x) < inv(2) * abs(x) (by Convergence).
+    Let us show that for every n such that m < n inv(2) * abs(x) < abs(a[n]).
+    Proof. 
+        Assume m < n.
+        abs(x) - abs(a[n]) =< abs(x - a[n]) (by AbsTriangleIneq2).
+        abs(x - a[n]) .= abs(-(x - a[n])) (by AbsPosNeg)
+                      .= abs(-x - (-a[n])) (by MinusRule1)
+                      .= abs(-x + a[n]) (by MinusRule2)
+                      .= abs(a[n] - x) (by ComAdd).
+        abs(a[n] - x) < inv(2) * abs(x) (by DistDefinition).
+        abs(x) - abs(a[n]) < inv(2) * abs(x) (by MixedTransitivity).
+        (abs(x) + (-abs(a[n]))) + (-abs(x)) < (inv(2) * abs(x)) + (-abs(x)) (by MixedAddInvariance). 
+        #We have (1 != 0 and 2 != 0) and -1 != 0 (by TwoNotZero).
+        #We have (1+1)*1 != 0.
+        (abs(x) + (-abs(a[n]))) + (-abs(x)) .= abs(x) + ((-abs(a[n])) + (-abs(x))) (by AssAdd)
+                                            .= abs(x) + ((-abs(x)) + (-abs(a[n]))) (by ComAdd)
+                                            .= (abs(x) + (-abs(x))) + (-abs(a[n])) (by AssAdd)
+                                            .= (-abs(a[n])) (by Neg, ComAdd, Zero).
+        -abs(a[n]) < (inv(2) * abs(x)) + (-abs(x)) (by AssAdd, Neg, Zero).
+        (inv(2) * abs(x)) + (-abs(x)) .= (inv(2) * abs(x)) + ((-1) * abs(x)) (by MinusRule4)
+                                      .= (inv(2) + (-1)) * abs(x) (by DistribDummy)
+                                      .= ((1 * inv(2)) + (-(1 * inv(1)))) * abs(x) (by OneDummy, Inverse)
+                                      .= ((1 * inv(2)) + ((-1) * inv(1))) * abs(x) (by OneDummy, MinusRule4)
+                                      .= ((1 * inv(2)) + ((-1) * inv(1))) * abs(x) (by MinusRule4)
+                                      .= (((1 * 1) + (2 * (-1))) * inv(2 * 1)) * abs(x) (by InvAdd)
+                                      .= ((1 + ((-1) * 2)) * inv(2)) * abs(x) (by One, ComMult).
+        Therefore abs(a[n]) > -(((1 + ((-1) * 2)) * inv(2)) * abs(x)) (by OrdMirror, MinusRule2).
+        1 + ((-1) * 2) .= 1 + -(1 * 2) (by MinusRule5)
+                       .= 1 + -2 (by OneDummy)
+                       .= -(2 - 1) (by MinusRule3)
+                       .= -1.
+        Therefore -(((1 + ((-1) * 2)) * inv(2)) * abs(x)) = -(((-1) * inv(2)) * abs(x)).
+        -(((-1) * inv(2)) * abs(x)) .= ((-(-1)) * inv(2)) * abs(x) (by MinusRule5)
+                                    .= (1 * inv(2)) * abs(x) (by MinusRule2)
+                                    .= inv(2) * abs(x) (by OneDummy)
+                                    .= abs(x) * inv(2) (by ComMult).
+        #Therefore abs(a[n]) > -(((1 + ((-1) * 2)) * inv(2)) * abs(x)) (by OrdMirror, MinusRule2).
+        Therefore abs(a[n]) > abs(x) * inv(2) (by TransitivityOfOrder).
+    qed.
+    (inv(2) * eps) * abs(x * x) is a positive real number.
+    Take an N1 such that for every n such that N1 < n dist(a[n],x) < (inv(2) * eps) * abs(x * x) (by Convergence). 
+    Take an N2 such that N2 = max(N1,m).
+    Let us show that for every n such that N2 < n dist(inv(a[n]),inv(x)) < eps.
+    Proof.
+        Assume N2 < n.
+        Then we have N1 < n and m < n.
+        dist(inv(a[n]),inv(x)) .= abs(inv(a[n]) - inv(x)) (by DistDefinition)
+                               .= abs((1 * inv(a[n])) - (1 * inv(x))) (by OneDummy)
+                               .= abs((1 * inv(a[n])) + ((-1) * inv(x))) (by MinusRule5)
+                               .= abs(((1 * x) + (a[n] * (-1))) * inv(a[n] * x)) (by InvAdd)
+                               .= abs((x + ((-1) * a[n])) * inv(a[n] * x)) (by OneDummy, ComMult)
+                               .= abs((x - a[n]) * inv(a[n] * x)) (by MinusRule4).
     
+        abs((x - a[n]) * inv(a[n] * x)) .= abs(x - a[n]) * abs(inv(a[n]) * inv(x)) (by AbsMult, InvRule2)
+                                        .= abs(inv(a[n]) * inv(x)) * abs(x - a[n]) (by ComMult).
+        We have pos(abs(inv(a[n]) * inv(x))) (by AbsPos, InvNotZero, NoZeroDivisors). 
+        abs(x - a[n]) = dist(a[n],x) (by DistDefinition, DistSymm).
+        abs(inv(a[n]) * inv(x)) * abs(x - a[n]) < abs(inv(a[n]) * inv(x)) * ((inv(2) * eps) * abs(x * x)) (by MultInvariance, DistDefinition).
+        abs(inv(a[n]) * inv(x)) * ((inv(2) * eps) * abs(x * x)) .= (abs(inv(a[n])) * abs(inv(x))) * ((inv(2) * eps) * abs(x * x)) (by AbsMult)
+                                                                .= ((inv(2) * eps) * abs(x * x)) * (abs(inv(a[n])) * abs(inv(x))) (by ComMult)
+                                                                .= (inv(2) * (eps * abs(x * x))) * (abs(inv(a[n])) * abs(inv(x))) (by AssMult)
+                                                                .= ((eps * abs(x * x)) * inv(2)) * (abs(inv(a[n])) * abs(inv(x))) (by ComMult)
+                                                                .= (eps * abs(x * x)) * (inv(2) * (abs(inv(a[n])) * abs(inv(x)))) (by AssMult)
+                                                                .= (eps * abs(x * x)) * (inv(2) * (abs(inv(x)) * abs(inv(a[n])))) (by ComMult)
+                                                                .= (eps * abs(x * x)) * ((inv(2) * abs(inv(x))) * abs(inv(a[n]))) (by AssMult)
+                                                                .= ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * abs(inv(a[n])) (by AssMult)
+                                                                .= ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * inv(abs(a[n])) (by AbsInv)
+                                                                .= ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) (by OneDummy).
+        Let us show that 1 * inv(abs(a[n])) < 2 * inv(abs(x)).
+        Proof.
+            We have abs(a[n]) > abs(x) * inv(2).
+            Hence abs(a[n]) * inv(1) > abs(x) * inv(2) (by InvOne, One).
+            We have (pos(abs(a[n])) and pos(1)) and (pos(abs(x)) and pos(2)).
+            (abs(a[n]) != 0 and 1 != 0) and (abs(x) != 0 and 2 != 0).
+            Then 1 * inv(abs(a[n])) < 2 * inv(abs(x)) (by InvSwapIneq).
+        qed.
+        We have pos((eps * abs(x * x)) * (inv(2) * abs(inv(x)))).
+        ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) < ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) (by MultInvariance).
+        ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) .= ((eps * abs(x * x)) * (inv(abs(x)) * inv(2))) * (2 * inv(abs(x))) (by ComMult, AbsInv)
+                                                                          .= (((eps * abs(x * x)) * inv(abs(x))) * inv(2)) * (2 * inv(abs(x))) (by AssMult)
+                                                                          .= ((eps * abs(x * x)) * inv(abs(x))) * (inv(2) * (2 * inv(abs(x)))) (by AssMult)
+                                                                          .= (eps * (abs(x * x) * inv(abs(x)))) * ((inv(2) * 2) * inv(abs(x))) (by AssMult)
+                                                                          .= (eps * (abs(x * x) * inv(abs(x)))) * inv(abs(x)) (by InvDummy, OneDummy)
+                                                                          .= (eps * ((abs(x) * abs(x)) * inv(abs(x)))) * inv(abs(x)) (by AbsMult)
+                                                                          .= (eps * (abs(x) * (abs(x) * inv(abs(x))))) * inv(abs(x)) (by AssMult)
+                                                                          .= (eps * abs(x)) * inv(abs(x)) (by Inverse, One)
+                                                                          .= eps * (abs(x) * inv(abs(x))) (by AssMult)
+                                                                          .= eps (by Inverse, One).
+        Hence the thesis (by TransitivityOfOrder).
+    qed.
+qed.
+   
 
 
 ### Subsequences
