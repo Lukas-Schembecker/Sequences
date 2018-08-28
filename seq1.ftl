@@ -110,7 +110,7 @@ Proof.
     Take a real number x such that a converges to x.
     Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
 
-    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on][prove off]
+    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
     #Define b[k] = abs(a[k]) for k in NAT.
     Take a real number K such that K = max(1 + abs(x), maxN(b,N)).
 
@@ -348,7 +348,7 @@ Definition LimitPointOfSet.
 #    end.
 #qed.
 
-[prove on][prove off]
+[prove on]
 
 
 ### Sum and Product of Sequences
@@ -428,7 +428,7 @@ Lemma SumConstConv.
 Proof.
     # Define cn[n] = c for n in NAT.
     # b is a sequence.
-    [prove off]Take a sequence cn such that for every n cn[n] = c.[prove on][prove off]
+    [prove off]Take a sequence cn such that for every n cn[n] = c.[prove on]
 
     Let us show that c +'' a = (cn +' a).
         Let us show that for every n (c +'' a)[n] = (cn +' a)[n].
@@ -559,7 +559,7 @@ Lemma ConstMultSum.
     Let a,b be sequences. Let x,y be real numbers such that for every n b[n] = y * (a[n] + (-x)). Assume a converges to x.
     Then b converges to 0.
 Proof.
-    [prove off]Take a sequence sum such that for every n sum[n] = (-x) + a[n]. [prove on][prove off]
+    [prove off]Take a sequence sum such that for every n sum[n] = (-x) + a[n]. [prove on]
     sum converges to 0 (by SumConstConv, ComAdd, Neg).
     Let us show that for every n b[n] = y * sum[n].
     Proof.
@@ -597,10 +597,10 @@ Proof.
             Hence abs(((a[n] - x) * (b[n] - y)) - 0) < eps (by Zero, NegOfZero).
         qed.
     qed.
-    [prove off] (2) Take a sequence s2 such that for every n s2[n] = (x * (b[n] + (-y))) + (y * (a[n] + (-x))). [prove on][prove off]
+    [prove off] (2) Take a sequence s2 such that for every n s2[n] = (x * (b[n] + (-y))) + (y * (a[n] + (-x))). [prove on]
     Let us show that s2 converges to 0.
     proof.
-        [prove off] Take sequences s2a, s2b such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)). [prove on][prove off]
+        [prove off] Take sequences s2a, s2b such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)). [prove on]
         s2a, s2b converge to 0 (by ConstMultSum). 
         Let us show that for every n s2[n] = s2b[n] + s2a[n].
         Proof.
@@ -609,7 +609,7 @@ Proof.
         qed.
         Hence s2 converges to 0 (by SumConv).
     qed.
-    [prove off] (3) Take a sequence s3 such that for every n s3[n] = (a[n] * b[n]) - (x * y). [prove on][prove off]
+    [prove off] (3) Take a sequence s3 such that for every n s3[n] = (a[n] * b[n]) - (x * y). [prove on]
     Let us show that s3 converges to 0.
     proof.
         Let us show that for every n s3[n] = s1[n] + s2[n].
@@ -631,9 +631,9 @@ Proof.
                       .= dist(a[n] * b[n],x * y) (by DistDefinition).
     qed.
 qed.
-#[prove on][prove off]
 
-##############################################################################
+
+
 [prove on]
 Lemma AbsTriangleIneq2.
     Let x,y be real numbers. Then abs(x) - abs(y) =< abs(x - y).
@@ -712,13 +712,31 @@ Proof.
 qed.
 
 
-[prove off]
+
 Lemma AbsInv.
-Let x be a real number. Assume x != 0. Then abs(inv(x)) = inv(abs(x)).
+    Let x be a real number. Assume x != 0. Then abs(inv(x)) = inv(abs(x)).
 Proof.
+    We have pos(abs(inv(x))) and pos(inv(abs(x))).
+    pos(1) (by OnePos).
+    (1) Hence ( abs(inv(x)) = abs(abs(inv(x))) and inv(abs(x)) = abs(inv(abs(x))) ) and abs(1) = 1 (by AbsValue).
+    abs(inv(x)) .= abs(abs(inv(x))) (by 1)
+                .= abs(abs(inv(x)) * 1) (by One)
+                .= abs(abs(inv(x)) * (abs(x) * inv(abs(x)))) (by Inverse)
+                .= abs((abs(inv(x)) * abs(x)) * inv(abs(x))) (by AssMult)
+                .= abs(abs(inv(x) * x) * inv(abs(x))) (by AbsMult)
+                .= abs(abs(1) * inv(abs(x))) (by InvDummy)
+                .= abs(1 * inv(abs(x))) (by 1) 
+                .= abs(inv(abs(x))) (by OneDummy)
+                .= inv(abs(x)) (by 1).    
 qed.
-[prove on]
-   
+
+
+Lemma InvOne.
+    inv(1) = 1.
+Proof.
+    1 .= 1 * inv(1) (by Inverse)
+      .= inv(1) (by OneDummy).
+qed.   
     
 
 Lemma DivConv.
@@ -794,18 +812,33 @@ Proof.
                                                                 .= (eps * abs(x * x)) * (inv(2) * (abs(inv(a[n])) * abs(inv(x)))) (by AssMult)
                                                                 .= (eps * abs(x * x)) * (inv(2) * (abs(inv(x)) * abs(inv(a[n])))) (by ComMult)
                                                                 .= (eps * abs(x * x)) * ((inv(2) * abs(inv(x))) * abs(inv(a[n]))) (by AssMult)
-                                                                .= ((eps * abs(x * x)) * ((inv(2) * abs(inv(x))))) * abs(inv(a[n])) (by AssMult)
-                                                                .= ((eps * abs(x * x)) * ((inv(2) * abs(inv(x))))) * inv(abs(a[n])) (by AbsInv)
-                                                                .= ((eps * abs(x * x)) * ((inv(2) * abs(inv(x))))) * (1 * inv(abs(a[n]))) (by OneDummy).
-        # nutze jetzt abs(a[n]) > abs(x) * inv(2)
-        We have abs(a[n]) > abs(x) * inv(2).
-        Hence abs(a[n]) * inv(1) > abs(x) * inv(2) (by 
-        ((eps * abs(x * x)) * ((inv(2) * abs(inv(x))))) * (1 * inv(abs(a[n]))) < ((eps * abs(x * x)) * ((inv(2) * abs(inv(x))))) * (2 * inv(abs(x))) (by MultInvariance, InvSwapIneq).
-        #(eps * abs(x * x)) * (abs(inv(a[n])) * (inv(2) * abs(inv(x)))) < (eps * abs(x * x)) * (abs(inv(a[n])) * abs(a[n])) (by MultInvariance).
-        #((inv(2) * eps) * abs(x * x)) * abs(inv(a[n]) * inv(x)) < (2 * inv(x * x)) * abs(a[n] - x) < eps.
+                                                                .= ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * abs(inv(a[n])) (by AssMult)
+                                                                .= ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * inv(abs(a[n])) (by AbsInv)
+                                                                .= ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) (by OneDummy).
+        Let us show that 1 * inv(abs(a[n])) < 2 * inv(abs(x)).
+        Proof.
+            We have abs(a[n]) > abs(x) * inv(2).
+            Hence abs(a[n]) * inv(1) > abs(x) * inv(2) (by InvOne, One).
+            We have (pos(abs(a[n])) and pos(1)) and (pos(abs(x)) and pos(2)).
+            (abs(a[n]) != 0 and 1 != 0) and (abs(x) != 0 and 2 != 0).
+            Then 1 * inv(abs(a[n])) < 2 * inv(abs(x)) (by InvSwapIneq).
+        qed.
+        We have pos((eps * abs(x * x)) * (inv(2) * abs(inv(x)))).
+        ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) < ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) (by MultInvariance).
+        ((eps * abs(x * x)) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) .= ((eps * abs(x * x)) * (inv(abs(x)) * inv(2))) * (2 * inv(abs(x))) (by ComMult, AbsInv)
+                                                                          .= (((eps * abs(x * x)) * inv(abs(x))) * inv(2)) * (2 * inv(abs(x))) (by AssMult)
+                                                                          .= ((eps * abs(x * x)) * inv(abs(x))) * (inv(2) * (2 * inv(abs(x)))) (by AssMult)
+                                                                          .= (eps * (abs(x * x) * inv(abs(x)))) * ((inv(2) * 2) * inv(abs(x))) (by AssMult)
+                                                                          .= (eps * (abs(x * x) * inv(abs(x)))) * inv(abs(x)) (by InvDummy, OneDummy)
+                                                                          .= (eps * ((abs(x) * abs(x)) * inv(abs(x)))) * inv(abs(x)) (by AbsMult)
+                                                                          .= (eps * (abs(x) * (abs(x) * inv(abs(x))))) * inv(abs(x)) (by AssMult)
+                                                                          .= (eps * abs(x)) * inv(abs(x)) (by Inverse, One)
+                                                                          .= eps * (abs(x) * inv(abs(x))) (by AssMult)
+                                                                          .= eps (by Inverse, One).
+        Hence the thesis (by TransitivityOfOrder).
     qed.
 qed.
-##############################################################################    
+   
 
 
 ### Subsequences
