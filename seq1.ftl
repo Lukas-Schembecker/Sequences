@@ -9,7 +9,7 @@
 
 Let NAT denote the set of natural numbers.
 Let n, m, N, N1, N2, N3 denote natural numbers.
-
+# 514 555 629 640 643 645 663 685 686
 
 ### Sequences
 
@@ -592,13 +592,16 @@ Theorem DivConv.
     Then div(a) converges to inv(x).
 Proof.
     Let eps be a positive real number.
-    inv(2), abs(x), abs(x) * abs(x), -abs(x) are real numbers.
+
+    2, inv(2), abs(x), abs(x) * abs(x), -abs(x), ((-1) * inv(2)) * abs(x), (inv(2) * abs(x)) + (-abs(x)) are real numbers.
+
     inv(2) * abs(x) is a positive real number.	
     Take a natural number m such that for every n such that m < n dist(a[n],x) < inv(2) * abs(x) (by Convergence).
     Let us show that for every n such that m < n inv(2) * abs(x) < abs(a[n]).
     Proof. 
         Assume m < n.
-        abs(x) - abs(a[n]), abs(x - a[n]), abs(a[n] - x), (abs(x) + (-abs(a[n]))), (abs(x) + (-abs(a[n]))) + (-abs(x)), (inv(2) * abs(x)) + (-abs(x))  are real numbers.
+        a[n], abs(a[n]), -abs(a[n]), abs(x) - abs(a[n]), x - a[n], abs(x - a[n]), a[n] - x, abs(a[n] - x), abs(x) + (-abs(a[n])), (abs(x) + (-abs(a[n]))) + (-abs(x)) are real numbers.
+
         Let us show that abs(x) - abs(a[n]) < inv(2) * abs(x).
         Proof.
             abs(x) - abs(a[n]) =< abs(x - a[n]) (by AbsTriangleIneq2).
