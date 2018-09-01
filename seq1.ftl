@@ -824,7 +824,7 @@ Proof.
             a[n], a[i[n]], dist(a[n],a[i[n]]), dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x, dist(a[n],a[i[n]]) + dist(a[i[n]],x) are real numbers.
 
             We have Subseq(a,i)[n] = a[i[n]].
-            We have dist(a[n],a[i[n]]) < halfeps.
+            We have dist(a[n],a[i[n]]) < halfeps (by Cauchy).
             We have dist(a[i[n]],x) < halfeps.
 
             dist(a[n],x) .= abs(a[n] - x) (by DistDefinition)
@@ -1031,35 +1031,44 @@ Let A, B, S denote a set.
 
 
 Definition BoundedAboveBy.
-Let S be a set. Assume every element of S is a real number. Let b be a real number. S is bounded above by b iff for every real number x such that x is an element of S x =< b.
+    Let S be a set. Assume every element of S is a real number. Let b be a real number. S is bounded above by b iff for every real number x such that x is an element of S x =< b.
 
 Definition BoundedAbove.
-Let S be a set. Assume every element of S is a real number. S is bounded above iff there exists a real number b such that S is bounded above by b.
+    Let S be a set. Assume every element of S is a real number. S is bounded above iff there exists a real number b such that S is bounded above by b.
 
 Definition BoundedBelowBy.
-Let S be a set. Assume every element of S is a real number. Let b be a real number. S is bounded below by b iff for every real number x such that x is an element of S x >= b.
+    Let S be a set. Assume every element of S is a real number. Let b be a real number. S is bounded below by b iff for every real number x such that x is an element of S x >= b.
 
 Definition BoundedBelow.
-Let S be a set. Assume every element of S is a real number. S is bounded below iff there exists a real number b such that S is bounded below by b.
+    Let S be a set. Assume every element of S is a real number. S is bounded below iff there exists a real number b such that S is bounded below by b.
 
 Definition Sup. 
-Let S be a set. Assume every element of S is a real number. 
-Assume that S is bounded above. Let a be a real number such that S is bounded above by a. 
-sup(S) = a iff for every real number b such that b < a S is not bounded above by b.
+    Let S be a set. Assume every element of S is a real number. 
+    Assume that S is bounded above. Let a be a real number such that S is bounded above by a. 
+    sup(S) = a iff for every real number b such that b < a S is not bounded above by b.
 
 Definition Inf.
-Let S be a set. Assume every element of S is a real number. 
-Assume that S is bounded below. Let a be a real number such that S is bounded below by a. 
-inf(S) = a iff for every real number b such that b > a S is not bounded below by b.
+    Let S be a set. Assume every element of S is a real number. 
+    Assume that S is bounded below. Let a be a real number such that S is bounded below by a. 
+    inf(S) = a iff for every real number b such that b > a S is not bounded below by b.
 
 Definition LimSup.
-Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. limsup(a) = sup(E) iff E is bounded above.
+    Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. limsup(a) = sup(E) iff E is bounded above.
 
 Definition LimInf.
-Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. limsup(a) = inf(E) iff E is bounded below.
+    Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. limsup(a) = inf(E) iff E is bounded below.
+
 
 
 ###Eindeutigkeit von Sup und Inf?
+
+
+
+#Theorem LimSupInE.
+#    Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. 
+#Then limsup(a) is an element of E.
+#Proof.
+#    Case limsup(a) =    
 
 
 
