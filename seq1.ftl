@@ -399,7 +399,7 @@ Definition SequenceDiv.
     Let a be a sequence. Assume for every n a[n] != 0. div(a) is a sequence such that for every n (div(a))[n] = inv(a[n]).
 
 
-Lemma SumConv.
+Theorem SumConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
     Then a +' b converges to x + y.
 Proof.
@@ -444,7 +444,7 @@ Proof.
     end.
 qed.
 
-Lemma SumConstConv.
+Theorem SumConstConv.
     Let a be a sequence. Let x,c be real numbers. Assume a converges to x.
     Then c +'' a converges to c + x.
 Proof.
@@ -465,7 +465,7 @@ Proof.
     Then c +'' a converges to c + x (by SumConv).
 qed.
 
-Lemma ProdConstConv.
+Theorem ProdConstConv.
     Let a be a sequence. Let x,c be real numbers. Assume a converges to x.
     Then c *'' a converges to c * x.
 Proof.
@@ -523,7 +523,7 @@ Proof.
 qed.
 
 
-Lemma ProdConv.
+Theorem ProdConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
     Let a *' b be a sequence such that for every natural number n (a *' b)[n] = a[n] * b[n].
     Then a *' b converges to x * y.
@@ -583,113 +583,9 @@ Proof.
     qed.
 qed.
 
-
-
-[prove on]
-Lemma AbsTriangleIneq2.
-    Let x,y be real numbers. Then abs(x) - abs(y) =< abs(x - y).
-Proof.
-    abs(x) .= abs(x + ((-y) + y)) (by Zero, Neg, ComAdd)
-           .= abs((x + (-y)) + y) (by AssAdd).
-    abs((x + (-y)) + y) =< abs(x - y) + abs(y) (by AbsTriangleIneq).
-    Hence abs(x) =< abs(x + (-y)) + abs(y).
-    abs(x) + (-abs(y)) =< (abs(x - y) + abs(y)) + (-abs(y)) (by LeqAddInvariance).
-    (abs(x - y) + abs(y)) + (-abs(y)) = abs(x - y) (by AssAdd, Neg, Zero).
-    Hence abs(x) - abs(y) =< abs(x - y) (by LeqTransitivity).
-qed.   
-
-
-
-Lemma InvAdd.
-    Let a,b,c,d be real numbers. Assume (a != 0 and b != 0) and (c != 0 and d != 0). 
-    Then (a * inv(b)) + (c * inv(d)) = ((a * d) + (b * c)) * inv(b * d).
-Proof.
-    (a * inv(b)) + (c * inv(d)) .= ((a * inv(b)) * 1) + (1 * (c * inv(d))) (by One, OneDummy)
-                                .= ((a * inv(b)) * (d * inv(d))) + ((b * inv(b)) * (c * inv(d))) (by Inverse)
-                                .= (a * (inv(b) * (d * inv(d)))) + (b * (inv(b) * (c * inv(d)))) (by AssMult)
-                                .= (a * ((inv(b) * d) * inv(d))) + (b * ((inv(b) * c) * inv(d))) (by AssMult)
-                                .= (a * ((d * inv(b)) * inv(d))) + (b * ((c * inv(b)) * inv(d))) (by ComMult)
-                                .= (a * (d * (inv(b) * inv(d)))) + (b * (c * (inv(b) * inv(d)))) (by AssMult)
-                                .= ((a * d) * (inv(b) * inv(d))) + ((b * c) * (inv(b) * inv(d))) (by AssMult)
-                                .= ((a * d) * inv(b * d)) + ((b * c) * inv(b * d)) (by InvRule2)
-                                .= ((a * d) + (b * c)) * inv(b * d) (by DistribDummy).
-qed.
-
-
-
-Lemma InvCanc.
-    Let a, b be real numbers. Assume a != 0 and b != 0.
-    Then (a * inv(b)) * (b * inv(a)) = 1.
-Proof.
-    (a * inv(b)) * (b * inv(a)) .= ((a * inv(b)) * b) * inv(a) (by AssMult)
-                                .= (a * (inv(b) * b)) * inv(a) (by AssMult)
-                                .= (a * 1) * inv(a) (by InvDummy)
-                                .= a * inv(a) (by One)
-                                .= 1 (by Inverse).
-qed.
-
-
-Lemma NegMultInvariance.
-Let x, y, z be real numbers.
-(x < y /\ z < 0) => z * x > z * y.
-Proof.
-    Assume x < y /\ z < 0.
-    Therefore pos(-z).    
-    Hence (-z) * x < (-z) * y.
-    Hence -((-z) * x) > -((-z) * y) (by OrdMirror).
-    -((-z) * x) .= (-(-z)) * x (by MinusRule5)
-                .= z * x (by MinusRule2).
-    -((-z) * y) .= (-(-z)) * y (by MinusRule5)
-                .= z * y (by MinusRule2).
-qed.
-
-
-Lemma InvSwapIneq.
-    Let a, b, c, d be positive real numbers. Assume (a != 0 and b != 0) and (c != 0 and d != 0). 
-    If a * inv(b) < c * inv(d) then b * inv(a) > d * inv(c).
-Proof.
-    Assume a * inv(b) < c * inv(d).
-    We have pos(b * inv(a)) and pos(d * inv(c)).
-    (b * inv(a)) * (a * inv(b)) < (b * inv(a)) * (c * inv(d)) (by MultInvariance).
-    (b * inv(a)) * (a * inv(b)) = 1 (by InvCanc).
-    Hence 1 < (b * inv(a)) * (c * inv(d)).
-    (d * inv(c)) * 1 < (d * inv(c)) * ((b * inv(a)) * (c * inv(d))) (by MultInvariance).
-    d * inv(c) < (d * inv(c)) * ((b * inv(a)) * (c * inv(d))) (by One).
-    (d * inv(c)) * ((b * inv(a)) * (c * inv(d))) .= ((b * inv(a)) * (c * inv(d))) * (d * inv(c)) (by ComMult)
-                                                 .= (b * inv(a)) * ((c * inv(d)) * (d * inv(c))) (by AssMult)
-                                                 .= (b * inv(a)) * 1 (by InvCanc)
-                                                 .= b * inv(a) (by One).   
-qed.
-
-
-
-Lemma AbsInv.
-    Let x be a real number. Assume x != 0. Then abs(inv(x)) = inv(abs(x)).
-Proof.
-    We have pos(abs(inv(x))) and pos(inv(abs(x))).
-    pos(1) (by OnePos).
-    (1) Hence ( abs(inv(x)) = abs(abs(inv(x))) and inv(abs(x)) = abs(inv(abs(x))) ) and abs(1) = 1 (by AbsValue).
-    abs(inv(x)) .= abs(abs(inv(x))) (by 1)
-                .= abs(abs(inv(x)) * 1) (by One)
-                .= abs(abs(inv(x)) * (abs(x) * inv(abs(x)))) (by Inverse)
-                .= abs((abs(inv(x)) * abs(x)) * inv(abs(x))) (by AssMult)
-                .= abs(abs(inv(x) * x) * inv(abs(x))) (by AbsMult)
-                .= abs(abs(1) * inv(abs(x))) (by InvDummy)
-                .= abs(1 * inv(abs(x))) (by 1) 
-                .= abs(inv(abs(x))) (by OneDummy)
-                .= inv(abs(x)) (by 1).    
-qed.
-
-
-Lemma InvOne.
-    inv(1) = 1.
-Proof.
-    1 .= 1 * inv(1) (by Inverse)
-      .= inv(1) (by OneDummy).
-qed.   
     
 
-Lemma DivConv.
+Theorem DivConv.
     Let a be a sequence. Let x be a real number such that x != 0. Assume a converges to x. 
     Assume for every n a[n] != 0.
     Let div(a) be a sequence such that for every natural number n (div(a))[n] = inv(a[n]).
