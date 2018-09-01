@@ -789,14 +789,14 @@ Proof.
             We have pos((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))).
             ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) < ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) (by MultInvariance).
             ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) .= ((eps * (abs(x) * abs(x))) * (inv(abs(x)) * inv(2))) * (2 * inv(abs(x))) (by ComMult, AbsInv)
-                                                                              .= (((eps * (abs(x) * abs(x))) * inv(abs(x))) * inv(2)) * (2 * inv(abs(x))) (by AssMult)
-                                                                              .= ((eps * (abs(x) * abs(x))) * inv(abs(x))) * (inv(2) * (2 * inv(abs(x)))) (by AssMult)
-                                                                              .= (eps * ((abs(x) * abs(x)) * inv(abs(x)))) * ((inv(2) * 2) * inv(abs(x))) (by AssMult)
-                                                                              .= (eps * ((abs(x) * abs(x)) * inv(abs(x)))) * inv(abs(x)) (by InvDummy, OneDummy)
-                                                                              .= (eps * (abs(x) * (abs(x) * inv(abs(x))))) * inv(abs(x)) (by AssMult)
-                                                                              .= (eps * abs(x)) * inv(abs(x)) (by Inverse, One)
-                                                                              .= eps * (abs(x) * inv(abs(x))) (by AssMult)
-                                                                              .= eps (by Inverse, One).
+                                                                                     .= (((eps * (abs(x) * abs(x))) * inv(abs(x))) * inv(2)) * (2 * inv(abs(x))) (by AssMult)
+                                                                                     .= ((eps * (abs(x) * abs(x))) * inv(abs(x))) * (inv(2) * (2 * inv(abs(x)))) (by AssMult)
+                                                                                     .= (eps * ((abs(x) * abs(x)) * inv(abs(x)))) * ((inv(2) * 2) * inv(abs(x))) (by AssMult)
+                                                                                     .= (eps * ((abs(x) * abs(x)) * inv(abs(x)))) * inv(abs(x)) (by InvDummy, OneDummy)
+                                                                                     .= (eps * (abs(x) * (abs(x) * inv(abs(x))))) * inv(abs(x)) (by AssMult)
+                                                                                     .= (eps * abs(x)) * inv(abs(x)) (by Inverse, One)
+                                                                                     .= eps * (abs(x) * inv(abs(x))) (by AssMult)
+                                                                                     .= eps (by Inverse, One).
         qed.
         Hence the thesis (by TransitivityOfOrder).
     qed.
