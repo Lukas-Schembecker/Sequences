@@ -1,7 +1,7 @@
 [prove off]
 [read Sequences/Naturals.ftl]
-[read Sequences/helper.ftl]
 [prove on]
+[read Sequences/helper.ftl]
 #[prove off][check off]
 [prove on][check on]
 [sequence/-s]
@@ -592,11 +592,13 @@ Theorem DivConv.
     Then div(a) converges to inv(x).
 Proof.
     Let eps be a positive real number.
+    inv(2), abs(x), abs(x) * abs(x), -abs(x) are real numbers.
     inv(2) * abs(x) is a positive real number.	
     Take a natural number m such that for every n such that m < n dist(a[n],x) < inv(2) * abs(x) (by Convergence).
     Let us show that for every n such that m < n inv(2) * abs(x) < abs(a[n]).
     Proof. 
         Assume m < n.
+        abs(x) - abs(a[n]), abs(x - a[n]), abs(a[n] - x), (abs(x) + (-abs(a[n]))), (abs(x) + (-abs(a[n]))) + (-abs(x)), (inv(2) * abs(x)) + (-abs(x))  are real numbers.
         Let us show that abs(x) - abs(a[n]) < inv(2) * abs(x).
         Proof.
             abs(x) - abs(a[n]) =< abs(x - a[n]) (by AbsTriangleIneq2).
@@ -612,7 +614,7 @@ Proof.
             (abs(x) + (-abs(a[n]))) + (-abs(x)) .= abs(x) + ((-abs(a[n])) + (-abs(x))) (by AssAdd)
                                                 .= abs(x) + ((-abs(x)) + (-abs(a[n]))) (by ComAdd)
                                                 .= (abs(x) + (-abs(x))) + (-abs(a[n])) (by AssAdd)
-                                                .= (-abs(a[n])) (by Neg, ComAdd, Zero).
+                                                .= -abs(a[n]) (by Neg, ComAdd, Zero).
             -abs(a[n]) < (inv(2) * abs(x)) + (-abs(x)) (by AssAdd, Neg, Zero).
             (inv(2) * abs(x)) + (-abs(x)) .= (inv(2) * abs(x)) + ((-1) * abs(x)) (by MinusRule4)
                                           .= (inv(2) + (-1)) * abs(x) (by DistribDummy)
@@ -637,6 +639,7 @@ Proof.
     Proof.
         pos(inv(2)) (by PosTwo, InvMono).
         pos(eps).
+        inv(2) are real numbers.
         pos(inv(2) * eps) (by MultClosed).
         abs(x) != 0.
         pos(abs(x) * abs(x)) (by PosSquare).
