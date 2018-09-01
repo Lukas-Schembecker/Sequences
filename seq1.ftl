@@ -819,8 +819,8 @@ Proof.
         Then N1 =< N and N2 =< N.
 
         Let us show that for every n such that N < n dist(a[n],x) < eps.
-            Assume N < n.
-            i[n] is a natural number.
+            Assume N < n. Hence N1 < n and N2 < n (by MixedTransitivity).
+            We have n =< i[n] (by SubSeqLeq). Hence N1 < i[n] (by MixedTransitivity).
             a[n], a[i[n]], dist(a[n],a[i[n]]), dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x, dist(a[n],a[i[n]]) + dist(a[i[n]],x) are real numbers.
 
             We have Subseq(a,i)[n] = a[i[n]].
