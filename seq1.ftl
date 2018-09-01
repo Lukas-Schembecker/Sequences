@@ -889,17 +889,17 @@ Definition MonDec.
 Definition Mon.
     Let a be a sequence. a is monotonic iff a is monotonically increasing or a is monotonically decreasing.
 
-Definition UpperBound.
+Definition UpperBoundSeq.
     Let a be a bounded sequence. Let K be a real number. K is upper bound of a iff (for every n a[n] =< K).
 
-Definition LeastUpperBound.
+Definition LeastUpperBoundSeq.
     Let a be a bounded sequence. LeastUpper(a) is a real number K such that (K is upper bound of a) and 
     (for every real number L such that L is upper bound of a K =< L).
 
-Definition LowerBound.
+Definition LowerBoundSeq.
     Let a be a bounded sequence. Let K be a real number. K is lower bound of a iff (for every n a[n] >= K).
 
-Definition GreatestLowerBound.
+Definition GreatestLowerBoundSeq.
     Let a be a bounded sequence. GreatestLower(a) is a real number K such that (K is lower bound of a) and
     (for every real number L such that L is lower bound of a L =< K).
 
@@ -1024,7 +1024,7 @@ Definition NegInf.
     Let a be a sequence. a converges to negative infinity iff for every real number K there exists N such that
     for every n such that N < n a[n] =< K.
 
-# Define limsup liminf?
+# limsup liminf
 
 Let b denote a real number. 
 Let A, B, S denote a set.
@@ -1033,15 +1033,11 @@ Let A, B, S denote a set.
 Definition BoundedAboveBy.
 Let S be a set. Assume every element of S is a real number. Let b be a real number. S is bounded above by b iff for every real number x such that x is an element of S x =< b.
 
-#Let b is an upper bound of S stand for S is bounded above by b.
-
 Definition BoundedAbove.
 Let S be a set. Assume every element of S is a real number. S is bounded above iff there exists a real number b such that S is bounded above by b.
 
 Definition BoundedBelowBy.
 Let S be a set. Assume every element of S is a real number. Let b be a real number. S is bounded below by b iff for every real number x such that x is an element of S x >= b.
-
-#Let b is an lower bound of S stand for S is bounded below by b.
 
 Definition BoundedBelow.
 Let S be a set. Assume every element of S is a real number. S is bounded below iff there exists a real number b such that S is bounded below by b.
@@ -1051,15 +1047,10 @@ Let S be a set. Assume every element of S is a real number.
 Assume that S is bounded above. Let a be a real number such that S is bounded above by a. 
 sup(S) = a iff for every real number b such that b < a S is not bounded above by b.
 
-
-#Let a is the least upper bound of S stand for a = sup(S).
-
 Definition Inf.
 Let S be a set. Assume every element of S is a real number. 
 Assume that S is bounded below. Let a be a real number such that S is bounded below by a. 
 inf(S) = a iff for every real number b such that b > a S is not bounded below by b.
-
-#Let a is the least lower bound of S stand for a = inf(S).
 
 Definition LimSup.
 Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. limsup(a) = sup(E) iff E is bounded above.
