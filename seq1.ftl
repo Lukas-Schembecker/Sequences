@@ -1,7 +1,7 @@
 [prove off]
 [read Sequences/Naturals.ftl]
-[read Sequences/helper.ftl]
 [prove on]
+[read Sequences/helper.ftl]
 #[prove off][check off]
 [prove on][check on]
 [sequence/-s]
@@ -592,11 +592,13 @@ Theorem DivConv.
     Then div(a) converges to inv(x).
 Proof.
     Let eps be a positive real number.
+    inv(2), abs(x), abs(x) * abs(x), -abs(x) are real numbers.
     inv(2) * abs(x) is a positive real number.	
     Take a natural number m such that for every n such that m < n dist(a[n],x) < inv(2) * abs(x) (by Convergence).
     Let us show that for every n such that m < n inv(2) * abs(x) < abs(a[n]).
     Proof. 
         Assume m < n.
+        abs(x) - abs(a[n]), abs(x - a[n]), abs(a[n] - x), (abs(x) + (-abs(a[n]))), (abs(x) + (-abs(a[n]))) + (-abs(x)), (inv(2) * abs(x)) + (-abs(x))  are real numbers.
         Let us show that abs(x) - abs(a[n]) < inv(2) * abs(x).
         Proof.
             abs(x) - abs(a[n]) =< abs(x - a[n]) (by AbsTriangleIneq2).
@@ -612,7 +614,7 @@ Proof.
             (abs(x) + (-abs(a[n]))) + (-abs(x)) .= abs(x) + ((-abs(a[n])) + (-abs(x))) (by AssAdd)
                                                 .= abs(x) + ((-abs(x)) + (-abs(a[n]))) (by ComAdd)
                                                 .= (abs(x) + (-abs(x))) + (-abs(a[n])) (by AssAdd)
-                                                .= (-abs(a[n])) (by Neg, ComAdd, Zero).
+                                                .= -abs(a[n]) (by Neg, ComAdd, Zero).
             -abs(a[n]) < (inv(2) * abs(x)) + (-abs(x)) (by AssAdd, Neg, Zero).
             (inv(2) * abs(x)) + (-abs(x)) .= (inv(2) * abs(x)) + ((-1) * abs(x)) (by MinusRule4)
                                           .= (inv(2) + (-1)) * abs(x) (by DistribDummy)
@@ -637,6 +639,7 @@ Proof.
     Proof.
         pos(inv(2)) (by PosTwo, InvMono).
         pos(eps).
+        inv(2) are real numbers.
         pos(inv(2) * eps) (by MultClosed).
         abs(x) != 0.
         pos(abs(x) * abs(x)) (by PosSquare).
@@ -819,8 +822,8 @@ Proof.
         Then N1 =< N and N2 =< N.
 
         Let us show that for every n such that N < n dist(a[n],x) < eps.
-            Assume N < n.
-            i[n] is a natural number.
+            Assume N < n. Hence N1 < n and N2 < n (by MixedTransitivity).
+            We have n =< i[n] (by SubSeqLeq). Hence N1 < i[n] (by MixedTransitivity).
             a[n], a[i[n]], dist(a[n],a[i[n]]), dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x, dist(a[n],a[i[n]]) + dist(a[i[n]],x) are real numbers.
 
             We have Subseq(a,i)[n] = a[i[n]].
@@ -906,7 +909,7 @@ Definition GreatestLowerBoundSeq.
 Lemma MonIncCon.
     Let a be a monotonically increasing bounded sequence. Then a converges.
 Proof.
-    For every n a[n] =< LeastUpper(a) (by UpperBound, LeastUpperBound).
+    For every n a[n] =< LeastUpper(a) (by UpperBoundSeq, LeastUpperBoundSeq).
     Let us show that for every positive real number eps there exists N such that (LeastUpper(a) - eps) < a[N].
         Assume the contrary.
         Take a positive real number eps such that for every N not((LeastUpper(a) - eps) < a[N]).
@@ -917,7 +920,7 @@ Proof.
             Therefore (LeastUpper(a) - eps) >= a[n] (by NotRuleOrder).
             Hence a[n] =< (LeastUpper(a) - eps).
         end.
-        Hence (LeastUpper(a) - eps) is upper bound of a (by UpperBound).
+        Hence (LeastUpper(a) - eps) is upper bound of a (by UpperBoundSeq).
 
         LeastUpper(a) - (LeastUpper(a) - eps) .= LeastUpper(a) + (-LeastUpper(a) + eps) (by MinusRule1, MinusRule2)
                                               .= (LeastUpper(a) - LeastUpper(a)) + eps (by AssAdd)
@@ -927,7 +930,7 @@ Proof.
 
         Hence (LeastUpper(a) - eps) < LeastUpper(a).
         Hence not((LeastUpper(a) - eps) >= LeastUpper(a)) (by NotRuleOrder).
-        Contradiction (by LeastUpperBound).
+        Contradiction (by LeastUpperBoundSeq).
     end.
 
     Let us show that a converges to LeastUpper(a).
