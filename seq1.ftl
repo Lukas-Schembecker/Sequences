@@ -593,9 +593,12 @@ Theorem DivConv.
 Proof.
     Let eps be a positive real number.
 
+    abs(x) != 0.
     2, inv(2), abs(x), abs(x) * abs(x), -abs(x), ((-1) * inv(2)) * abs(x), (inv(2) * abs(x)) + (-abs(x)) are real numbers.
-
-    inv(2) * abs(x) is a positive real number.	
+    We have pos(2) and pos(inv(2)) and pos(abs(x)) and pos(abs(inv(x))) and pos(inv(2) * eps) and pos(abs(x) * abs(x)) and pos((inv(2) * eps) * (abs(x) * abs(x))) and
+            pos(inv(2) * abs(x)) and pos(eps * (abs(x) * abs(x))) and pos(inv(2) * abs(inv(x))) and pos((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))).
+                                                                                
+   
     Take a natural number m such that for every n such that m < n dist(a[n],x) < inv(2) * abs(x) (by Convergence).
     Let us show that for every n such that m < n inv(2) * abs(x) < abs(a[n]).
     Proof. 
@@ -612,6 +615,7 @@ Proof.
             abs(a[n] - x) < inv(2) * abs(x) (by DistDefinition).
             Hence the thesis (by MixedTransitivity).
         qed.
+
         Let us show that -abs(a[n]) < ((-1) * inv(2)) * abs(x).
             (abs(x) + (-abs(a[n]))) + (-abs(x)) < (inv(2) * abs(x)) + (-abs(x)) (by MixedAddInvariance). 
             (abs(x) + (-abs(a[n]))) + (-abs(x)) .= abs(x) + ((-abs(a[n])) + (-abs(x))) (by AssAdd)
@@ -631,6 +635,7 @@ Proof.
                            .= -(2 - 1) (by MinusRule3)
                            .= -1.
         qed.
+
         Therefore abs(a[n]) > -(((-1) * inv(2)) * abs(x)) (by OrdMirror, MinusRule2).
         -(((-1) * inv(2)) * abs(x)) .= ((-(-1)) * inv(2)) * abs(x) (by MinusRule5)
                                     .= (1 * inv(2)) * abs(x) (by MinusRule2)
@@ -638,18 +643,9 @@ Proof.
                                     .= abs(x) * inv(2) (by ComMult).
         Therefore abs(a[n]) > abs(x) * inv(2) (by TransitivityOfOrder).
     qed.
-    Let us show that pos((inv(2) * eps) * (abs(x) * abs(x))).
-    Proof.
-        pos(inv(2)) (by PosTwo, InvMono).
-        pos(eps).
-        inv(2) are real numbers.
-        pos(inv(2) * eps) (by MultClosed).
-        abs(x) != 0.
-        pos(abs(x) * abs(x)) (by PosSquare).
-        Hence the thesis (by MultClosed).
-    qed.    
-    Take an N1 such that for every n such that N1 < n dist(a[n],x) < (inv(2) * eps) * (abs(x) * abs(x)) (by Convergence). 
-    Take an N2 such that N2 = max(N1,m).
+    
+    Take N1 such that for every n such that N1 < n dist(a[n],x) < (inv(2) * eps) * (abs(x) * abs(x)) (by Convergence). 
+    Take N2 such that N2 = max(N1,m).
     Let us show that for every n such that N2 < n dist(inv(a[n]),inv(x)) < eps.
     Proof.
         Assume N2 < n.
@@ -664,7 +660,7 @@ Proof.
                                    .= abs((x - a[n]) * inv(a[n] * x)) (by MinusRule4)
                                    .= abs(x - a[n]) * abs(inv(a[n]) * inv(x)) (by AbsMult, InvRule2)
                                    .= abs(inv(a[n]) * inv(x)) * abs(x - a[n]) (by ComMult).
-            We have pos(abs(inv(a[n]) * inv(x))) (by AbsPos, InvNotZero, NoZeroDivisors). 
+            We have pos(abs(inv(a[n]) * inv(x))) (by AbsPos, InvNotZero, NoZeroDivisors).
             abs(x - a[n]) = dist(a[n],x) (by DistDefinition, DistSymm).
             abs(inv(a[n]) * inv(x)) * abs(x - a[n]) < abs(inv(a[n]) * inv(x)) * ((inv(2) * eps) * (abs(x) * abs(x))) (by MultInvariance, DistDefinition).
             abs(inv(a[n]) * inv(x)) * ((inv(2) * eps) * (abs(x) * abs(x))) .= (abs(inv(a[n])) * abs(inv(x))) * ((inv(2) * eps) * (abs(x) * abs(x))) (by AbsMult)
@@ -677,7 +673,11 @@ Proof.
                                                                     .= ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * abs(inv(a[n])) (by AssMult)
                                                                     .= ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * inv(abs(a[n])) (by AbsInv)
                                                                     .= ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) (by OneDummy).
-        qed.       
+        qed.
+
+        (eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x))), 1 * inv(abs(a[n])), 2 * inv(abs(x)), dist(inv(a[n]),inv(x)),
+        ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))), ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) are real numbers.
+
         Let us show that ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) < eps.
         Proof. 
             Let us show that 1 * inv(abs(a[n])) < 2 * inv(abs(x)).
@@ -688,7 +688,7 @@ Proof.
                 (abs(a[n]) != 0 and 1 != 0) and (abs(x) != 0 and 2 != 0).
                 Then 1 * inv(abs(a[n])) < 2 * inv(abs(x)) (by InvSwapIneq).
             qed.
-            We have pos((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))).
+
             ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (1 * inv(abs(a[n]))) < ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) (by MultInvariance).
             ((eps * (abs(x) * abs(x))) * (inv(2) * abs(inv(x)))) * (2 * inv(abs(x))) .= ((eps * (abs(x) * abs(x))) * (inv(abs(x)) * inv(2))) * (2 * inv(abs(x))) (by ComMult, AbsInv)
                                                                                      .= (((eps * (abs(x) * abs(x))) * inv(abs(x))) * inv(2)) * (2 * inv(abs(x))) (by AssMult)
@@ -830,7 +830,7 @@ Proof.
             a[n], a[i[n]], dist(a[n],a[i[n]]), dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x, dist(a[n],a[i[n]]) + dist(a[i[n]],x) are real numbers.
 
             We have Subseq(a,i)[n] = a[i[n]].
-            We have dist(a[n],a[i[n]]) < halfeps (by Cauchy).
+            We have dist(a[n],a[i[n]]) < halfeps.
             We have dist(a[i[n]],x) < halfeps.
 
             dist(a[n],x) .= abs(a[n] - x) (by DistDefinition)
