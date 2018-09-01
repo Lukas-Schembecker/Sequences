@@ -1071,10 +1071,18 @@ Definition LimInf.
 
 
 #Theorem LimSupInE.
-#    Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. 
-#Then limsup(a) is an element of E.
+#    Let a be a sequence. 
+#    Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. 
+#    Assume E is bounded above and E is bounded below.
+#    Then limsup(a) is an element of E.
 #Proof.
-#    Case limsup(a) =    
+#    ### +inf, -inf umgegangen durch bounded above / below
+#    Assume E is bounded above and E is bounded below.
+    
+
+     
+
+           
 
 
 
