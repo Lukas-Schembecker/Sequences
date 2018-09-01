@@ -906,7 +906,7 @@ Definition GreatestLowerBoundSeq.
 Lemma MonIncCon.
     Let a be a monotonically increasing bounded sequence. Then a converges.
 Proof.
-    For every n a[n] =< LeastUpper(a) (by UpperBound, LeastUpperBound).
+    For every n a[n] =< LeastUpper(a) (by UpperBoundSeq, LeastUpperBoundSeq).
     Let us show that for every positive real number eps there exists N such that (LeastUpper(a) - eps) < a[N].
         Assume the contrary.
         Take a positive real number eps such that for every N not((LeastUpper(a) - eps) < a[N]).
@@ -917,7 +917,7 @@ Proof.
             Therefore (LeastUpper(a) - eps) >= a[n] (by NotRuleOrder).
             Hence a[n] =< (LeastUpper(a) - eps).
         end.
-        Hence (LeastUpper(a) - eps) is upper bound of a (by UpperBound).
+        Hence (LeastUpper(a) - eps) is upper bound of a (by UpperBoundSeq).
 
         LeastUpper(a) - (LeastUpper(a) - eps) .= LeastUpper(a) + (-LeastUpper(a) + eps) (by MinusRule1, MinusRule2)
                                               .= (LeastUpper(a) - LeastUpper(a)) + eps (by AssAdd)
@@ -927,7 +927,7 @@ Proof.
 
         Hence (LeastUpper(a) - eps) < LeastUpper(a).
         Hence not((LeastUpper(a) - eps) >= LeastUpper(a)) (by NotRuleOrder).
-        Contradiction (by LeastUpperBound).
+        Contradiction (by LeastUpperBoundSeq).
     end.
 
     Let us show that a converges to LeastUpper(a).
