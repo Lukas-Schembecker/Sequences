@@ -1,5 +1,6 @@
 [prove off]
 [read Sequences/Naturals.ftl]
+[read Sequences/helper.ftl]
 [prove on]
 #[prove off][check off]
 [prove on][check on]
@@ -7,10 +8,9 @@
 [converge/-s]
 
 Let NAT denote the set of natural numbers.
-Let REAL denote the set of real numbers.
 Let n, m, N, N1, N2, N3 denote natural numbers.
 
-[prove off]
+
 ### Sequences
 
 Definition Seq.
@@ -32,116 +32,8 @@ Definition Conv.
     Let a be a sequence. a converges iff there exists a real number x such that a converges to x.
 
 Let a is convergent stand for a converges.
-
-Signature Limit.
-    Let a be a sequence. Assume a converges. lim a is a real number such that a converges to lim a.
-
-
-
-### Limit is unique
-
-Lemma DistEqual.
-    Let x and y be real numbers. Assume for every positive real number eps dist(x,y) < eps.
-    Then x = y.
-Proof.
-	Assume the contrary.
-    Then there exists a positive real number eps2 such that eps2 < dist(x,y).
-    A contradiction.
-qed.
-
-Lemma LimitUnique.
-    Let a be a sequence. Let x, y be real numbers. Assume a converges to x and a converges to y.
-    Then x = y.
-Proof.
-    Let us show that for every positive real number eps dist(x,y) < eps.
-        Let eps be a positive real number.
-        Take a positive real number halfeps such that halfeps = inv(2) * eps.
-
-        Take N1 such that for every n such that N1 < n dist(a[n],x) < halfeps (by Convergence).
-        Take N2 such that for every n such that N2 < n dist(a[n],y) < halfeps (by Convergence).
-
-        For every n dist(x,y) =< dist(x,a[n]) + dist(a[n],y) (by DistTriangleIneq). 
-        Take N3 such that N3 = max(N1,N2) + 1.
-        Then N1 < N3 and N2 < N3.
-
-        Hence dist(x,a[N3]) < halfeps and dist(a[N3],y) < halfeps (by DistSymm).
-        Hence dist(x,a[N3]) + dist(a[N3],y) < halfeps + halfeps (by AddInvariance).
-        Hence dist(x,y) < halfeps + halfeps (by MixedTransitivity).
-
-        halfeps + halfeps .= (1 * halfeps) + (1 * halfeps) (by OneDummy)
-                          .= (1 + 1) * halfeps (by DistribDummy)
-                          .= 2 * (inv(2) * eps)
-                          .= (2 * inv(2)) * eps (by AssMult)
-                          .= 1 * eps (by Inverse)
-                          .= eps (by OneDummy).
-
-        Hence dist(x,y) < eps.
-    end.
-    Therefore x = y (by DistEqual).
-qed.
-
-
-
-### A convergent sequence is bounded
-
-Definition BoundedBy.
-    Let a be a sequence. Let K be a real number. a is bounded by K iff
-    for every n abs(a[n]) =< K.
-
-Definition BoundedSequence.
-    Let a be a sequence. a is bounded iff there exists a real number K such that
-    a is bounded by K.
-
-Signature MaxAbsN.
-    Let a be a sequence. maxN(a,N) is a real number such that
-    (there exists n such that n =< N and maxN(a,N) = a[n]) and
-    (for every n such that n =< N a[n] =< maxN(a,N)).
-
-Lemma MaxIneqDummy.
-    Let a,b be real numbers. b =< max(a,b).
-
-Lemma MixedAddInvariance.
-    Let a,b,c,d be real numbers. a < c /\ b =< d => a + b < c + d.
-
-Lemma ConvergentImpBounded.
-    Let a be a sequence. Assume that a converges. Then a is bounded.
-Proof.
-    Take a real number x such that a converges to x.
-    Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
-
-    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
-    #Define b[k] = abs(a[k]) for k in NAT.
-    Take a real number K such that K = max(1 + abs(x), maxN(b,N)).
-
-    Let us show that a is bounded by K.
-        Let us show that for every n abs(a[n]) =< K. 
-            Let n be a natural number.
-            We have n =< N or n > N.
-            Case n =< N.
-                We have abs(a[n]) = b[n] =< maxN(b,N) (by MaxAbsN).
-                We have maxN(b,N) =< K (by MaxIneqDummy).
-                Therefore abs(a[n]) =< K (by LeqTransitivity).
-            end.
-            Case n > N.
-                We have dist(a[n],x) < 1.
-                We have 1 + abs(x) =< K (by MaxIneq).
-
-                abs(a[n]) .= abs(a[n] + 0) (by Zero)
-                          .= abs(a[n] + (x - x)) (by Neg)
-                          .= abs(a[n] + ((-x) + x)) (by ComAdd)
-                          .= abs((a[n] - x) + x) (by AssAdd).
-
-                Hence abs(a[n]) =< abs(a[n] - x) + abs(x) (by AbsTriangleIneq).
-                Hence abs(a[n]) =< dist(a[n],x) + abs(x).
-
-                We have dist(a[n],x) + abs(x) < 1 + abs(x) (by MixedAddInvariance).
-                Hence abs(a[n]) =< 1 + abs(x) (by MixedTransitivity).
-                Therefore abs(a[n]) =< K (by LeqTransitivity).
-            end.
-        end.
-        Hence a is bounded by K (by BoundedBy).
-    end.
-qed.
+Let a diverges stand for not (a converges).
+Let a is divergent stand for a diverges.
 
 
 
@@ -169,7 +61,7 @@ Lemma.
     Then a converges to 0 and a has infinite range.
 Proof.
     Let us show that a converges to 0.
-        Assume eps is a positive real number. 
+        Let eps be a positive real number. 
         Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
 
         Let us show that for every n such that N < n dist(a[n],0) < eps.
@@ -205,6 +97,8 @@ Proof.
                                 .= 2 * (N + 1) (by Distrib)
                                 .= inv(N + 1) * (N + 1)
                                 .= 1 (by InvDummy).
+
+                    We have (2 * N) + 2 > 1.
                     Contradiction.
                 end.
                 Case n != 0.
@@ -225,48 +119,89 @@ qed.
 
 
 
-### Sequence (-1)^n has finite range.
+### Sequence (-1)^n diverges and has finite range.
 
-Axiom EvenOrOdd.
-    There exists N such that n = 2 * N or n = (2 * N) + 1.
+Signature Parity.
+    n is even is an atom.
+
+Let n is odd stand for not (n is even).
+
+Axiom ParityPlusOne.
+    n is even iff n + 1 is odd.
+
+Axiom ZeroEven.
+    0 is even.
+
+Lemma OneOdd.
+    1 is odd.
 
 Lemma.
-    Let a be a sequence such that for every n (a[2 * n] = 1 and a[(2 * n) + 1] = -1).
-    Then a has finite range.
+    Let a be a sequence such that for every n (((n is even) => a[n] = 1) and ((n is odd) => a[n] = -1)).
+    Then a diverges and a has finite range.
 Proof.
-    Let us show that ran(a) = ranN(a,1).
-        Let us show that every element of ranN(a,1) is an element of ran(a).
-            Assume x is an element of ranN(a,1).
-            Take n such that n =< 1 and a[n] = x (by OneNat, RangeN).
-            Hence x is an element of ran(a) (by Range).
+    Let us show that a diverges.
+        Assume the contrary.
+        Take a real number x such that a converges to x.
+        Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
+
+        Let us show that dist(a[N + 1],a[N + 2]) = 2.
+            Case N + 1 is even.
+                Then (N + 2) is odd.
+                Hence dist(a[N + 1],a[N + 2]) = dist(1,-1) = 2.
+            end.
+            Case N + 1 is odd.
+                Then N + 2 is even.
+                Hence dist(a[N + 1],a[N + 2]) = dist(-1,1) = 2.
+            end.
         end.
 
-        Let us show that every element of ran(a) is an element of ranN(a,1).
-            Assume x is an element of ran(a).
+        a[N + 1] is a real number and a[N + 2] is a real number.
+        We have dist(a[N + 1],a[N + 2]) =< dist(a[N + 1],x) + dist(x,a[N + 2]) (by DistTriangleIneq).
+        We have dist(x,a[N + 2]) = dist(a[N + 2],x) (by DistSymm).
+        Hence dist(a[N + 1],a[N + 2]) =< dist(a[N + 1],x) + dist(a[N + 2],x).
+
+        We have dist(a[N + 1],x) < 1 and dist(a[N + 2],x) < 1.
+        Hence dist(a[N + 1],x) + dist(a[N + 2],x) < 1 + 1 (by AddInvariance).
+        Hence dist(a[N + 1],a[N + 2]) < 2 (by MixedTransitivity).
+        Hence 2 < 2.
+        Contradiction.
+    end.
+
+    Let us show that a has finite range.
+        Let us show that ran(a) = ranN(a,1).
+            Let us show that every element of ranN(a,1) is an element of ran(a).
+                Assume x is an element of ranN(a,1).
+                Take n such that n =< 1 and a[n] = x (by OneNat, RangeN).
+                Hence x is an element of ran(a) (by Range).
+            end.
+
+            Let us show that every element of ran(a) is an element of ranN(a,1).
+                Assume x is an element of ran(a).
 
                 Let us show that x = 1 or x = -1.
-                Take n such that a[n] = x (by Range).
-                Take N such that n = 2 * N or n = (2 * N) + 1 (by EvenOrOdd).
-                Then x = 1 or x = -1.
-            end.
+                    Take n such that a[n] = x (by Range).
+                    n is even or n is odd.
+                    Hence x = 1 or x = -1.
+                end.
 
-            We have a[0] = 1.
-            We have a[1] = -1.
+                We have a[0] = 1.
+                We have a[1] = -1.
 
-            Case x = 1.
-                Then x = a[0].
-                We have 0 =< 1.
-                Hence x is an element of ranN(a,1) (by ZeroNat, OneNat, RangeN).
-            end.
-            Case x = -1.
-                Then x = a[1].
-                We have 1 =< 1.
-                Hence x is an element of ranN(a,1) (by OneNat, RangeN).
+               Case x = 1.
+                    Then x = a[0].
+                    We have 0 =< 1.
+                    Hence x is an element of ranN(a,1) (by ZeroNat, OneNat, RangeN).
+                end.
+                Case x = -1.
+                    Then x = a[1].
+                    We have 1 =< 1.
+                    Hence x is an element of ranN(a,1) (by OneNat, RangeN).
+                end.
             end.
         end.
-        Hence ranN(a,1) = ran(a).
     end.
 qed.
+
 
 
 ### Neighborhood
@@ -275,7 +210,7 @@ Definition Neighb.
     Let eps be a positive real number. Let x be a real number.
     Neighb(x,eps) = {y | y is a real number such that dist(y,x) < eps}.
 
-Lemma ConvNeighborhood.
+Theorem ConvNeighborhood.
     Let a be a sequence. Let x be a real number.
     a converges to x iff for every positive real number eps there exists a N
     such that for every n such that N < n a[n] is an element of Neighb(x,eps).
@@ -298,56 +233,152 @@ Proof.
     end.
 qed.
 
+
+
+### Limit is unique
+
+Lemma DistEqual.
+    Let x and y be real numbers. Assume for every positive real number eps dist(x,y) < eps.
+    Then x = y.
+Proof.
+	Assume the contrary.
+    Then there exists a positive real number eps2 such that eps2 < dist(x,y).
+    A contradiction.
+qed.
+
+Theorem LimitUnique.
+    Let a be a sequence. Let x, y be real numbers. Assume a converges to x and a converges to y.
+    Then x = y.
+Proof.
+    Let us show that for every positive real number eps dist(x,y) < eps.
+        Let eps be a positive real number.
+        Take a positive real number halfeps such that halfeps = inv(2) * eps.
+
+        Take N1 such that for every n such that N1 < n dist(a[n],x) < halfeps (by Convergence).
+        Take N2 such that for every n such that N2 < n dist(a[n],y) < halfeps (by Convergence).
+
+        For every n dist(x,y) =< dist(x,a[n]) + dist(a[n],y) (by DistTriangleIneq). 
+        Take N3 such that N3 = max(N1,N2) + 1.
+        Then N1 < N3 and N2 < N3.
+
+        Hence dist(x,a[N3]) < halfeps and dist(a[N3],y) < halfeps (by DistSymm).
+        Hence dist(x,a[N3]) + dist(a[N3],y) < halfeps + halfeps (by AddInvariance).
+        Hence dist(x,y) < halfeps + halfeps (by MixedTransitivity).
+        Hence dist(x,y) < eps (by TwoHalf).
+    end.
+    Therefore x = y (by DistEqual).
+qed.
+
+
+
+### A convergent sequence is bounded
+
+Definition BoundedBy.
+    Let a be a sequence. Let K be a real number. a is bounded by K iff
+    for every n abs(a[n]) =< K.
+
+Definition BoundedSequence.
+    Let a be a sequence. a is bounded iff there exists a real number K such that
+    a is bounded by K.
+
+Signature MaxN.
+    Let a be a sequence. maxN(a,N) is a real number such that
+    (there exists n such that n =< N and maxN(a,N) = a[n]) and
+    (for every n such that n =< N a[n] =< maxN(a,N)).
+
+Theorem ConvergentImpBounded.
+    Let a be a sequence. Assume that a converges. Then a is bounded.
+Proof.
+    Take a real number x such that a converges to x.
+    Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
+
+    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
+    #Define b[k] = abs(a[k]) for k in NAT.
+    Take a real number K such that K = max(1 + abs(x), maxN(b,N)).
+
+    Let us show that a is bounded by K.
+        Let us show that for every n abs(a[n]) =< K. 
+            Let n be a natural number.
+            We have n =< N or n > N.
+            Case n =< N.
+                We have abs(a[n]) = b[n] =< maxN(b,N) (by MaxN).
+                We have maxN(b,N) =< K (by MaxIneqDummy).
+                Therefore abs(a[n]) =< K (by LeqTransitivity).
+            end.
+            Case n > N.
+                We have dist(a[n],x) < 1.
+                We have 1 + abs(x) =< K (by MaxIneq).
+
+                abs(a[n]) .= abs(a[n] + 0) (by Zero)
+                          .= abs(a[n] + (x - x)) (by Neg)
+                          .= abs(a[n] + ((-x) + x)) (by ComAdd)
+                          .= abs((a[n] - x) + x) (by AssAdd).
+
+                Hence abs(a[n]) =< abs(a[n] - x) + abs(x) (by AbsTriangleIneq).
+                Hence abs(a[n]) =< dist(a[n],x) + abs(x).
+
+                We have dist(a[n],x) + abs(x) < 1 + abs(x) (by MixedAddInvariance).
+                Hence abs(a[n]) =< 1 + abs(x) (by MixedTransitivity).
+                Therefore abs(a[n]) =< K (by LeqTransitivity).
+            end.
+        end.
+        Hence a is bounded by K (by BoundedBy).
+    end.
+qed.
+
 Definition LimitPointOfSet.
     Let E be a set. Assume every element of E is a real number. A limit point of E
     is a real number x such that for every positive real number eps there exists an element
     y of E such that y is an element of Neighb(x,eps) and y != x.
 
-#Lemma ConvLimitPoint.
-#    Let E be a subset of REAL. Let x be a limit point of E. Then there exists a sequence a
-#    such that a converges to x and for every n a[n] is an element of E.
-#Proof.
-#    Let us show that for every n such that n > 0 there exists an element y of E such that
-#    y is an element of Neighb(x,inv(n)) and y != x.
-#        Assume n > 0.
-#        Then inv(n) is a positive real number.
-#        Take an element y of E such that y is an element of Neighb(x,inv(n))
-#            and y != x (by LimitPointOfSet).
-#    end.
-#
+Theorem ConvLimitPoint.
+    Let E be a set. Assume every element of E is a real number. Let x be a limit point of E.
+    Then there exists a sequence a such that a converges to x and for every n a[n] is an element of E.
+Proof.
+    Let us show that for every n such that n > 0 there exists an element y of E such that
+    y is an element of Neighb(x,inv(n)) and y != x.
+        Assume n > 0.
+        Then inv(n) is a positive real number.
+        Take an element y of E such that y is an element of Neighb(x,inv(n))
+            and y != x (by LimitPointOfSet).
+    end.
+
 #    Define a[n] = Case n = 0 -> Choose an element y of E such that y is an element of
 #                                Neighb(x,1) and y != x in y,
 #                  Case n > 0 -> Choose an element y of E such that y is an element of
 #                                Neighb(x,inv(n)) and y != x in y
 #    for n in NAT.
-#
-#    Then for every n a[n] is an element of E.
-#    Let us show that a converges to x.
-#        Let eps be a positive real number.
-#        Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
-#
-#        Let us show that for every n such that N < n dist(a[n],x) < eps.
-#            Assume N < n. Then n != 0.
-#            Then a[n] is an element of E such that a[n] is an element of Neighb(x,inv(n)).
-#            Hence dist(a[n],x) < inv(n).
-#
-#            Let us show that inv(n) < eps.
-#                We have N * eps < n * eps (by ComMult, MultInvariance).
-#                Hence 1 < n * eps (by TransitivityOfOrder).
-#
-#                inv(n) is positive.
-#                Hence inv(n) * 1 < inv(n) * (n * eps) (by MultInvariance).
-#                We have inv(n) * 1 = inv(n) (by One).
-#                inv(n) * (n * eps) .= (inv(n) * n) * eps (by AssMult)
-#                                   .= 1 * eps (by InvDummy)
-#                                   .= eps (by OneDummy).
-#            end.
-#            Hence dist(a[n],x) < eps (by TransitivityOfOrder).
-#        end.
-#    end.
-#qed.
 
-[prove on]
+    [prove off]Take a sequence a such that for every n
+        (((n = 0) => (a[n] is an element of E and a[n] is an element of Neighb(x,1) and a[n] != x)) and
+         ((n > 0) => (a[n] is an element of E and a[n] is an element of Neighb(x,inv(n)) and a[n] != x))).[prove on]
+
+    Then for every n a[n] is an element of E.
+    Let us show that a converges to x.
+        Let eps be a positive real number.
+        Take N such that 1 < N * eps (by ArchimedeanAxiom, OnePos).
+
+        Let us show that for every n such that N < n dist(a[n],x) < eps.
+            Assume N < n. Then n != 0.
+            Then a[n] is an element of E such that a[n] is an element of Neighb(x,inv(n)).
+            Hence dist(a[n],x) < inv(n).
+
+            Let us show that inv(n) < eps.
+                We have N * eps < n * eps (by ComMult, MultInvariance).
+                Hence 1 < n * eps (by TransitivityOfOrder).
+
+                inv(n) is positive.
+                Hence inv(n) * 1 < inv(n) * (n * eps) (by MultInvariance).
+                We have inv(n) * 1 = inv(n) (by One).
+                inv(n) * (n * eps) .= (inv(n) * n) * eps (by AssMult)
+                                   .= 1 * eps (by InvDummy)
+                                   .= eps (by OneDummy).
+            end.
+            Hence dist(a[n],x) < eps (by TransitivityOfOrder).
+        end.
+    end.
+qed.
+
 
 
 ### Sum and Product of Sequences
@@ -397,15 +428,7 @@ Proof.
         Hence dist(a[n],x) + dist(b[n],y) < halfeps + halfeps (by AddInvariance).
         Hence abs((a[n] + b[n]) - (x + y)) < halfeps + halfeps (by MixedTransitivity).
         Hence dist((a +' b)[n],(x + y)) < halfeps + halfeps.
-
-        halfeps + halfeps .= (1 * halfeps) + (1 * halfeps) (by OneDummy)
-                          .= (1 + 1) * halfeps (by DistribDummy)
-                          .= 2 * (inv(2) * eps)
-                          .= (2 * inv(2)) * eps (by AssMult)
-                          .= 1 * eps (by Inverse)
-                          .= eps (by OneDummy).
-
-        Hence dist((a +' b)[n],(x + y)) < eps.
+        Hence dist((a +' b)[n],(x + y)) < eps (by TwoHalf).
     end.
 qed.
 
@@ -426,7 +449,6 @@ Lemma SumConstConv.
     Then c +'' a converges to c + x.
 Proof.
     # Define cn[n] = c for n in NAT.
-    # b is a sequence.
     [prove off]Take a sequence cn such that for every n cn[n] = c.[prove on]
 
     Let us show that c +'' a = (cn +' a).
@@ -483,76 +505,6 @@ Proof.
     end.
 qed.
 
-
-#[prove off]
-Lemma MinusRule5.
-    Let a,b be real numbers. 
-    Then (a * (-b)) = -(a * b) and ((-b) * a) = -(b * a).
-Proof.
-        (1) a * (-b) .= a * ((-1)*b) (by MinusRule4)
-                     .= (a * (-1)) * b (by AssMult)
-                     .= ((-1) * a) * b (by ComMult)
-                     .= (-1) * (a * b) (by AssMult)
-                     .= -(a * b) (by MinusRule4).
-
-        ((-b) * a) .= -(b * a) (by ComMult, 1).
-qed.
-
-Lemma MinusRule6.
-    Let a,b be real numbers. 
-    Then ((-a) * (-b)) = a * b.
-Proof.
-    ((-a) * (-b)) .= -(a * (-b)) (by MinusRule5)
-                  .= -(-(a * b)) (by MinusRule5)
-                  .= a * b (by MinusRule2).
-qed.
-
-Lemma Binomi1.
-    Let a,b,c,d be real numbers.
-    Then (a + b) * (c + d) = ((a * c) + (b * c)) + ((a * d) + (b * d)) .
-Proof.
-    (a + b) * (c + d) .= ((a + b) * c) + ((a + b) * d) (by Distrib)
-                      .= ((a * c) + (b * c)) + ((a * d) + (b * d)) (by DistribDummy).
-qed.
-
-Lemma Binomi2.
-    Let a,b,c,d be real numbers.
-    Then (a - b) * (c - d) = ((a * c) - (b * c)) + (-(a * d) + (b * d)).
-Proof.
-    (a - b) * (c - d) .= ((a * c) + ((-b) * c)) + ((a * (-d)) + ((-b) * (-d))) (by Binomi1)
-                      .= ((a * c) - (b * c)) + (-(a * d) + (b * d)) (by MinusRule5, MinusRule6).
-qed.
-
-Lemma Identity1.
-    Let a,b,c,d be real numbers. 
-    Then (a * b) - (c * d) = ((a - c) * (b - d)) + ((c * (b - d)) + (d * (a - c))).
-Proof.
-    ((a - c)*(b - d)) + ((c*(b - d)) + (d*(a - c))) 
-        .= (((a * b) - (c * b)) + (-(a * d) + (c * d))) + ((c * (b - d)) + (d * (a - c))) (by Binomi2)
-        .= (((a * b) - (c * b)) + (-(a * d) + (c * d))) + (((c * b) + (c * (-d))) + ((d * a) + (d * (-c)))) (by Distrib)
-        .= (((a * b) - (c * b)) + (-(a * d) + (c * d))) + (((c * b) + (-(c * d))) + ((d * a) + (-(d * c)))) (by MinusRule5)
-        .= ((c * b) + (-(c * d))) + ((((a * b) - (c * b)) + (-(a * d) + (c * d))) + ((d * a) + (-(d * c)))) (by BubbleAdd)
-        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + ((-(a * d) + (c * d)) + ((a * d) + (-(c * d))))) (by AssAdd, ComMult)
-        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + ((-(a * d) + (c * d)) + (-(-((a * d) + (-(c * d))))))) (by MinusRule2)
-        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + ((-(a * d) + (c * d)) + (-(-(a * d) + (c * d))))) (by ComAdd, MinusRule3)
-        .= ((c * b) + (-(c * d))) + (((a * b) - (c * b)) + 0) (by Neg)
-        .= ((-(c * d)) + (c * b)) + (-(c * b) + (a * b)) (by ComAdd, Zero)
-        .= (-(c * d)) + ((c * b) + (-(c * b) + (a * b))) (by AssAdd)
-        .= (-(c * d)) + (((c * b) -(c * b)) + (a * b)) (by AssAdd)
-        .= -(c * d) + (0 + (a * b)) (by Neg)
-        .= -(c * d) + ((a * b) + 0) (by ComAdd)
-        .= -(c * d) + (a * b) (by Zero)
-        .= (a * b) - (c * d) (by ComAdd).
-qed.
-
-#[exit]
-#[prove off]
-
-Signature Sqrt.
-Let x be a positive real number. sqrt(x) is a positive real number.
-
-Axiom Wurz.
-Let x be a positive real number. sqrt(x)*sqrt(x) = x.
 
 Lemma ConstMultSum.
     Let a,b be sequences. Let x,y be real numbers such that for every n b[n] = y * (a[n] + (-x)). Assume a converges to x.
@@ -855,25 +807,153 @@ qed.
 ### Subsequences
 
 Definition IndexSeq.
-    A index sequence is a sequence i such that (for every n i[n] is a natural number) and (for every n i[n] < i[n+1]).
+    An index sequence is a sequence i such that (for every n i[n] is a natural number) and (for every n i[n] < i[n + 1]).
 
 Definition SubSeq.
-    Let a be a sequence and i be a index sequence. Subseq(a,i) is a sequence such that for every  n
+    Let a be a sequence and i be an index sequence. Subseq(a,i) is a sequence such that for every n
     Subseq(a,i)[n] = a[i[n]].
 
-# Mit Topologie Gruppe absprechen? (Closed/Compact)
+Definition ConvSubSeq.
+    Let a be a sequence. a has some convergent subsequence iff there exists an index sequence i such that Subseq(a,i) converges.
+
+
+
+Axiom SubSeqLeq.
+    Let a be a sequence. Let i be an index sequence. Then for every n n =< i[n].
+
+Lemma LimitSubSeq.
+    Let a be a sequence. Let x be a real number. a converges to x iff for every index sequence i Subseq(a,i) converges to x.
+Proof.
+    Let us show that if a converges to x then for every index sequence i Subseq(a,i) converges to x.
+        Assume a converges to x.
+        Let i be an index sequence.
+        Let eps be a positive real number.
+        Take N such that for every n such that N < n dist(a[n],x) < eps (by Convergence).
+
+        Let us show that for every n such that N < n dist(Subseq(a,i)[n],x) < eps.
+            Let n be a natural number such that N < n.
+            Then n =< i[n] (by SubSeqLeq).
+            Hence N < i[n] (by MixedTransitivity).
+            Hence dist(Subseq(a,i)[n],x) = dist(a[i[n]],x) < eps.
+        end.
+    end.
+
+    Let us show that if for every index sequence i Subseq(a,i) converges to x then a converges to x.
+        Assume for every index sequence i Subseq(a,i) converges to x.
+        #Define i[n] = n for n in NAT.
+        [prove off]Take an index sequence i such that for every n i[n] = n.[prove on]
+        Subseq(a,i) converges to x.
+
+        For every n a[n] = Subseq(a,i)[n].
+        Hence a = Subseq(a,i) (by SequenceEq).
+        Hence a converges to x.
+    end.
+end.
+
+
 
 ### Cauchy
+
+Axiom BolzanoWeierstrass.
+    Let a be a bounded sequence. Then a has some convergent subsequence.
 
 Definition Cauchy.
     A cauchy sequence is a sequence a such that for every positive real number eps there exists N such that
     for every n,m such that (N < n and N < m) dist(a[n],a[m]) < eps.
 
-Lemma CauchyInR.
-    Let a be a sequence. a is a cauchy sequence iff a is convergent.
+Lemma CauchyBounded.
+    Let a be a cauchy sequence. Then a is bounded.
 Proof.
-    Let us show that ((a is convergent) => (a is a cauchy sequence)).
-        Assume a is convergent.
+    Take N such that for every n,m such that (N < n and N < m) dist(a[n],a[m]) < 1 (by Cauchy, OnePos).
+    N + 1 is a natural number and N < N + 1.
+    Hence for every n such that N < n dist(a[n],a[N + 1]) < 1.
+
+    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
+    #Define b[k] = abs(a[k]) for k in NAT.
+
+    maxN(b,N), 1, a[N + 1], abs(a[N + 1]), 1 + abs(a[N + 1]) are real numbers.
+    Take a real number K such that K = max(1 + abs(a[N + 1]), maxN(b,N)).
+
+    Let us show that a is bounded by K.
+        Let us show that for every n abs(a[n]) =< K. 
+            Let n be a natural number.
+            a[n], abs(a[n]), b[n], dist(a[n],a[N + 1]), a[n] - a[N + 1], dist(a[n],a[N + 1]) + abs(a[N + 1]) are real numbers.
+
+            We have n =< N or n > N.
+            Case n =< N.
+                We have abs(a[n]) = b[n] =< maxN(b,N) (by MaxN).
+                We have maxN(b,N) =< K (by MaxIneqDummy).
+                Therefore abs(a[n]) =< K (by LeqTransitivity).
+            end.
+            Case n > N.
+                We have dist(a[n],a[N + 1]) < 1.
+                We have 1 + abs(a[N + 1]) =< K (by MaxIneq).
+
+                abs(a[n]) .= abs(a[n] + 0) (by Zero)
+                          .= abs(a[n] + (a[N + 1] - a[N + 1])) (by Neg)
+                          .= abs(a[n] + ((-a[N + 1]) + a[N + 1])) (by ComAdd)
+                          .= abs((a[n] - a[N + 1]) + a[N + 1]) (by AssAdd).
+
+                We have abs((a[n] - a[N + 1]) + a[N + 1]) =< abs(a[n] - a[N + 1]) + abs(a[N + 1]) (by AbsTriangleIneq).
+                Hence abs(a[n]) =< abs(a[n] - a[N + 1]) + abs(a[N + 1]).
+                Hence abs(a[n]) =< dist(a[n],a[N + 1]) + abs(a[N + 1]).
+
+                We have dist(a[n],a[N + 1]) + abs(a[N + 1]) < 1 + abs(a[N + 1]) (by MixedAddInvariance).
+                Hence abs(a[n]) =< 1 + abs(a[N + 1]) (by MixedTransitivity).
+                Therefore abs(a[n]) =< K (by LeqTransitivity).
+            end.
+        end.
+        Hence a is bounded by K (by BoundedBy).
+    end.
+qed.
+
+Lemma CauchyConvSubSeq.
+    Let a be a cauchy sequence such that a has some convergent subsequence. Then a converges.
+Proof.
+    Take a index sequence i such that Subseq(a,i) converges.
+    Take a real number x such that Subseq(a,i) converges to x.
+
+    Let us show that a converges to x.
+        Let eps be a positive real number.
+        Take a positive real number halfeps such that halfeps = inv(2) * eps.
+
+        Take N1 such that for every n,m such that (N1 < n and N1 < m) dist(a[n],a[m]) < halfeps (by Cauchy).
+        Take N2 such that for every n such that N2 < n dist(Subseq(a,i)[n],x) < halfeps (by Convergence).
+        Take N such that N = max(N1,N2).
+        Then N1 =< N and N2 =< N.
+
+        Let us show that for every n such that N < n dist(a[n],x) < eps.
+            Assume N < n.
+            i[n] is a natural number.
+            a[n], a[i[n]], dist(a[n],a[i[n]]), dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x, dist(a[n],a[i[n]]) + dist(a[i[n]],x) are real numbers.
+
+            We have Subseq(a,i)[n] = a[i[n]].
+            We have dist(a[n],a[i[n]]) < halfeps.
+            We have dist(a[i[n]],x) < halfeps.
+
+            dist(a[n],x) .= abs(a[n] - x) (by DistDefinition)
+                         .= abs((a[n] + 0) - x) (by Zero)
+                         .= abs((a[n] + (a[i[n]] - a[i[n]])) - x) (by Neg)
+                         .= abs((a[n] + ((-a[i[n]]) + a[i[n]])) - x) (by ComAdd)
+                         .= abs(((a[n] - a[i[n]]) + a[i[n]]) - x) (by AssAdd)
+                         .= abs((a[n] - a[i[n]]) + (a[i[n]] - x)) (by AssAdd).
+
+            We have abs((a[n] - a[i[n]]) + (a[i[n]] - x)) =< abs(a[n] - a[i[n]]) + abs(a[i[n]] - x) (by AbsTriangleIneq).
+            Hence dist(a[n],x) =< abs(a[n] - a[i[n]]) + abs(a[i[n]] - x).
+            Hence dist(a[n],x) =< dist(a[n],a[i[n]]) + dist(a[i[n]],x).
+
+            We have dist(a[n],a[i[n]]) + dist(a[i[n]],x) < halfeps + halfeps (by AddInvariance).
+            Hence dist(a[n],x) < halfeps + halfeps (by MixedTransitivity).
+            Hence dist(a[n],x) < eps (by TwoHalf).
+        end.
+    end.
+qed.
+
+Theorem RComplete.
+    Let a be a sequence. a is a cauchy sequence iff a converges.
+Proof.
+    Let us show that ((a converges) => (a is a cauchy sequence)).
+        Assume a converges.
         Take a real number x such that a converges to x.
         Let eps be a positive real number.
         
@@ -889,23 +969,16 @@ Proof.
             Hence dist(a[n],a[m]) =< dist(a[n],x) + dist(a[m],x) (by DistSymm).
             We have dist(a[n],x) + dist(a[m],x) < halfeps + halfeps (by AddInvariance).
             Hence dist(a[n],a[m]) < halfeps + halfeps (by MixedTransitivity).
-        
-            halfeps + halfeps .= (1 * halfeps) + (1 * halfeps) (by OneDummy)
-                              .= (1 + 1) * halfeps (by DistribDummy)
-                              .= 2 * (inv(2) * eps)
-                              .= (2 * inv(2)) * eps (by AssMult)
-                              .= 1 * eps (by Inverse)
-                              .= eps (by OneDummy).
-
-            Hence dist(a[n],a[m]) < eps.
+            Hence dist(a[n],a[m]) < eps (by TwoHalf).
        end.
     end.
 
-    [prove off]
-    Let us show that ((a is a cauchy sequence) => (a is convergent)).
-    
+    Let us show that ((a is a cauchy sequence) => (a converges)).
+        Assume a is a cauchy sequence.
+        Then a is bounded (by CauchyBounded).
+        Therefore a has some convergent subsequence (by BolzanoWeierstrass).
+        Hence a converges (by CauchyConvSubSeq).
     end.
-    [prove on]
 qed.
 
 
@@ -914,7 +987,6 @@ qed.
 
 Definition MonInc.
     Let a be a sequence. a is monotonically increasing iff (for every n,m such that n =< m a[n] =< a[m]).
-
 Definition MonDec.
     Let a be a sequence. a is monotonically decreasing iff (for every n,m such that n =< m a[n] >= a[m]).
 
@@ -934,9 +1006,6 @@ Definition LowerBound.
 Definition GreatestLowerBound.
     Let a be a bounded sequence. GreatestLower(a) is a real number K such that (K is lower bound of a) and
     (for every real number L such that L is lower bound of a L =< K).
-
-Lemma NotRuleOrder.
-    Let a,b be real numbers. a < b iff not(a >= b).
 
 Lemma MonIncCon.
     Let a be a monotonically increasing bounded sequence. Then a converges.
@@ -996,7 +1065,7 @@ Proof.
     end.
 qed.
 
-Lemma MonCon.
+Theorem MonCon.
     Let a be a monotonic sequence. a converges iff a is bounded.
 Proof.
     We have (If a converges then a is bounded) (by ConvergentImpBounded).
@@ -1028,6 +1097,8 @@ Proof.
                                      .= abs(a[n]) (by AbsPosNeg).
                 Hence abs(((-1) *'' a)[n]) =< K.
             end.
+
+            Hence (-1) *'' a is bounded by K (by BoundedBy).
         end.
 
         Hence (-1) *'' a converges (by MonIncCon).
