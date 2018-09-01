@@ -1,0 +1,103 @@
+\documentclass{article}
+\usepackage[english]{babel}
+\usepackage{enumerate, latexsym, amssymb, amsmath}
+\usepackage{framed, multicol}
+\newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
+
+%%%%%%%%%% Start TeXmacs macros
+\newcommand{\tmaffiliation}[1]{\\ #1}
+\newcommand{\tmem}[1]{{\em #1\/}}
+\newenvironment{enumeratenumeric}{\begin{enumerate}[1.] }{\end{enumerate}}
+\newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
+\newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newtheorem{axiom}{Axiom}
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{definition}{Definition}
+\newtheorem{signature}{Signature}
+\newtheorem{proposition}{Proposition}
+%%%%%%%%%% End TeXmacs macros
+
+\newcommand{\event}{UITP 2018}
+\newcommand{\dom}{Dom}
+\newcommand{\fun}{aFunction}
+\newcommand{\sym}{sym}
+\newcommand{\halfline}{{\vspace{3pt}}}
+\newcommand{\tab}{{\hspace{1cm}}}
+\newcommand{\ball}[2]{B_{#1}(#2)}
+\newcommand{\llbracket}{[}
+\newcommand{\rrbracket}{]}
+\newcommand{\less}[1]{<_{#1}}
+\newcommand{\greater}[1]{>_{#1}}
+\newcommand{\leeq}[1]{{\leq}_{#1}}
+\newcommand{\supr}[1]{\mathrm{sup}_{#1}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\NN}{\mathbb{N}}
+
+\begin{document}
+
+\title{An SAD3 Formalization of Real Sequences for Walter Rudin's
+\it{Principles of Mathematical Analysis}}
+
+\author{Peter Koepke}
+
+\date{August 25, 2018}
+
+\maketitle
+
+
+\section{Introduction}
+
+
+\section{The Formalization}
+\subsection{Some Set-Theoretic Terminology}
+
+
+\begin{forthel}
+	
+	Let $NAT$ denote the set of natural numbers.
+	Let $n, m, N, N1, N2, N3$ denote natural numbers.
+	
+	Sequences
+	
+	\begin{definition} Seq.
+	A sequence f is a function such that every element of Dom(f) is a natural number and every
+	natural number is an element of $Dom(f)$ and for every $n f[n]$ is a real number.
+	\end{definition}
+	
+	\begin{axiom} SequenceEq.
+	Let $a, b$ be sequences. $a = b$ iff (for every $n a[n] = b[n]$).
+	\end{axiom}
+	
+\end{forthel}
+
+\section{Remarks}
+\subsection{Structures}
+
+
+\subsection{Text Comparisons}
+
+
+
+\section{{From \LaTeX} to ForTheL}
+
+
+
+\section{Discussion}
+
+
+\begin{thebibliography}{1}
+
+\bibitem{Rudin}
+  Walter Rudin,
+  \textit{Principles of mathematical analysis},
+  McGraw-Hill,
+  1976.
+
+\end{thebibliography}
+  
+
+
+\end{document}
