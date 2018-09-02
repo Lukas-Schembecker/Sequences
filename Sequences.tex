@@ -58,18 +58,184 @@
 \begin{forthel}
 	
 	Let $NAT$ denote the set of natural numbers.
-	Let $n, m, N, N1, N2, N3$ denote natural numbers.
+	Let $n$, $m$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
 	
-	Sequences
-	
-	\begin{definition} Seq.
-	A sequence f is a function such that every element of Dom(f) is a natural number and every
-	natural number is an element of $Dom(f)$ and for every $n f[n]$ is a real number.
+	\begin{definition} Seq.	A sequence f is a function such that every element of Dom(f) is a natural number and every
+	natural number is an element of $Dom(f)$ and for every $n \ f[n]$ is a real number.
 	\end{definition}
 	
-	\begin{axiom} SequenceEq.
-	Let $a, b$ be sequences. $a = b$ iff (for every $n a[n] = b[n]$).
+	\begin{axiom} SequenceEq. Let $a, b$ be sequences. \\ $a = b$ iff for every $n \ a[n] = b[n]$.
 	\end{axiom}
+	
+	\begin{definition} Convergence. Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every positive real
+	number $eps$ there exists $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < eps$.
+	\end{definition}
+	
+	\begin{definition} Conv. Let $a$ be a sequence. $a$ converges iff there exists a real number $x$ such that $a$ converges to $x$.
+	\end{definition}
+	
+	\noindent Let $a$ is convergent stand for $a$ converges.
+	\\Let $a$ diverges stand for not ($a$ converges).
+	\\Let $a$ is divergent stand for $a$ diverges.
+	
+	\begin{definition} Range. Let $a$ be a sequence. $ran(a) = \{a[n] \mid \text{n is a natural number}\}$. 
+	\end{definition}
+
+	\begin{definition} RangeN. Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$.
+	\end{definition}
+	
+	\begin{definition} FiniteRange.	Let $a$ be a sequence. $a$ has finite range iff there exists an $N$ such that $ran(a) = ranN(a,N)$.
+	\end{definition}
+
+	\begin{definition} InfiniteRange. Let $a$ be a sequence. $a$ has infinite range iff not ($a$ has finite range).
+	\end{definition}
+	
+	\begin{lemma} Let $a$ be a sequence such that for every $n$
+	((If $n = 0$ then $a[n] = 2$) and (If $n \neq 0$ then $a[n] = inv(n)$)).
+	Then $a$ converges to $0$ and $a$ has infinite range.
+	\end{lemma}
+	\begin{proof} Let us show that $a$ converges to $0$.
+	Let $eps$ be a positive real number. 
+	Take $N$ such that $1 < N \cdot eps$ (by ArchimedeanAxiom, OnePos).
+	
+	Let us show that for every $n$ such that $N < n \ dist(a[n],0) < eps$.
+	Assume $N < n$. Then $n \neq 0$.
+	Let us show that $inv(n) < eps$.
+	We have $N \cdot eps < n \cdot eps$ (by ComMult, MultInvariance).
+	Hence $1 < n \cdot eps$ (by TransitivityOfOrder).
+	
+	$inv(n)$ is positive.
+	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot eps)$ (by MultInvariance).
+	We have $inv(n) \cdot 1 = inv(n)$ (by One).
+	$inv(n) \cdot (n \cdot eps) .= (inv(n) \cdot n) \cdot eps$ (by AssMult)
+	$.= 1 \cdot eps$ (by InvDummy)
+	$.= eps$ (by OneDummy).
+	end.
+	Hence $dist(a[n],0) = inv(n) < eps$.
+	end.
+	end.
+	
+	Let us show that $a$ has infinite range.
+	Assume the contrary.
+	Take $N$ such that $ran(a) = ranN(a,N)$ (by FiniteRange).
+	Then $a[N + 1]$ is an element of $ran(a)$ (by OneNat, AddClosedNat, Range).
+	
+	Let us show that $a[N + 1]$ is not an element of $ranN(a,N)$.
+	Let us show that for every $n$ such that $n \leq N \ a[n] \neq a[N + 1]$.
+	Assume the contrary.
+	Take $n$ such that $n \leq N \text{ and } a[n] = a[N + 1]$.
+	Case $n = 0$.
+	We have $2 = inv(N + 1)$.
+	
+	$(2 \cdot N) + 2 .= (2 \cdot N) + (2 \cdot 1)$ (by One)
+	$.= 2 \cdot (N + 1)$ (by Distrib)
+	$.= inv(N + 1) \cdot (N + 1)$
+	$.= 1$ (by InvDummy).
+	
+	We have $(2 \cdot N) + 2 > 1$.
+	Contradiction.
+	end.
+	Case $n \neq 0$.
+	We have $inv(n) = inv(N + 1)$.
+	Then $inv(inv(n)) = inv(inv(N + 1))$.
+	
+	We have $N + 1 \neq 0$.
+	Hence $n = N + 1$ (by InvRule1).
+	Contradiction.
+	end.
+	end.
+	Hence $a[N + 1]$ is not an element of $ranN(a,N)$ (by RangeN).
+	end.
+	
+	Contradiction.
+	end.
+	\end{proof}
+	
+	\begin{signature} Parity.
+	$n$ is even is an atom.
+	\end{signature}
+	
+	\noindent Let $n$ is odd stand for not ($n$ is even).
+	
+	\begin{axiom} ParityPlusOne.
+	$n$ is even iff $n + 1$ is odd.
+	\end{axiom}
+
+	\begin{axiom} ZeroEven.
+	$0$ is even.
+	\end{axiom}
+	
+	\begin{lemma} OneOdd.
+	$1$ is odd.
+	\end{lemma} 
+	
+	\begin{lemma}
+	Let $a$ be a sequence such that for every $n \ (((n \text{ is even}) \text{ then } a[n] = 1) \wedge ((\text{n is odd}) \text{ then } a[n] = -1))$.
+	Then $a$ diverges and $a$ has finite range.
+	\end{lemma}
+	\begin{proof}
+	Let us show that $a$ diverges.
+	Assume the contrary.
+	Take a real number $x$ such that $a$ converges to $x$.
+	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < 1$ (by Convergence, OnePos).
+	
+	Let us show that $dist(a[N + 1],a[N + 2]) = 2$.
+	Case $N + 1$ is even.
+	Then $N + 2$ is odd.
+	Hence $dist(a[N + 1],a[N + 2]) = dist(1,-1) = 2$.
+	end.
+	Case $N + 1$ is odd.
+	Then $N + 2$ is even.
+	Hence $dist(a[N + 1],a[N + 2]) = dist(-1,1) = 2$.
+	end.
+	end.
+	
+	$a[N + 1]$ is a real number and $a[N + 2]$ is a real number.
+	We have $dist(a[N + 1],a[N + 2]) \leq dist(a[N + 1],x) + dist(x,a[N + 2])$ (by DistTriangleIneq).
+	We have $dist(x,a[N + 2]) = dist(a[N + 2],x)$ (by DistSymm).
+	Hence $dist(a[N + 1],a[N + 2]) \leq dist(a[N + 1],x) + dist(a[N + 2],x)$.
+	
+	We have $dist(a[N + 1],x) < 1$ and $dist(a[N + 2],x) < 1$.
+	Hence $dist(a[N + 1],x) + dist(a[N + 2],x) < 1 + 1$ (by AddInvariance).
+	Hence $dist(a[N + 1],a[N + 2]) < 2$ (by MixedTransitivity).
+	Hence $2 < 2$.
+	Contradiction.
+	end.
+	
+	Let us show that $a$ has finite range.
+	Let us show that $ran(a) = ranN(a,1)$.
+	Let us show that every element of $ranN(a,1)$ is an element of $ran(a)$.
+	Assume $x$ is an element of $ranN(a,1)$.
+	Take $n$ such that $n \leq 1$ and $a[n] = x$ (by OneNat, RangeN).
+	Hence $x$ is an element of $ran(a)$ (by Range).
+	end.
+	
+	Let us show that every element of $ran(a)$ is an element of $ranN(a,1)$.
+	Assume $x$ is an element of $ran(a)$.
+	
+	Let us show that $x = 1$ or $x = -1$.
+	Take $n$ such that $a[n] = x$ (by Range).
+	$n$ is even or $n$ is odd.
+	Hence $x = 1$ or $x = -1$.
+	end.
+	
+	We have $a[0] = 1$.
+	We have $a[1] = -1$.
+	
+	Case $x = 1$.
+	Then $x = a[0]$.
+	We have $0 \leq 1$.
+	Hence $x$ is an element of $ranN(a,1)$ (by ZeroNat, OneNat, RangeN).
+	end.
+	Case $x = -1$.
+	Then $x = a[1]$.
+	We have $1 \leq 1$.
+	Hence $x$ is an element of $ranN(a,1)$ (by OneNat, RangeN).
+	end.
+	end.
+	end.
+	end.
+	\end{proof}
 	
 \end{forthel}
 
