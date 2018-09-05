@@ -59,8 +59,11 @@
 
 \begin{forthel}
 	
-	Let $NAT$ denote the set of natural numbers.
 	Let $n$, $m$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
+	
+	\begin{definition}
+		$NAT$ is the set of natural numbers.
+	\end{definition}
 	
 	\begin{definition} Seq.	A sequence f is a function such that every element of Dom(f) is a natural number and every
 	natural number is an element of $Dom(f)$ and for every $n \ f[n]$ is a real number.
@@ -121,12 +124,15 @@
 	\end{subproof}
 	
 	Let us show that $a$ has infinite range.
+	\begin{subproof}
 	Assume the contrary.
 	Take $N$ such that $ran(a) = ranN(a,N)$ (by FiniteRange).
 	Then $a[N + 1]$ is an element of $ran(a)$ (by OneNat, AddClosedNat, Range).
 	
 	Let us show that $a[N + 1]$ is not an element of $ranN(a,N)$.
+	\begin{subproof}
 	Let us show that for every $n$ such that $n \leq N \ a[n] \neq a[N + 1]$.
+	\begin{subproof}
 	Assume the contrary.
 	Take $n$ such that $n \leq N \text{ and } a[n] = a[N + 1]$.
 	Case $n = 0$.
@@ -148,12 +154,12 @@
 	Hence $n = N + 1$ (by InvRule1).
 	Contradiction.
 	end.
-	end.
+	\end{subproof}
 	Hence $a[N + 1]$ is not an element of $ranN(a,N)$ (by RangeN).
-	end.
+	\end{subproof}
 	
 	Contradiction.
-	end.
+	\end{subproof}
 	\end{proof}
 	
 	\begin{signature} Parity.
@@ -210,21 +216,26 @@
 	\end{subproof}
 	
 	Let us show that $a$ has finite range.
+	\begin{subproof}
 	Let us show that $ran(a) = ranN(a,1)$.
+	\begin{subproof}
 	Let us show that every element of $ranN(a,1)$ is an element of $ran(a)$.
+	\begin{subproof}
 	Assume $x$ is an element of $ranN(a,1)$.
 	Take $n$ such that $n \leq 1$ and $a[n] = x$ (by OneNat, RangeN).
 	Hence $x$ is an element of $ran(a)$ (by Range).
-	end.
+	\end{subproof}
 	
 	Let us show that every element of $ran(a)$ is an element of $ranN(a,1)$.
+	\begin{subproof}
 	Assume $x$ is an element of $ran(a)$.
 	
 	Let us show that $x = 1$ or $x = -1$.
+	\begin{subproof}
 	Take $n$ such that $a[n] = x$ (by Range).
 	$n$ is even or $n$ is odd.
 	Hence $x = 1$ or $x = -1$.
-	end.
+	\end{subproof}
 	
 	We have $a[0] = 1$.
 	We have $a[1] = -1$.
@@ -239,10 +250,12 @@
 	We have $1 \leq 1$.
 	Hence $x$ is an element of $ranN(a,1)$ (by OneNat, RangeN).
 	end.
-	end.
-	end.
-	end.
+	\end{subproof}
+	\end{subproof}
+	\end{subproof}
 	\end{proof}
+	
+	
 	
 \end{forthel}
 
