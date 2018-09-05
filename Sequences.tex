@@ -10,6 +10,8 @@
 \newenvironment{enumeratenumeric}{\begin{enumerate}[1.] }{\end{enumerate}}
 \newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
 \newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
+\newenvironment{subproof}{\begin{list}{}{}
+		\item[\text{Proof}]}{\hfill $\Box$ \end{list}}
 \newtheorem{axiom}{Axiom}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
@@ -95,25 +97,28 @@
 	Then $a$ converges to $0$ and $a$ has infinite range.
 	\end{lemma}
 	\begin{proof} Let us show that $a$ converges to $0$.
+	\begin{subproof}
 	Let $eps$ be a positive real number. 
 	Take $N$ such that $1 < N \cdot eps$ (by ArchimedeanAxiom, OnePos).
 	
 	Let us show that for every $n$ such that $N < n \ dist(a[n],0) < eps$.
+	\begin{subproof}
 	Assume $N < n$. Then $n \neq 0$.
+
 	Let us show that $inv(n) < eps$.
+	\begin{subproof}
 	We have $N \cdot eps < n \cdot eps$ (by ComMult, MultInvariance).
 	Hence $1 < n \cdot eps$ (by TransitivityOfOrder).
-	
 	$inv(n)$ is positive.
 	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot eps)$ (by MultInvariance).
 	We have $inv(n) \cdot 1 = inv(n)$ (by One).
 	$inv(n) \cdot (n \cdot eps) .= (inv(n) \cdot n) \cdot eps$ (by AssMult)
 	$.= 1 \cdot eps$ (by InvDummy)
 	$.= eps$ (by OneDummy).
-	end.
+	\end{subproof}
 	Hence $dist(a[n],0) = inv(n) < eps$.
-	end.
-	end.
+	\end{subproof}
+	\end{subproof}
 	
 	Let us show that $a$ has infinite range.
 	Assume the contrary.
@@ -170,16 +175,18 @@
 	\end{lemma} 
 	
 	\begin{lemma}
-	Let $a$ be a sequence such that for every $n \ (((n \text{ is even}) \text{ then } a[n] = 1) \wedge ((\text{n is odd}) \text{ then } a[n] = -1))$.
+	Let $a$ be a sequence such that for every $n \ (((n \text{ is even}) \text{ then } a[n] = 1) \text{ and } ((\text{n is odd}) \text{ then } a[n] = -1))$.
 	Then $a$ diverges and $a$ has finite range.
 	\end{lemma}
 	\begin{proof}
 	Let us show that $a$ diverges.
+	\begin{subproof}
 	Assume the contrary.
 	Take a real number $x$ such that $a$ converges to $x$.
 	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < 1$ (by Convergence, OnePos).
 	
 	Let us show that $dist(a[N + 1],a[N + 2]) = 2$.
+	\begin{subproof}
 	Case $N + 1$ is even.
 	Then $N + 2$ is odd.
 	Hence $dist(a[N + 1],a[N + 2]) = dist(1,-1) = 2$.
@@ -188,7 +195,7 @@
 	Then $N + 2$ is even.
 	Hence $dist(a[N + 1],a[N + 2]) = dist(-1,1) = 2$.
 	end.
-	end.
+	\end{subproof}
 	
 	$a[N + 1]$ is a real number and $a[N + 2]$ is a real number.
 	We have $dist(a[N + 1],a[N + 2]) \leq dist(a[N + 1],x) + dist(x,a[N + 2])$ (by DistTriangleIneq).
@@ -200,7 +207,7 @@
 	Hence $dist(a[N + 1],a[N + 2]) < 2$ (by MixedTransitivity).
 	Hence $2 < 2$.
 	Contradiction.
-	end.
+	\end{subproof}
 	
 	Let us show that $a$ has finite range.
 	Let us show that $ran(a) = ranN(a,1)$.
