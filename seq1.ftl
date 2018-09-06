@@ -568,9 +568,9 @@ Proof.
         #[prove off] Take sequences s2a, s2b such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)). [prove on]
         Define s2a[k] = y * (a[k] + (-x)) for k in NAT.
         Define s2b[k] = x * (b[k] + (-y)) for k in NAT.
-        Every element of Dom(s2a) is a natural number and every natural number is an element of Dom(s2a) and for every n s2a[n] is a real number.
-        Every element of Dom(s2b) is a natural number and every natural number is an element of Dom(s2b) and for every n s2b[n] is a real number.
-        Hence s2a, s2b are sequences.
+        #Every element of Dom(s2a) is a natural number and every natural number is an element of Dom(s2a) and for every n s2a[n] is a real number.
+        #Every element of Dom(s2b) is a natural number and every natural number is an element of Dom(s2b) and for every n s2b[n] is a real number.
+        s2a, s2b are sequences.
         Define sum1[k] = a[k] + (-x) for k in NAT.
         Define sum2[k] = b[k] + (-y) for k in NAT.
         sum1, sum2 are sequences.
@@ -596,7 +596,8 @@ Proof.
                   .= ((a[n] - x) * (b[n] - y)) + ((x * (b[n] - y)) + (y * (a[n] - x))) (by Identity1)
                   .= s1[n] + s2[n] (by 1, 2).
         qed.
-        Therefore s3 converges to 0 (by SumConv).
+        Hence s3 = s1 +' s2 (by SequenceEq).
+        Therefore the thesis (by SumConv, Zero).
     qed. 
     Let eps be a positive real number.
     Take N such that for every n such that N < n dist(s3[n],0) < eps (by Convergence).
