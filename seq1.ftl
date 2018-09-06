@@ -1,9 +1,8 @@
 [prove off]
 [read Sequences/Naturals.ftl]
-[prove on]
 [read Sequences/helper.ftl]
 #[prove off][check off]
-[prove on][check on]
+[prove on]
 [sequence/-s]
 [converge/-s]
 
@@ -533,7 +532,6 @@ Proof.
     Hence b converges to 0 (by ProdConstConv, ComMult, ZeroMult).
 qed.
 
-[prove on]
 
 Theorem ProdConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
@@ -746,10 +744,32 @@ Definition SubSeq.
 Definition ConvSubSeq.
     Let a be a sequence. a has some convergent subsequence iff there exists an index sequence i such that Subseq(a,i) converges.
 
+##############################################################################################################
 
+Axiom.
+Let n be a natural number. n -<- n + 1.
 
-Axiom SubSeqLeq.
+Axiom.
+Let n be a natural number. Assume n != 0. Then there exists a natural number m such that n = m + 1.
+
+Axiom.
+n -<- 0 for no natural number n.
+
+Axiom.
+Let n,m be natural numbers. If n < m then n + 1 =< m.
+
+[prove on]
+Proposition SubSeqLeq.
     Let a be a sequence. Let i be an index sequence. Then for every n n =< i[n].
+Proof by induction. Let n be a natural number. 
+    Case n = 0. Obvious. 
+    Case n != 0. Take a natural number m such that n = m + 1. Then m =< i[m]. 
+    We can show by induction that i[k] + 1 =< i[k + 1] for every natural number k. Obvious.
+end.
+qed.
+[exit]
+
+#################################################################################################################
 
 Lemma LimitSubSeq.
     Let a be a sequence. Let x be a real number. a converges to x iff for every index sequence i Subseq(a,i) converges to x.
@@ -770,7 +790,6 @@ Proof.
 
     Let us show that if for every index sequence i Subseq(a,i) converges to x then a converges to x.
         Assume for every index sequence i Subseq(a,i) converges to x.
-        #Define i[n] = n for n in NAT.
         #[prove off]Take an index sequence i such that for every n i[n] = n.[prove on]
         Define i[k] = k for k in NAT.
         i is a sequence and ((for every n i[n] is a natural number) and (for every n i[n] < i[n+1])).
