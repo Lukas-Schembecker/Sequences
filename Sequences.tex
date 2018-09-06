@@ -11,7 +11,7 @@
 \newenvironment{proof}{\noindent\textbf{Proof\ }}{\hspace*{\fill}$\Box$\medskip}
 \newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
 \newenvironment{subproof}{\begin{list}{}{}
-		\item[\text{Proof}]}{\hfill $\Box$ \end{list}}
+		\item[\text{Proof}]}{\hfill $\surd$ \end{list}}
 \newtheorem{axiom}{Axiom}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
@@ -43,14 +43,15 @@
 \title{An SAD3 Formalization of Real Sequences for Walter Rudin's
 \it{Principles of Mathematical Analysis}}
 
-\author{Peter Koepke}
+\author{Lukas Schembecker, Annika Hennes}
 
-\date{August 25, 2018}
+\date{September 10, 2018}
 
 \maketitle
 
 
 \section{Introduction}
+The present formalization deals with chapter 3 'Numerical Sequences and Series' (pages 47 to 58). We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$.
 
 
 \section{The Formalization}
@@ -65,34 +66,34 @@
 		$NAT$ is the set of natural numbers.
 	\end{definition}
 	
-	\begin{definition} Seq.	A sequence f is a function such that every element of Dom(f) is a natural number and every
+	\begin{definition}[Seq]	A sequence f is a function such that every element of Dom(f) is a natural number and every
 	natural number is an element of $Dom(f)$ and for every $n \ f[n]$ is a real number.
 	\end{definition}
 	
-	\begin{axiom} SequenceEq. Let $a, b$ be sequences. \\ $a = b$ iff for every $n \ a[n] = b[n]$.
+	\begin{axiom} [SequenceEq] Let $a, b$ be sequences. \\ $a = b$ iff for every $n \ a[n] = b[n]$.
 	\end{axiom}
 	
-	\begin{definition} Convergence. Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every positive real
+	\begin{definition} [Convergence] Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every positive real
 	number $eps$ there exists $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < eps$.
 	\end{definition}
 	
-	\begin{definition} Conv. Let $a$ be a sequence. $a$ converges iff there exists a real number $x$ such that $a$ converges to $x$.
+	\begin{definition} [Conv] Let $a$ be a sequence. $a$ converges iff there exists a real number $x$ such that $a$ converges to $x$.
 	\end{definition}
 	
 	\noindent Let $a$ is convergent stand for $a$ converges.
 	\\Let $a$ diverges stand for not ($a$ converges).
 	\\Let $a$ is divergent stand for $a$ diverges.
 	
-	\begin{definition} Range. Let $a$ be a sequence. $ran(a) = \{a[n] \mid \text{n is a natural number}\}$. 
+	\begin{definition} [Range] Let $a$ be a sequence. $ran(a) = \{a[n] \mid \text{n is a natural number}\}$. 
 	\end{definition}
 
-	\begin{definition} RangeN. Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$.
+	\begin{definition} [RangeN] Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$.
 	\end{definition}
 	
-	\begin{definition} FiniteRange.	Let $a$ be a sequence. $a$ has finite range iff there exists an $N$ such that $ran(a) = ranN(a,N)$.
+	\begin{definition} [FiniteRange]	Let $a$ be a sequence. $a$ has finite range iff there exists an $N$ such that $ran(a) = ranN(a,N)$.
 	\end{definition}
 
-	\begin{definition} InfiniteRange. Let $a$ be a sequence. $a$ has infinite range iff not ($a$ has finite range).
+	\begin{definition} [InfiniteRange] Let $a$ be a sequence. $a$ has infinite range iff not ($a$ has finite range).
 	\end{definition}
 	
 	\begin{lemma} Let $a$ be a sequence such that for every $n$
@@ -162,21 +163,21 @@
 	\end{subproof}
 	\end{proof}
 	
-	\begin{signature} Parity.
+	\begin{signature} [Parity]
 	$n$ is even is an atom.
 	\end{signature}
 	
 	\noindent Let $n$ is odd stand for not ($n$ is even).
 	
-	\begin{axiom} ParityPlusOne.
+	\begin{axiom} [ParityPlusOne]
 	$n$ is even iff $n + 1$ is odd.
 	\end{axiom}
 
-	\begin{axiom} ZeroEven.
+	\begin{axiom} [ZeroEven]
 	$0$ is even.
 	\end{axiom}
 	
-	\begin{lemma} OneOdd.
+	\begin{lemma} [OneOdd]
 	$1$ is odd.
 	\end{lemma} 
 	
@@ -255,8 +256,310 @@
 	\end{subproof}
 	\end{proof}
 	
+	\begin{definition} [Neighb]
+	Let $eps$ be a positive real number. Let $x$ be a real number.
+	$Neighb(x,eps) = \{y | y \text{ is a real number such that } dist(y,x) < eps\}$.
+	\end{definition}
 	
+	\begin{theorem} [ConvNeighborhood]
+	Let $a$ be a sequence. Let $x$ be a real number.
+	$a$ converges to $x$ iff for every positive real number $eps$ there exists a $N$
+	such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$.
+	\end{theorem}
+	\begin{proof}
+	Let us show that (if $a$ converges to $x$ then for every positive real number $eps$ there exists a $N$
+	such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$).
+	\begin{subproof}
+	Assume $a$ converges to $x$.
+	Let $eps$ be a positive real number.
+	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < eps$ (by Convergence).
+	Hence for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$ (by Neighb).
+	\end{subproof}
 	
+	Let us show that (if for every positive real number $eps$ there exists a $N$ such that
+	for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$ then $a$ converges to $x$).
+	\begin{subproof}
+	Assume for every positive real number $eps$ there exists a $N$ such that
+	for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$.
+	Let $eps$ be a positive real number.
+	Take $N$ such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$.
+	Hence for every $n$ such that $N < n \ dist(a[n],x) < eps$ (by Neighb).
+	\end{subproof}
+	\end{proof}	
+	
+	\begin{lemma} [DistEqual]
+	Let $x$ and $y$ be real numbers. Assume for every positive real number $eps$ $dist(x,y) < eps$.
+	Then $x = y$.
+	\end{lemma}
+	\begin{proof}
+	Assume the contrary.
+	Then there exists a positive real number $eps2$ such that $eps2 < dist(x,y)$.
+	A contradiction.
+	\end{proof}
+	
+	\begin{theorem} [LimitUnique]
+	Let $a$ be a sequence. Let $x, y$ be real numbers. Assume $a$ converges to $x$ and $a$ converges to $y$.
+	Then $x = y$.
+	\end{theorem}
+	\begin{proof}
+	Let us show that for every positive real number $eps \ dist(x,y) < eps$.
+	\begin{subproof}
+	Let $eps$ be a positive real number.
+	Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
+	
+	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < halfeps$ (by Convergence).
+	Take $N2$ such that for every $n$ such that $N2 < n \ dist(a[n],y) < halfeps$ (by Convergence).
+	
+	For every $n \ dist(x,y) \leq dist(x,a[n]) + dist(a[n],y)$ (by DistTriangleIneq). 
+	Take $N3$ such that $N3 = max(N1,N2) + 1$.
+	Then $N1 < N3$ and $N2 < N3$.
+	
+	Hence $dist(x,a[N3]) < halfeps$ and $dist(a[N3],y) < halfeps$ (by DistSymm).
+	Hence $dist(x,a[N3]) + dist(a[N3],y) < halfeps + halfeps$ (by AddInvariance).
+	Hence $dist(x,y) < halfeps + halfeps$ (by MixedTransitivity).
+	Hence $dist(x,y) < eps$ (by TwoHalf).
+	\end{subproof}
+	Therefore $x = y$ (by DistEqual).
+	\end{proof}
+	
+	\begin{definition} [BoundedBy]
+	Let $a$ be a sequence. Let $K$ be a real number. $a$ is bounded by $K$ iff
+	for every $n \ abs(a[n]) \leq K$.
+	\end{definition}
+	
+	\begin{definition} [BoundedSequence]
+	Let $a$ be a sequence. $a$ is bounded iff there exists a real number $K$ such that
+	$a$ is bounded by $K$.
+	\end{definition}
+	
+	\begin{signature} [MaxN]
+	Let $a$ be a sequence. $maxN(a,N)$ is a real number such that
+	(there exists $n$ such that $n \leq N$ and $maxN(a,N) = a[n]$) and
+	(for every $n$ such that $n \leq N \ a[n] =< maxN(a,N)$).
+	\end{signature}
+	
+	\begin{theorem} [ConvergentImpBounded]
+	Let $a$ be a sequence. Assume that $a$ converges. Then $a$ is bounded.
+	\end{theorem}
+	\begin{proof}
+	Take a real number $x$ such that $a$ converges to $x$.
+	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < 1$ (by Convergence, OnePos).
+	Define $b[k] = abs(a[k])$ for $k$ in $NAT$.
+	Take a real number $K$ such that $K = max(1 + abs(x), maxN(b,N))$.
+	Let us show that $a$ is bounded by $K$.
+	\begin{subproof}
+	Let us show that for every $n \ abs(a[n]) \leq K$.
+	\begin{subproof} 
+	Let $n$ be a natural number.
+	We have $n \leq N$ or $n > N$.
+	Case $n =< N$.
+	We have $abs(a[n]) = b[n] \leq maxN(b,N)$ (by MaxN).
+	We have $maxN(b,N) \leq K$ (by MaxIneqDummy).
+	Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
+	end.
+	Case $n > N$.
+	We have $dist(a[n],x) < 1$.
+	We have $1 + abs(x) \leq K$ (by MaxIneq).
+	
+	$abs(a[n]) .= abs(a[n] + 0)$ (by Zero)
+	$.= abs(a[n] + (x - x))$ (by Neg)
+	$.= abs(a[n] + ((-x) + x))$ (by ComAdd)
+	$.= abs((a[n] - x) + x)$ (by AssAdd).
+	
+	Hence $abs(a[n]) \leq abs(a[n] - x) + abs(x)$ (by AbsTriangleIneq).
+	Hence $abs(a[n]) \leq dist(a[n],x) + abs(x)$.
+	
+	We have $dist(a[n],x) + abs(x) < 1 + abs(x)$ (by MixedAddInvariance).
+	Hence $abs(a[n]) \leq 1 + abs(x)$ (by MixedTransitivity).
+	Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
+	end.
+	\end{subproof}
+	Hence $a$ is bounded by $K$ (by BoundedBy).
+	\end{subproof}
+	\end{proof}
+	
+	\begin{definition} [LimitPointOfSet]
+	Let $E$ be a set. Assume every element of $E$ is a real number. A limit point of $E$
+	is a real number $x$ such that for every positive real number $eps$ there exists an element
+	$y$ of $E$ such that $y$ is an element of $Neighb(x,eps)$ and $y \neq x$.
+	\end{definition}
+	
+	\begin{theorem} [ConvLimitPoint]
+	Let $E$ be a set. Assume every element of $E$ is a real number. Let $x$ be a limit point of $E$.
+	Then there exists a sequence $a$ such that $a$ converges to $x$ and for every $n \ a[n]$ is an element of $E$.
+	\end{theorem}
+	\begin{proof}
+	Let us show that for every $n$ such that $n > 0$ there exists an element $y$ of $E$ such that
+	$y$ is an element of $Neighb(x,inv(n))$ and $y \neq x$.
+	\begin{subproof}
+	Assume $n > 0$.
+	Then $inv(n)$ is a positive real number.
+	Take an element $y$ of $E$ such that $y$ is an element of $Neighb(x,inv(n))$
+	and $y \neq x$ (by LimitPointOfSet).
+	\end{subproof}
+	Define $a[n] =$ Case $n = 0$ $->$ Choose an element $y$ of $E$ such that $y$ is an element of
+	$Neighb(x,1)$ and $y \neq x$ in $y$,
+	Case $n > 0$ $->$ Choose an element $y$ of $E$ such that $y$ is an element of
+	$Neighb(x,inv(n))$ and $y \neq x$ in $y$
+	for $n$ in $NAT$.
+	$a$ is a sequence.	
+	Then for every $n \ a[n]$ is an element of $E$.
+	Let us show that $a$ converges to $x$.
+	\begin{subproof}
+	Let $eps$ be a positive real number.
+	Take $N$ such that $1 < N \cdot eps$ (by ArchimedeanAxiom, OnePos).
+
+	Let us show that for every $n$ such that $N < n \ dist(a[n],x) < eps$.
+	\begin{subproof}
+	Assume $N < n$. Then $n \neq 0$.
+	Then $a[n]$ is an element of $E$ such that $a[n]$ is an element of $Neighb(x,inv(n))$.
+	Hence $dist(a[n],x) < inv(n)$.
+	
+	Let us show that $inv(n) < eps$.
+	\begin{subproof}
+	We have $N \cdot eps < n \cdot eps$ (by ComMult, MultInvariance).
+	Hence $1 < n \cdot eps$ (by TransitivityOfOrder).
+	$inv(n)$ is positive.
+	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot eps)$ (by MultInvariance).
+	We have $inv(n) \cdot 1 = inv(n)$ (by One).
+	$inv(n) \cdot (n \cdot eps) .= (inv(n) \cdot n) \cdot eps$ (by AssMult)
+	$.= 1 \cdot eps$ (by InvDummy)
+	$.= eps$ (by OneDummy).
+	\end{subproof}
+	Hence $dist(a[n],x) < eps$ (by TransitivityOfOrder).
+	\end{subproof}
+	\end{subproof}
+	\end{proof}
+	
+	\begin{definition} [SequenceSum]
+	Let $a,b$ be sequences. $a +' b$ is a sequence such that for every $n \ (a +' b)[n] = a[n] + b[n]$.
+	\end{definition}
+	
+	\begin{definition}[SequenceProd]
+	Let $a,b$ be sequences. $a *' b$ is a sequence such that for every $n \ (a *' b)[n] = a[n] \cdot b[n]$.
+	\end{definition}
+	
+	\begin{definition} [SequenceConstSum]
+	Let $a$ be a sequence. Let $c$ be a real number. $c +'' a$ is a sequence such that for every $n \ (c +'' a)[n] = c + a[n]$.
+	\end{definition}
+	
+	\begin{definition} [SequenceConstProd]
+	Let $a$ be a sequence. Let $c$ be a real number. $c *'' a$ is a sequence such that for every $n \ (c *'' a)[n] = c \cdot a[n]$.
+	\end{definition}
+
+	\begin{definition} [SequenceDiv]
+	Let $a$ be a sequence. Assume for every $n \ a[n] \neq 0$. $div(a)$ is a sequence such that for every $n \ (div(a))[n] = inv(a[n])$.
+	\end{definition}
+	
+	\begin{theorem} [SumConv]
+	Let $a,b$ be sequences. Let $x,y$ be real numbers. Assume $a$ converges to $x$ and $b$ converges to $y$.
+	Then $a +' b$ converges to $x + y$.
+	\end{theorem}
+	\begin{proof}.
+	Let $eps$ be a positive real number.
+	Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
+	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < halfeps$ (by Convergence).
+	Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < halfeps$ (by Convergence).
+	Take $N$ such that $N = max(N1,N2)$.
+	Then $N1 \leq N$ and $N2 \leq N$.
+	Let us show that for every $n$ such that $N < n \ dist((a +' b)[n],(x+y)) < eps$.
+	\begin{subproof}
+	Assume $N < n$.
+	We have $dist(a[n],x) < halfeps$.
+	We have $dist(b[n],y) < halfeps$.
+	$abs((a[n] + b[n]) - (x + y)) .= abs((a[n] + b[n]) + ((-x) + (-y)))$ (by MinusRule1)
+	$.= abs((-x) + ((a[n] + b[n]) - y))$ (by BubbleAdd)
+	$.= abs((-x) + (a[n] + (b[n] - y)))$ (by AssAdd)
+	$.= abs(((-x) + a[n]) + (b[n] - y))$ (by AssAdd)
+	$.= abs((a[n] - x) + (b[n] - y))$ (by ComAdd).
+	We have $abs((a[n] - x) + (b[n] - y)) \leq abs(a[n] - x) + abs(b[n] - y)$  (by AbsTriangleIneq).
+	Hence $abs((a[n] + b[n]) - (x + y)) \leq dist(a[n],x) + dist(b[n],y)$.
+	Hence $dist(a[n],x) + dist(b[n],y) < halfeps + halfeps$ (by AddInvariance).
+	Hence $abs((a[n] + b[n]) - (x + y)) < halfeps + halfeps$ (by MixedTransitivity).
+	Hence $dist((a +' b)[n],(x + y)) < halfeps + halfeps$.
+	Hence $dist((a +' b)[n],(x + y)) < eps$ (by TwoHalf).
+	\end{subproof}
+	\end{proof}
+	
+	\begin{lemma} [ConstConv]
+	Let $c$ be a real number. Let $cn$ be a sequence such that for every $n \ cn[n] = c$.
+	Then $cn$ converges to $c$.
+	\end{lemma}
+	\begin{proof}
+	Let $eps$ be a positive real number.
+	Let us show that for every $n$ such that $0 < n \ dist(cn[n],c) < eps$.
+	\begin{subproof}
+	Assume $0 < n$.
+	$dist(cn[n],c) = dist(c,c) = 0$ (by IdOfInd).
+	Hence $dist(cn[n],c) < eps$.
+	\end{subproof}
+	\end{proof}
+	
+	\begin{theorem} [SumConstConv]
+	Let $a$ be a sequence. Let $x,c$ be real numbers. Assume $a$ converges to $x$.
+	Then $c +'' a$ converges to $c + x$.
+	\end{theorem}
+	\begin{proof}
+	Define $cn[n] = c$ for $n$ in $NAT$.
+	$cn$ is a sequence.
+	Let us show that $c +'' a = (cn +' a)$.
+	\begin{subproof}
+	Let us show that for every $n \ (c +'' a)[n] = (cn +' a)[n]$.
+	\begin{subproof}
+	Let $n$ be a natural number.
+	$(c +'' a)[n] .= c + a[n]
+	.= cn[n] + a[n]
+	.= (cn +' a)[n]$.
+	\end{subproof}
+	Hence $c +'' a = (cn +' a)$ (by SequenceEq).
+	\end{subproof}
+	$cn$ converges to $c$ (by ConstConv).
+	Then $c +'' a$ converges to $c + x$ (by SumConv).
+	\end{proof}
+	
+	\begin{theorem} [ProdConstConv]
+	Let $a$ be a sequence. Let $x,c$ be real numbers. Assume $a$ converges to $x$.
+	Then $c *'' a$ converges to $c \cdot x$.
+	\end{theorem}
+	\begin{proof}
+	Case $c = 0$.
+	We have $c \cdot x = 0$.
+	Let us show that for every $n \ (c *'' a)[n] = 0$. 
+	\begin{subproof}
+	$(c *'' a)[n] .= c * a[n]
+	.= 0 * a[n]
+	.= 0$ (by ZeroMult).
+	\end{subproof}
+	Hence $c *'' a$ converges to $c \cdot x$ (by ConstConv).
+	end.
+	Case $c \neq 0$.
+	Let $eps$ be a positive real number. 
+	(1)     Take a positive real number $invEps$ such that $invEps = inv(abs(c)) \cdot eps$.
+	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < invEps$ (By Convergence).
+	
+	Let us show that for every $n$ such that $N < n \ dist(c \cdot a[n],c \cdot x) < eps$.
+	\begin{subproof}
+	Assume $N < n$.
+	$abs((c \cdot a[n]) - (c \cdot x)) .= abs((c \cdot a[n]) +  ((-1) \cdot (c \cdot x))) (by MinusRule4)$ 
+	$.= abs((c \cdot a[n]) + (((-1) \cdot c) \cdot x))$ (by AssMult)
+	$.= abs((c \cdot a[n]) + ((c \cdot (-1)) \cdot x))$ (by ComMult)
+	$.= abs((c \cdot a[n]) + (c \cdot ((-1) \cdot x)))$ (by AssMult)
+	$.= abs((c \cdot a[n]) + (c \cdot (-x)))$ (by MinusRule4)
+	$.= abs(c \cdot (a[n] - x))$ (by Distrib)
+	$.= abs(c) \cdot abs(a[n] - x)$ (by AbsMult).
+	$abs(c) \cdot dist(a[n],x) < abs(c) \cdot invEps$ (by AbsPos, MultInvariance).
+	Hence $abs((c \cdot a[n]) - (c \cdot x)) < abs(c) \cdot invEps$.
+	
+	$abs(c) \cdot invEps .= abs(c) \cdot (inv(abs(c)) \cdot eps)$ (by 1)
+	$.= (abs(c) \cdot inv(abs(c))) \cdot eps$ (by AssMult)
+	$.= 1 \cdot eps$ (by Inverse)
+	$.= eps$ (by OneDummy).
+	
+	Hence $dist(c \cdot a[n],c \cdot x) < eps$.
+	\end{subproof}
+	end.
+	\end{proof}
+
 \end{forthel}
 
 \section{Remarks}
