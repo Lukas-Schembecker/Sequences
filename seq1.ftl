@@ -7,9 +7,12 @@
 [sequence/-s]
 [converge/-s]
 
-Let NAT denote the set of natural numbers.
+[prove off]
 Let n, m, N, N1, N2, N3 denote natural numbers.
 # 514 555 629 640 643 645 663 685 686
+
+Definition.
+NAT is the set of natural numbers.
 
 ### Sequences
 
@@ -292,8 +295,8 @@ Proof.
     Take a real number x such that a converges to x.
     Take N such that for every n such that N < n dist(a[n],x) < 1 (by Convergence, OnePos).
 
-    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
-    #Define b[k] = abs(a[k]) for k in NAT.
+    #[prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
+    Define b[k] = abs(a[k]) for k in NAT.
     Take a real number K such that K = max(1 + abs(x), maxN(b,N)).
 
     Let us show that a is bounded by K.
@@ -343,15 +346,16 @@ Proof.
             and y != x (by LimitPointOfSet).
     end.
 
-#    Define a[n] = Case n = 0 -> Choose an element y of E such that y is an element of
-#                                Neighb(x,1) and y != x in y,
-#                  Case n > 0 -> Choose an element y of E such that y is an element of
-#                                Neighb(x,inv(n)) and y != x in y
-#    for n in NAT.
+    Define a[n] = Case n = 0 -> Choose an element y of E such that y is an element of
+                                Neighb(x,1) and y != x in y,
+                  Case n > 0 -> Choose an element y of E such that y is an element of
+                                Neighb(x,inv(n)) and y != x in y
+    for n in NAT.
+    a is a sequence.
 
-    [prove off]Take a sequence a such that for every n
-        (((n = 0) => (a[n] is an element of E and a[n] is an element of Neighb(x,1) and a[n] != x)) and
-         ((n > 0) => (a[n] is an element of E and a[n] is an element of Neighb(x,inv(n)) and a[n] != x))).[prove on]
+    #[prove off]Take a sequence a such that for every n
+    #    (((n = 0) => (a[n] is an element of E and a[n] is an element of Neighb(x,1) and a[n] != x)) and
+    #     ((n > 0) => (a[n] is an element of E and a[n] is an element of Neighb(x,inv(n)) and a[n] != x))).[prove on]
 
     Then for every n a[n] is an element of E.
     Let us show that a converges to x.
@@ -448,9 +452,9 @@ Theorem SumConstConv.
     Let a be a sequence. Let x,c be real numbers. Assume a converges to x.
     Then c +'' a converges to c + x.
 Proof.
-    # Define cn[n] = c for n in NAT.
-    [prove off]Take a sequence cn such that for every n cn[n] = c.[prove on]
-
+    Define cn[n] = c for n in NAT.
+    #[prove off]Take a sequence cn such that for every n cn[n] = c.[prove on]
+    cn is a sequence.
     Let us show that c +'' a = (cn +' a).
         Let us show that for every n (c +'' a)[n] = (cn +' a)[n].
             Let n be a natural number.
@@ -510,8 +514,15 @@ Lemma ConstMultSum.
     Let a,b be sequences. Let x,y be real numbers such that for every n b[n] = y * (a[n] + (-x)). Assume a converges to x.
     Then b converges to 0.
 Proof.
-    [prove off]Take a sequence sum such that for every n sum[n] = (-x) + a[n]. [prove on]
-    sum converges to 0 (by SumConstConv, ComAdd, Neg).
+    #[prove off]Take a sequence sum such that for every n sum[n] = (-x) + a[n]. [prove on]
+    Define sum[k] = (-x) + a[k] for k in NAT.
+    sum is a sequence.
+    Let us show that sum converges to 0.
+    Proof.
+        We have sum = (-x) +'' a.
+        Hence sum converges to (-x) + x (by SumConstConv).
+        (-x) + x = 0 (by ComAdd, Neg).
+    qed.
     Let us show that for every n b[n] = y * sum[n].
     Proof.
         b[n] .= y * (a[n] + (-x))
@@ -522,6 +533,7 @@ Proof.
     Hence b converges to 0 (by ProdConstConv, ComMult, ZeroMult).
 qed.
 
+[prove on]
 
 Theorem ProdConv.
     Let a,b be sequences. Let x,y be real numbers. Assume a converges to x and b converges to y.
@@ -529,7 +541,8 @@ Theorem ProdConv.
     Then a *' b converges to x * y.
 Proof.
 #Strategie: zerteile (s[n]*t[n]) - (x*y) = ((s[n] - x)*(t[n] - y)) + ((x*(t[n] - y)) + (y*(s[n] - x))) in Teilfolgen und zeige erst die Konvergenz der Teile um daraus die Konvergenz des Ganzen zu folgern.
-    [prove off] (1) Take a sequence s1 such that for every n s1[n] = (a[n] - x) * (b[n] - y). [prove off]
+    #[prove off] (1) Take a sequence s1 such that for every n s1[n] = (a[n] - x) * (b[n] - y). [prove on]
+    (1) Define s1[k] = (a[k] - x) * (b[k] - y) for k in NAT.
     Let us show that s1 converges to 0.
     proof.
         Assume eps is a positive real number. 
@@ -542,16 +555,29 @@ Proof.
             Assume N < n.
             dist(a[n],x) < Eps and dist(b[n],y) < Eps.
             dist(a[n],x), dist(b[n],y) and Eps are nonnegative.
-            Then dist(a[n],x) * dist(b[n],y) < eps (by NonNegMultInvariance, Wurz).
+            Then dist(a[n],x) * dist(b[n],y) < eps (by NonNegMultInvariance).
             Hence abs(a[n] - x) * abs(b[n] - y) < eps.
             Hence abs((a[n] - x) * (b[n] - y)) < eps (by AbsMult).
             Hence abs(((a[n] - x) * (b[n] - y)) - 0) < eps (by Zero, NegOfZero).
         qed.
     qed.
-    [prove off] (2) Take a sequence s2 such that for every n s2[n] = (x * (b[n] + (-y))) + (y * (a[n] + (-x))). [prove on]
+    #[prove off] (2) Take a sequence s2 such that for every n s2[n] = (x * (b[n] + (-y))) + (y * (a[n] + (-x))). [prove on]
+    (2) Define s2[k] = (x * (b[k] + (-y))) + (y * (a[k] + (-x))) for k in NAT.
     Let us show that s2 converges to 0.
-    proof.
-        [prove off] Take sequences s2a, s2b such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)). [prove on]
+    Proof.
+        #[prove off] Take sequences s2a, s2b such that for every n s2b[n] = x * (b[n] + (-y)) and s2a[n] = y * (a[n] + (-x)). [prove on]
+        Define s2a[k] = y * (a[k] + (-x)) for k in NAT.
+        Define s2b[k] = x * (b[k] + (-y)) for k in NAT.
+        Every element of Dom(s2a) is a natural number and every natural number is an element of Dom(s2a) and for every n s2a[n] is a real number.
+        Every element of Dom(s2b) is a natural number and every natural number is an element of Dom(s2b) and for every n s2b[n] is a real number.
+        Hence s2a, s2b are sequences.
+        Define sum1[k] = a[k] + (-x) for k in NAT.
+        Define sum2[k] = b[k] + (-y) for k in NAT.
+        sum1, sum2 are sequences.
+        #We have sum1[n] = (-x) + a[n] and sum2[n] = (-y) + b[n] (by ComAdd).
+        sum1 = (-x) +'' a and sum2 = (-y) +'' b (by ComAdd, SequenceEq).
+        sum1, sum2 converge to 0 (by SumConstConv, Neg, ComAdd).
+        We have s2a = y *'' sum1 and s2b = x *'' sum2 (by SequenceEq).
         s2a, s2b converge to 0 (by ConstMultSum). 
         Let us show that for every n s2[n] = s2b[n] + s2a[n].
         Proof.
@@ -560,7 +586,8 @@ Proof.
         qed.
         Hence s2 converges to 0 (by SumConv).
     qed.
-    [prove off] (3) Take a sequence s3 such that for every n s3[n] = (a[n] * b[n]) - (x * y). [prove on]
+    #[prove off] (3) Take a sequence s3 such that for every n s3[n] = (a[n] * b[n]) - (x * y). [prove on]
+    (3) Define s3[k] = (a[k] * b[k]) - (x * y) for k in NAT.
     Let us show that s3 converges to 0.
     proof.
         Let us show that for every n s3[n] = s1[n] + s2[n].
@@ -743,9 +770,11 @@ Proof.
     Let us show that if for every index sequence i Subseq(a,i) converges to x then a converges to x.
         Assume for every index sequence i Subseq(a,i) converges to x.
         #Define i[n] = n for n in NAT.
-        [prove off]Take an index sequence i such that for every n i[n] = n.[prove on]
+        #[prove off]Take an index sequence i such that for every n i[n] = n.[prove on]
+        Define i[k] = k for k in NAT.
+        i is a sequence and ((for every n i[n] is a natural number) and (for every n i[n] < i[n+1])).
+        Hence i is an index sequence.
         Subseq(a,i) converges to x.
-
         For every n a[n] = Subseq(a,i)[n].
         Hence a = Subseq(a,i) (by SequenceEq).
         Hence a converges to x.
@@ -770,8 +799,8 @@ Proof.
     N + 1 is a natural number and N < N + 1.
     Hence for every n such that N < n dist(a[n],a[N + 1]) < 1.
 
-    [prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
-    #Define b[k] = abs(a[k]) for k in NAT.
+    #[prove off]Take a sequence b such that for every n b[n] = abs(a[n]).[prove on]
+    Define b[k] = abs(a[k]) for k in NAT.
 
     maxN(b,N), 1, a[N + 1], abs(a[N + 1]), 1 + abs(a[N + 1]) are real numbers.
     Take a real number K such that K = max(1 + abs(a[N + 1]), maxN(b,N)).
