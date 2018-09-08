@@ -51,7 +51,7 @@
 
 
 \section{Introduction}
-The present formalization deals with chapter 3 'Numerical Sequences and Series' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. Beside using some of the lemmata provided in 'examples/Forster/Reals.ftl' we also had to think of some own helpful propositions. In order to improve the readability, we moved most of the lemmata, which only serve as expedients for the theorems presented in Rudin, to an extra file - helper.ftl.
+The present formalization deals with chapter 3 'Numerical Sequences and Series' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. Beside using some of the lemmata provided in 'examples/Forster/Reals.ftl' we also had to think of some own helpful propositions. In order to improve the readability, we moved most of the lemmata, which only serve as expedients for the theorems presented in Rudin, to an extra file - 'helper.ftl'.
 
 
 \section{The Formalization}
@@ -335,7 +335,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{subproof} 
 	Let $n$ be a natural number.
 	We have $n \leq N$ or $n > N$.
-	Case $n =< N$.
+	Case $n \leq N$.
 	We have $abs(a[n]) = b[n] \leq maxN(b,N)$ (by MaxN).
 	We have $maxN(b,N) \leq K$ (by MaxIneqDummy).
 	Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
@@ -377,9 +377,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Take an element $y$ of $E$ such that $y$ is an element of $Neighb(x,inv(n))$
 	and $y \neq x$ (by LimitPointOfSet).
 	\end{subproof}
-	Define $a[n] =$ Case $n = 0$ $->$ Choose an element $y$ of $E$ such that $y$ is an element of
+	Define $a[n] =$ Case $n = 0 ->$ Choose an element $y$ of $E$ such that $y$ is an element of
 	$Neighb(x,1)$ and $y \neq x$ in $y$,
-	Case $n > 0$ $->$ Choose an element $y$ of $E$ such that $y$ is an element of
+	Case $n > 0 ->$ Choose an element $y$ of $E$ such that $y$ is an element of
 	$Neighb(x,inv(n))$ and $y \neq x$ in $y$
 	for $n$ in $NAT$.
 	$a$ is a sequence.	
@@ -647,20 +647,14 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let us show that $abs(x) - abs(a[n]) < inv(2) \cdot abs(x)$.
 	\begin{subproof}
 	$abs(x) - abs(a[n]) \leq abs(x - a[n])$ (by AbsTriangleIneq2).
-	$abs(x - a[n]) .= abs(-(x - a[n]))$ (by AbsPosNeg)
-	$.= abs(-x - (-a[n]))$ (by MinusRule1)
-	$.= abs(-x + a[n])$ (by MinusRule2)
-	$.= abs(a[n] - x)$ (by ComAdd).
+	$abs(x - a[n]) = abs(-(x - a[n])) = abs(a[n] - x)$ (by AbsPosNeg, MinusRule1, MinusRule2, ComAdd).
 	$abs(a[n] - x) < inv(2) \cdot abs(x)$ (by DistDefinition).
 	Hence the thesis (by MixedTransitivity).
 	\end{subproof}
-	Let us show that $-abs(a[n]) < ((-1) \cdot inv(2)) \cdot abs(x)$.
+	Let us show that $-abs(a[n]) < (-inv(2)) \cdot abs(x)$.
 	\begin{subproof}
-	$(abs(x) + (-abs(a[n]))) + (-abs(x)) < (inv(2) \cdot abs(x)) + (-abs(x))$ (by MixedAddInvariance). 
-	$(abs(x) + (-abs(a[n]))) + (-abs(x)) .= abs(x) + ((-abs(a[n])) + (-abs(x)))$ (by AssAdd)
-	$.= abs(x) + ((-abs(x)) + (-abs(a[n])))$ (by ComAdd)
-	$.= (abs(x) + (-abs(x))) + (-abs(a[n]))$ (by AssAdd)
-	$.= -abs(a[n])$ (by Neg, ComAdd, Zero).
+	$(abs(x) - abs(a[n])) + (-abs(x)) < (inv(2) \cdot abs(x)) + (-abs(x))$ (by MixedAddInvariance). 
+	$(abs(x) - abs(a[n])) + (-abs(x)) = -abs(a[n])$ (by AssAdd, Neg, ComAdd, Zero).
 	$-abs(a[n]) < (inv(2) \cdot abs(x)) + (-abs(x))$ (by AssAdd, Neg, Zero).
 	$(inv(2) \cdot abs(x)) + (-abs(x)) .= (inv(2) \cdot abs(x)) + ((-1) \cdot abs(x))$ (by MinusRule4)
 	$.= (inv(2) + (-1)) \cdot abs(x)$ (by DistribDummy)
@@ -670,16 +664,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= (((1 \cdot 1) + (2 \cdot (-1))) \cdot inv(2 \cdot 1)) \cdot abs(x)$ (by InvAdd)
 	$.= ((1 + ((-1) \cdot 2)) \cdot inv(2)) \cdot abs(x)$ (by One, ComMult).
 	$1 + ((-1) \cdot 2) .= 1 + -(1 \cdot 2)$ (by MinusRule5)
-	$.= 1 + -2$ (by OneDummy)
-	$.= -(2 - 1)$ (by MinusRule3)
+	$.= -(2 - 1)$ (by OneDummy, MinusRule3)
 	$.= -1$.
 	\end{subproof}
-	Therefore $abs(a[n]) > -(((-1) \cdot inv(2)) \cdot abs(x))$ (by OrdMirror, MinusRule2).
-	$-(((-1) \cdot inv(2)) \cdot abs(x)) .= ((-(-1)) \cdot inv(2)) \cdot abs(x) $(by MinusRule5)
-	$.= (1 \cdot inv(2)) \cdot abs(x)$ (by MinusRule2)
-	$.= inv(2) \cdot abs(x)$ (by OneDummy)
-	$.= abs(x) \cdot inv(2)$ (by ComMult).
-	Therefore $abs(a[n]) > abs(x) \cdot inv(2)$ (by TransitivityOfOrder).
+    Therefore $abs(a[n]) > -((-inv(2)) \cdot abs(x))$ (by OrdMirror, MinusRule2).
+    $-((-inv(2)) \cdot abs(x)) = abs(x) \cdot inv(2)$ (by MinusRule5, MinusRule2, ComMult).
+    Therefore $abs(a[n]) > abs(x) \cdot inv(2)$ (by TransitivityOfOrder).
 	\end{subproof}
 	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < (inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x))$ (by Convergence). 
 	Take $N2$ such that $N2 = max(N1,m)$.
