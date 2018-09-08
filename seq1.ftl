@@ -7,7 +7,7 @@
 [converge/-s]
 
 [prove off]
-Let n, m, N, N1, N2, N3 denote natural numbers.
+Let n, m, k, N, N1, N2, N3 denote natural numbers.
 # 514 555 629 640 643 645 663 685 686
 
 Definition.
@@ -745,32 +745,28 @@ Definition SubSeq.
 Definition ConvSubSeq.
     Let a be a sequence. a has some convergent subsequence iff there exists an index sequence i such that Subseq(a,i) converges.
 
-##############################################################################################################
 
-Axiom.
-Let n be a natural number. n -<- n + 1.
+Axiom IndSucc.
+    n -<- n + 1.
 
-Axiom.
-Let n be a natural number. Assume n != 0. Then there exists a natural number m such that n = m + 1.
+Axiom IndPrec.
+    Assume n != 0. Then there exists m such that n = m + 1.
 
-Axiom.
-n -<- 0 for no natural number n.
+Axiom IndNonNeg.
+    n -<- 0 for no n.
 
-Axiom.
-Let n,m be natural numbers. If n < m then n + 1 =< m.
+Axiom IndPlusOne.
+    Assume n < m. Then n + 1 =< m.
 
-[prove on]
 Proposition SubSeqLeq.
     Let a be a sequence. Let i be an index sequence. Then for every n n =< i[n].
-Proof by induction. Let n be a natural number. 
+Proof by induction. Let n be a natural number.
     Case n = 0. Obvious. 
-    Case n != 0. Take a natural number m such that n = m + 1. Then m =< i[m]. 
-    We can show by induction that i[k] + 1 =< i[k + 1] for every natural number k. Obvious.
-end.
+    Case n != 0.
+        Take m such that n = m + 1. Then m =< i[m]. 
+        We can show by induction that i[k] + 1 =< i[k + 1] for every k. Obvious.
+    end.
 qed.
-[exit]
-
-#################################################################################################################
 
 Lemma LimitSubSeq.
     Let a be a sequence. Let x be a real number. a converges to x iff for every index sequence i Subseq(a,i) converges to x.
@@ -904,7 +900,7 @@ qed.
 Theorem RComplete.
     Let a be a sequence. a is a cauchy sequence iff a converges.
 Proof.
-    Let us show that ((a converges) => (a is a cauchy sequence)).
+    Let us show that (If a converges then a is a cauchy sequence).
         Assume a converges.
         Take a real number x such that a converges to x.
         Let eps be a positive real number.
@@ -925,7 +921,7 @@ Proof.
        end.
     end.
 
-    Let us show that ((a is a cauchy sequence) => (a converges)).
+    Let us show that (If a is a cauchy sequence then a converges).
         Assume a is a cauchy sequence.
         Then a is bounded (by CauchyBounded).
         Therefore a has some convergent subsequence (by BolzanoWeierstrass).
