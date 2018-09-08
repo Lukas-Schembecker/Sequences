@@ -468,6 +468,7 @@ Proof.
     Then c +'' a converges to c + x (by SumConv).
 qed.
 
+
 Theorem ProdConstConv.
     Let a be a sequence. Let x,c be real numbers. Assume a converges to x.
     Then c *'' a converges to c * x.
@@ -544,15 +545,15 @@ Proof.
     Let us show that s1 converges to 0.
     proof.
         Assume eps is a positive real number. 
-        Take a positive real number Eps such that Eps = sqrt(eps) (by Sqrt).
-        Take N1 such that for every n such that N1 < n dist(a[n],x) < Eps (by Convergence).
-        Take N2 such that for every n such that N2 < n dist(b[n],y) < Eps (by Convergence).
+        Take a positive real number rooteps such that rooteps = sqrt(eps) (by Sqrt).
+        Take N1 such that for every n such that N1 < n dist(a[n],x) < rooteps (by Convergence).
+        Take N2 such that for every n such that N2 < n dist(b[n],y) < rooteps (by Convergence).
         Take N such that N = max(N1,N2).
         Let us show that for every n such that N < n dist(s1[n],0) < eps.
         Proof.
             Assume N < n.
-            dist(a[n],x) < Eps and dist(b[n],y) < Eps.
-            dist(a[n],x), dist(b[n],y) and Eps are nonnegative.
+            dist(a[n],x) < rooteps and dist(b[n],y) < rooteps.
+            dist(a[n],x), dist(b[n],y) and rooteps are nonnegative.
             Then dist(a[n],x) * dist(b[n],y) < eps (by NonNegMultInvariance).
             Hence abs(a[n] - x) * abs(b[n] - y) < eps.
             Hence abs((a[n] - x) * (b[n] - y)) < eps (by AbsMult).

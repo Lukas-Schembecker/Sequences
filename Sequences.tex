@@ -51,15 +51,18 @@
 
 
 \section{Introduction}
-The present formalization deals with chapter 3 'Numerical Sequences and Series' (pages 47 to 58). We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$.
+The present formalization deals with chapter 3 'Numerical Sequences and Series' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. Beside using some of the lemmata provided in 'examples/Forster/Reals.ftl' we also had to think of some own helpful propositions. In order to improve the readability, we moved most of the lemmata, which only serve as expedients for the theorems presented in Rudin, to an extra file - helper.ftl.
 
 
 \section{The Formalization}
-\subsection{Some Set-Theoretic Terminology}
+\subsection{Sequences.ftl}
 
 
 \begin{forthel}
-	
+	\noindent $\text{[read Sequences/Naturals.ftl]}\\
+	\text{[read Sequences/helper.ftl]}\\
+	\text{[sequence/-s]}\\
+	\text{[converge/-s]}$\\
 	Let $n$, $m$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
 	
 	\begin{definition}
@@ -104,11 +107,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{subproof}
 	Let $eps$ be a positive real number. 
 	Take $N$ such that $1 < N \cdot eps$ (by ArchimedeanAxiom, OnePos).
-	
 	Let us show that for every $n$ such that $N < n \ dist(a[n],0) < eps$.
 	\begin{subproof}
 	Assume $N < n$. Then $n \neq 0$.
-
 	Let us show that $inv(n) < eps$.
 	\begin{subproof}
 	We have $N \cdot eps < n \cdot eps$ (by ComMult, MultInvariance).
@@ -123,13 +124,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Hence $dist(a[n],0) = inv(n) < eps$.
 	\end{subproof}
 	\end{subproof}
-	
 	Let us show that $a$ has infinite range.
 	\begin{subproof}
 	Assume the contrary.
 	Take $N$ such that $ran(a) = ranN(a,N)$ (by FiniteRange).
 	Then $a[N + 1]$ is an element of $ran(a)$ (by OneNat, AddClosedNat, Range).
-	
 	Let us show that $a[N + 1]$ is not an element of $ranN(a,N)$.
 	\begin{subproof}
 	Let us show that for every $n$ such that $n \leq N \ a[n] \neq a[N + 1]$.
@@ -138,19 +137,16 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Take $n$ such that $n \leq N \text{ and } a[n] = a[N + 1]$.
 	Case $n = 0$.
 	We have $2 = inv(N + 1)$.
-	
 	$(2 \cdot N) + 2 .= (2 \cdot N) + (2 \cdot 1)$ (by One)
 	$.= 2 \cdot (N + 1)$ (by Distrib)
 	$.= inv(N + 1) \cdot (N + 1)$
 	$.= 1$ (by InvDummy).
-	
 	We have $(2 \cdot N) + 2 > 1$.
 	Contradiction.
 	end.
 	Case $n \neq 0$.
 	We have $inv(n) = inv(N + 1)$.
 	Then $inv(inv(n)) = inv(inv(N + 1))$.
-	
 	We have $N + 1 \neq 0$.
 	Hence $n = N + 1$ (by InvRule1).
 	Contradiction.
@@ -158,7 +154,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	Hence $a[N + 1]$ is not an element of $ranN(a,N)$ (by RangeN).
 	\end{subproof}
-	
 	Contradiction.
 	\end{subproof}
 	\end{proof}
@@ -191,7 +186,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Assume the contrary.
 	Take a real number $x$ such that $a$ converges to $x$.
 	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < 1$ (by Convergence, OnePos).
-	
 	Let us show that $dist(a[N + 1],a[N + 2]) = 2$.
 	\begin{subproof}
 	Case $N + 1$ is even.
@@ -203,19 +197,16 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Hence $dist(a[N + 1],a[N + 2]) = dist(-1,1) = 2$.
 	end.
 	\end{subproof}
-	
 	$a[N + 1]$ is a real number and $a[N + 2]$ is a real number.
 	We have $dist(a[N + 1],a[N + 2]) \leq dist(a[N + 1],x) + dist(x,a[N + 2])$ (by DistTriangleIneq).
 	We have $dist(x,a[N + 2]) = dist(a[N + 2],x)$ (by DistSymm).
 	Hence $dist(a[N + 1],a[N + 2]) \leq dist(a[N + 1],x) + dist(a[N + 2],x)$.
-	
 	We have $dist(a[N + 1],x) < 1$ and $dist(a[N + 2],x) < 1$.
 	Hence $dist(a[N + 1],x) + dist(a[N + 2],x) < 1 + 1$ (by AddInvariance).
 	Hence $dist(a[N + 1],a[N + 2]) < 2$ (by MixedTransitivity).
 	Hence $2 < 2$.
 	Contradiction.
 	\end{subproof}
-	
 	Let us show that $a$ has finite range.
 	\begin{subproof}
 	Let us show that $ran(a) = ranN(a,1)$.
@@ -226,21 +217,17 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Take $n$ such that $n \leq 1$ and $a[n] = x$ (by OneNat, RangeN).
 	Hence $x$ is an element of $ran(a)$ (by Range).
 	\end{subproof}
-	
 	Let us show that every element of $ran(a)$ is an element of $ranN(a,1)$.
 	\begin{subproof}
 	Assume $x$ is an element of $ran(a)$.
-	
 	Let us show that $x = 1$ or $x = -1$.
 	\begin{subproof}
 	Take $n$ such that $a[n] = x$ (by Range).
 	$n$ is even or $n$ is odd.
 	Hence $x = 1$ or $x = -1$.
 	\end{subproof}
-	
 	We have $a[0] = 1$.
 	We have $a[1] = -1$.
-	
 	Case $x = 1$.
 	Then $x = a[0]$.
 	We have $0 \leq 1$.
@@ -258,7 +245,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	\begin{definition} [Neighb]
 	Let $eps$ be a positive real number. Let $x$ be a real number.
-	$Neighb(x,eps) = \{y | y \text{ is a real number such that } dist(y,x) < eps\}$.
+	$Neighb(x,eps) = \{y \mid y \text{ is a real number such that } dist(y,x) < eps\}$.
 	\end{definition}
 	
 	\begin{theorem} [ConvNeighborhood]
@@ -275,7 +262,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < eps$ (by Convergence).
 	Hence for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$ (by Neighb).
 	\end{subproof}
-	
 	Let us show that (if for every positive real number $eps$ there exists a $N$ such that
 	for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$ then $a$ converges to $x$).
 	\begin{subproof}
@@ -306,14 +292,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{subproof}
 	Let $eps$ be a positive real number.
 	Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
-	
 	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < halfeps$ (by Convergence).
 	Take $N2$ such that for every $n$ such that $N2 < n \ dist(a[n],y) < halfeps$ (by Convergence).
-	
 	For every $n \ dist(x,y) \leq dist(x,a[n]) + dist(a[n],y)$ (by DistTriangleIneq). 
 	Take $N3$ such that $N3 = max(N1,N2) + 1$.
 	Then $N1 < N3$ and $N2 < N3$.
-	
 	Hence $dist(x,a[N3]) < halfeps$ and $dist(a[N3],y) < halfeps$ (by DistSymm).
 	Hence $dist(x,a[N3]) + dist(a[N3],y) < halfeps + halfeps$ (by AddInvariance).
 	Hence $dist(x,y) < halfeps + halfeps$ (by MixedTransitivity).
@@ -335,7 +318,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{signature} [MaxN]
 	Let $a$ be a sequence. $maxN(a,N)$ is a real number such that
 	(there exists $n$ such that $n \leq N$ and $maxN(a,N) = a[n]$) and
-	(for every $n$ such that $n \leq N \ a[n] =< maxN(a,N)$).
+	(for every $n$ such that $n \leq N \ a[n] \leq maxN(a,N)$).
 	\end{signature}
 	
 	\begin{theorem} [ConvergentImpBounded]
@@ -360,15 +343,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Case $n > N$.
 	We have $dist(a[n],x) < 1$.
 	We have $1 + abs(x) \leq K$ (by MaxIneq).
-	
 	$abs(a[n]) .= abs(a[n] + 0)$ (by Zero)
 	$.= abs(a[n] + (x - x))$ (by Neg)
 	$.= abs(a[n] + ((-x) + x))$ (by ComAdd)
 	$.= abs((a[n] - x) + x)$ (by AssAdd).
-	
 	Hence $abs(a[n]) \leq abs(a[n] - x) + abs(x)$ (by AbsTriangleIneq).
 	Hence $abs(a[n]) \leq dist(a[n],x) + abs(x)$.
-	
 	We have $dist(a[n],x) + abs(x) < 1 + abs(x)$ (by MixedAddInvariance).
 	Hence $abs(a[n]) \leq 1 + abs(x)$ (by MixedTransitivity).
 	Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
@@ -408,13 +388,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{subproof}
 	Let $eps$ be a positive real number.
 	Take $N$ such that $1 < N \cdot eps$ (by ArchimedeanAxiom, OnePos).
-
 	Let us show that for every $n$ such that $N < n \ dist(a[n],x) < eps$.
 	\begin{subproof}
 	Assume $N < n$. Then $n \neq 0$.
 	Then $a[n]$ is an element of $E$ such that $a[n]$ is an element of $Neighb(x,inv(n))$.
 	Hence $dist(a[n],x) < inv(n)$.
-	
 	Let us show that $inv(n) < eps$.
 	\begin{subproof}
 	We have $N \cdot eps < n \cdot eps$ (by ComMult, MultInvariance).
@@ -536,7 +514,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let $eps$ be a positive real number. 
 	(1)     Take a positive real number $invEps$ such that $invEps = inv(abs(c)) \cdot eps$.
 	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < invEps$ (By Convergence).
-	
 	Let us show that for every $n$ such that $N < n \ dist(c \cdot a[n],c \cdot x) < eps$.
 	\begin{subproof}
 	Assume $N < n$.
@@ -549,17 +526,430 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= abs(c) \cdot abs(a[n] - x)$ (by AbsMult).
 	$abs(c) \cdot dist(a[n],x) < abs(c) \cdot invEps$ (by AbsPos, MultInvariance).
 	Hence $abs((c \cdot a[n]) - (c \cdot x)) < abs(c) \cdot invEps$.
-	
 	$abs(c) \cdot invEps .= abs(c) \cdot (inv(abs(c)) \cdot eps)$ (by 1)
 	$.= (abs(c) \cdot inv(abs(c))) \cdot eps$ (by AssMult)
 	$.= 1 \cdot eps$ (by Inverse)
 	$.= eps$ (by OneDummy).
-	
 	Hence $dist(c \cdot a[n],c \cdot x) < eps$.
 	\end{subproof}
 	end.
 	\end{proof}
 
+	\begin{lemma} [ConstMultSum]
+	Let $a,b$ be sequences. Let $x,y$ be real numbers such that for every $n\ b[n] = y \cdot (a[n] + (-x))$. Assume $a$ converges to $x$.
+	Then $b$ converges to $0$.
+	\end{lemma}
+	\begin{proof}
+	Define $sum[k] = (-x) + a[k]$ for $k$ in $NAT$.
+	$sum$ is a sequence.
+	Let us show that $sum$ converges to $0$.
+	\begin{subproof}
+	We have $sum = (-x) +'' a$.
+	Hence $sum$ converges to $(-x) + x$ (by SumConstConv).
+	$(-x) + x = 0$ (by ComAdd, Neg).
+	\end{subproof}
+	Let us show that for every $n\ b[n] = y \cdot sum[n]$.
+	\begin{subproof}
+	$b[n] .= y \cdot (a[n] + (-x))$
+	$.= y \cdot ((-x) + a[n])$ (by ComAdd)
+	$.= y \cdot sum[n]$.
+	\end{subproof}
+	Hence $b = y *'' sum$ (by SequenceEq).
+	Hence $b$ converges to $0$ (by ProdConstConv, ComMult, ZeroMult).
+	\end{proof}
+	
+	\begin{theorem} [ProdConv]
+	Let $a,b$ be sequences. Let $x,y$ be real numbers. Assume $a$ converges to $x$ and $b$ converges to $y$.
+	Let $a *' b$ be a sequence such that for every natural number $n (a *' b)[n] = a[n] * b[n]$.
+	Then $a *' b$ converges to $x * y$.
+	\end{theorem}
+	\begin{proof}.
+	(1) Define $s1[k] = (a[k] - x) \cdot (b[k] - y)$ for $k$ in $NAT$.
+	Let us show that $s1$ converges to $0$.
+	\begin{subproof}
+    Assume $eps$ is a positive real number. 
+    Take a positive real number $rooteps$ such that $rooteps = sqrt(eps)$ (by Sqrt).
+    Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < rooteps$ (by Convergence).
+    Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < rooteps$ (by Convergence).
+    Take $N$ such that $N = max(N1,N2)$.
+    Let us show that for every $n$ such that $N < n \ dist(s1[n],0) < eps$.
+    \begin{subproof}
+    Assume $N < n$.
+    $dist(a[n],x) < rooteps$ and $dist(b[n],y) < rooteps$.
+    $dist(a[n],x), dist(b[n],y)$ and $rooteps$ are nonnegative.
+    Then $dist(a[n],x) \cdot dist(b[n],y) < eps$ (by NonNegMultInvariance).
+    Hence $abs(a[n] - x) \cdot abs(b[n] - y) < eps$.
+    Hence $abs((a[n] - x) \cdot (b[n] - y)) < eps$ (by AbsMult).
+    Hence $abs(((a[n] - x) \cdot (b[n] - y)) - 0) < eps$ (by Zero, NegOfZero).
+    \end{subproof}
+	\end{subproof}
+	(2) Define $s2[k] = (x \cdot (b[k] + (-y))) + (y \cdot (a[k] + (-x)))$ for $k$ in $NAT$.
+	Let us show that $s2$ converges to $0$.
+	\begin{subproof}
+	Define $s2a[k] = y \cdot (a[k] + (-x))$ for $k$ in $NAT$.
+	Define $s2b[k] = x \cdot (b[k] + (-y))$ for $k$ in $NAT$.
+	$s2a, s2b$ are sequences.
+	Define $sum1[k] = a[k] + (-x)$ for $k$ in $NAT$.
+	Define $sum2[k] = b[k] + (-y)$ for $k$ in $NAT$.
+	$sum1, sum2$ are sequences.
+	$sum1 = (-x) +'' a$ and $sum2 = (-y) +'' b$ (by ComAdd, SequenceEq).
+	$sum1, sum2$ converge to $0$ (by SumConstConv, Neg, ComAdd).
+	We have $s2a = y *'' sum1$ and $s2b = x *'' sum2$ (by SequenceEq).
+	$s2a, s2b$ converge to $0$ (by ConstMultSum). 
+	Let us show that for every $n \ s2[n] = s2b[n] + s2a[n]$.
+	\begin{subproof}
+	$s2[n] .= (x \cdot (b[n] + (-y))) + (y \cdot (a[n] + (-x)))
+	.= s2b[n] + s2a[n]$.
+	\end{subproof}
+	Hence $s2$ converges to $0$ (by SumConv).
+	\end{subproof}
+	(3) Define $s3[k] = (a[k] \cdot b[k]) - (x \cdot y)$ for $k$ in $NAT$.
+	Let us show that $s3$ converges to $0$.
+	\begin{subproof}
+	Let us show that for every $n \ s3[n] = s1[n] + s2[n]$.
+	\begin{subproof}
+	$s3[n] .= (a[n] \cdot b[n]) - (x \cdot y)$ (by 3)
+	$.= ((a[n] - x) \cdot (b[n] - y)) + ((x \cdot (b[n] - y)) + (y \cdot (a[n] - x)))$ (by Identity1)
+	$.= s1[n] + s2[n]$ (by 1, 2).
+	\end{subproof}
+	Hence $s3 = s1 +' s2$ (by SequenceEq).
+	Therefore the thesis (by SumConv, Zero).
+	\end{subproof}
+	Let $eps$ be a positive real number.
+	Take $N$ such that for every $n$ such that $N < n \ dist(s3[n],0) < eps$ (by Convergence).
+	Let us show that for every $n$ such that $N < n \ dist(a[n] \cdot b[n],x \cdot y) < eps$.
+	\begin{subproof}
+	Assume $N < n$.
+	$dist(s3[n],0) .= dist((a[n] \cdot b[n]) - (x \cdot y),0)$ (by 3)
+	$.= abs(((a[n] \cdot b[n]) - (x \cdot y)) - 0)$ (by DistDefinition)
+	$.= abs((a[n] \cdot b[n]) - (x \cdot y))$ (by NegOfZero, Zero)
+	$.= dist(a[n] \cdot b[n],x \cdot y)$ (by DistDefinition).
+	\end{subproof}
+	\end{proof}
+
+	\begin{theorem} [DivConv]
+	Let $a$ be a sequence. Let $x$ be a real number such that $x \neq 0$. Assume $a$ converges to $x$. 
+	Assume for every $n \ a[n] \neq 0$.
+	Let $div(a)$ be a sequence such that for every natural number $n \ (div(a))[n] = inv(a[n])$.
+	Then $div(a)$ converges to $inv(x)$.
+	\end{theorem}
+	\begin{proof}
+	Let $eps$ be a positive real number.
+	$abs(x) \neq 0$.
+	$2, inv(2), abs(x), abs(x) \cdot abs(x), -abs(x), ((-1) \cdot inv(2)) \cdot abs(x), (inv(2) \cdot abs(x)) + (-abs(x))$ are real numbers.
+	We have $pos(2)$ and $pos(inv(2))$ and $pos(abs(x))$ and $pos(abs(inv(x)))$ and $pos(inv(2) \cdot eps)$ and $pos(abs(x) \cdot abs(x))$ and $pos((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x)))$ and
+	$pos(inv(2) \cdot abs(x))$ and $pos(eps \cdot (abs(x) \cdot abs(x)))$ and $pos(inv(2) \cdot abs(inv(x)))$ and $pos((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))))$.
+	Take a natural number $m$ such that for every $n$ such that $m < n \  dist(a[n],x) < inv(2) \cdot abs(x)$ (by Convergence).
+	Let us show that for every $n$ such that $m < n \ inv(2) \cdot abs(x) < abs(a[n])$.
+	\begin{subproof}
+	Assume $m < n$.
+	$a[n], abs(a[n]), -abs(a[n]), abs(x) - abs(a[n]), x - a[n], abs(x - a[n]), a[n] - x, abs(a[n] - x), abs(x) + (-abs(a[n])), (abs(x) + (-abs(a[n]))) + (-abs(x))$ are real numbers.
+	Let us show that $abs(x) - abs(a[n]) < inv(2) \cdot abs(x)$.
+	\begin{subproof}
+	$abs(x) - abs(a[n]) \leq abs(x - a[n])$ (by AbsTriangleIneq2).
+	$abs(x - a[n]) .= abs(-(x - a[n]))$ (by AbsPosNeg)
+	$.= abs(-x - (-a[n]))$ (by MinusRule1)
+	$.= abs(-x + a[n])$ (by MinusRule2)
+	$.= abs(a[n] - x)$ (by ComAdd).
+	$abs(a[n] - x) < inv(2) \cdot abs(x)$ (by DistDefinition).
+	Hence the thesis (by MixedTransitivity).
+	\end{subproof}
+	Let us show that $-abs(a[n]) < ((-1) \cdot inv(2)) \cdot abs(x)$.
+	\begin{subproof}
+	$(abs(x) + (-abs(a[n]))) + (-abs(x)) < (inv(2) \cdot abs(x)) + (-abs(x))$ (by MixedAddInvariance). 
+	$(abs(x) + (-abs(a[n]))) + (-abs(x)) .= abs(x) + ((-abs(a[n])) + (-abs(x)))$ (by AssAdd)
+	$.= abs(x) + ((-abs(x)) + (-abs(a[n])))$ (by ComAdd)
+	$.= (abs(x) + (-abs(x))) + (-abs(a[n]))$ (by AssAdd)
+	$.= -abs(a[n])$ (by Neg, ComAdd, Zero).
+	$-abs(a[n]) < (inv(2) \cdot abs(x)) + (-abs(x))$ (by AssAdd, Neg, Zero).
+	$(inv(2) \cdot abs(x)) + (-abs(x)) .= (inv(2) \cdot abs(x)) + ((-1) \cdot abs(x))$ (by MinusRule4)
+	$.= (inv(2) + (-1)) \cdot abs(x)$ (by DistribDummy)
+	$.= ((1 \cdot inv(2)) + (-(1 \cdot inv(1)))) \cdot abs(x)$ (by OneDummy, Inverse)
+	$.= ((1 \cdot inv(2)) + ((-1) \cdot inv(1))) \cdot abs(x)$ (by OneDummy, MinusRule4)
+	$.= ((1 \cdot inv(2)) + ((-1) \cdot inv(1))) \cdot abs(x)$ (by MinusRule4)
+	$.= (((1 \cdot 1) + (2 \cdot (-1))) \cdot inv(2 \cdot 1)) \cdot abs(x)$ (by InvAdd)
+	$.= ((1 + ((-1) \cdot 2)) \cdot inv(2)) \cdot abs(x)$ (by One, ComMult).
+	$1 + ((-1) \cdot 2) .= 1 + -(1 \cdot 2)$ (by MinusRule5)
+	$.= 1 + -2$ (by OneDummy)
+	$.= -(2 - 1)$ (by MinusRule3)
+	$.= -1$.
+	\end{subproof}
+	Therefore $abs(a[n]) > -(((-1) \cdot inv(2)) \cdot abs(x))$ (by OrdMirror, MinusRule2).
+	$-(((-1) \cdot inv(2)) \cdot abs(x)) .= ((-(-1)) \cdot inv(2)) \cdot abs(x) $(by MinusRule5)
+	$.= (1 \cdot inv(2)) \cdot abs(x)$ (by MinusRule2)
+	$.= inv(2) \cdot abs(x)$ (by OneDummy)
+	$.= abs(x) \cdot inv(2)$ (by ComMult).
+	Therefore $abs(a[n]) > abs(x) \cdot inv(2)$ (by TransitivityOfOrder).
+	\end{subproof}
+	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < (inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x))$ (by Convergence). 
+	Take $N2$ such that $N2 = max(N1,m)$.
+	Let us show that for every $n$ such that $N2 < n \ dist(inv(a[n]),inv(x)) < eps$.
+	\begin{subproof}
+	Assume $N2 < n$.
+	Then we have $N1 < n$ and $m < n$.
+	Let us show that $dist(inv(a[n]),inv(x)) < ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$.
+	\begin{subproof}
+	$dist(inv(a[n]),inv(x)) .= abs(inv(a[n]) - inv(x))$ (by DistDefinition)
+	$.= abs((1 \cdot inv(a[n])) - (1 \cdot inv(x)))$ (by OneDummy)
+	$.= abs((1 \cdot inv(a[n])) + ((-1) \cdot inv(x)))$ (by MinusRule5)
+	$.= abs(((1 \cdot x) + (a[n] \cdot (-1))) \cdot inv(a[n] \cdot x))$ (by InvAdd)
+	$.= abs((x + ((-1) \cdot a[n])) \cdot inv(a[n] \cdot x))$ (by OneDummy, ComMult)
+	$.= abs((x - a[n]) \cdot inv(a[n] \cdot x))$ (by MinusRule4)
+	$.= abs(x - a[n]) \cdot abs(inv(a[n]) \cdot inv(x))$ (by AbsMult, InvRule2)
+	$.= abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n])$ (by ComMult).
+	We have $pos(abs(inv(a[n]) \cdot inv(x)))$ (by AbsPos, InvNotZero, NoZeroDivisors).
+	$abs(x - a[n]) = dist(a[n],x)$ (by DistDefinition, DistSymm).
+	$abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n]) < abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x)))$ (by MultInvariance, DistDefinition).
+	$abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x))) .= (abs(inv(a[n])) \cdot abs(inv(x))) \cdot ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x)))$ (by AbsMult)
+	$.= ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult)
+	$.= (inv(2) \cdot (eps \cdot (abs(x) \cdot abs(x)))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by AssMult)
+	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot inv(2)) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult)
+	$.= (eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(a[n])) \cdot abs(inv(x))))$ (by AssMult)
+	$.= (eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(x)) \cdot abs(inv(a[n]))))$ (by ComMult)
+	$.= (eps \cdot (abs(x) \cdot abs(x))) \cdot ((inv(2) \cdot abs(inv(x))) \cdot abs(inv(a[n])))$ (by AssMult)
+	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot abs(inv(a[n]))$ (by AssMult)
+	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot inv(abs(a[n]))$ (by AbsInv)
+	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$ (by OneDummy).
+	\end{subproof}
+	$(eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))), 1 \cdot inv(abs(a[n])), 2 \cdot inv(abs(x)), dist(inv(a[n]), inv(x)),
+	((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))), ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ are real numbers.
+	Let us show that $((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < eps$.
+	\begin{subproof} 
+	Let us show that $1 \cdot inv(abs(a[n])) < 2 \cdot inv(abs(x))$.
+	\begin{subproof}
+	We have $abs(a[n]) > abs(x) \cdot inv(2)$.
+	Hence $abs(a[n]) \cdot inv(1) > abs(x) \cdot inv(2)$ (by InvOne, One).
+	We have ($pos(abs(a[n]))$ and $pos(1)$) and ($pos(abs(x))$ and $pos(2)$).
+	($abs(a[n]) \neq 0$ and $1 \neq 0$) and ($abs(x) \neq 0$ and $2 \neq 0$).
+	Then $1 \cdot inv(abs(a[n])) < 2 \cdot inv(abs(x))$ (by InvSwapIneq).
+	\end{subproof}
+	$((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ (by MultInvariance).
+	$((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x))) .= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(abs(x)) \cdot inv(2))) \cdot (2 \cdot inv(abs(x)))$ (by ComMult, AbsInv)
+	$.= (((eps \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot inv(2)) \cdot (2 \cdot inv(abs(x)))$ (by AssMult)
+	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot (inv(2) \cdot (2 \cdot inv(abs(x))))$ (by AssMult)
+	$.= (eps \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot ((inv(2) \cdot 2) \cdot inv(abs(x)))$ (by AssMult)
+	$.= (eps \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot inv(abs(x))$ (by InvDummy, OneDummy)
+	$.= (eps \cdot (abs(x) \cdot (abs(x) \cdot inv(abs(x))))) \cdot inv(abs(x))$ (by AssMult)
+	$.= (eps \cdot abs(x)) \cdot inv(abs(x))$ (by Inverse, One)
+	$.= eps \cdot (abs(x) \cdot inv(abs(x)))$ (by AssMult)
+	$.= eps$ (by Inverse, One).
+	\end{subproof}
+	Hence the thesis (by TransitivityOfOrder).
+	\end{subproof}
+	\end{proof}
+
+
+
+
+\end{forthel}
+
+\subsection{helper.ftl}
+
+\begin{forthel}
+	[read Sequences/Naturals.ftl]
+	
+	Let $n,m$ denote natural numbers.
+	Let $a,b,c,d$ denote real numbers.
+	
+	
+	
+	\begin{lemma} [MaxIneqDummy]
+	Let $a,b$ be real numbers. Then $b \leq max(a,b)$.
+	\end{lemma}
+	
+	\begin{lemma} [NotRuleOrder]
+	$a < b$ iff $not(a \geq b)$.
+	\end{lemma}
+	
+	\begin{lemma} [MixedAddInvariance]
+	$a < c \wedge b \leq d => a + b < c + d$.
+	\end{lemma}
+	
+	\begin{lemma} [TwoHalf]
+	$(inv(2) \cdot a) + (inv(2) \cdot a) = a$.
+	\end{lemma}
+	
+	\begin{lemma} [MinusRule5]
+	Let $a,b$ be real numbers. 
+	Then $(a \cdot (-b)) = -(a \cdot b) and ((-b) \cdot a) = -(b \cdot a)$.
+	\end{lemma}
+	\begin{proof}
+	(1) $a \cdot (-b) .= a \cdot ((-1) \cdot b)$ (by MinusRule4)
+	$.= (a \cdot (-1)) \cdot b$ (by AssMult)
+	$.= ((-1) \cdot a) \cdot b$ (by ComMult)
+	$.= (-1) \cdot (a \cdot b)$ (by AssMult)
+	$.= -(a \cdot b)$ (by MinusRule4).
+	
+	$((-b) \cdot a) .= -(b \cdot a)$ (by ComMult, 1).
+	\end{proof}
+	
+	\begin{lemma} [MinusRule6]
+	Let $a,b$ be real numbers. 
+	Then $((-a) \cdot (-b)) = a \cdot b$.
+	\end{lemma}
+	\begin{proof}
+	$((-a) \cdot (-b)) .= -(a \cdot (-b))$ (by MinusRule5)
+	$.= -(-(a \cdot b))$ (by MinusRule5)
+	$.= a \cdot b$ (by MinusRule2).
+	\end{proof}
+	
+	\begin{lemma} [Binomi1]
+	Let $a,b,c,d$ be real numbers.
+	Then $(a + b) \cdot (c + d) = ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot* d))$.
+	\end{lemma}
+	\begin{proof}
+	$(a + b) \cdot (c + d) .= ((a + b) \cdot c) + ((a + b) \cdot d)$ (by Distrib)
+	$.= ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$ (by DistribDummy).
+	\end{proof}
+	
+	\begin{lemma} [Binomi2]
+	Let $a,b,c,d$ be real numbers.
+	Then $(a - b) \cdot (c - d) = ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$.
+	\end{lemma}
+	\begin{proof}
+	$(a - b) \cdot (c - d) .= ((a \cdot c) + ((-b) \cdot c)) + ((a \cdot (-d)) + ((-b) \cdot (-d)))$ (by Binomi1)
+	$.= ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$ (by MinusRule5, MinusRule6).
+	\end{proof}
+	
+	
+	
+	\begin{lemma} [Identity1]
+	Let $a,b,c,d$ be real numbers. 
+	Then $(a \cdot b) - (c \cdot d) = ((a - c) \cdot (b - d)) + ((c \cdot (b - d)) + (d \cdot (a - c)))$.
+	\end{lemma}
+	\begin{proof}
+	$((a - c) \cdot (b - d)) + ((c \cdot (b - d)) + (d \cdot (a - c))) 
+	.= (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((c \cdot (b - d)) + (d \cdot (a - c)))$ (by Binomi2)
+	$.= (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (c \cdot (-d))) + ((d \cdot a) + (d \cdot (-c))))$ (by Distrib)
+	$.= (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (-(c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by MinusRule5)
+	$.= ((c \cdot b) + (-(c \cdot d))) + ((((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by BubbleAdd)
+	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + ((a \cdot d) + (-(c \cdot d)))))$ (by AssAdd, ComMult)
+	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-((a \cdot d) + (-(c \cdot d)))))))$ (by MinusRule2)
+	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-(a \cdot d) + (c \cdot d)))))$ (by ComAdd, MinusRule3)
+	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + 0)$ (by Neg)
+	$.= ((-(c \cdot d)) + (c \cdot b)) + (-(c \cdot b) + (a \cdot b))$ (by ComAdd, Zero)
+	$.= (-(c \cdot d)) + ((c \cdot b) + (-(c \cdot b) + (a \cdot b)))$ (by AssAdd)
+	$.= (-(c \cdot d)) + (((c \cdot b) -(c \cdot b)) + (a \cdot b))$ (by AssAdd)
+	$.= -(c \cdot d) + (0 + (a \cdot b))$ (by Neg)
+	$.= -(c \cdot d) + ((a \cdot b) + 0)$ (by ComAdd)
+	$.= -(c \cdot d) + (a \cdot b)$ (by Zero)
+	$.= (a \cdot b) - (c \cdot d)$ (by ComAdd).
+	\end{proof}
+	
+	
+	
+	\begin{signature} [Sqrt]
+	Let $x$ be a positive real number. $sqrt(x)$ is a positive real number such that $sqrt(x) \cdot sqrt(x) = x$.
+	\end{signature}
+	
+	\begin{lemma} [AbsTriangleIneq2]
+	Let $x,y$ be real numbers. Then $abs(x) - abs(y) \leq abs(x - y)$.
+	\end{lemma}
+	\begin{proof}
+	$abs(x) .= abs(x + ((-y) + y))$ (by Zero, Neg, ComAdd)
+	$.= abs((x + (-y)) + y)$ (by AssAdd).
+	$abs((x + (-y)) + y) \leq abs(x - y) + abs(y)$ (by AbsTriangleIneq).
+	Hence $abs(x) \leq abs(x + (-y)) + abs(y)$.
+	$abs(x) + (-abs(y)) \leq (abs(x - y) + abs(y)) + (-abs(y))$ (by LeqAddInvariance).
+	$(abs(x - y) + abs(y)) + (-abs(y)) = abs(x - y)$ (by AssAdd, Neg, Zero).
+	Hence $abs(x) - abs(y) \leq abs(x - y)$ (by LeqTransitivity).
+	\end{proof}
+	
+	
+	\begin{lemma} [InvAdd]
+	Let $a,b,c,d$ be real numbers. Assume $(a \neq 0 and b \neq 0) and (c \neq 0 and d \neq 0)$. 
+	Then $(a \cdot inv(b)) + (c \cdot inv(d)) = ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$.
+	\end{lemma}
+	\begin{proof}
+	$(a \cdot inv(b)) + (c \cdot inv(d)) .= ((a \cdot inv(b)) \cdot 1) + (1 \cdot (c \cdot inv(d)))$ (by One, OneDummy)
+	$.= ((a \cdot inv(b)) \cdot (d \cdot inv(d))) + ((b \cdot inv(b)) \cdot (c \cdot inv(d)))$ (by Inverse)
+	$.= (a \cdot (inv(b) \cdot (d \cdot inv(d)))) + (b \cdot (inv(b) \cdot (c \cdot inv(d))))$ (by AssMult)
+	$.= (a \cdot ((inv(b) \cdot d) \cdot inv(d))) + (b \cdot ((inv(b) \cdot c) \cdot inv(d)))$ (by AssMult)
+	$.= (a \cdot ((d \cdot inv(b)) \cdot inv(d))) + (b \cdot ((c \cdot inv(b)) \cdot inv(d)))$ (by ComMult)
+	$.= (a \cdot (d \cdot (inv(b) \cdot inv(d)))) + (b \cdot (c \cdot (inv(b) \cdot inv(d))))$ (by AssMult)
+	$.= ((a \cdot d) \cdot (inv(b) \cdot inv(d))) + ((b \cdot c) \cdot (inv(b) \cdot inv(d)))$ (by AssMult)
+	$.= ((a \cdot d) \cdot inv(b \cdot d)) + ((b \cdot c) \cdot inv(b \cdot d)) $(by InvRule2)
+	$.= ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$ (by DistribDummy).
+	\end{proof}
+	
+	
+	
+	\begin{lemma} [InvCanc]
+	Let $a, b$ be real numbers. Assume $a \neq 0$ and $b \neq 0$.
+	Then $(a \cdot inv(b)) \cdot (b \cdot inv(a)) = 1$.
+	\end{lemma}
+	\begin{proof}
+	$(a \cdot inv(b)) \cdot (b \cdot inv(a)) .= ((a \cdot inv(b)) \cdot b) \cdot inv(a)$ (by AssMult)
+	$.= (a \cdot (inv(b) \cdot b)) \cdot inv(a)$ (by AssMult)
+	$.= (a \cdot 1) \cdot inv(a)$ (by InvDummy)
+	$.= a \cdot inv(a)$ (by One)
+	$.= 1$ (by Inverse).
+	\end{proof}
+	
+	
+	\begin{lemma} [NegMultInvariance]
+	Let $x, y, z$ be real numbers.
+	$(x < y \wedge z < 0) => z \cdot x > z \cdot y$.
+	\end{lemma}
+	\begin{proof}
+	Assume $x < y \wedge z < 0$.
+	Therefore $pos(-z)$.    
+	Hence $(-z) \cdot x < (-z) \cdot y$.
+	Hence $-((-z) \cdot x) > -((-z) \cdot y)$ (by OrdMirror).
+	$-((-z) \cdot x) .= (-(-z)) \cdot x$ (by MinusRule5)
+	$.= z \cdot x$ (by MinusRule2).
+	$-((-z) \cdot y) .= (-(-z)) \cdot y$ (by MinusRule5)
+	$.= z \cdot y$ (by MinusRule2).
+	\end{proof}
+	
+	
+	\begin{lemma} [InvSwapIneq]
+	Let $a, b, c, d$ be positive real numbers. Assume $(a \neq 0$ and $b \neq 0)$ and $(c \neq 0 and d \neq 0)$. 
+	If $a \cdot inv(b) < c \cdot inv(d)$ then $b \cdot inv(a) > d \cdot inv(c)$.
+	\end{lemma}
+	\begin{proof}
+	Assume $a \cdot inv(b) < c \cdot inv(d)$.
+	We have $pos(b \cdot inv(a))$ and $pos(d \cdot inv(c))$.
+	$(b \cdot inv(a)) \cdot (a \cdot inv(b)) < (b \cdot inv(a)) \cdot (c \cdot inv(d))$ (by MultInvariance).
+	$(b \cdot inv(a)) \cdot (a \cdot inv(b)) = $1 (by InvCanc).
+	Hence $1 < (b \cdot inv(a)) \cdot (c \cdot inv(d))$.
+	$(d \cdot inv(c)) \cdot 1 < (d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d)))$ (by MultInvariance).
+	$d \cdot inv(c) < (d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d)))$ (by One).
+	$(d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d))) .= ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \cdot (d \cdot inv(c))$ (by ComMult)
+	$.= (b \cdot inv(a)) \cdot ((c \cdot inv(d)) \cdot (d \cdot inv(c)))$ (by AssMult)
+	$.= (b \cdot inv(a)) \cdot 1$ (by InvCanc)
+	$.= b \cdot inv(a)$ (by One).   
+	\end{proof}
+	
+	
+	
+	\begin{lemma} [AbsInv]
+	Let $x$ be a real number. Assume $x \neq 0$. Then $abs(inv(x)) = inv(abs(x))$.
+	\end{lemma}
+	\begin{proof}
+	We have $pos(abs(inv(x)))$ and $pos(inv(abs(x)))$.
+	$pos(1)$ (by OnePos).
+	(1) Hence $( abs(inv(x)) = abs(abs(inv(x)))$ and $inv(abs(x)) = abs(inv(abs(x))) )$ and $abs(1) = 1$ (by AbsValue).
+	$abs(inv(x)) .= abs(abs(inv(x)))$ (by 1)
+	$.= abs(abs(inv(x)) \cdot 1)$ (by One)
+	$.= abs(abs(inv(x)) \cdot (abs(x) \cdot inv(abs(x))))$ (by Inverse)
+	$.= abs((abs(inv(x)) \cdot abs(x)) \cdot inv(abs(x)))$ (by AssMult)
+	$.= abs(abs(inv(x) \cdot x) \cdot inv(abs(x)))$ (by AbsMult)
+	$.= abs(abs(1) \cdot inv(abs(x)))$ (by InvDummy)
+	$.= abs(1 \cdot inv(abs(x)))$ (by 1) 
+	$.= abs(inv(abs(x)))$ (by OneDummy)
+	$.= inv(abs(x))$ (by 1).    
+	\end{proof}
+	
+	
+	\begin{lemma} [InvOne]
+	$inv(1) = 1$.
+	\end{lemma}
+	\begin{proof}
+	$1 .= 1 \cdot inv(1)$ (by Inverse)
+	$.= inv(1)$ (by OneDummy).
+	\end{proof}   
+	
 \end{forthel}
 
 \section{Remarks}
