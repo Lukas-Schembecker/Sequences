@@ -66,7 +66,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let $n$, $m$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
 	
 	\begin{definition}
-		$NAT$ is the set of natural numbers.
+		$\NN$ is the set of natural numbers.
 	\end{definition}
 	
 	\begin{definition}[Seq]	A sequence f is a function such that every element of Dom(f) is a natural number and every
@@ -327,7 +327,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{proof}
 	Take a real number $x$ such that $a$ converges to $x$.
 	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < 1$ (by Convergence, OnePos).
-	Define $b[k] = abs(a[k])$ for $k$ in $NAT$.
+	Define $b[k] = abs(a[k])$ for $k$ in $\NN$.
 	Take a real number $K$ such that $K = max(1 + abs(x), maxN(b,N))$.
 	Let us show that $a$ is bounded by $K$.
 	\begin{subproof}
@@ -381,7 +381,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$Neighb(x,1)$ and $y \neq x$ in $y$,
 	Case $n > 0 \rightarrow$ Choose an element $y$ of $E$ such that $y$ is an element of
 	$Neighb(x,inv(n))$ and $y \neq x$ in $y$
-	for $n$ in $NAT$.
+	for $n$ in $\NN$.
 	$a$ is a sequence.	
 	Then for every $n \ a[n]$ is an element of $E$.
 	Let us show that $a$ converges to $x$.
@@ -478,7 +478,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $c +'' a$ converges to $c + x$.
 	\end{theorem}
 	\begin{proof}
-	Define $cn[n] = c$ for $n$ in $NAT$.
+	Define $cn[n] = c$ for $n$ in $\NN$.
 	$cn$ is a sequence.
 	Let us show that $c +'' a = (cn +' a)$.
 	\begin{subproof}
@@ -540,7 +540,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $b$ converges to $0$.
 	\end{lemma}
 	\begin{proof}
-	Define $sum[k] = (-x) + a[k]$ for $k$ in $NAT$.
+	Define $sum[k] = (-x) + a[k]$ for $k$ in $\NN$.
 	$sum$ is a sequence.
 	Let us show that $sum$ converges to $0$.
 	\begin{subproof}
@@ -564,7 +564,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $a *' b$ converges to $x * y$.
 	\end{theorem}
 	\begin{proof}
-	(1) Define $s1[k] = (a[k] - x) \cdot (b[k] - y)$ for $k$ in $NAT$.
+	(1) Define $s1[k] = (a[k] - x) \cdot (b[k] - y)$ for $k$ in $\NN$.
 	Let us show that $s1$ converges to $0$. 
 	\begin{subproof}
     Assume $eps$ is a positive real number. 
@@ -583,14 +583,14 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
     Hence $abs(((a[n] - x) \cdot (b[n] - y)) - 0) < eps$ (by Zero, NegOfZero).
     \end{subproof}
 	\end{subproof}
-	(2) Define $s2[k] = (x \cdot (b[k] + (-y))) + (y \cdot (a[k] + (-x)))$ for $k$ in $NAT$.
+	(2) Define $s2[k] = (x \cdot (b[k] + (-y))) + (y \cdot (a[k] + (-x)))$ for $k$ in $\NN$.
 	Let us show that $s2$ converges to $0$.
 	\begin{subproof}
-	Define $s2a[k] = y \cdot (a[k] + (-x))$ for $k$ in $NAT$.
-	Define $s2b[k] = x \cdot (b[k] + (-y))$ for $k$ in $NAT$.
+	Define $s2a[k] = y \cdot (a[k] + (-x))$ for $k$ in $\NN$.
+	Define $s2b[k] = x \cdot (b[k] + (-y))$ for $k$ in $\NN$.
 	$s2a, s2b$ are sequences.
-	Define $sum1[k] = a[k] + (-x)$ for $k$ in $NAT$.
-	Define $sum2[k] = b[k] + (-y)$ for $k$ in $NAT$.
+	Define $sum1[k] = a[k] + (-x)$ for $k$ in $\NN$.
+	Define $sum2[k] = b[k] + (-y)$ for $k$ in $\NN$.
 	$sum1, sum2$ are sequences.
 	$sum1 = (-x) +'' a$ and $sum2 = (-y) +'' b$ (by ComAdd, SequenceEq).
 	$sum1, sum2$ converge to $0$ (by SumConstConv, Neg, ComAdd).
@@ -603,7 +603,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	Hence $s2$ converges to $0$ (by SumConv).
 	\end{subproof}
-	(3) Define $s3[k] = (a[k] \cdot b[k]) - (x \cdot y)$ for $k$ in $NAT$.
+	(3) Define $s3[k] = (a[k] \cdot b[k]) - (x \cdot y)$ for $k$ in $\NN$.
 	Let us show that $s3$ converges to $0$.
 	\begin{subproof}
 	Let us show that for every $n \ s3[n] = s1[n] + s2[n]$.
@@ -851,7 +851,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		
 		Hence for every $n$ such that $N < n$ $dist(a[n],a[N + 1]) < 1$.
 		
-		Define $b[k] = abs(a[k])$ for $k$ in $NAT$.
+		Define $b[k] = abs(a[k])$ for $k$ in $\NN$.
 		
 		$maxN(b,N)$, $1$, $a[N + 1]$, $abs(a[N + 1])$, $1 + abs(a[N + 1])$ are real numbers.
 		
