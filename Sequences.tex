@@ -72,7 +72,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 \begin{forthel}
 	\noindent $\text{[read Sequences/Naturals.ftl]}\\
 	\text{[read Sequences/helper.ftl]}\\
-	\text{[sequence/-s]}\\
+	\text{[sequence/-s]}
 	\text{[converge/-s]}$\\
 	Let $n$, $m$, $k$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
 
@@ -779,10 +779,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		\begin{subproof}
 			Let $n$ be a natural number.\\
 			Case $n = 0$. Obvious.\\
-			Case $n \neq 0$.\\ 
+			Case $n \neq 0$.
 			\begin{case}
 				Take $m$ such that $n = m + 1$. Then $m \leq i[m]$.\\
-				We can show by induction that $i[k] + 1 \leq i[k + 1]$ for every $k$. Obvious.\\
+				We can show by induction that $i[k] + 1 \leq i[k + 1]$ for every $k$. Obvious.
 			\end{case}
 		\end{subproof}
 	\end{proof}
@@ -861,10 +861,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				\begin{subproof}
 					We have $dist(a[n],a[N + 1]) < 1$.\\
 					We have $1 + abs(a[N + 1]) \leq K$ (by MaxIneq).\\
-					$abs(a[n]) \dotequal abs(a[n] + 0)$ (by Zero)\\
+					$abs(a[n]) \dotequal abs(a[n] + 0)$ (by Zero)
+					
 					$\dotequal abs(a[n] + (a[N + 1] - a[N + 1]))$ (by Neg)\\
 					$\dotequal abs(a[n] + ((-a[N + 1]) + a[N + 1]))$ (by ComAdd)\\
-					$\dotequal abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).\\
+					$\dotequal abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).
+					
 					We have $abs((a[n] - a[N + 1]) + a[N + 1]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$ (by AbsTriangleIneq).\\
 					Hence $abs(a[n]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$.\\
 					Hence $abs(a[n]) \leq dist(a[n],a[N + 1]) + abs(a[N + 1])$.\\
@@ -878,21 +880,20 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	\begin{lemma}[CauchyConvSubSeq]
-		Let a be a cauchy sequence such that a has some convergent subsequence. Then a converges.
+		Let a be $a$ cauchy sequence such that $a$ has some convergent subsequence. Then $a$ converges.
 	\end{lemma}
 	
 	\begin{proof}
 		Take a index sequence $i$ such that $Subseq(a,i)$ converges.
-		Take a real number $x$ such that $Subseq(a,i)$ converges to $x$.\\
+		Take a real number $x$ such that $Subseq(a,i)$ converges to $x$.
 		
-		Let us show that $a$ converges to $x$.
+		\noindent Let us show that $a$ converges to $x$.
 		\begin{subproof}
 			Let $\epsilon$ be a positive real number.\\			
 			Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.\\
 			Take $N1$ such that for every $n$,$m$ such that ($N1 < n$ and $N1 < m$) $dist(a[n],a[m]) < \halfeps$ (by Cauchy).\\
 			Take $N2$ such that for every $n$ such that $N2 < n$ $dist(Subseq(a,i)[n],x) < \halfeps$ (by Convergence).\\
-			Take $N$ such that $N = max(N1,N2)$.\\
-			Then $N1 \leq N$ and $N2 \leq N$.
+			Take $N$ such that $N = max(N1,N2)$. Then $N1 \leq N$ and $N2 \leq N$.
 			
 			Let us show that for every $n$ such that $N < n$ $dist(a[n],x) < \epsilon$.
 			\begin{subproof}
@@ -902,13 +903,15 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				$a[n]$, $a[i[n]]$, $dist(a[n],a[i[n]])$, $dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x$, $dist(a[n],a[i[n]]) + dist(a[i[n]],x)$ are real numbers.\\
 				We have $Subseq(a,i)[n] = a[i[n]]$.\\
 				We have $dist(a[n],a[i[n]]) < \halfeps$.\\
-				We have $dist(a[i[n]],x) < \halfeps$.\\
+				We have $dist(a[i[n]],x) < \halfeps$.
+				
 				$dist(a[n],x) \dotequal abs(a[n] - x)$ (by DistDefinition)\\
 				$\dotequal abs((a[n] + 0) - x)$ (by Zero)\\
 				$\dotequal abs((a[n] + (a[i[n]] - a[i[n]])) - x)$ (by Neg)\\
 				$\dotequal abs((a[n] + ((-a[i[n]]) + a[i[n]])) - x)$ (by ComAdd)\\
 				$\dotequal abs(((a[n] - a[i[n]]) + a[i[n]]) - x)$ (by AssAdd)\\
-				$\dotequal abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).\\
+				$\dotequal abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).
+				
 				We have $abs((a[n] - a[i[n]]) + (a[i[n]] - x)) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$ (by AbsTriangleIneq).\\
 				Hence $dist(a[n],x) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$.\\
 				Hence $dist(a[n],x) \leq dist(a[n],a[i[n]]) + dist(a[i[n]],x)$.\\
@@ -926,52 +929,32 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	\begin{proof}
 		Let us show that (If $a$ converges then $a$ is a cauchy sequence).
-		
 		\begin{subproof}
 			Assume $a$ converges.
-			
 			Take a real number $x$ such that $a$ converges to $x$.
-			
-			Let $\epsilon$ be a positive real number.
-			
-			Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.
-			
+			Let $\epsilon$ be a positive real number.\\
+			Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.\\
 			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < \halfeps$ (by Convergence).
 			
 			Let us show that for every $n$,$m$ such that ($N < n$ and $N < m$) $dist(a[n],a[m]) < \epsilon$.
-			
 			\begin{subproof}
-				Assume $N < n$ and $N < m$.
-				
-				We have $dist(a[n],x) < \halfeps$.
-				
-				We have $dist(a[m],x) < \halfeps$.
-				
-				We have $dist(a[n],a[m]) \leq dist(a[n],x) + dist(x,a[m])$ (by DistTriangleIneq).
-				
-				Hence $dist(a[n],a[m]) \leq dist(a[n],x) + dist(a[m],x)$ (by DistSymm).
-				
-				We have $dist(a[n],x) + dist(a[m],x) < \halfeps + \halfeps$ (by AddInvariance).
-				
-				Hence $dist(a[n],a[m]) < \halfeps + \halfeps$ (by MixedTransitivity).
-				
+				Assume $N < n$ and $N < m$.\\
+				We have $dist(a[n],x) < \halfeps$.\\
+				We have $dist(a[m],x) < \halfeps$.\\
+				We have $dist(a[n],a[m]) \leq dist(a[n],x) + dist(x,a[m])$ (by DistTriangleIneq).\\
+				Hence $dist(a[n],a[m]) \leq dist(a[n],x) + dist(a[m],x)$ (by DistSymm).\\
+				We have $dist(a[n],x) + dist(a[m],x) < \halfeps + \halfeps$ (by AddInvariance).\\
+				Hence $dist(a[n],a[m]) < \halfeps + \halfeps$ (by MixedTransitivity).\\
 				Hence $dist(a[n],a[m]) < \epsilon$ (by TwoHalf).
-				
 			\end{subproof}
-			
 		\end{subproof}
 		
 		Let us show that (If $a$ is a cauchy sequence then $a$ converges).
-		
 		\begin{subproof}
-			Assume $a$ is a cauchy sequence.
-			
-			Then $a$ is bounded (by CauchyBounded).
-			
-			Therefore $a$ has some convergent subsequence (by BolzanoWeierstrass).
-			
+			Assume $a$ is a cauchy sequence.\\
+			Then $a$ is bounded (by CauchyBounded).\\
+			Therefore $a$ has some convergent subsequence (by BolzanoWeierstrass).\\
 			Hence $a$ converges (by CauchyConvSubSeq).
-			
 		\end{subproof}
 	\end{proof}
 	
@@ -1013,92 +996,61 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{proof}
 		For every $n$ $a[n] \leq LeastUpper(a)$ (by UpperBoundSeq, LeastUpperBoundSeq).
 
-		Let us show that for every positive real number $\epsilon$ there exists $N$ such that $(LeastUpper(a) - \epsilon) < a[N]$.
-		
+		\noindent Let us show that for every positive real number $\epsilon$ there exists $N$ such that $(LeastUpper(a) - \epsilon) < a[N]$.
 		\begin{subproof}
-			Assume the contrary.
-			
+			Assume the contrary.\\
 			Take a positive real number $\epsilon$ such that for every $N$ not($(LeastUpper(a) - \epsilon) < a[N]$).
 			
 			Let us show that for every $n$ $a[n] \leq (LeastUpper(a) - \epsilon)$.
-			
 			\begin{subproof}
-				Let $n$ be a natural number.
-				
-				We have not($(LeastUpper(a) - \epsilon) < a[n]$).
-				
-				Therefore $(LeastUpper(a) - \epsilon) \geq a[n]$ (by NotRuleOrder).
-				
+				Let $n$ be a natural number.\\
+				We have not($(LeastUpper(a) - \epsilon) < a[n]$).\\
+				Therefore $(LeastUpper(a) - \epsilon) \geq a[n]$ (by NotRuleOrder).\\
 				Hence $a[n] \leq (LeastUpper(a) - \epsilon)$.
-				
 			\end{subproof}
-			
 			Hence $(LeastUpper(a) - \epsilon)$ is upper bound of $a$ (by UpperBoundSeq).
 			
-			$LeastUpper(a) - (LeastUpper(a) - \epsilon) \dotequal LeastUpper(a) + (-LeastUpper(a) + \epsilon)$ (by MinusRule1, MinusRule2)
-			
-			$\dotequal (LeastUpper(a) - LeastUpper(a)) + \epsilon$ (by AssAdd)
-			
-			$\dotequal 0 + \epsilon$ (by Neg)
-			
-			$\dotequal \epsilon + 0$ (by ComAdd)
-			
+			$LeastUpper(a) - (LeastUpper(a) - \epsilon)\\ \dotequal LeastUpper(a) + (-LeastUpper(a) + \epsilon)$ (by MinusRule1, MinusRule2)\\
+			$\dotequal (LeastUpper(a) - LeastUpper(a)) + \epsilon$ (by AssAdd)\\
+			$\dotequal 0 + \epsilon$ (by Neg)\\
+			$\dotequal \epsilon + 0$ (by ComAdd)\\
 			$\dotequal \epsilon$ (by Zero).
-			
-			Hence $(LeastUpper(a) - \epsilon) < LeastUpper(a)$.
-			
-			Hence not($(LeastUpper(a) - \epsilon) \geq LeastUpper(a)) (by NotRuleOrder)$.
-			
+
+			Hence $(LeastUpper(a) - \epsilon) < LeastUpper(a)$.\\
+			Hence not($(LeastUpper(a) - \epsilon) \geq LeastUpper(a)) (by NotRuleOrder)$.\\
 			Contradiction (by LeastUpperBoundSeq).
-			
 		\end{subproof}
 		
-		Let us show that $a$ converges to $LeastUpper(a)$.
+		\noindent Let us show that $a$ converges to $LeastUpper(a)$.
 		
 		\begin{subproof}
-			Let $\epsilon$ be a positive real number.
-			
+			Let $\epsilon$ be a positive real number.\\
 			Take $N$ such that $(LeastUpper(a) - \epsilon) < a[N]$.
 			
 			Let us show that for every $n$ such that $N < n$ $dist(a[n],LeastUpper(a)) < \epsilon$.
-			
 			\begin{subproof}
-				Assume $N < n$.
-				
-				Hence $a[N] \leq a[n]$ (by MonInc).
-				
-				We have $a[n] \leq LeastUpper(a)$.
-				
-				Hence $dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n]) = LeastUpper(a) - a[n]$.
-				
-				We have $(LeastUpper(a) - \epsilon) + \epsilon < a[N] + \epsilon$ (by MixedAddInvariance).
-				
+				Assume $N < n$.\\
+				Hence $a[N] \leq a[n]$ (by MonInc).\\
+				We have $a[n] \leq LeastUpper(a)$.\\
+				Hence $dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n]) = LeastUpper(a) - a[n]$.\\
+				We have $(LeastUpper(a) - \epsilon) + \epsilon < a[N] + \epsilon$ (by MixedAddInvariance).\\
 				We have $((LeastUpper(a) - \epsilon) + \epsilon) - a[N] < (a[N] + \epsilon) - a[N]$ (by MixedAddInvariance).
 				
-				$((LeastUpper(a) - \epsilon) + \epsilon) - a[N] \dotequal (LeastUpper(a) + (-\epsilon + \epsilon)) - a[N]$ (by AssAdd)
-				
-				$\dotequal (LeastUpper(a) + (\epsilon - \epsilon)) - a[N]$ (by ComAdd)
-				
-				$\dotequal (LeastUpper(a) + 0) - a[N]$ (by Neg)
-				
+				$((LeastUpper(a) - \epsilon) + \epsilon) - a[N]\\
+				\dotequal (LeastUpper(a) + (-\epsilon + \epsilon)) - a[N]$ (by AssAdd)\\
+				$\dotequal (LeastUpper(a) + (\epsilon - \epsilon)) - a[N]$ (by ComAdd)\\
+				$\dotequal (LeastUpper(a) + 0) - a[N]$ (by Neg)\\
 				$\dotequal LeastUpper(a) - a[N]$ (by Zero).
 				
-				$(a[N] + \epsilon) - a[N] \dotequal (\epsilon + a[N]) - a[N]$ (by ComAdd)
-				
-				$\dotequal \epsilon + (a[N] - a[N])$ (by AssAdd)
-				
-				$\dotequal \epsilon + 0$ (by Neg)
-				
+				$(a[N] + \epsilon) - a[N]\\ \dotequal (\epsilon + a[N]) - a[N]$ (by ComAdd)\\
+				$\dotequal \epsilon + (a[N] - a[N])$ (by AssAdd)\\
+				$\dotequal \epsilon + 0$ (by Neg)\\
 				$\dotequal \epsilon$ (by Zero).
 				
-				Hence $LeastUpper(a) - a[N] < \epsilon$.
-				
-				We have $LeastUpper(a) - a[n] \leq LeastUpper(a) - a[N]$.
-				
+				Hence $LeastUpper(a) - a[N] < \epsilon$.\\
+				We have $LeastUpper(a) - a[n] \leq LeastUpper(a) - a[N]$.\\
 				Hence $dist(a[n],LeastUpper(a)) < \epsilon$ (by MixedTransitivity).
-				
 			\end{subproof}
-			
 		\end{subproof}
 	\end{proof}
 	
@@ -1109,21 +1061,19 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{proof}
 		We have (If $a$ converges then $a$ is bounded) (by ConvergentImpBounded).
 		
-		Assume $a$ is bounded.
+		\noindent Assume $a$ is bounded.
 		
-		Case $a$ is monotonically increasing. Then $a$ converges (by MonIncCon). 
-		end.
-		
+		\noindent Case $a$ is monotonically increasing.
+		\begin{case}
+			Then $a$ converges (by MonIncCon). 
+		\end{case} 
 		Case $a$ is monotonically decreasing.
-		
 		\begin{subproof}
 			Let us show that $(-1) \cdottwo a$ is monotonically increasing.
 			
 			\begin{subproof}
-				Assume $n \leq m$.
-				
-				Then $a[n] \geq a[m]$ (by MonDec).
-				
+				Assume $n \leq m$.\\
+				Then $a[n] \geq a[m]$ (by MonDec).\\
 				Then $-a[n] \leq -a[m]$ (by OrdMirrorLeq).
 				
 				$((-1) \cdottwo a)[n] \dotequal (-1) \cdot a[n]
@@ -1133,66 +1083,44 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				\dotequal -a[m]$ (by MinusRule4).
 				
 				Hence $((-1) \cdottwo a)[n] \leq ((-1) \cdottwo a)[m]$.
-				
 			\end{subproof}
-			
+		
 			Let us show that $(-1) \cdottwo a$ is bounded.
-			
 			\begin{subproof}
 				Take a real number $K$ such that for every $n$ $abs(a[n]) \leq K$ (by BoundedSequence).
 				
 				Let us show that for every $n$ $abs(((-1) \cdottwo a)[n]) \leq K$.
-				
 				\begin{subproof}
-					$abs(((-1) \cdottwo a)[n]) \dotequal abs((-1) \cdot a[n])$ (by SequenceConstProd)
-					
-					$\dotequal abs(-a[n])$ (by MinusRule4)
-					
+					$abs(((-1) \cdottwo a)[n]) \dotequal abs((-1) \cdot a[n])$ (by SequenceConstProd)\\
+					$\dotequal abs(-a[n])$ (by MinusRule4)\\
 					$\dotequal abs(a[n])$ (by AbsPosNeg).
 					
 					Hence $abs(((-1) \cdottwo a)[n]) \leq K$.
-					
 				\end{subproof}
-				
 				Hence $(-1) \cdottwo a$ is bounded by $K$ (by BoundedBy).
-				
 			\end{subproof}
-			
-			Hence $(-1) \cdottwo a$ converges (by MonIncCon).
-			
+			Hence $(-1) \cdottwo a$ converges (by MonIncCon).\\
 			Take a real number $x$ such that $(-1) \cdottwo a$ converges to $x$ (by Conv).
 			
 			Let us show that $(-1) \cdottwo ((-1) \cdottwo a) = a$.
-			
 			\begin{subproof}
 				Let us show that for every $n$ $((-1) \cdottwo ((-1) \cdottwo a))[n] = a[n]$.
-				
 				\begin{subproof}
 					Let $n$ be a natural number.
 					
-					$((-1) \cdottwo ((-1) \cdottwo a))[n] \dotequal (-1) \cdot ((-1) \cdottwo a)[n]$ (by SequenceConstProd)
-					
-					$\dotequal (-1) \cdot ((-1) \cdot a[n])$ (by SequenceConstProd)
-					
-					$\dotequal -(-a[n])$ (by MinusRule4)
-					
+					$((-1) \cdottwo ((-1) \cdottwo a))[n] \dotequal (-1) \cdot ((-1) \cdottwo a)[n]$ (by SequenceConstProd)\\
+					$\dotequal (-1) \cdot ((-1) \cdot a[n])$ (by SequenceConstProd)\\
+					$\dotequal -(-a[n])$ (by MinusRule4)\\
 					$\dotequal a[n]$ (by MinusRule2).
-										
 				\end{subproof}
 				
 				Hence $(-1) \cdottwo ((-1) \cdottwo a) = a$ (by SequenceEq).
-				
 			\end{subproof}
 			
-			Then $(-1) \cdottwo ((-1) \cdottwo a)$ converges to $(-1) \cdot x$ (by ProdConstConv).
-			
+			Then $(-1) \cdottwo ((-1) \cdottwo a)$ converges to $(-1) \cdot x$ (by ProdConstConv).\\
 			Hence $a$ converges (by Conv).
-			
 		\end{subproof}
-		
 	\end{proof}
-
-
 \end{forthel}
 
 \subsection{helper.ftl}
