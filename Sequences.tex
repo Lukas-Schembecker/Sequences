@@ -64,12 +64,12 @@
 
 
 \section{Introduction}
-The present formalization covers chapter 3 'Numerical Sequences (and Series)' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. To improve readability, we moved most of these to a separate file - 'helper.ftl'.
+The present formalization covers chapter 3 'Numerical Sequences (and Series)' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. To improve readability, we moved most of these to a seperate file - 'helper.ftl'.
 
 \section{The Formalization}
 \subsection{Sequences.ftl}
 
-In order to improve the proof reading experience, we added two new environments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new environments, so we changed it's Haskell code in 'Alice/Import/LaTeX.hs' accordingly. Besides some further small changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes to the parser.\\
+In order to improve the proof reading experience, we added two new enviroments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new enviroments, so we changed it's Haskell code in 'Alice/Import/LaTeX.hs' accordingly. Besides some further small changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes to the parser.\\
 
 \noindent The definitions of sequences can be translated very closely to Rudin's text:
 
@@ -119,7 +119,7 @@ In order to improve the proof reading experience, we added two new environments 
 	\end{definition}
 \end{forthel}
 
-\noindent The following properties of $\frac{1}{n}$ and $(-1)^{n}$ are said to be trivial by Rudin as they only need 'common math' to be proven. A rigorous formalization needs to address these common facts separately, so they text gets naturally longer.\\
+\noindent The following properties of $\frac{1}{n}$ and $(-1)^{n}$ are said to be trivial by Rudin as they only need 'common math' to be proven. A rigerous formalization needs to address these common facts seperately, so they text gets naturally longer.\\
 
 \noindent Here we also have to consider the special case of $n=0$. Rudin does not consider 0 as a natural number.
 
@@ -369,7 +369,7 @@ In order to improve the proof reading experience, we added two new environments 
 
 \fbox{\includegraphics[width=0.9 \textwidth]{3_2b}}\\
 
-\noindent As we can see, the two proofs are almost identical, with some minor additions in our formalization and a separate lemma for the last statement. This is only possible due to the low complexity of the calculations involved. As we get to more elaborate proofs, these calculations will take a lot more space, so we have to further separate from the original text.
+\noindent As we can see, the two proofs are almost identical, with some minor additions in our formalization and a seperate lemma for the last statement. This is only possible due to the low complexity of the calculations involved. As we get to more elaborate proofs, these calculations will take a lot more space, so we have to further seperate from the original text.
 
 \begin{forthel}
 	\begin{definition}[BoundedBy]
@@ -830,7 +830,7 @@ We simplified the proof as much as possible - the prover did not accept further 
 	\end{proof}
 \end{forthel}
 
-\noindent This is the most extreme case of additional concretisation we have to provide the prover. The corresponding excerpt of Rudin's book underlines how big the differences are in length:
+\noindent The next excerpt of Rudin's book shows how big the differences are in length. This is the most extreme case of additional concretisation we have to provide the prover.
 
 \fbox{\includegraphics[width=0.9 \textwidth]{3_3d}}\\
 
@@ -914,7 +914,7 @@ We simplified the proof as much as possible - the prover did not accept further 
 	\end{proof}
 \end{forthel}
 
-\noindent Rudin considers arbitrary metric spaces, so he shows that every convergent sequence is a cauchy sequence for all metric spaces and vice versa for $\RR^{n}$. \linebreak We only consider the case of $\RR$, so we directly show the completeness of $\RR$. \linebreak To achieve this we followed the proof found in \cite{Cauchy}.
+\noindent Rudin considers arbitrary metric spaces, so he shows that every convergent sequence is a cauchy sequence for all metric spaces and vice versa for $\RR^{n}$. We only consider the case of $\RR$, so we directly show the completeness of $\RR$. To achieve this we followed the proof found in \cite{Cauchy}.
 
 \begin{forthel}
 	\begin{axiom}[BolzanoWeierstrass]
@@ -1225,12 +1225,6 @@ We simplified the proof as much as possible - the prover did not accept further 
 			Hence $a$ converges (by Conv).
 		\end{subproof}
 	\end{proof}
-	
-\end{forthel}
-
-\noindent In the last part we formalized the definitions of Limsup and Liminf as depicted in Rudin, but we skipped the theorem based on these definitions since the proof considers the cases $\pm \ \infty$ (which we do not allow in our implementation) and the remaining case makes use of results which were not part of our formalization. 
-
-\begin{forthel}
 	
 	\noindent Let $b$ denote a real number. 
 	\\Let $A, B, S$ denote a set.
