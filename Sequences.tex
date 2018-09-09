@@ -1157,6 +1157,7 @@ The definitions of sequences can be translated very closely to Rudin's text:
 \end{forthel}
 
 \subsection{helper.ftl}
+In the following part we display basic propositions with rather technical proofs, which we needed to add as auxiliaries for the Rudin-Theorems.
 
 \begin{forthel}
 	\noindent [read Sequences/Naturals.ftl]\\
@@ -1166,7 +1167,7 @@ The definitions of sequences can be translated very closely to Rudin's text:
 	
 	
 	\begin{lemma}[MaxIneqDummy]
-	Let $a,b$ be real numbers. \\Then $b \leq max(a,b)$.
+	Let $a,b$ be real numbers. $$b \leq max(a,b).$$
 	\end{lemma}
 	
 	\begin{lemma}[NotRuleOrder]
@@ -1181,185 +1182,195 @@ The definitions of sequences can be translated very closely to Rudin's text:
 	$(inv(2) \cdot a) + (inv(2) \cdot a) = a$.
 	\end{lemma}
 	
+\end{forthel}
+
+\noindent In the following two lemmata we extend the minusrules from 'Reals.ftl'. Therefore the apparently strange enumeration.
+
+\begin{forthel}
+		
 	\begin{lemma}[MinusRule5]
 	Let $a,b$ be real numbers. 
-	Then $(a \cdot (-b)) = -(a \cdot b) and ((-b) \cdot a) = -(b \cdot a)$.
+	Then $$(a \cdot (-b)) = -(a \cdot b) \text{ and } ((-b) \cdot a) = -(b \cdot a).$$
 	\end{lemma}
-	\begin{proof}
+	\begin{proof} \\
 	(1) $a \cdot (-b) \dotequal a \cdot ((-1) \cdot b)$ (by MinusRule4)
-	$\dotequal (a \cdot (-1)) \cdot b$ (by AssMult)
-	$\dotequal ((-1) \cdot a) \cdot b$ (by ComMult)
-	$\dotequal (-1) \cdot (a \cdot b)$ (by AssMult)
-	$\dotequal -(a \cdot b)$ (by MinusRule4).
-	
-	$((-b) \cdot a) \dotequal -(b \cdot a)$ (by ComMult, 1).
+	\\$\dotequal (a \cdot (-1)) \cdot b$ (by AssMult)
+	\\$\dotequal ((-1) \cdot a) \cdot b$ (by ComMult)
+	\\$\dotequal (-1) \cdot (a \cdot b)$ (by AssMult)
+	\\$\dotequal -(a \cdot b)$ (by MinusRule4).
+	\\\\$((-b) \cdot a) \dotequal -(b \cdot a)$ (by ComMult, 1).
 	\end{proof}
 	
 	\begin{lemma}[MinusRule6]
 	Let $a,b$ be real numbers. 
-	Then $((-a) \cdot (-b)) = a \cdot b$.
+	Then $$((-a) \cdot (-b)) = a \cdot b.$$
 	\end{lemma}
-	\begin{proof}
+	\begin{proof}\\
 	$((-a) \cdot (-b)) \dotequal -(a \cdot (-b))$ (by MinusRule5)
-	$\dotequal -(-(a \cdot b))$ (by MinusRule5)
-	$\dotequal a \cdot b$ (by MinusRule2).
+	\\$\dotequal -(-(a \cdot b))$ (by MinusRule5)
+	\\$\dotequal a \cdot b$ (by MinusRule2).
 	\end{proof}
 	
 	\begin{lemma}[Binomi1]
 	Let $a,b,c,d$ be real numbers.
-	Then $(a + b) \cdot (c + d) = ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$.
+	Then $$(a + b) \cdot (c + d) = ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d)).$$
 	\end{lemma}
 	\begin{proof}
 	$(a + b) \cdot (c + d) \dotequal ((a + b) \cdot c) + ((a + b) \cdot d)$ (by Distrib)
-	$\dotequal ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$ (by DistribDummy).
+	\\$\dotequal ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$ (by DistribDummy).
 	\end{proof}
 	
 	\begin{lemma}[Binomi2]
 	Let $a,b,c,d$ be real numbers.
-	Then $(a - b) \cdot (c - d) = ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$.
+	\\Then $(a - b) \cdot (c - d) = ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$.
 	\end{lemma}
 	\begin{proof}
 	$(a - b) \cdot (c - d) \dotequal ((a \cdot c) + ((-b) \cdot c)) + ((a \cdot (-d)) + ((-b) \cdot (-d)))$ (by Binomi1)
-	$\dotequal ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$ (by MinusRule5, MinusRule6).
+	\\$\dotequal ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$ (by MinusRule5, MinusRule6).
 	\end{proof}
 	
-	
+\end{forthel}
+
+\noindent The next identity is used in the theorem 'ProdConv', but in Rudin it was only mentioned without a proof. Since this is not an obvious result, we decided to prove it though. In the ForTheL-text we used the '.='-syntax in which one has to tell the eprover every rule he should use in each equation.
+So this is a great example to visualize the amount of commands the eprover uses to transform simple algebraic equations (furthermore, the use of the rules Binomi2, MinusRule5 and MinusRule2 hide the use of plenty further rules).
+
+\begin{forthel}
 	
 	\begin{lemma}[Identity1]
 	Let $a,b,c,d$ be real numbers. 
-	Then $(a \cdot b) - (c \cdot d) = ((a - c) \cdot (b - d)) + ((c \cdot (b - d)) + (d \cdot (a - c)))$.
+	\\Then $(a \cdot b) - (c \cdot d) = ((a - c) \cdot (b - d)) + ((c \cdot (b - d)) + (d \cdot (a - c)))$.
 	\end{lemma}
 	\begin{proof}
 	$((a - c) \cdot (b - d)) + ((c \cdot (b - d)) + (d \cdot (a - c))) 
 	\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((c \cdot (b - d)) + (d \cdot (a - c)))$ (by Binomi2)
-	$\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (c \cdot (-d))) + ((d \cdot a) + (d \cdot (-c))))$ (by Distrib)
-	$\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (-(c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by MinusRule5)
-	$\dotequal ((c \cdot b) + (-(c \cdot d))) + ((((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by BubbleAdd)
-	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + ((a \cdot d) + (-(c \cdot d)))))$ (by AssAdd, ComMult)
-	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-((a \cdot d) + (-(c \cdot d)))))))$ (by MinusRule2)
-	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-(a \cdot d) + (c \cdot d)))))$ (by ComAdd, MinusRule3)
-	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + 0)$ (by Neg)
-	$\dotequal ((-(c \cdot d)) + (c \cdot b)) + (-(c \cdot b) + (a \cdot b))$ (by ComAdd, Zero)
-	$\dotequal (-(c \cdot d)) + ((c \cdot b) + (-(c \cdot b) + (a \cdot b)))$ (by AssAdd)
-	$\dotequal (-(c \cdot d)) + (((c \cdot b) -(c \cdot b)) + (a \cdot b))$ (by AssAdd)
-	$\dotequal -(c \cdot d) + (0 + (a \cdot b))$ (by Neg)
-	$\dotequal -(c \cdot d) + ((a \cdot b) + 0)$ (by ComAdd)
-	$\dotequal -(c \cdot d) + (a \cdot b)$ (by Zero)
-	$\dotequal (a \cdot b) - (c \cdot d)$ (by ComAdd).
+	\\$\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (c \cdot (-d))) + ((d \cdot a) + (d \cdot (-c))))$ (by Distrib)
+	\\$\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (-(c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by MinusRule5)
+	\\$\dotequal ((c \cdot b) + (-(c \cdot d))) + ((((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by BubbleAdd)
+	\\$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + ((a \cdot d) + (-(c \cdot d)))))$ (by AssAdd, ComMult)
+	\\$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-((a \cdot d) + (-(c \cdot d)))))))$ (by MinusRule2)
+	\\$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-(a \cdot d) + (c \cdot d)))))$ (by ComAdd, MinusRule3)
+	\\$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + 0)$ (by Neg)
+	\\$\dotequal ((-(c \cdot d)) + (c \cdot b)) + (-(c \cdot b) + (a \cdot b))$ (by ComAdd, Zero)
+	\\$\dotequal (-(c \cdot d)) + ((c \cdot b) + (-(c \cdot b) + (a \cdot b)))$ (by AssAdd)
+	\\$\dotequal (-(c \cdot d)) + (((c \cdot b) -(c \cdot b)) + (a \cdot b))$ (by AssAdd)
+	\\$\dotequal -(c \cdot d) + (0 + (a \cdot b))$ (by Neg)
+	\\$\dotequal -(c \cdot d) + ((a \cdot b) + 0)$ (by ComAdd)
+	\\$\dotequal -(c \cdot d) + (a \cdot b)$ (by Zero)
+	\\$\dotequal (a \cdot b) - (c \cdot d)$ (by ComAdd).
 	\end{proof}
 	
 	
 	
 	\begin{signature}[Sqrt]
-	Let $x$ be a positive real number. $sqrt(x)$ is a positive real number such that $sqrt(x) \cdot sqrt(x) = x$.
+	Let $x$ be a positive real number. \\$sqrt(x)$ is a positive real number such that $sqrt(x) \cdot sqrt(x) = x$.
 	\end{signature}
 	
 	\begin{lemma}[AbsTriangleIneq2]
-	Let $x,y$ be real numbers. Then $abs(x) - abs(y) \leq abs(x - y)$.
+	Let $x,y$ be real numbers. Then $$abs(x) - abs(y) \leq abs(x - y).$$
 	\end{lemma}
-	\begin{proof}
+	\begin{proof}\\
 	$abs(x) \dotequal abs(x + ((-y) + y))$ (by Zero, Neg, ComAdd)
-	$\dotequal abs((x + (-y)) + y)$ (by AssAdd).
-	$abs((x + (-y)) + y) \leq abs(x - y) + abs(y)$ (by AbsTriangleIneq).
-	Hence $abs(x) \leq abs(x + (-y)) + abs(y)$.
-	$abs(x) + (-abs(y)) \leq (abs(x - y) + abs(y)) + (-abs(y))$ (by LeqAddInvariance).
-	$(abs(x - y) + abs(y)) + (-abs(y)) = abs(x - y)$ (by AssAdd, Neg, Zero).
-	Hence $abs(x) - abs(y) \leq abs(x - y)$ (by LeqTransitivity).
+	\\$\dotequal abs((x + (-y)) + y)$ (by AssAdd).
+	\\$abs((x + (-y)) + y) \leq abs(x - y) + abs(y)$ (by AbsTriangleIneq).
+	\\Hence $abs(x) \leq abs(x + (-y)) + abs(y)$.
+	\\$abs(x) + (-abs(y)) \leq (abs(x - y) + abs(y)) + (-abs(y))$ (by LeqAddInvariance).
+	\\$(abs(x - y) + abs(y)) + (-abs(y)) = abs(x - y)$ (by AssAdd, Neg, Zero).
+	\\Hence $abs(x) - abs(y) \leq abs(x - y)$ (by LeqTransitivity).
 	\end{proof}
 	
 	
 	\begin{lemma}[InvAdd]
-	Let $a,b,c,d$ be real numbers. Assume $(a \neq 0 and b \neq 0) and (c \neq 0 and d \neq 0)$. 
-	Then $(a \cdot inv(b)) + (c \cdot inv(d)) = ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$.
+	Let $a,b,c,d$ be real numbers. \\Assume $(a \neq 0 \text{ and } b \neq 0) \text{ and } (c \neq 0 \text{ and } d \neq 0)$. 
+	Then $$(a \cdot inv(b)) + (c \cdot inv(d)) = ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d).$$
 	\end{lemma}
-	\begin{proof}
+	\begin{proof}\\
 	$(a \cdot inv(b)) + (c \cdot inv(d)) \dotequal ((a \cdot inv(b)) \cdot 1) + (1 \cdot (c \cdot inv(d)))$ (by One, OneDummy)
-	$\dotequal ((a \cdot inv(b)) \cdot (d \cdot inv(d))) + ((b \cdot inv(b)) \cdot (c \cdot inv(d)))$ (by Inverse)
-	$\dotequal (a \cdot (inv(b) \cdot (d \cdot inv(d)))) + (b \cdot (inv(b) \cdot (c \cdot inv(d))))$ (by AssMult)
-	$\dotequal (a \cdot ((inv(b) \cdot d) \cdot inv(d))) + (b \cdot ((inv(b) \cdot c) \cdot inv(d)))$ (by AssMult)
-	$\dotequal (a \cdot ((d \cdot inv(b)) \cdot inv(d))) + (b \cdot ((c \cdot inv(b)) \cdot inv(d)))$ (by ComMult)
-	$\dotequal (a \cdot (d \cdot (inv(b) \cdot inv(d)))) + (b \cdot (c \cdot (inv(b) \cdot inv(d))))$ (by AssMult)
-	$\dotequal ((a \cdot d) \cdot (inv(b) \cdot inv(d))) + ((b \cdot c) \cdot (inv(b) \cdot inv(d)))$ (by AssMult)
-	$\dotequal ((a \cdot d) \cdot inv(b \cdot d)) + ((b \cdot c) \cdot inv(b \cdot d)) $(by InvRule2)
-	$\dotequal ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$ (by DistribDummy).
+	\\$\dotequal ((a \cdot inv(b)) \cdot (d \cdot inv(d))) + ((b \cdot inv(b)) \cdot (c \cdot inv(d)))$ (by Inverse)
+	\\$\dotequal (a \cdot (inv(b) \cdot (d \cdot inv(d)))) + (b \cdot (inv(b) \cdot (c \cdot inv(d))))$ (by AssMult)
+	\\$\dotequal (a \cdot ((inv(b) \cdot d) \cdot inv(d))) + (b \cdot ((inv(b) \cdot c) \cdot inv(d)))$ (by AssMult)
+	\\$\dotequal (a \cdot ((d \cdot inv(b)) \cdot inv(d))) + (b \cdot ((c \cdot inv(b)) \cdot inv(d)))$ (by ComMult)
+	\\$\dotequal (a \cdot (d \cdot (inv(b) \cdot inv(d)))) + (b \cdot (c \cdot (inv(b) \cdot inv(d))))$ (by AssMult)
+	\\$\dotequal ((a \cdot d) \cdot (inv(b) \cdot inv(d))) + ((b \cdot c) \cdot (inv(b) \cdot inv(d)))$ (by AssMult)
+	\\$\dotequal ((a \cdot d) \cdot inv(b \cdot d)) + ((b \cdot c) \cdot inv(b \cdot d)) $(by InvRule2)
+	\\$\dotequal ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$ (by DistribDummy).
 	\end{proof}
 	
 	
 	
 	\begin{lemma}[InvCanc]
 	Let $a, b$ be real numbers. Assume $a \neq 0$ and $b \neq 0$.
-	Then $(a \cdot inv(b)) \cdot (b \cdot inv(a)) = 1$.
+	Then $$(a \cdot inv(b)) \cdot (b \cdot inv(a)) = 1.$$
 	\end{lemma}
 	\begin{proof}
 	$(a \cdot inv(b)) \cdot (b \cdot inv(a)) \dotequal ((a \cdot inv(b)) \cdot b) \cdot inv(a)$ (by AssMult)
-	$\dotequal (a \cdot (inv(b) \cdot b)) \cdot inv(a)$ (by AssMult)
-	$\dotequal (a \cdot 1) \cdot inv(a)$ (by InvDummy)
-	$\dotequal a \cdot inv(a)$ (by One)
-	$\dotequal 1$ (by Inverse).
+	\\$\dotequal (a \cdot (inv(b) \cdot b)) \cdot inv(a)$ (by AssMult)
+	\\$\dotequal (a \cdot 1) \cdot inv(a)$ (by InvDummy)
+	\\$\dotequal a \cdot inv(a)$ (by One)
+	\\$\dotequal 1$ (by Inverse).
 	\end{proof}
 	
 	
 	\begin{lemma}[NegMultInvariance]
 	Let $x, y, z$ be real numbers.
-	$(x < y \wedge z < 0) \Rightarrow z \cdot x > z \cdot y$.
+	$$(x < y \wedge z < 0) \Rightarrow z \cdot x > z \cdot y.$$
 	\end{lemma}
 	\begin{proof}
 	Assume $x < y \wedge z < 0$.
 	Therefore $pos(-z)$.    
 	Hence $(-z) \cdot x < (-z) \cdot y$.
 	Hence $-((-z) \cdot x) > -((-z) \cdot y)$ (by OrdMirror).
-	$-((-z) \cdot x) \dotequal (-(-z)) \cdot x$ (by MinusRule5)
-	$\dotequal z \cdot x$ (by MinusRule2).
-	$-((-z) \cdot y) \dotequal (-(-z)) \cdot y$ (by MinusRule5)
-	$\dotequal z \cdot y$ (by MinusRule2).
+	\\$-((-z) \cdot x) \dotequal (-(-z)) \cdot x$ (by MinusRule5)
+	\\$\dotequal z \cdot x$ (by MinusRule2).
+	\\$-((-z) \cdot y) \dotequal (-(-z)) \cdot y$ (by MinusRule5)
+	\\$\dotequal z \cdot y$ (by MinusRule2).
 	\end{proof}
 	
 	
 	\begin{lemma}[InvSwapIneq]
-	Let $a, b, c, d$ be positive real numbers. Assume $(a \neq 0$ and $b \neq 0)$ and $(c \neq 0 and d \neq 0)$. 
-	If $a \cdot inv(b) < c \cdot inv(d)$ then $b \cdot inv(a) > d \cdot inv(c)$.
+	Let $a, b, c, d$ be positive real numbers. \\Assume $(a \neq 0$ and $b \neq 0)$ and $(c \neq 0 \text{ and } d \neq 0)$. 
+	$$a \cdot inv(b) < c \cdot inv(d) \Rightarrow b \cdot inv(a) > d \cdot inv(c).$$
 	\end{lemma}
 	\begin{proof}
 	Assume $a \cdot inv(b) < c \cdot inv(d)$.
-	We have $pos(b \cdot inv(a))$ and $pos(d \cdot inv(c))$.
-	$(b \cdot inv(a)) \cdot (a \cdot inv(b)) < (b \cdot inv(a)) \cdot (c \cdot inv(d))$ (by MultInvariance).
-	$(b \cdot inv(a)) \cdot (a \cdot inv(b)) = $1 (by InvCanc).
+	\\We have $pos(b \cdot inv(a))$ and $pos(d \cdot inv(c))$.
+	\\$(b \cdot inv(a)) \cdot (a \cdot inv(b)) < (b \cdot inv(a)) \cdot (c \cdot inv(d))$ (by MultInvariance).
+	\\$(b \cdot inv(a)) \cdot (a \cdot inv(b)) = $1 (by InvCanc).
 	Hence $1 < (b \cdot inv(a)) \cdot (c \cdot inv(d))$.
 	$(d \cdot inv(c)) \cdot 1 < (d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d)))$ (by MultInvariance).
 	$d \cdot inv(c) < (d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d)))$ (by One).
-	$(d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \dotequal ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \cdot (d \cdot inv(c))$ (by ComMult)
-	$\dotequal (b \cdot inv(a)) \cdot ((c \cdot inv(d)) \cdot (d \cdot inv(c)))$ (by AssMult)
-	$\dotequal (b \cdot inv(a)) \cdot 1$ (by InvCanc)
-	$\dotequal b \cdot inv(a)$ (by One).   
+	\\\\$(d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \\\dotequal ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \cdot (d \cdot inv(c))$ (by ComMult)
+	\\$\dotequal (b \cdot inv(a)) \cdot ((c \cdot inv(d)) \cdot (d \cdot inv(c)))$ (by AssMult)
+	\\$\dotequal (b \cdot inv(a)) \cdot 1$ (by InvCanc)
+	\\$\dotequal b \cdot inv(a)$ (by One).   
 	\end{proof}
 	
 	
 	
 	\begin{lemma}[AbsInv]
-	Let $x$ be a real number. Assume $x \neq 0$. Then $abs(inv(x)) = inv(abs(x))$.
+	Let $x$ be a real number. Assume $x \neq 0$. Then $$abs(inv(x)) = inv(abs(x)).$$
 	\end{lemma}
-	\begin{proof}
+	\begin{proof} \\
 	We have $pos(abs(inv(x)))$ and $pos(inv(abs(x)))$.
 	$pos(1)$ (by OnePos).
-	(1) Hence $( abs(inv(x)) = abs(abs(inv(x)))$ and $inv(abs(x)) = abs(inv(abs(x))) )$ and $abs(1) = 1$ (by AbsValue).
-	$abs(inv(x)) \dotequal abs(abs(inv(x)))$ (by 1)
-	$\dotequal abs(abs(inv(x)) \cdot 1)$ (by One)
-	$\dotequal abs(abs(inv(x)) \cdot (abs(x) \cdot inv(abs(x))))$ (by Inverse)
-	$\dotequal abs((abs(inv(x)) \cdot abs(x)) \cdot inv(abs(x)))$ (by AssMult)
-	$\dotequal abs(abs(inv(x) \cdot x) \cdot inv(abs(x)))$ (by AbsMult)
-	$\dotequal abs(abs(1) \cdot inv(abs(x)))$ (by InvDummy)
-	$\dotequal abs(1 \cdot inv(abs(x)))$ (by 1) 
-	$\dotequal abs(inv(abs(x)))$ (by OneDummy)
-	$\dotequal inv(abs(x))$ (by 1).    
+	\\(1) Hence $( abs(inv(x)) = abs(abs(inv(x)))$ and $inv(abs(x)) = abs(inv(abs(x))) )$ and $abs(1) = 1$ (by AbsValue).
+	\\$abs(inv(x)) \dotequal abs(abs(inv(x)))$ (by 1)
+	\\$\dotequal abs(abs(inv(x)) \cdot 1)$ (by One)
+	\\$\dotequal abs(abs(inv(x)) \cdot (abs(x) \cdot inv(abs(x))))$ (by Inverse)
+	\\$\dotequal abs((abs(inv(x)) \cdot abs(x)) \cdot inv(abs(x)))$ (by AssMult)
+	\\$\dotequal abs(abs(inv(x) \cdot x) \cdot inv(abs(x)))$ (by AbsMult)
+	\\$\dotequal abs(abs(1) \cdot inv(abs(x)))$ (by InvDummy)
+	\\$\dotequal abs(1 \cdot inv(abs(x)))$ (by 1) 
+	\\$\dotequal abs(inv(abs(x)))$ (by OneDummy)
+	\\$\dotequal inv(abs(x))$ (by 1).    
 	\end{proof}
 	
 	
 	\begin{lemma}[InvOne]
 	$inv(1) = 1$.
 	\end{lemma}
-	\begin{proof}
+	\begin{proof}\\
 	$1 \dotequal 1 \cdot inv(1)$ (by Inverse)
-	$\dotequal inv(1)$ (by OneDummy).
+	\\$\dotequal inv(1)$ (by OneDummy).
 	\end{proof}   
 	
 \end{forthel}
