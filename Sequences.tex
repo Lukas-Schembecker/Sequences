@@ -1225,6 +1225,46 @@ We simplified the proof as much as possible - the prover did not accept further 
 			Hence $a$ converges (by Conv).
 		\end{subproof}
 	\end{proof}
+	
+	\noindent Let $b$ denote a real number. 
+	\\Let $A, B, S$ denote a set.
+	
+	
+	\begin{definition}[BoundedAboveBy]
+		Let $S$ be a set. Assume every element of $S$ is a real number. Let $b$ be a real number. $S$ is bounded above by $b$ iff for every real number $x$ such that $x$ is an element of $S \ x \leq b$.
+	\end{definition}
+	
+	\begin{definition}[BoundedAbove]
+		Let $S$ be a set. Assume every element of $S$ is a real number. $S$ is bounded above iff there exists a real number $b$ such that $S$ is bounded above by $b$.
+	\end{definition}
+	
+	\begin{definition}[BoundedBelowBy]
+		Let $S$ be a set. Assume every element of $S$ is a real number. Let $b$ be a real number. $S$ is bounded below by $b$ iff for every real number $x$ such that $x$ is an element of $S \ x \geq b$.
+	\end{definition}
+	
+	\begin{definition}[BoundedBelow]
+		Let $S$ be a set. Assume every element of $S$ is a real number. $S$ is bounded below iff there exists a real number $b$ such that $S$ is bounded below by $b$.
+	\end{definition}
+	
+	\begin{definition}[Sup] 
+		Let $S$ be a set. Assume every element of $S$ is a real number. 
+		Assume that $S$ is bounded above. Let $a$ be a real number such that $S$ is bounded above by $a$. 
+		$sup(S) = a$ iff for every real number $b$ such that $b < a$ $S$ is not bounded above by $b$.
+	\end{definition}
+	
+	\begin{definition}[Inf]
+		Let $S$ be a set. Assume every element of $S$ is a real number. 
+		Assume that $S$ is bounded below. Let $a$ be a real number such that $S$ is bounded below by $a$. 
+		$inf(S) = a$ iff for every real number $b$ such that $b > a$ $S$ is not bounded below by $b$.
+	\end{definition}
+	
+	\begin{definition}[LimSup]
+		Let $a$ be a sequence. Let $E$ be a set such that \\$E = \{ x \mid x $ is a real number and there exists an index sequence i such that $ Subseq(a,i) \text{ converges to } x \}$. $limsup(a) = sup(E)$ iff $E$ is bounded above.
+	\end{definition}
+	
+	\begin{definition}[LimInf]
+		Let $a$ be a sequence. Let $E$ be a set such that $E = \{ x \mid x $ is a real number and there exists an index sequence i such that $ Subseq(a,i) \text{ converges to } x \}$. $limsup(a) = inf(E)$ iff $E$ is bounded below.
+	\end{definition}
 \end{forthel}
 
 \subsection{helper.ftl}
@@ -1299,6 +1339,7 @@ In the following part we display basic propositions with rather technical proofs
 	$(a - b) \cdot (c - d) \dotequal ((a \cdot c) + ((-b) \cdot c)) + ((a \cdot (-d)) + ((-b) \cdot (-d)))$ (by Binomi1)
 	\\$\dotequal ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$ (by MinusRule5, MinusRule6).
 	\end{proof}
+
 	
 \end{forthel}
 
