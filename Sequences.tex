@@ -15,7 +15,7 @@
 \newenvironment{case}{\begin{list}{}{}
 		\item[]}{\end{list}}	
 \newtheorem{axiom}{Axiom}
-\newtheorem{lemma}{Lemma}
+\newtheorem{lemma}{Lemma}\plustwo
 \newtheorem{theorem}{Theorem}
 \newtheorem{definition}{Definition}
 \newtheorem{signature}{Signature}
@@ -84,7 +84,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{axiom}
 	
 	\begin{definition}[Convergence] Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every positive real
-	number $eps$ there exists $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < eps$.
+	number $\epsilon$ there exists $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < \epsilon$.
 	\end{definition}
 	
 	\begin{definition}[Conv] Let $a$ be a sequence. $a$ converges iff there exists a real number $x$ such that $a$ converges to $x$.
@@ -112,23 +112,23 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{lemma}
 	\begin{proof} Let us show that $a$ converges to $0$.
 	\begin{subproof}
-	Let $eps$ be a positive real number. 
-	Take $N$ such that $1 < N \cdot eps$ (by ArchimedeanAxiom, OnePos).
-	Let us show that for every $n$ such that $N < n \ dist(a[n],0) < eps$.
+	Let $\epsilon$ be a positive real number. 
+	Take $N$ such that $1 < N \cdot \epsilon$ (by ArchimedeanAxiom, OnePos).
+	Let us show that for every $n$ such that $N < n \ dist(a[n],0) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$. Then $n \neq 0$.
-	Let us show that $inv(n) < eps$.
+	Let us show that $inv(n) < \epsilon$.
 	\begin{subproof}
-	We have $N \cdot eps < n \cdot eps$ (by ComMult, MultInvariance).
-	Hence $1 < n \cdot eps$ (by TransitivityOfOrder).
+	We have $N \cdot \epsilon < n \cdot \epsilon$ (by ComMult, MultInvariance).
+	Hence $1 < n \cdot \epsilon$ (by TransitivityOfOrder).
 	$inv(n)$ is positive.
-	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot eps)$ (by MultInvariance).
+	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot \epsilon)$ (by MultInvariance).
 	We have $inv(n) \cdot 1 = inv(n)$ (by One).
-	$inv(n) \cdot (n \cdot eps) .= (inv(n) \cdot n) \cdot eps$ (by AssMult)
-	$.= 1 \cdot eps$ (by InvDummy)
-	$.= eps$ (by OneDummy).
+	$inv(n) \cdot (n \cdot \epsilon) .= (inv(n) \cdot n) \cdot \epsilon$ (by AssMult)
+	$.= 1 \cdot \epsilon$ (by InvDummy)
+	$.= \epsilon$ (by OneDummy).
 	\end{subproof}
-	Hence $dist(a[n],0) = inv(n) < eps$.
+	Hence $dist(a[n],0) = inv(n) < \epsilon$.
 	\end{subproof}
 	\end{subproof}
 	Let us show that $a$ has infinite range.
@@ -251,42 +251,42 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	\begin{definition}[Neighb]
-	Let $eps$ be a positive real number. Let $x$ be a real number.
-	$Neighb(x,eps) = \{y \mid y \text{ is a real number such that } dist(y,x) < eps\}$.
+	Let $\epsilon$ be a positive real number. Let $x$ be a real number.
+	$Neighb(x,\epsilon) = \{y \mid y \text{ is a real number such that } dist(y,x) < \epsilon\}$.
 	\end{definition}
 	
 	\begin{theorem}[ConvNeighborhood]
 	Let $a$ be a sequence. Let $x$ be a real number.
-	$a$ converges to $x$ iff for every positive real number $eps$ there exists a $N$
-	such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$.
+	$a$ converges to $x$ iff for every positive real number $\epsilon$ there exists a $N$
+	such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$.
 	\end{theorem}
 	\begin{proof}
-	Let us show that (if $a$ converges to $x$ then for every positive real number $eps$ there exists a $N$
-	such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$).
+	Let us show that (if $a$ converges to $x$ then for every positive real number $\epsilon$ there exists a $N$
+	such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$).
 	\begin{subproof}
 	Assume $a$ converges to $x$.
-	Let $eps$ be a positive real number.
-	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < eps$ (by Convergence).
-	Hence for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$ (by Neighb).
+	Let $\epsilon$ be a positive real number.
+	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < \epsilon$ (by Convergence).
+	Hence for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$ (by Neighb).
 	\end{subproof}
-	Let us show that (if for every positive real number $eps$ there exists a $N$ such that
-	for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$ then $a$ converges to $x$).
+	Let us show that (if for every positive real number $\epsilon$ there exists a $N$ such that
+	for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$ then $a$ converges to $x$).
 	\begin{subproof}
-	Assume for every positive real number $eps$ there exists a $N$ such that
-	for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$.
-	Let $eps$ be a positive real number.
-	Take $N$ such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$.
-	Hence for every $n$ such that $N < n \ dist(a[n],x) < eps$ (by Neighb).
+	Assume for every positive real number $\epsilon$ there exists a $N$ such that
+	for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$.
+	Let $\epsilon$ be a positive real number.
+	Take $N$ such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$.
+	Hence for every $n$ such that $N < n \ dist(a[n],x) < \epsilon$ (by Neighb).
 	\end{subproof}
 	\end{proof}	
 	
 	\begin{lemma}[DistEqual]
-	Let $x$ and $y$ be real numbers. Assume for every positive real number $eps$ $dist(x,y) < eps$.
+	Let $x$ and $y$ be real numbers. Assume for every positive real number $\epsilon$ $dist(x,y) < \epsilon$.
 	Then $x = y$.
 	\end{lemma}
 	\begin{proof}
 	Assume the contrary.
-	Then there exists a positive real number $eps2$ such that $eps2 < dist(x,y)$.
+	Then there exists a positive real number $\epsilon2$ such that $\epsilon2 < dist(x,y)$.
 	A contradiction.
 	\end{proof}
 	
@@ -295,19 +295,19 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $x = y$.
 	\end{theorem}
 	\begin{proof}
-	Let us show that for every positive real number $eps \ dist(x,y) < eps$.
+	Let us show that for every positive real number $\epsilon \ dist(x,y) < \epsilon$.
 	\begin{subproof}
-	Let $eps$ be a positive real number.
-	Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
-	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < halfeps$ (by Convergence).
-	Take $N2$ such that for every $n$ such that $N2 < n \ dist(a[n],y) < halfeps$ (by Convergence).
+	Let $\epsilon$ be a positive real number.
+	Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.
+	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < \halfeps$ (by Convergence).
+	Take $N2$ such that for every $n$ such that $N2 < n \ dist(a[n],y) < \halfeps$ (by Convergence).
 	For every $n \ dist(x,y) \leq dist(x,a[n]) + dist(a[n],y)$ (by DistTriangleIneq). 
 	Take $N3$ such that $N3 = max(N1,N2) + 1$.
 	Then $N1 < N3$ and $N2 < N3$.
-	Hence $dist(x,a[N3]) < halfeps$ and $dist(a[N3],y) < halfeps$ (by DistSymm).
-	Hence $dist(x,a[N3]) + dist(a[N3],y) < halfeps + halfeps$ (by AddInvariance).
-	Hence $dist(x,y) < halfeps + halfeps$ (by MixedTransitivity).
-	Hence $dist(x,y) < eps$ (by TwoHalf).
+	Hence $dist(x,a[N3]) < \halfeps$ and $dist(a[N3],y) < \halfeps$ (by DistSymm).
+	Hence $dist(x,a[N3]) + dist(a[N3],y) < \halfeps + \halfeps$ (by AddInvariance).
+	Hence $dist(x,y) < \halfeps + \halfeps$ (by MixedTransitivity).
+	Hence $dist(x,y) < \epsilon$ (by TwoHalf).
 	\end{subproof}
 	Therefore $x = y$ (by DistEqual).
 	\end{proof}
@@ -367,8 +367,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	\begin{definition}[LimitPointOfSet]
 	Let $E$ be a set. Assume every element of $E$ is a real number. A limit point of $E$
-	is a real number $x$ such that for every positive real number $eps$ there exists an element
-	$y$ of $E$ such that $y$ is an element of $Neighb(x,eps)$ and $y \neq x$.
+	is a real number $x$ such that for every positive real number $\epsilon$ there exists an element
+	$y$ of $E$ such that $y$ is an element of $Neighb(x,\epsilon)$ and $y \neq x$.
 	\end{definition}
 	
 	\begin{theorem}[ConvLimitPoint]
@@ -393,25 +393,25 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then for every $n \ a[n]$ is an element of $E$.
 	Let us show that $a$ converges to $x$.
 	\begin{subproof}
-	Let $eps$ be a positive real number.
-	Take $N$ such that $1 < N \cdot eps$ (by ArchimedeanAxiom, OnePos).
-	Let us show that for every $n$ such that $N < n \ dist(a[n],x) < eps$.
+	Let $\epsilon$ be a positive real number.
+	Take $N$ such that $1 < N \cdot \epsilon$ (by ArchimedeanAxiom, OnePos).
+	Let us show that for every $n$ such that $N < n \ dist(a[n],x) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$. Then $n \neq 0$.
 	Then $a[n]$ is an element of $E$ such that $a[n]$ is an element of $Neighb(x,inv(n))$.
 	Hence $dist(a[n],x) < inv(n)$.
-	Let us show that $inv(n) < eps$.
+	Let us show that $inv(n) < \epsilon$.
 	\begin{subproof}
-	We have $N \cdot eps < n \cdot eps$ (by ComMult, MultInvariance).
-	Hence $1 < n \cdot eps$ (by TransitivityOfOrder).
+	We have $N \cdot \epsilon < n \cdot \epsilon$ (by ComMult, MultInvariance).
+	Hence $1 < n \cdot \epsilon$ (by TransitivityOfOrder).
 	$inv(n)$ is positive.
-	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot eps)$ (by MultInvariance).
+	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot \epsilon)$ (by MultInvariance).
 	We have $inv(n) \cdot 1 = inv(n)$ (by One).
-	$inv(n) \cdot (n \cdot eps) .= (inv(n) \cdot n) \cdot eps$ (by AssMult)
-	$.= 1 \cdot eps$ (by InvDummy)
-	$.= eps$ (by OneDummy).
+	$inv(n) \cdot (n \cdot \epsilon) .= (inv(n) \cdot n) \cdot \epsilon$ (by AssMult)
+	$.= 1 \cdot \epsilon$ (by InvDummy)
+	$.= \epsilon$ (by OneDummy).
 	\end{subproof}
-	Hence $dist(a[n],x) < eps$ (by TransitivityOfOrder).
+	Hence $dist(a[n],x) < \epsilon$ (by TransitivityOfOrder).
 	\end{subproof}
 	\end{subproof}
 	\end{proof}
@@ -441,17 +441,17 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $a \plusone b$ converges to $x + y$.
 	\end{theorem}
 	\begin{proof}
-	Let $eps$ be a positive real number.
-	Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
-	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < halfeps$ (by Convergence).
-	Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < halfeps$ (by Convergence).
+	Let $\epsilon$ be a positive real number.
+	Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.
+	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < \halfeps$ (by Convergence).
+	Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < \halfeps$ (by Convergence).
 	Take $N$ such that $N = max(N1,N2)$.
 	Then $N1 \leq N$ and $N2 \leq N$.
-	Let us show that for every $n$ such that $N < n \ dist((a \plusone b)[n],(x+y)) < eps$.
+	Let us show that for every $n$ such that $N < n \ dist((a \plusone b)[n],(x+y)) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$.
-	We have $dist(a[n],x) < halfeps$.
-	We have $dist(b[n],y) < halfeps$.
+	We have $dist(a[n],x) < \halfeps$.
+	We have $dist(b[n],y) < \halfeps$.
 	$abs((a[n] + b[n]) - (x + y)) .= abs((a[n] + b[n]) + ((-x) + (-y)))$ (by MinusRule1)
 	$.= abs((-x) + ((a[n] + b[n]) - y))$ (by BubbleAdd)
 	$.= abs((-x) + (a[n] + (b[n] - y)))$ (by AssAdd)
@@ -459,10 +459,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= abs((a[n] - x) + (b[n] - y))$ (by ComAdd).
 	We have $abs((a[n] - x) + (b[n] - y)) \leq abs(a[n] - x) + abs(b[n] - y)$  (by AbsTriangleIneq).
 	Hence $abs((a[n] + b[n]) - (x + y)) \leq dist(a[n],x) + dist(b[n],y)$.
-	Hence $dist(a[n],x) + dist(b[n],y) < halfeps + halfeps$ (by AddInvariance).
-	Hence $abs((a[n] + b[n]) - (x + y)) < halfeps + halfeps$ (by MixedTransitivity).
-	Hence $dist((a \plusone b)[n],(x + y)) < halfeps + halfeps$.
-	Hence $dist((a \plusone b)[n],(x + y)) < eps$ (by TwoHalf).
+	Hence $dist(a[n],x) + dist(b[n],y) < \halfeps + \halfeps$ (by AddInvariance).
+	Hence $abs((a[n] + b[n]) - (x + y)) < \halfeps + \halfeps$ (by MixedTransitivity).
+	Hence $dist((a \plusone b)[n],(x + y)) < \halfeps + \halfeps$.
+	Hence $dist((a \plusone b)[n],(x + y)) < \epsilon$ (by TwoHalf).
 	\end{subproof}
 	\end{proof}
 	
@@ -471,12 +471,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $cn$ converges to $c$.
 	\end{lemma}
 	\begin{proof}
-	Let $eps$ be a positive real number.
-	Let us show that for every $n$ such that $0 < n \ dist(cn[n],c) < eps$.
+	Let $\epsilon$ be a positive real number.
+	Let us show that for every $n$ such that $0 < n \ dist(cn[n],c) < \epsilon$.
 	\begin{subproof}
 	Assume $0 < n$.
 	$dist(cn[n],c) = dist(c,c) = 0$ (by IdOfInd).
-	Hence $dist(cn[n],c) < eps$.
+	Hence $dist(cn[n],c) < \epsilon$.
 	\end{subproof}
 	\end{proof}
 	
@@ -518,10 +518,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Hence $c \cdottwo a$ converges to $c \cdot x$ (by ConstConv).
 	end.
 	Case $c \neq 0$.
-	Let $eps$ be a positive real number. 
-	(1)     Take a positive real number $invEps$ such that $invEps = inv(abs(c)) \cdot eps$.
-	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < invEps$ (By Convergence).
-	Let us show that for every $n$ such that $N < n \ dist(c \cdot a[n],c \cdot x) < eps$.
+	Let $\epsilon$ be a positive real number. 
+	(1)     Take a positive real number $\inveps$ such that $\inveps = inv(abs(c)) \cdot \epsilon$.
+	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < \inveps$ (By Convergence).
+	Let us show that for every $n$ such that $N < n \ dist(c \cdot a[n],c \cdot x) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$.
 	$abs((c \cdot a[n]) - (c \cdot x)) .= abs((c \cdot a[n]) +  ((-1) \cdot (c \cdot x))) (by MinusRule4)$ 
@@ -531,13 +531,13 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= abs((c \cdot a[n]) + (c \cdot (-x)))$ (by MinusRule4)
 	$.= abs(c \cdot (a[n] - x))$ (by Distrib)
 	$.= abs(c) \cdot abs(a[n] - x)$ (by AbsMult).
-	$abs(c) \cdot dist(a[n],x) < abs(c) \cdot invEps$ (by AbsPos, MultInvariance).
-	Hence $abs((c \cdot a[n]) - (c \cdot x)) < abs(c) \cdot invEps$.
-	$abs(c) \cdot invEps .= abs(c) \cdot (inv(abs(c)) \cdot eps)$ (by 1)
-	$.= (abs(c) \cdot inv(abs(c))) \cdot eps$ (by AssMult)
-	$.= 1 \cdot eps$ (by Inverse)
-	$.= eps$ (by OneDummy).
-	Hence $dist(c \cdot a[n],c \cdot x) < eps$.
+	$abs(c) \cdot dist(a[n],x) < abs(c) \cdot \inveps$ (by AbsPos, MultInvariance).
+	Hence $abs((c \cdot a[n]) - (c \cdot x)) < abs(c) \cdot \inveps$.
+	$abs(c) \cdot \inveps .= abs(c) \cdot (inv(abs(c)) \cdot \epsilon)$ (by 1)
+	$.= (abs(c) \cdot inv(abs(c))) \cdot \epsilon$ (by AssMult)
+	$.= 1 \cdot \epsilon$ (by Inverse)
+	$.= \epsilon$ (by OneDummy).
+	Hence $dist(c \cdot a[n],c \cdot x) < \epsilon$.
 	\end{subproof}
 	end.
 	\end{proof}
@@ -574,20 +574,20 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	(1) Define $s1[k] = (a[k] - x) \cdot (b[k] - y)$ for $k$ in $\NN$.
 	Let us show that $s1$ converges to $0$. 
 	\begin{subproof}
-    Assume $eps$ is a positive real number. 
-    Take a positive real number $rooteps$ such that $rooteps = sqrt(eps)$ (by Sqrt).
-    Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < rooteps$ (by Convergence).
-    Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < rooteps$ (by Convergence).
+    Assume $\epsilon$ is a positive real number. 
+    Take a positive real number $\rooteps$ such that $\rooteps = sqrt(\epsilon)$ (by Sqrt).
+    Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < \rooteps$ (by Convergence).
+    Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < \rooteps$ (by Convergence).
     Take $N$ such that $N = max(N1,N2)$.
-    Let us show that for every $n$ such that $N < n \ dist(s1[n],0) < eps$.
+    Let us show that for every $n$ such that $N < n \ dist(s1[n],0) < \epsilon$.
     \begin{subproof}
     Assume $N < n$.
-    $dist(a[n],x) < rooteps$ and $dist(b[n],y) < rooteps$.
-    $dist(a[n],x), dist(b[n],y)$ and $rooteps$ are nonnegative.
-    Then $dist(a[n],x) \cdot dist(b[n],y) < eps$ (by NonNegMultInvariance).
-    Hence $abs(a[n] - x) \cdot abs(b[n] - y) < eps$.
-    Hence $abs((a[n] - x) \cdot (b[n] - y)) < eps$ (by AbsMult).
-    Hence $abs(((a[n] - x) \cdot (b[n] - y)) - 0) < eps$ (by Zero, NegOfZero).
+    $dist(a[n],x) < \rooteps$ and $dist(b[n],y) < \rooteps$.
+    $dist(a[n],x), dist(b[n],y)$ and $\rooteps$ are nonnegative.
+    Then $dist(a[n],x) \cdot dist(b[n],y) < \epsilon$ (by NonNegMultInvariance).
+    Hence $abs(a[n] - x) \cdot abs(b[n] - y) < \epsilon$.
+    Hence $abs((a[n] - x) \cdot (b[n] - y)) < \epsilon$ (by AbsMult).
+    Hence $abs(((a[n] - x) \cdot (b[n] - y)) - 0) < \epsilon$ (by Zero, NegOfZero).
     \end{subproof}
 	\end{subproof}
 	(2) Define $s2[k] = (x \cdot (b[k] + (-y))) + (y \cdot (a[k] + (-x)))$ for $k$ in $\NN$.
@@ -622,9 +622,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Hence $s3 = s1 \plusone s2$ (by SequenceEq).
 	Therefore the thesis (by SumConv, Zero).
 	\end{subproof}
-	Let $eps$ be a positive real number.
-	Take $N$ such that for every $n$ such that $N < n \ dist(s3[n],0) < eps$ (by Convergence).
-	Let us show that for every $n$ such that $N < n \ dist(a[n] \cdot b[n],x \cdot y) < eps$.
+	Let $\epsilon$ be a positive real number.
+	Take $N$ such that for every $n$ such that $N < n \ dist(s3[n],0) < \epsilon$ (by Convergence).
+	Let us show that for every $n$ such that $N < n \ dist(a[n] \cdot b[n],x \cdot y) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$.
 	$dist(s3[n],0) .= dist((a[n] \cdot b[n]) - (x \cdot y),0)$ (by 3)
@@ -641,11 +641,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $div(a)$ converges to $inv(x)$.
 	\end{theorem}
 	\begin{proof}
-	Let $eps$ be a positive real number.
+	Let $\epsilon$ be a positive real number.
 	$abs(x) \neq 0$. 
 	$2, inv(2), abs(x), abs(x) \cdot abs(x), -abs(x), ((-1) \cdot inv(2)) \cdot abs(x), (inv(2) \cdot abs(x)) + (-abs(x))$ are real numbers.
-	We have $pos(2)$ and $pos(inv(2))$ and $pos(abs(x))$ and $pos(abs(inv(x)))$ and $pos(inv(2) \cdot eps)$ and $pos(abs(x) \cdot abs(x))$ and $pos((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x)))$ and
-	$pos(inv(2) \cdot abs(x))$ and $pos(eps \cdot (abs(x) \cdot abs(x)))$ and $pos(inv(2) \cdot abs(inv(x)))$ and $pos((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))))$.
+	We have $pos(2)$ and $pos(inv(2))$ and $pos(abs(x))$ and $pos(abs(inv(x)))$ and $pos(inv(2) \cdot \epsilon)$ and $pos(abs(x) \cdot abs(x))$ and $pos((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x)))$ and
+	$pos(inv(2) \cdot abs(x))$ and $pos(\epsilon \cdot (abs(x) \cdot abs(x)))$ and $pos(inv(2) \cdot abs(inv(x)))$ and $pos((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))))$.
 	Take a natural number $m$ such that for every $n$ such that $m < n \  dist(a[n],x) < inv(2) \cdot abs(x)$ (by Convergence).
 	Let us show that for every $n$ such that $m < n \ inv(2) \cdot abs(x) < abs(a[n])$.
 	\begin{subproof}
@@ -678,13 +678,13 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
     $-((-inv(2)) \cdot abs(x)) = abs(x) \cdot inv(2)$ (by MinusRule5, MinusRule2, ComMult).
     Therefore $abs(a[n]) > abs(x) \cdot inv(2)$ (by TransitivityOfOrder).
 	\end{subproof}
-	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < (inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x))$ (by Convergence). 
+	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < (inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x))$ (by Convergence). 
 	Take $N2$ such that $N2 = max(N1,m)$.
-	Let us show that for every $n$ such that $N2 < n \ dist(inv(a[n]),inv(x)) < eps$.
+	Let us show that for every $n$ such that $N2 < n \ dist(inv(a[n]),inv(x)) < \epsilon$.
 	\begin{subproof}
 	Assume $N2 < n$.
 	Then we have $N1 < n$ and $m < n$.
-	Let us show that $dist(inv(a[n]),inv(x)) < ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$.
+	Let us show that $dist(inv(a[n]),inv(x)) < ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$.
 	\begin{subproof}
 	$dist(inv(a[n]),inv(x)) .= abs(inv(a[n]) - inv(x))$ (by DistDefinition)
 	$.= abs((1 \cdot inv(a[n])) - (1 \cdot inv(x)))$ (by OneDummy)
@@ -696,21 +696,21 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n])$ (by ComMult).
 	We have $pos(abs(inv(a[n]) \cdot inv(x)))$ (by AbsPos, InvNotZero, NoZeroDivisors).
 	$abs(x - a[n]) = dist(a[n],x)$ (by DistDefinition, DistSymm).
-	$abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n]) < abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x)))$ (by MultInvariance, DistDefinition).
-	$abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x))) .= (abs(inv(a[n])) \cdot abs(inv(x))) \cdot ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x)))$ (by AbsMult)
-	$.= ((inv(2) \cdot eps) \cdot (abs(x) \cdot abs(x))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult)
-	$.= (inv(2) \cdot (eps \cdot (abs(x) \cdot abs(x)))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by AssMult)
-	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot inv(2)) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult) 
-	$.= (eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(a[n])) \cdot abs(inv(x))))$ (by AssMult)
-	$.= (eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(x)) \cdot abs(inv(a[n]))))$ (by ComMult)
-	$.= (eps \cdot (abs(x) \cdot abs(x))) \cdot ((inv(2) \cdot abs(inv(x))) \cdot abs(inv(a[n])))$ (by AssMult)
-	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot abs(inv(a[n]))$ (by AssMult)
-	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot inv(abs(a[n]))$ (by AbsInv)
-	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$ (by OneDummy).
+	$abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n]) < abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x)))$ (by MultInvariance, DistDefinition).
+	$abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x))) .= (abs(inv(a[n])) \cdot abs(inv(x))) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x)))$ (by AbsMult)
+	$.= ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult)
+	$.= (inv(2) \cdot (\epsilon \cdot (abs(x) \cdot abs(x)))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by AssMult)
+	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(2)) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult) 
+	$.= (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(a[n])) \cdot abs(inv(x))))$ (by AssMult)
+	$.= (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(x)) \cdot abs(inv(a[n]))))$ (by ComMult)
+	$.= (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot ((inv(2) \cdot abs(inv(x))) \cdot abs(inv(a[n])))$ (by AssMult)
+	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot abs(inv(a[n]))$ (by AssMult)
+	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot inv(abs(a[n]))$ (by AbsInv)
+	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$ (by OneDummy).
 	\end{subproof}
-	$(eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))), 1 \cdot inv(abs(a[n])), 2 \cdot inv(abs(x)), dist(inv(a[n]), inv(x)),
-	((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))), ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ are real numbers.
-	Let us show that $((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < eps$.
+	$(\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))), 1 \cdot inv(abs(a[n])), 2 \cdot inv(abs(x)), dist(inv(a[n]), inv(x)),
+	((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))), ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ are real numbers.
+	Let us show that $((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < \epsilon$.
 	\begin{subproof} 
 	Let us show that $1 \cdot inv(abs(a[n])) < 2 \cdot inv(abs(x))$.
 	\begin{subproof}
@@ -720,16 +720,16 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	($abs(a[n]) \neq 0$ and $1 \neq 0$) and ($abs(x) \neq 0$ and $2 \neq 0$).
 	Then $1 \cdot inv(abs(a[n])) < 2 \cdot inv(abs(x))$ (by InvSwapIneq).
 	\end{subproof}
-	$((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ (by MultInvariance).
-	$((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x))) .= ((eps \cdot (abs(x) \cdot abs(x))) \cdot (inv(abs(x)) \cdot inv(2))) \cdot (2 \cdot inv(abs(x)))$ (by ComMult, AbsInv)
-	$.= (((eps \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot inv(2)) \cdot (2 \cdot inv(abs(x)))$ (by AssMult)
-	$.= ((eps \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot (inv(2) \cdot (2 \cdot inv(abs(x))))$ (by AssMult)
-	$.= (eps \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot ((inv(2) \cdot 2) \cdot inv(abs(x)))$ (by AssMult)
-	$.= (eps \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot inv(abs(x))$ (by InvDummy, OneDummy)
-	$.= (eps \cdot (abs(x) \cdot (abs(x) \cdot inv(abs(x))))) \cdot inv(abs(x))$ (by AssMult)
-	$.= (eps \cdot abs(x)) \cdot inv(abs(x))$ (by Inverse, One)
-	$.= eps \cdot (abs(x) \cdot inv(abs(x)))$ (by AssMult)
-	$.= eps$ (by Inverse, One).
+	$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ (by MultInvariance).
+	$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x))) .= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(abs(x)) \cdot inv(2))) \cdot (2 \cdot inv(abs(x)))$ (by ComMult, AbsInv)
+	$.= (((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot inv(2)) \cdot (2 \cdot inv(abs(x)))$ (by AssMult)
+	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot (inv(2) \cdot (2 \cdot inv(abs(x))))$ (by AssMult)
+	$.= (\epsilon \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot ((inv(2) \cdot 2) \cdot inv(abs(x)))$ (by AssMult)
+	$.= (\epsilon \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot inv(abs(x))$ (by InvDummy, OneDummy)
+	$.= (\epsilon \cdot (abs(x) \cdot (abs(x) \cdot inv(abs(x))))) \cdot inv(abs(x))$ (by AssMult)
+	$.= (\epsilon \cdot abs(x)) \cdot inv(abs(x))$ (by Inverse, One)
+	$.= \epsilon \cdot (abs(x) \cdot inv(abs(x)))$ (by AssMult)
+	$.= \epsilon$ (by Inverse, One).
 	\end{subproof}
 	Hence the thesis (by TransitivityOfOrder).
 	\end{subproof}
@@ -792,15 +792,15 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		\begin{subproof}
 			Assume $a$ converges to $x$. 
 			Let $i$ be an index sequence.
-			Let $eps$ be a positive real number.
-			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < eps$ (by Convergence).
+			Let $\epsilon$ be a positive real number.
+			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < \epsilon$ (by Convergence).
 			
-			Let us show that for every $n$ such that $N < n$ \\ $dist(Subseq(a,i)[n],x) < eps$.
+			Let us show that for every $n$ such that $N < n$ \\ $dist(Subseq(a,i)[n],x) < \epsilon$.
 			\begin{subproof}
 				Let $n$ be a natural number such that $N < n$.\\
 				Then $n \leq i[n]$ (by SubSeqLeq).\\
 				Hence $N < i[n]$ (by MixedTransitivity).\\
-				Hence $dist(Subseq(a,i)[n],x) = dist(a[i[n]],x) < eps$.
+				Hence $dist(Subseq(a,i)[n],x) = dist(a[i[n]],x) < \epsilon$.
 			\end{subproof}
 		\end{subproof}
 		Let us show that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$.
@@ -820,8 +820,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{axiom}
 	
 	\begin{definition}[Cauchy]
-		A cauchy sequence is a sequence $a$ such that for every positive real number $eps$ there exists $N$ such that
-		for every $n$,$m$ such that ($N < n$ and $N < m$) $dist(a[n],a[m]) < eps$.
+		A cauchy sequence is a sequence $a$ such that for every positive real number $\epsilon$ there exists $N$ such that
+		for every $n$,$m$ such that ($N < n$ and $N < m$) $dist(a[n],a[m]) < \epsilon$.
 	\end{definition}
 	
 	\begin{lemma}[CauchyBounded]
@@ -883,22 +883,22 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		
 		Let us show that $a$ converges to $x$.
 		\begin{subproof}
-			Let $eps$ be a positive real number.\\			
-			Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.\\
-			Take $N1$ such that for every $n$,$m$ such that ($N1 < n$ and $N1 < m$) $dist(a[n],a[m]) < halfeps$ (by Cauchy).\\
-			Take $N2$ such that for every $n$ such that $N2 < n$ $dist(Subseq(a,i)[n],x) < halfeps$ (by Convergence).\\
+			Let $\epsilon$ be a positive real number.\\			
+			Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.\\
+			Take $N1$ such that for every $n$,$m$ such that ($N1 < n$ and $N1 < m$) $dist(a[n],a[m]) < \halfeps$ (by Cauchy).\\
+			Take $N2$ such that for every $n$ such that $N2 < n$ $dist(Subseq(a,i)[n],x) < \halfeps$ (by Convergence).\\
 			Take $N$ such that $N = max(N1,N2)$.\\
 			Then $N1 \leq N$ and $N2 \leq N$.
 			
-			Let us show that for every $n$ such that $N < n$ $dist(a[n],x) < eps$.
+			Let us show that for every $n$ such that $N < n$ $dist(a[n],x) < \epsilon$.
 			\begin{subproof}
 				Assume $N < n$. Hence $N1 < n$ and $N2 < n$ (by MixedTransitivity).\\
 				We have $n \leq i[n]$ (by SubSeqLeq).\\
 				Hence $N1 < i[n]$ (by MixedTransitivity).\\
 				$a[n]$, $a[i[n]]$, $dist(a[n],a[i[n]])$, $dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x$, $dist(a[n],a[i[n]]) + dist(a[i[n]],x)$ are real numbers.\\
 				We have $Subseq(a,i)[n] = a[i[n]]$.\\
-				We have $dist(a[n],a[i[n]]) < halfeps$.\\
-				We have $dist(a[i[n]],x) < halfeps$.\\
+				We have $dist(a[n],a[i[n]]) < \halfeps$.\\
+				We have $dist(a[i[n]],x) < \halfeps$.\\
 				$dist(a[n],x) .= abs(a[n] - x)$ (by DistDefinition)\\
 				$.= abs((a[n] + 0) - x)$ (by Zero)\\
 				$.= abs((a[n] + (a[i[n]] - a[i[n]])) - x)$ (by Neg)\\
@@ -908,9 +908,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				We have $abs((a[n] - a[i[n]]) + (a[i[n]] - x)) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$ (by AbsTriangleIneq).\\
 				Hence $dist(a[n],x) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$.\\
 				Hence $dist(a[n],x) \leq dist(a[n],a[i[n]]) + dist(a[i[n]],x)$.\\
-				We have $dist(a[n],a[i[n]]) + dist(a[i[n]],x) < halfeps + halfeps$ (by AddInvariance).\\
-				Hence $dist(a[n],x) < halfeps + halfeps$ (by MixedTransitivity).\\
-				Hence $dist(a[n],x) < eps$ (by TwoHalf).
+				We have $dist(a[n],a[i[n]]) + dist(a[i[n]],x) < \halfeps + \halfeps$ (by AddInvariance).\\
+				Hence $dist(a[n],x) < \halfeps + \halfeps$ (by MixedTransitivity).\\
+				Hence $dist(a[n],x) < \epsilon$ (by TwoHalf).
 			\end{subproof}
 			
 		\end{subproof}
@@ -928,30 +928,30 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			
 			Take a real number $x$ such that $a$ converges to $x$.
 			
-			Let $eps$ be a positive real number.
+			Let $\epsilon$ be a positive real number.
 			
-			Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
+			Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.
 			
-			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < halfeps$ (by Convergence).
+			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < \halfeps$ (by Convergence).
 			
-			Let us show that for every $n$,$m$ such that ($N < n$ and $N < m$) $dist(a[n],a[m]) < eps$.
+			Let us show that for every $n$,$m$ such that ($N < n$ and $N < m$) $dist(a[n],a[m]) < \epsilon$.
 			
 			\begin{subproof}
 				Assume $N < n$ and $N < m$.
 				
-				We have $dist(a[n],x) < halfeps$.
+				We have $dist(a[n],x) < \halfeps$.
 				
-				We have $dist(a[m],x) < halfeps$.
+				We have $dist(a[m],x) < \halfeps$.
 				
 				We have $dist(a[n],a[m]) \leq dist(a[n],x) + dist(x,a[m])$ (by DistTriangleIneq).
 				
 				Hence $dist(a[n],a[m]) \leq dist(a[n],x) + dist(a[m],x)$ (by DistSymm).
 				
-				We have $dist(a[n],x) + dist(a[m],x) < halfeps + halfeps$ (by AddInvariance).
+				We have $dist(a[n],x) + dist(a[m],x) < \halfeps + \halfeps$ (by AddInvariance).
 				
-				Hence $dist(a[n],a[m]) < halfeps + halfeps$ (by MixedTransitivity).
+				Hence $dist(a[n],a[m]) < \halfeps + \halfeps$ (by MixedTransitivity).
 				
-				Hence $dist(a[n],a[m]) < eps$ (by TwoHalf).
+				Hence $dist(a[n],a[m]) < \epsilon$ (by TwoHalf).
 				
 			\end{subproof}
 			
@@ -1009,41 +1009,41 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{proof}
 		For every $n$ $a[n] \leq LeastUpper(a)$ (by UpperBoundSeq, LeastUpperBoundSeq).
 
-		Let us show that for every positive real number $eps$ there exists $N$ such that $(LeastUpper(a) - eps) < a[N]$.
+		Let us show that for every positive real number $\epsilon$ there exists $N$ such that $(LeastUpper(a) - \epsilon) < a[N]$.
 		
 		\begin{subproof}
 			Assume the contrary.
 			
-			Take a positive real number $eps$ such that for every $N$ not($(LeastUpper(a) - eps) < a[N]$).
+			Take a positive real number $\epsilon$ such that for every $N$ not($(LeastUpper(a) - \epsilon) < a[N]$).
 			
-			Let us show that for every $n$ $a[n] \leq (LeastUpper(a) - eps)$.
+			Let us show that for every $n$ $a[n] \leq (LeastUpper(a) - \epsilon)$.
 			
 			\begin{subproof}
 				Let $n$ be a natural number.
 				
-				We have not($(LeastUpper(a) - eps) < a[n]$).
+				We have not($(LeastUpper(a) - \epsilon) < a[n]$).
 				
-				Therefore $(LeastUpper(a) - eps) \geq a[n]$ (by NotRuleOrder).
+				Therefore $(LeastUpper(a) - \epsilon) \geq a[n]$ (by NotRuleOrder).
 				
-				Hence $a[n] \leq (LeastUpper(a) - eps)$.
+				Hence $a[n] \leq (LeastUpper(a) - \epsilon)$.
 				
 			\end{subproof}
 			
-			Hence $(LeastUpper(a) - eps)$ is upper bound of $a$ (by UpperBoundSeq).
+			Hence $(LeastUpper(a) - \epsilon)$ is upper bound of $a$ (by UpperBoundSeq).
 			
-			$LeastUpper(a) - (LeastUpper(a) - eps) .= LeastUpper(a) + (-LeastUpper(a) + eps)$ (by MinusRule1, MinusRule2)
+			$LeastUpper(a) - (LeastUpper(a) - \epsilon) .= LeastUpper(a) + (-LeastUpper(a) + \epsilon)$ (by MinusRule1, MinusRule2)
 			
-			$.= (LeastUpper(a) - LeastUpper(a)) + eps$ (by AssAdd)
+			$.= (LeastUpper(a) - LeastUpper(a)) + \epsilon$ (by AssAdd)
 			
-			$.= 0 + eps$ (by Neg)
+			$.= 0 + \epsilon$ (by Neg)
 			
-			$.= eps + 0$ (by ComAdd)
+			$.= \epsilon + 0$ (by ComAdd)
 			
-			$.= eps$ (by Zero).
+			$.= \epsilon$ (by Zero).
 			
-			Hence $(LeastUpper(a) - eps) < LeastUpper(a)$.
+			Hence $(LeastUpper(a) - \epsilon) < LeastUpper(a)$.
 			
-			Hence not($(LeastUpper(a) - eps) \geq LeastUpper(a)) (by NotRuleOrder)$.
+			Hence not($(LeastUpper(a) - \epsilon) \geq LeastUpper(a)) (by NotRuleOrder)$.
 			
 			Contradiction (by LeastUpperBoundSeq).
 			
@@ -1052,11 +1052,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		Let us show that $a$ converges to $LeastUpper(a)$.
 		
 		\begin{subproof}
-			Let $eps$ be a positive real number.
+			Let $\epsilon$ be a positive real number.
 			
-			Take $N$ such that $(LeastUpper(a) - eps) < a[N]$.
+			Take $N$ such that $(LeastUpper(a) - \epsilon) < a[N]$.
 			
-			Let us show that for every $n$ such that $N < n$ $dist(a[n],LeastUpper(a)) < eps$.
+			Let us show that for every $n$ such that $N < n$ $dist(a[n],LeastUpper(a)) < \epsilon$.
 			
 			\begin{subproof}
 				Assume $N < n$.
@@ -1067,31 +1067,31 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Hence $dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n]) = LeastUpper(a) - a[n]$.
 				
-				We have $(LeastUpper(a) - eps) + eps < a[N] + eps$ (by MixedAddInvariance).
+				We have $(LeastUpper(a) - \epsilon) + \epsilon < a[N] + \epsilon$ (by MixedAddInvariance).
 				
-				We have $((LeastUpper(a) - eps) + eps) - a[N] < (a[N] + eps) - a[N]$ (by MixedAddInvariance).
+				We have $((LeastUpper(a) - \epsilon) + \epsilon) - a[N] < (a[N] + \epsilon) - a[N]$ (by MixedAddInvariance).
 				
-				$((LeastUpper(a) - eps) + eps) - a[N] .= (LeastUpper(a) + (-eps + eps)) - a[N]$ (by AssAdd)
+				$((LeastUpper(a) - \epsilon) + \epsilon) - a[N] .= (LeastUpper(a) + (-\epsilon + \epsilon)) - a[N]$ (by AssAdd)
 				
-				$.= (LeastUpper(a) + (eps - eps)) - a[N]$ (by ComAdd)
+				$.= (LeastUpper(a) + (\epsilon - \epsilon)) - a[N]$ (by ComAdd)
 				
 				$.= (LeastUpper(a) + 0) - a[N]$ (by Neg)
 				
 				$.= LeastUpper(a) - a[N]$ (by Zero).
 				
-				$(a[N] + eps) - a[N] .= (eps + a[N]) - a[N]$ (by ComAdd)
+				$(a[N] + \epsilon) - a[N] .= (\epsilon + a[N]) - a[N]$ (by ComAdd)
 				
-				$.= eps + (a[N] - a[N])$ (by AssAdd)
+				$.= \epsilon + (a[N] - a[N])$ (by AssAdd)
 				
-				$.= eps + 0$ (by Neg)
+				$.= \epsilon + 0$ (by Neg)
 				
-				$.= eps$ (by Zero).
+				$.= \epsilon$ (by Zero).
 				
-				Hence $LeastUpper(a) - a[N] < eps$.
+				Hence $LeastUpper(a) - a[N] < \epsilon$.
 				
 				We have $LeastUpper(a) - a[n] \leq LeastUpper(a) - a[N]$.
 				
-				Hence $dist(a[n],LeastUpper(a)) < eps$ (by MixedTransitivity).
+				Hence $dist(a[n],LeastUpper(a)) < \epsilon$ (by MixedTransitivity).
 				
 			\end{subproof}
 			
