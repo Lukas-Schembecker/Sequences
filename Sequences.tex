@@ -64,12 +64,12 @@
 
 
 \section{Introduction}
-The present formalization deals with chapter 3 'Numerical Sequences (and Series)' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. In order to improve the readability, we moved most of these to a seperate file - 'helper.ftl'.
+The present formalization covers chapter 3 'Numerical Sequences (and Series)' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. To improve readability, we moved most of these to a seperate file - 'helper.ftl'.
 
 \section{The Formalization}
 \subsection{Sequences.ftl}
 
-In order to improve the proof reading experience, we added two new enviroments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new enviroments, so we changed it in 'Alice/Import/LaTeX.hs' accordingly. Besides some further smaller changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes in the parser.\\
+In order to improve the proof reading experience, we added two new enviroments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new enviroments, so we changed it's Haskell code in 'Alice/Import/LaTeX.hs' accordingly. Besides some further small changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes to the parser.\\
 
 \noindent The definitions of sequences can be translated very closely to Rudin's text:
 
@@ -106,7 +106,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{definition}
 \end{forthel}
 
-\noindent Here we depart from the standard definion of finite range - namely the set theoretic finiteness of $ran$ - and use an equivalent definition, which is more related to the convergence definition as set theoretic definition of finiteness is far more complex.
+\noindent Here we depart from the standard definition of finite range - namely the set theoretic finiteness of $ran$ - and use an equivalent definition, which is more related to the convergence definition as a set theoretic definition of finiteness is far more complex.
 
 \begin{forthel}
 	\begin{definition}[RangeN] Let $a$ be a sequence. \\ $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$. 
@@ -119,21 +119,21 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{definition}
 \end{forthel}
 
-\noindent The following properties of $\frac{1}{n}$ and $(-1)^{n}$ are said to be trivial as they only need 'common math' to be proven. A rigerous formalization needs to address these common facts seperately, so they text gets naturally longer.\\
+\noindent The following properties of $\frac{1}{n}$ and $(-1)^{n}$ are said to be trivial by Rudin as they only need 'common math' to be proven. A rigerous formalization needs to address these common facts seperately, so they text gets naturally longer.\\
 
 \noindent Here we also have to consider the special case of $n=0$. Rudin does not consider 0 as a natural number.
 
 \begin{forthel}
 	\begin{lemma}[PropertiesOfInv]
 		Let $a$ be a sequence such that for every $n$
-		((If $n = 0$ then $a[n] = 2$) and (If $n \neq 0$ then $a[n] = inv(n)$)).
+		((If $n = 0$ then $a[n] = 2$) and (if $n \neq 0$ then $a[n] = inv(n)$)).
 		Then $a$ converges to $0$ and $a$ has infinite range.
 	\end{lemma}
 	\begin{proof}
 		Let us show that $a$ converges to $0$.
 		\begin{subproof}
 			Let $\epsilon$ be a positive real number. 
-			Take $N$ such that $1 < N \cdot \epsilon$ (by ArchimedeanAxiom, OnePos).
+			Take $N$ such that $1 < N \cdot \epsilon$ \\(by ArchimedeanAxiom, OnePos).
 	
 			Let us show that for every $n$ such that $N < n \ dist(a[n],0) < \epsilon$.
 			\begin{subproof}
@@ -156,12 +156,12 @@ In order to improve the proof reading experience, we added two new enviroments '
 		Let us show that $a$ has infinite range.
 		\begin{subproof}
 			Assume the contrary.
-			Take $N$ such that $ran(a) = ranN(a,N)$ (by FiniteRange).
+			Take $N$ such that $ran(a) = ranN(a,N)$ \linebreak(by FiniteRange).
 			Then $a[N + 1]$ is an element of $ran(a)$ (by OneNat, AddClosedNat, Range).
 			
 			Let us show that $a[N + 1]$ is not an element of $ranN(a,N)$.
 			\begin{subproof}
-				Let us show that for every natural number $n$ such that $n \leq N \ a[n] \neq a[N + 1]$.
+				Let us show that for every natural number $n$ such that \\$n \leq N \ a[n] \neq a[N + 1]$.
 				\begin{subproof}
 					Assume the contrary.\\
 					Take $n$ such that $n \leq N \text{ and } a[n] = a[N + 1]$.
@@ -315,7 +315,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 			Hence for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$ (by Neighb).
 		\end{subproof}
 	
-		Let us show that (if for every positive real number $\epsilon$ there exists a $N$ such that
+		\noindent Let us show that (if for every positive real number $\epsilon$ there exists a $N$ such that
 		for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,\epsilon)$ then $a$ converges to $x$).
 		\begin{subproof}
 			Assume for every positive real number $\epsilon$ there exists a $N$ such that
@@ -336,7 +336,11 @@ In order to improve the proof reading experience, we added two new enviroments '
 		Then there exists a positive real number $\epsilon$ such that $\epsilon < dist(x,y)$.
 		A contradiction.
 	\end{proof}
-	
+\end{forthel}
+
+\noindent Here we should note that we added the symbol $\halfeps$ for the variable 'halfeps' in ForTheL. Thus the strangly looking line $\halfeps = inv(2) \cdot \epsilon$ in the next proof. We used similar symbols $\inveps$ and $\rooteps$ throughout the remaining formalization.
+
+\begin{forthel}
 	\begin{theorem}[LimitUnique]
 		Let $a$ be a sequence. Let $x, y$ be real numbers. Assume $a$ converges to $x$ and $a$ converges to $y$.
 		Then $x = y$.
@@ -361,12 +365,11 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{proof}
 \end{forthel}
 
-\newpage
 \noindent For example here is the same proof in Rudin's text:\\
 
 \fbox{\includegraphics[width=0.9 \textwidth]{3_2b}}\\
 
-\noindent As we can see, the two proof are almost identical, with some minor additions in our formalization and a seperate lemma for the last statement. This is only possible due to the low complexity of the calculations involved. As we get to more elaborate proofs, these calculations will take a lot more space, so we have to further seperate from the original text.
+\noindent As we can see, the two proofs are almost identical, with some minor additions in our formalization and a seperate lemma for the last statement. This is only possible due to the low complexity of the calculations involved. As we get to more elaborate proofs, these calculations will take a lot more space, so we have to further seperate from the original text.
 
 \begin{forthel}
 	\begin{definition}[BoundedBy]
@@ -393,7 +396,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 		Take a real number $x$ such that $a$ converges to $x$.
 		Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < 1$ (by Convergence, OnePos).
 		Define $b[k] = abs(a[k])$ for $k$ in $\NN$.
-		Take a real number $K$ such that $K = max(1 + abs(x), maxN(b,N))$.
+		Take a real number $K$ such that \linebreak $K = max(1 + abs(x), maxN(b,N))$.
 		
 		\noindent Let us show that $a$ is bounded by $K$.
 		\begin{subproof}
@@ -471,7 +474,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 				
 				\noindent Let us show that $inv(n) < \epsilon$.
 				\begin{subproof}
-					We have $N \cdot \epsilon < n \cdot \epsilon$ (by ComMult, MultInvariance)\\.
+					We have $N \cdot \epsilon < n \cdot \epsilon$ (by ComMult, MultInvariance).\\
 					Hence $1 < n \cdot \epsilon$ (by 	TransitivityOfOrder).
 					$inv(n)$ is positive.
 					Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot \epsilon)$ (by MultInvariance).\\
@@ -487,7 +490,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{proof}
 \end{forthel}
 
-\noindent In LaTeX it is possible to overload the plus operator by adding a simple replacement command in contrast to ForTheL, where one has to use slightly different operators like ' $+'$ ' instead of ' $+$ ':
+\noindent In LaTeX it is possible to overload the plus operator by adding a simple replacement command. On the other hand in ForTheL one has to use slightly different operators like ' $+'$ ' instead of ' $+$ ':
 
 \begin{forthel}	
 	\begin{definition}[SequenceSum]
@@ -517,7 +520,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\begin{proof}
 	Let $\epsilon$ be a positive real number.
 	Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.
-	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < \halfeps$ (by Convergence).
+	Take $N1$ such that for every $n$ such that \linebreak $N1 < n \ dist(a[n],x) < \halfeps$ (by Convergence).
 	Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < \halfeps$ (by Convergence).
 	Take $N$ such that $N = max(N1,N2)$.
 	Then $N1 \leq N$ and $N2 \leq N$.
@@ -532,7 +535,9 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\\$\dotequal abs((-x) + (a[n] + (b[n] - y)))$ (by AssAdd)
 	\\$\dotequal abs(((-x) + a[n]) + (b[n] - y))$ (by AssAdd)
 	\\$\dotequal abs((a[n] - x) + (b[n] - y))$ (by ComAdd).
-	\\We have $abs((a[n] - x) + (b[n] - y)) \leq abs(a[n] - x) + abs(b[n] - y)$  (by AbsTriangleIneq).
+		\\
+		
+		We have $abs((a[n] - x) + (b[n] - y)) \leq abs(a[n] - x) + abs(b[n] - y)$  (by AbsTriangleIneq).
 	\\Hence $abs((a[n] + b[n]) - (x + y)) \leq dist(a[n],x) + dist(b[n],y)$.
 	\\Hence $dist(a[n],x) + dist(b[n],y) < \halfeps + \halfeps$ (by AddInvariance).
 	\\Thus $abs((a[n] + b[n]) - (x + y)) < \halfeps + \halfeps$ (by MixedTransitivity).
@@ -569,7 +574,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	Let $n$ be a natural number.
 	$$(c \plustwo a)[n] \dotequal c + a[n]
 	\dotequal cn[n] + a[n]
-	\dotequal (cn \plusone a)[n]$$.
+	\dotequal (cn \plusone a)[n].$$
 	\end{subproof}
 	Hence $c \plustwo a = (cn \plusone a)$ (by SequenceEq).
 	\end{subproof}
@@ -621,7 +626,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	
 \end{forthel}
 
-\noindent The following lemma was developed for the purpose of working around to repeat one subproof in the proof of the theorem 'ProdConv' twice. Surprisingly, the eprover takes a long time to apply this lemma, although the lemma itself is proved really quickly and every precondition is provided.
+\noindent The following lemma was developed for the purpose of working around repeating one subproof in the proof of the theorem 'ProdConv' twice. Surprisingly, the eprover takes a long time to apply this lemma, although the lemma itself is proved really quickly and every precondition is provided.
 
 \begin{forthel}
 
@@ -650,7 +655,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	
 	\begin{theorem}[ProdConv]
 	Let $a,b$ be sequences. Let $x,y$ be real numbers. Assume $a$ converges to $x$ and $b$ converges to $y$.
-	\\Let $a \cdotone b$ be a sequence such that for every natural number $n (a \cdotone b)[n] = a[n] \cdot b[n]$.
+	\\Let $a \cdotone b$ be a sequence such that for every natural number $n \ (a \cdotone b)[n] = a[n] \cdot b[n]$.
 	Then $a \cdotone b$ converges to $x \cdot y$.
 	\end{theorem}
 	\begin{proof}
@@ -687,7 +692,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\\$s2a, s2b$ converge to $0$ (by ConstMultSum). 
 	\\Let us show that for every $n \ s2[n] = s2b[n] + s2a[n]$.
 	\begin{subproof}
-	$s2[n] \dotequal (x \cdot (b[n] + (-y))) + (y \cdot (a[n] + (-x)))$ (by 2)
+	$s2[n] \dotequal (x \cdot (b[n] + (-y))) + (y \cdot (a[n] + (-x)))$ (by 2)\\
 	$\dotequal s2b[n] + s2a[n]$ (by 3, 4).
 	\end{subproof}
 	Hence $s2$ converges to $0$ (by SumConv).
@@ -718,8 +723,8 @@ In order to improve the proof reading experience, we added two new enviroments '
 
 \end{forthel}
 
-\noindent The next theorem is a bit degenerate since the apparently "simple" equations used in Rudin took much more activity when trying to prove it with Alice. 
-We also tried to simplify this proof, but this was always at the cost of run-time - if it ran at all. 
+\noindent The next theorem is a bit degenerate since the apparently "simple" equations used in Rudin took much more concretisation when trying to prove it with Alice. 
+We simplified the proof as much as possible - the prover did not accept further simplifications.
 
 \begin{forthel}
 	
@@ -735,7 +740,7 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 	$2, inv(2), abs(x), abs(x) \cdot abs(x), -abs(x), ((-1) \cdot inv(2)) \cdot abs(x), (inv(2) \cdot abs(x)) + (-abs(x))$ are real numbers.
 	\\We have $pos(2)$ and $pos(inv(2))$ and $pos(abs(x))$ and $pos(abs(inv(x)))$ and $pos(inv(2) \cdot \epsilon)$ and $pos(abs(x) \cdot abs(x))$ and $pos((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x)))$ and
 	$pos(inv(2) \cdot abs(x))$ and $pos(\epsilon \cdot (abs(x) \cdot abs(x)))$ and $pos(inv(2) \cdot abs(inv(x)))$ and $pos((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))))$.
-	\\Take a natural number $m$ such that for every $n$ such that $m < n \  dist(a[n],x) < inv(2) \cdot abs(x)$ (by Convergence).
+	\\Take a natural number $m$ such that for every $n$ such that \linebreak $m < n \  dist(a[n],x) < inv(2) \cdot abs(x)$ (by Convergence).
 	\\Let us show that for every $n$ such that $m < n \ inv(2) \cdot abs(x) < abs(a[n])$.
 	\begin{subproof}
 	Assume $m < n$.
@@ -809,8 +814,8 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 	\\($abs(a[n]) \neq 0$ and $1 \neq 0$) and ($abs(x) \neq 0$ and $2 \neq 0$).
 	\\Then $1 \cdot inv(abs(a[n])) < 2 \cdot inv(abs(x))$ (by InvSwapIneq).
 	\end{subproof}
-	$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ (by MultInvariance).
-	\\$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x))) \dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(abs(x)) \cdot inv(2))) \cdot (2 \cdot inv(abs(x)))$ (by ComMult, AbsInv)
+	$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) \\< ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ (by MultInvariance).
+	\\$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x))) \\\dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(abs(x)) \cdot inv(2))) \cdot (2 \cdot inv(abs(x)))$ (by ComMult, AbsInv)
 	\\$\dotequal (((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot inv(2)) \cdot (2 \cdot inv(abs(x)))$ (by AssMult)
 	\\$\dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot (inv(2) \cdot (2 \cdot inv(abs(x))))$ (by AssMult)
 	\\$\dotequal (\epsilon \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot ((inv(2) \cdot 2) \cdot inv(abs(x)))$ (by AssMult)
@@ -823,8 +828,13 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 	Hence the thesis (by TransitivityOfOrder).
 	\end{subproof}
 	\end{proof}
+\end{forthel}
 
-	
+\noindent The next excerpt of Rudin's book shows how big the differences are in length. This is the most extreme case of additional concretisation we have to provide the prover.
+
+\fbox{\includegraphics[width=0.9 \textwidth]{3_3d}}\\
+
+\begin{forthel}	
 	\begin{definition}[IndexSeq]
 		An index sequence is a sequence $i$ such that \\
 		(for every $n$ $i[n]$ is a natural number) and (for every $n$ $i[n] < i[n + 1]$).
@@ -873,7 +883,7 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 	\end{proof}
 	
 	\begin{lemma}[LimitSubSeq]
-		Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every index sequence $i$ $Subseq(a,i)$ converges to $x$. 
+		Let $a$ be a sequence. Let $x$ be a real number. \linebreak $a$ converges to $x$ iff for every index sequence $i$ $Subseq(a,i)$ converges to $x$. 
 	\end{lemma}
 	\begin{proof}
 		Let us show that if $a$ converges to $x$ then for every index sequence $i$ $Subseq(a,i)$ converges to $x$.
@@ -904,7 +914,7 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 	\end{proof}
 \end{forthel}
 
-\noindent Rudin considers arbitrary metric spaces, so he shows that every convergent sequence is a cauchy sequence for all metric spaces and vice versa for $\RR^{n}$. We only consider the case of $\RR$, so we directly show the completeness of $\RR$. For that we followed the proof found in \cite{Cauchy}.
+\noindent Rudin considers arbitrary metric spaces, so he shows that every convergent sequence is a cauchy sequence for all metric spaces and vice versa for $\RR^{n}$. We only consider the case of $\RR$, so we directly show the completeness of $\RR$. To achieve this we followed the proof found in \cite{Cauchy}.
 
 \begin{forthel}
 	\begin{axiom}[BolzanoWeierstrass]
@@ -949,13 +959,13 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 				\begin{subproof}
 					We have $dist(a[n],a[N + 1]) < 1$.\\
 					We have $1 + abs(a[N + 1]) \leq K$ (by MaxIneq).\\
-					$abs(a[n]) \dotequal abs(a[n] + 0)$ (by Zero)
 					
+					$abs(a[n]) \dotequal abs(a[n] + 0)$ (by Zero)\\					
 					$\dotequal abs(a[n] + (a[N + 1] - a[N + 1]))$ (by Neg)\\
 					$\dotequal abs(a[n] + ((-a[N + 1]) + a[N + 1]))$ (by ComAdd)\\
-					$\dotequal abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).
+					$\dotequal abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).\\
 					
-					We have $abs((a[n] - a[N + 1]) + a[N + 1]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$ (by AbsTriangleIneq).\\
+					We have $abs((a[n] - a[N + 1]) + a[N + 1])\\ \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$ (by AbsTriangleIneq).\\
 					Hence $abs(a[n]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$.\\
 					Hence $abs(a[n]) \leq dist(a[n],a[N + 1]) + abs(a[N + 1])$.\\
 					We have $dist(a[n],a[N + 1]) + abs(a[N + 1]) < 1 + abs(a[N + 1])$ (by MixedAddInvariance).\\
@@ -988,19 +998,21 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 				Assume $N < n$. Hence $N1 < n$ and $N2 < n$ (by MixedTransitivity).\\
 				We have $n \leq i[n]$ (by SubSeqLeq).\\
 				Hence $N1 < i[n]$ (by MixedTransitivity).\\
+				
 				$a[n]$, $a[i[n]]$, $dist(a[n],a[i[n]])$, $dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x$, $dist(a[n],a[i[n]]) + dist(a[i[n]],x)$ are real numbers.\\
+				
 				We have $Subseq(a,i)[n] = a[i[n]]$.\\
 				We have $dist(a[n],a[i[n]]) < \halfeps$.\\
-				We have $dist(a[i[n]],x) < \halfeps$.
+				We have $dist(a[i[n]],x) < \halfeps$.\\
 				
 				$dist(a[n],x) \dotequal abs(a[n] - x)$ (by DistDefinition)\\
 				$\dotequal abs((a[n] + 0) - x)$ (by Zero)\\
 				$\dotequal abs((a[n] + (a[i[n]] - a[i[n]])) - x)$ (by Neg)\\
 				$\dotequal abs((a[n] + ((-a[i[n]]) + a[i[n]])) - x)$ (by ComAdd)\\
 				$\dotequal abs(((a[n] - a[i[n]]) + a[i[n]]) - x)$ (by AssAdd)\\
-				$\dotequal abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).
+				$\dotequal abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).\\
 				
-				We have $abs((a[n] - a[i[n]]) + (a[i[n]] - x)) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$ (by AbsTriangleIneq).\\
+				We have $abs((a[n] - a[i[n]]) + (a[i[n]] - x))\\ \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$ (by AbsTriangleIneq).\\
 				Hence $dist(a[n],x) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$.\\
 				Hence $dist(a[n],x) \leq dist(a[n],a[i[n]]) + dist(a[i[n]],x)$.\\
 				We have $dist(a[n],a[i[n]]) + dist(a[i[n]],x) < \halfeps + \halfeps$ (by AddInvariance).\\
@@ -1019,7 +1031,7 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 		Let us show that (If $a$ converges then $a$ is a cauchy sequence).
 		\begin{subproof}
 			Assume $a$ converges.
-			Take a real number $x$ such that $a$ converges to $x$.
+			Take a real number $x$ such that $a$ converges \linebreak to $x$.
 			Let $\epsilon$ be a positive real number.\\
 			Take a positive real number $\halfeps$ such that $\halfeps = inv(2) \cdot \epsilon$.\\
 			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < \halfeps$ (by Convergence).
@@ -1037,7 +1049,7 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 			\end{subproof}
 		\end{subproof}
 		
-		Let us show that (If $a$ is a cauchy sequence then $a$ converges).
+		\noindent Let us show that (If $a$ is a cauchy sequence then $a$ converges).
 		\begin{subproof}
 			Assume $a$ is a cauchy sequence.\\
 			Then $a$ is bounded (by CauchyBounded).\\
@@ -1087,7 +1099,7 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 		\noindent Let us show that for every positive real number $\epsilon$ there exists $N$ such that $(LeastUpper(a) - \epsilon) < a[N]$.
 		\begin{subproof}
 			Assume the contrary.\\
-			Take a positive real number $\epsilon$ such that for every $N$ $\neg$ ($(LeastUpper(a) - \epsilon) < a[N]$).
+			Take a positive real number $\epsilon$ such that for every $N$ \linebreak$\neg$ ($(LeastUpper(a) - \epsilon) < a[N]$).
 			
 			Let us show that for every $n$ $a[n] \leq (LeastUpper(a) - \epsilon)$.
 			\begin{subproof}
@@ -1115,20 +1127,20 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 			Let $\epsilon$ be a positive real number.\\
 			Take $N$ such that $(LeastUpper(a) - \epsilon) < a[N]$.
 			
-			Let us show that for every $n$ such that $N < n$ $dist(a[n],LeastUpper(a)) < \epsilon$.
+			Let us show that for every $n$ such that $N < n$\\ $dist(a[n],LeastUpper(a)) < \epsilon$.
 			\begin{subproof}
 				Assume $N < n$.\\
 				Hence $a[N] \leq a[n]$ (by MonInc).\\
 				We have $a[n] \leq LeastUpper(a)$.\\
-				Hence $dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n]) = LeastUpper(a) - a[n]$.\\
+				Hence $dist(a[n],LeastUpper(a)) = abs(LeastUpper(a) - a[n])\\ = LeastUpper(a) - a[n]$.\\
 				We have $(LeastUpper(a) - \epsilon) + \epsilon < a[N] + \epsilon$ (by MixedAddInvariance).\\
-				We have $((LeastUpper(a) - \epsilon) + \epsilon) - a[N] < (a[N] + \epsilon) - a[N]$ (by MixedAddInvariance).
+				We have $((LeastUpper(a) - \epsilon) + \epsilon) - a[N] < (a[N] + \epsilon) - a[N]$ (by MixedAddInvariance).\\
 				
 				$((LeastUpper(a) - \epsilon) + \epsilon) - a[N]\\
 				\dotequal (LeastUpper(a) + (-\epsilon + \epsilon)) - a[N]$ (by AssAdd)\\
 				$\dotequal (LeastUpper(a) + (\epsilon - \epsilon)) - a[N]$ (by ComAdd)\\
 				$\dotequal (LeastUpper(a) + 0) - a[N]$ (by Neg)\\
-				$\dotequal LeastUpper(a) - a[N]$ (by Zero).
+				$\dotequal LeastUpper(a) - a[N]$ (by Zero).\\
 				
 				$(a[N] + \epsilon) - a[N]\\ \dotequal (\epsilon + a[N]) - a[N]$ (by ComAdd)\\
 				$\dotequal \epsilon + (a[N] - a[N])$ (by AssAdd)\\
@@ -1143,7 +1155,7 @@ We also tried to simplify this proof, but this was always at the cost of run-tim
 	\end{proof}
 \end{forthel}
 	
-\noindent Rudin writes that the other case of monotonically decreasing sequences works analogously, but obviously this is not possible in a strict proof system. Instead we decides to prove the other case by using that the negative of a monotonically decreasing sequence is monotonically increasing. Hence we can deduce the general case from the special case.
+\noindent Rudin writes that the other case of monotonically decreasing sequences works analogously, but obviously this is not possible in a strict proof system. Instead we decided to prove the other case by using that the negation of a monotonically decreasing sequence is monotonically increasing. Hence we can deduce the general case from the special case.
 	
 \begin{forthel}
 	\begin{theorem}[MonCon]
