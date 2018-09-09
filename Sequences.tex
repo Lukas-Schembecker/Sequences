@@ -37,6 +37,10 @@
 \newcommand{\QQ}{\mathbb{Q}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\NN}{\mathbb{N}}
+\newcommand{\cdotone}{\cdot}
+\newcommand{\cdottwo}{\cdot}
+\newcommand{\plusone}{+}
+\newcommand{\plustwo}{+}
 
 \begin{document}
 
@@ -410,19 +414,19 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	\begin{definition}[SequenceSum]
-	Let $a,b$ be sequences. $a +' b$ is a sequence such that for every $n \ (a +' b)[n] = a[n] + b[n]$.
+	Let $a,b$ be sequences. $a \plusone b$ is a sequence such that for every $n \ (a \plusone b)[n] = a[n] + b[n]$.
 	\end{definition}
 	
 	\begin{definition}[SequenceProd]
-	Let $a,b$ be sequences. $a *' b$ is a sequence such that for every $n \ (a *' b)[n] = a[n] \cdot b[n]$.
+	Let $a,b$ be sequences. $a \cdotone b$ is a sequence such that for every $n \ (a \cdotone b)[n] = a[n] \cdot b[n]$.
 	\end{definition}
 	
 	\begin{definition}[SequenceConstSum]
-	Let $a$ be a sequence. Let $c$ be a real number. $c +'' a$ is a sequence such that for every $n \ (c +'' a)[n] = c + a[n]$.
+	Let $a$ be a sequence. Let $c$ be a real number. $c \plustwo a$ is a sequence such that for every $n \ (c \plustwo a)[n] = c + a[n]$.
 	\end{definition}
 	
 	\begin{definition}[SequenceConstProd]
-	Let $a$ be a sequence. Let $c$ be a real number. $c *'' a$ is a sequence such that for every $n \ (c *'' a)[n] = c \cdot a[n]$.
+	Let $a$ be a sequence. Let $c$ be a real number. $c \cdottwo a$ is a sequence such that for every $n \ (c \cdottwo a)[n] = c \cdot a[n]$.
 	\end{definition}
 
 	\begin{definition}[SequenceDiv]
@@ -431,7 +435,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	\begin{theorem}[SumConv]
 	Let $a,b$ be sequences. Let $x,y$ be real numbers. Assume $a$ converges to $x$ and $b$ converges to $y$.
-	Then $a +' b$ converges to $x + y$.
+	Then $a \plusone b$ converges to $x + y$.
 	\end{theorem}
 	\begin{proof}
 	Let $eps$ be a positive real number.
@@ -440,7 +444,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Take $N2$ such that for every $n$ such that $N2 < n \ dist(b[n],y) < halfeps$ (by Convergence).
 	Take $N$ such that $N = max(N1,N2)$.
 	Then $N1 \leq N$ and $N2 \leq N$.
-	Let us show that for every $n$ such that $N < n \ dist((a +' b)[n],(x+y)) < eps$.
+	Let us show that for every $n$ such that $N < n \ dist((a \plusone b)[n],(x+y)) < eps$.
 	\begin{subproof}
 	Assume $N < n$.
 	We have $dist(a[n],x) < halfeps$.
@@ -454,8 +458,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Hence $abs((a[n] + b[n]) - (x + y)) \leq dist(a[n],x) + dist(b[n],y)$.
 	Hence $dist(a[n],x) + dist(b[n],y) < halfeps + halfeps$ (by AddInvariance).
 	Hence $abs((a[n] + b[n]) - (x + y)) < halfeps + halfeps$ (by MixedTransitivity).
-	Hence $dist((a +' b)[n],(x + y)) < halfeps + halfeps$.
-	Hence $dist((a +' b)[n],(x + y)) < eps$ (by TwoHalf).
+	Hence $dist((a \plusone b)[n],(x + y)) < halfeps + halfeps$.
+	Hence $dist((a \plusone b)[n],(x + y)) < eps$ (by TwoHalf).
 	\end{subproof}
 	\end{proof}
 	
@@ -475,40 +479,40 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	\begin{theorem}[SumConstConv]
 	Let $a$ be a sequence. Let $x,c$ be real numbers. Assume $a$ converges to $x$.
-	Then $c +'' a$ converges to $c + x$.
+	Then $c \plustwo a$ converges to $c + x$.
 	\end{theorem}
 	\begin{proof}
 	Define $cn[n] = c$ for $n$ in $\NN$.
 	$cn$ is a sequence.
-	Let us show that $c +'' a = (cn +' a)$.
+	Let us show that $c \plustwo a = (cn \plusone a)$.
 	\begin{subproof}
-	Let us show that for every $n \ (c +'' a)[n] = (cn +' a)[n]$.
+	Let us show that for every $n \ (c \plustwo a)[n] = (cn \plusone a)[n]$.
 	\begin{subproof}
 	Let $n$ be a natural number.
-	$(c +'' a)[n] .= c + a[n]
+	$(c \plustwo a)[n] .= c + a[n]
 	.= cn[n] + a[n]
-	.= (cn +' a)[n]$.
+	.= (cn \plusone a)[n]$.
 	\end{subproof}
-	Hence $c +'' a = (cn +' a)$ (by SequenceEq).
+	Hence $c \plustwo a = (cn \plusone a)$ (by SequenceEq).
 	\end{subproof}
 	$cn$ converges to $c$ (by ConstConv).
-	Then $c +'' a$ converges to $c + x$ (by SumConv).
+	Then $c \plustwo a$ converges to $c + x$ (by SumConv).
 	\end{proof}
 	
 	\begin{theorem}[ProdConstConv]
 	Let $a$ be a sequence. Let $x,c$ be real numbers. Assume $a$ converges to $x$.
-	Then $c *'' a$ converges to $c \cdot x$.
+	Then $c \cdottwo a$ converges to $c \cdot x$.
 	\end{theorem}
 	\begin{proof}
 	Case $c = 0$.
 	We have $c \cdot x = 0$.
-	Let us show that for every $n \ (c *'' a)[n] = 0$. 
+	Let us show that for every $n \ (c \cdottwo a)[n] = 0$. 
 	\begin{subproof}
-	$(c *'' a)[n] .= c * a[n]
-	.= 0 * a[n]
+	$(c \cdottwo a)[n] .= c \cdot a[n]
+	.= 0 \cdot a[n]
 	.= 0$ (by ZeroMult).
 	\end{subproof}
-	Hence $c *'' a$ converges to $c \cdot x$ (by ConstConv).
+	Hence $c \cdottwo a$ converges to $c \cdot x$ (by ConstConv).
 	end.
 	Case $c \neq 0$.
 	Let $eps$ be a positive real number. 
@@ -544,7 +548,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$sum$ is a sequence.
 	Let us show that $sum$ converges to $0$.
 	\begin{subproof}
-	We have $sum = (-x) +'' a$.
+	We have $sum = (-x) \plustwo a$.
 	Hence $sum$ converges to $(-x) + x$ (by SumConstConv).
 	$(-x) + x = 0$ (by ComAdd, Neg).
 	\end{subproof}
@@ -554,14 +558,14 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= y \cdot ((-x) + a[n])$ (by ComAdd)
 	$.= y \cdot sum[n]$.
 	\end{subproof}
-	Hence $b = y *'' sum$ (by SequenceEq).
+	Hence $b = y \cdottwo sum$ (by SequenceEq).
 	Hence $b$ converges to $0$ (by ProdConstConv, ComMult, ZeroMult).
 	\end{proof}
 	
 	\begin{theorem}[ProdConv]
 	Let $a,b$ be sequences. Let $x,y$ be real numbers. Assume $a$ converges to $x$ and $b$ converges to $y$.
-	Let $a *' b$ be a sequence such that for every natural number $n (a *' b)[n] = a[n] * b[n]$.
-	Then $a *' b$ converges to $x * y$.
+	Let $a \cdotone b$ be a sequence such that for every natural number $n (a \cdotone b)[n] = a[n] \cdot b[n]$.
+	Then $a \cdotone b$ converges to $x \cdot y$.
 	\end{theorem}
 	\begin{proof}
 	(1) Define $s1[k] = (a[k] - x) \cdot (b[k] - y)$ for $k$ in $\NN$.
@@ -592,9 +596,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Define $sum1[k] = a[k] + (-x)$ for $k$ in $\NN$.
 	Define $sum2[k] = b[k] + (-y)$ for $k$ in $\NN$.
 	$sum1, sum2$ are sequences.
-	$sum1 = (-x) +'' a$ and $sum2 = (-y) +'' b$ (by ComAdd, SequenceEq).
+	$sum1 = (-x) \plustwo a$ and $sum2 = (-y) \plustwo b$ (by ComAdd, SequenceEq).
 	$sum1, sum2$ converge to $0$ (by SumConstConv, Neg, ComAdd).
-	We have $s2a = y *'' sum1$ and $s2b = x *'' sum2$ (by SequenceEq).
+	We have $s2a = y \cdottwo sum1$ and $s2b = x \cdottwo sum2$ (by SequenceEq).
 	$s2a, s2b$ converge to $0$ (by ConstMultSum). 
 	Let us show that for every $n \ s2[n] = s2b[n] + s2a[n]$.
 	\begin{subproof}
@@ -612,7 +616,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= ((a[n] - x) \cdot (b[n] - y)) + ((x \cdot (b[n] - y)) + (y \cdot (a[n] - x)))$ (by Identity1)
 	$.= s1[n] + s2[n]$ (by 1, 2).
 	\end{subproof}
-	Hence $s3 = s1 +' s2$ (by SequenceEq).
+	Hence $s3 = s1 \plusone s2$ (by SequenceEq).
 	Therefore the thesis (by SumConv, Zero).
 	\end{subproof}
 	Let $eps$ be a positive real number.
@@ -934,7 +938,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		\begin{subproof}
 			Let $eps$ be a positive real number.
 			
-			Take a positive real number $halfeps$ such that $halfeps = inv(2) * eps$.
+			Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
 			
 			Take $N1$ such that for every $n$,$m$ such that ($N1 < n$ and $N1 < m$) $dist(a[n],a[m]) < halfeps$ (by Cauchy).
 			
@@ -1006,7 +1010,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			
 			Let $eps$ be a positive real number.
 			
-			Take a positive real number $halfeps$ such that $halfeps = inv(2) * eps$.
+			Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
 			
 			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < halfeps$ (by Convergence).
 			
@@ -1196,7 +1200,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		Case $a$ is monotonically decreasing.
 		
 		\begin{subproof}
-			Let us show that $(-1) *'' a$ is monotonically increasing.
+			Let us show that $(-1) \cdottwo a$ is monotonically increasing.
 			
 			\begin{subproof}
 				Assume $n \leq m$.
@@ -1205,56 +1209,56 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Then $-a[n] \leq -a[m]$ (by OrdMirrorLeq).
 				
-				$((-1) *'' a)[n] .= (-1) * a[n]
+				$((-1) \cdottwo a)[n] .= (-1) \cdot a[n]
 				.= -a[n]$ (by MinusRule4).
 				
-				$((-1) *'' a)[m] .= (-1) * a[m]
+				$((-1) \cdottwo a)[m] .= (-1) \cdot a[m]
 				.= -a[m]$ (by MinusRule4).
 				
-				Hence $((-1) *'' a)[n] =< ((-1) *'' a)[m]$.
+				Hence $((-1) \cdottwo a)[n] \leq ((-1) \cdottwo a)[m]$.
 				
 				end.
 			\end{subproof}
 			
-			Let us show that $(-1) *'' a$ is bounded.
+			Let us show that $(-1) \cdottwo a$ is bounded.
 			
 			\begin{subproof}
 				Take a real number $K$ such that for every $n$ $abs(a[n]) \leq K$ (by BoundedSequence).
 				
-				Let us show that for every $n$ $abs(((-1) *'' a)[n]) \leq K$.
+				Let us show that for every $n$ $abs(((-1) \cdottwo a)[n]) \leq K$.
 				
 				\begin{subproof}
-					$abs(((-1) *'' a)[n]) .= abs((-1) * a[n])$ (by SequenceConstProd)
+					$abs(((-1) \cdottwo a)[n]) .= abs((-1) \cdot a[n])$ (by SequenceConstProd)
 					
 					$.= abs(-a[n])$ (by MinusRule4)
 					
 					$.= abs(a[n])$ (by AbsPosNeg).
 					
-					Hence $abs(((-1) *'' a)[n]) \leq K$.
+					Hence $abs(((-1) \cdottwo a)[n]) \leq K$.
 					
 					end.
 				\end{subproof}
 				
-				Hence $(-1) *'' a$ is bounded by $K$ (by BoundedBy).
+				Hence $(-1) \cdottwo a$ is bounded by $K$ (by BoundedBy).
 				
 				end.
 			\end{subproof}
 			
-			Hence $(-1) *'' a$ converges (by MonIncCon).
+			Hence $(-1) \cdottwo a$ converges (by MonIncCon).
 			
-			Take a real number $x$ such that $(-1) *'' a$ converges to $x$ (by Conv).
+			Take a real number $x$ such that $(-1) \cdottwo a$ converges to $x$ (by Conv).
 			
-			Let us show that $(-1) *'' ((-1) *'' a) = a$.
+			Let us show that $(-1) \cdottwo ((-1) \cdottwo a) = a$.
 			
 			\begin{subproof}
-				Let us show that for every $n$ $((-1) *'' ((-1) *'' a))[n] = a[n]$.
+				Let us show that for every $n$ $((-1) \cdottwo ((-1) \cdottwo a))[n] = a[n]$.
 				
 				\begin{subproof}
 					Let $n$ be a natural number.
 					
-					$((-1) *'' ((-1) *'' a))[n] .= (-1) * ((-1) *'' a)[n]$ (by SequenceConstProd)
+					$((-1) \cdottwo ((-1) \cdottwo a))[n] .= (-1) \cdot ((-1) \cdottwo a)[n]$ (by SequenceConstProd)
 					
-					$.= (-1) * ((-1) * a[n])$ (by SequenceConstProd)
+					$.= (-1) \cdot ((-1) \cdot a[n])$ (by SequenceConstProd)
 					
 					$.= -(-a[n])$ (by MinusRule4)
 					
@@ -1263,12 +1267,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 					end.					
 				\end{subproof}
 				
-				Hence $(-1) *'' ((-1) *'' a) = a$ (by SequenceEq).
+				Hence $(-1) \cdottwo ((-1) \cdottwo a) = a$ (by SequenceEq).
 				
 				end.
 			\end{subproof}
 			
-			Then $(-1) *'' ((-1) *'' a)$ converges to $(-1) * x$ (by ProdConstConv).
+			Then $(-1) \cdottwo ((-1) \cdottwo a)$ converges to $(-1) \cdot x$ (by ProdConstConv).
 			
 			Hence $a$ converges (by Conv).
 			
