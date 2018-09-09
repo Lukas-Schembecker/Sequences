@@ -3,6 +3,7 @@
 \usepackage{enumerate, latexsym, amssymb, amsmath}
 \usepackage{framed, multicol}
 \usepackage{graphicx}
+\usepackage{hyperref}
 \newenvironment{forthel}{\begin{leftbar}}{\end{leftbar}}
 
 %%%%%%%%%% Start TeXmacs macros
@@ -68,7 +69,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 \section{The Formalization}
 \subsection{Sequences.ftl}
 
-In order to improve the proof reading experience, we added two new enviroments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new enviroments, so we changed it in 'Alice/Import/LaTeX.hs' accordingly. Besides some further smaller changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more eloberate changes in the parser.\\
+In order to improve the proof reading experience, we added two new enviroments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new enviroments, so we changed it in 'Alice/Import/LaTeX.hs' accordingly. Besides some further smaller changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes in the parser.\\
 
 \noindent The definitions of sequences can be translated very closely to Rudin's text:
 
@@ -290,6 +291,8 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{proof}
 \end{forthel}
 
+\noindent The following translations of the next few theorems are almost identical to their counterpart in Rudin's text:
+
 \begin{forthel}
 	\begin{definition}[Neighb]
 		Let $\epsilon$ be a positive real number. Let $x$ be a real number.
@@ -359,7 +362,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 \end{forthel}
 
 \newpage
-\noindent Here is the same proof in Rudin's text:\\
+\noindent For example here is the same proof in Rudin's text:\\
 
 \fbox{\includegraphics[width=0.9 \textwidth]{3_2b}}\\
 
@@ -482,7 +485,11 @@ In order to improve the proof reading experience, we added two new enviroments '
 			\end{subproof}
 		\end{subproof}
 	\end{proof}
-	
+\end{forthel}
+
+\noindent In LaTeX it is possible to overload the plus operator by adding a simple replacement command in contrast to ForTheL, where one has to use slightly different operators like ' $+'$ ' instead of ' $+$ ':
+
+\begin{forthel}	
 	\begin{definition}[SequenceSum]
 	Let $a,b$ be sequences. \\$a \plusone b$ is a sequence such that for every $n \ (a \plusone b)[n] = a[n] + b[n]$.
 	\end{definition}
@@ -882,7 +889,11 @@ In order to improve the proof reading experience, we added two new enviroments '
 			Hence $a$ converges to $x$.
 		\end{subproof}
 	\end{proof}
-	
+\end{forthel}
+
+\noindent Rudin considers arbitrary metric spaces, so he shows that every convergent sequence is a cauchy sequence for all metric spaces and vice versa for $\RR^{n}$. We only consider the case of $\RR$, so we directly show the completeness of $\RR$. For that we followed the proof found in \cite{Cauchy}.
+
+\begin{forthel}
 	\begin{axiom}[BolzanoWeierstrass]
 		Let $a$ be a bounded sequence. Then $a$ has some convergent subsequence. 
 	\end{axiom}
@@ -1117,7 +1128,11 @@ In order to improve the proof reading experience, we added two new enviroments '
 			\end{subproof}
 		\end{subproof}
 	\end{proof}
+\end{forthel}
 	
+\noindent Rudin writes that the other case of monotonically decreasing sequences works analogously, but obviously this is not possible in a strict proof system. Instead we decides to prove the other case by using that the negative of a monotonically decreasing sequence is monotonically increasing. Hence we can deduce the general case from the special case.
+	
+\begin{forthel}
 	\begin{theorem}[MonCon]
 		Let $a$ be a monotonic sequence. $a$ converges iff $a$ is bounded.
 	\end{theorem}
@@ -1429,6 +1444,12 @@ So this is a great example to visualize the amount of commands the eprover uses 
   \textit{Principles of mathematical analysis},
   McGraw-Hill,
   1976.
+  
+\bibitem{Cauchy}
+	Mathe f\"ur Nicht-Freaks,
+	\textit{Cauchy-Folgen und das Cauchy-Kriterium},
+	\url{https://de.wikibooks.org/wiki/Mathe_f%C3%BCr_Nicht-Freaks:_Cauchy-Folgen_und_das_Cauchy-Kriterium},
+	2018.
 
 \end{thebibliography}
   
