@@ -120,7 +120,7 @@ The definitions of sequences can be translated very closely to Rudin's text:
 \noindent The following properties of $\frac{1}{n}$ and $(-1)^{n}$ are said to be trivial as they only need 'common math' to be proven. A rigerous formalization needs to address these common facts seperately, so they text gets naturally longer.
 
 \begin{forthel}
-	\begin{lemma}[Properties of $\frac{1}{n}$]
+	\begin{lemma}[PropertiesOfInv]
 		Let $a$ be a sequence such that for every $n$
 		((If $n = 0$ then $a[n] = 2$) and (If $n \neq 0$ then $a[n] = inv(n)$)).
 		Then $a$ converges to $0$ and $a$ has infinite range.
@@ -211,7 +211,7 @@ The definitions of sequences can be translated very closely to Rudin's text:
 	$1$ is odd.
 	\end{lemma} 
 	
-	\begin{lemma}[Properties of $(-1)^{n}$]
+	\begin{lemma}[PropertiesOfAlt]
 		Let $a$ be a sequence such that for every $n \ (((n \text{ is even}) \Rightarrow a[n] = 1) \text{ and } ((\text{n is odd}) \Rightarrow a[n] = -1))$.
 		Then $a$ diverges and $a$ has finite range.
 	\end{lemma}
