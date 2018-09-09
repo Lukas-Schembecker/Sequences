@@ -372,31 +372,31 @@ The definitions of sequences can be translated very closely to Rudin's text:
 	\begin{proof}
 	Take a real number $x$ such that $a$ converges to $x$.
 	Take $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < 1$ (by Convergence, OnePos).
-	Define $b[k] = \abs{a[k]}$ for $k$ in $\NN$.
-	Take a real number $K$ such that $K = max(1 + \abs{x}, maxN(b,N))$.
+	Define $b[k] = abs(a[k])$ for $k$ in $\NN$.
+	Take a real number $K$ such that $K = max(1 + abs(x), maxN(b,N))$.
 	Let us show that $a$ is bounded by $K$.
 	\begin{subproof}
-	Let us show that for every $n$ $\abs{a[n]} \leq K$.
+	Let us show that for every $n \ abs(a[n]) \leq K$.
 	\begin{subproof} 
 	Let $n$ be a natural number.
 	We have $n \leq N$ or $n > N$.
 	Case $n \leq N$.
-	We have $\abs{a[n]} = b[n] \leq maxN(b,N)$ (by MaxN).
+	We have $abs(a[n]) = b[n] \leq maxN(b,N)$ (by MaxN).
 	We have $maxN(b,N) \leq K$ (by MaxIneqDummy).
-	Therefore $\abs{a[n]} \leq K$ (by LeqTransitivity).
+	Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
 	end.
 	Case $n > N$.
 	We have $dist(a[n],x) < 1$.
-	We have $1 + \abs{x} \leq K$ (by MaxIneq).
-	$\abs{a[n]} \dotequal \abs{a[n] + 0}$ (by Zero)
-	$\dotequal \abs{a[n] + (x - x)}$ (by Neg)
-	$\dotequal \abs{a[n] + ((-x) + x)}$ (by ComAdd)
-	$\dotequal \abs{(a[n] - x) + x}$ (by AssAdd).
-	Hence $\abs{a[n]} \leq \abs{a[n] - x} + \abs{x}$ (by AbsTriangleIneq).
-	Hence $\abs{a[n]} \leq dist(a[n],x) + \abs{x}$.
-	We have $dist(a[n],x) + \abs{x} < 1 + \abs{x}$ (by MixedAddInvariance).
-	Hence $\abs{a[n]} \leq 1 + \abs{x}$ (by MixedTransitivity).
-	Therefore $\abs{a[n]} \leq K$ (by LeqTransitivity).
+	We have $1 + abs(x) \leq K$ (by MaxIneq).
+	$abs(a[n]) \dotequal abs(a[n] + 0)$ (by Zero)
+	$\dotequal abs(a[n] + (x - x))$ (by Neg)
+	$\dotequal abs(a[n] + ((-x) + x))$ (by ComAdd)
+	$\dotequal abs((a[n] - x) + x)$ (by AssAdd).
+	Hence $abs(a[n]) \leq abs(a[n] - x) + abs(x)$ (by AbsTriangleIneq).
+	Hence $abs(a[n]) \leq dist(a[n],x) + abs(x)$.
+	We have $dist(a[n],x) + abs(x) < 1 + abs(x)$ (by MixedAddInvariance).
+	Hence $abs(a[n]) \leq 1 + abs(x)$ (by MixedTransitivity).
+	Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
 	end.
 	\end{subproof}
 	Hence $a$ is bounded by $K$ (by BoundedBy).
