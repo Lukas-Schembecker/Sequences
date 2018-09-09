@@ -240,7 +240,7 @@ Lemma DistEqual.
     Then x = y.
 Proof.
 	Assume the contrary.
-    Then there exists a positive real number eps2 such that eps2 < dist(x,y).
+    Then there exists a positive real number eps such that eps < dist(x,y).
     A contradiction.
 qed.
 
@@ -551,8 +551,8 @@ Proof.
     (2) Define s2[k] = (x * (b[k] + (-y))) + (y * (a[k] + (-x))) for k in NAT.
     Let us show that s2 converges to 0.
     Proof.
-        Define s2a[k] = y * (a[k] + (-x)) for k in NAT.
-        Define s2b[k] = x * (b[k] + (-y)) for k in NAT.
+        (3) Define s2a[k] = y * (a[k] + (-x)) for k in NAT.
+        (4) Define s2b[k] = x * (b[k] + (-y)) for k in NAT.
         s2a, s2b are sequences.
         Define sum1[k] = a[k] + (-x) for k in NAT.
         Define sum2[k] = b[k] + (-y) for k in NAT.
@@ -563,17 +563,17 @@ Proof.
         s2a, s2b converge to 0 (by ConstMultSum). 
         Let us show that for every n s2[n] = s2b[n] + s2a[n].
         Proof.
-            s2[n] .= (x * (b[n] + (-y))) + (y * (a[n] + (-x)))
-                  .= s2b[n] + s2a[n].
+            s2[n] .= (x * (b[n] + (-y))) + (y * (a[n] + (-x))) (by 2)
+                  .= s2b[n] + s2a[n] (by 3, 4).
         qed.
         Hence s2 converges to 0 (by SumConv).
     qed.
-    (3) Define s3[k] = (a[k] * b[k]) - (x * y) for k in NAT.
+    (5) Define s3[k] = (a[k] * b[k]) - (x * y) for k in NAT.
     Let us show that s3 converges to 0.
     proof.
         Let us show that for every n s3[n] = s1[n] + s2[n].
         Proof.
-            s3[n] .= (a[n] * b[n]) - (x * y) (by 3)
+            s3[n] .= (a[n] * b[n]) - (x * y) (by 5)
                   .= ((a[n] - x) * (b[n] - y)) + ((x * (b[n] - y)) + (y * (a[n] - x))) (by Identity1)
                   .= s1[n] + s2[n] (by 1, 2).
         qed.
@@ -585,7 +585,7 @@ Proof.
     Let us show that for every n such that N < n dist(a[n] * b[n],x * y) < eps.
     Proof.
         Assume N < n.
-        dist(s3[n],0) .= dist((a[n] * b[n]) - (x * y),0) (by 3)
+        dist(s3[n],0) .= dist((a[n] * b[n]) - (x * y),0) (by 5)
                       .= abs(((a[n] * b[n]) - (x * y)) - 0) (by DistDefinition)
                       .= abs((a[n] * b[n]) - (x * y)) (by NegOfZero, Zero)
                       .= dist(a[n] * b[n],x * y) (by DistDefinition).
@@ -613,24 +613,18 @@ Proof.
     Proof. 
         Assume m < n.
         a[n], abs(a[n]), -abs(a[n]), abs(x) - abs(a[n]), x - a[n], abs(x - a[n]), a[n] - x, abs(a[n] - x), abs(x) + (-abs(a[n])), (abs(x) + (-abs(a[n]))) + (-abs(x)) are real numbers.
-
         Let us show that abs(x) - abs(a[n]) < inv(2) * abs(x).
         Proof.
             abs(x) - abs(a[n]) =< abs(x - a[n]) (by AbsTriangleIneq2).
-            abs(x - a[n]) .= abs(-(x - a[n])) (by AbsPosNeg)
-                          .= abs(-x - (-a[n])) (by MinusRule1)
-                          .= abs(-x + a[n]) (by MinusRule2)
-                          .= abs(a[n] - x) (by ComAdd).
+            abs(x - a[n]) = abs(-(x - a[n])) = abs(a[n] - x) (by AbsPosNeg, MinusRule1, MinusRule2, ComAdd).
             abs(a[n] - x) < inv(2) * abs(x) (by DistDefinition).
             Hence the thesis (by MixedTransitivity).
         qed.
 
-        Let us show that -abs(a[n]) < ((-1) * inv(2)) * abs(x).
-            (abs(x) + (-abs(a[n]))) + (-abs(x)) < (inv(2) * abs(x)) + (-abs(x)) (by MixedAddInvariance). 
-            (abs(x) + (-abs(a[n]))) + (-abs(x)) .= abs(x) + ((-abs(a[n])) + (-abs(x))) (by AssAdd)
-                                                .= abs(x) + ((-abs(x)) + (-abs(a[n]))) (by ComAdd)
-                                                .= (abs(x) + (-abs(x))) + (-abs(a[n])) (by AssAdd)
-                                                .= -abs(a[n]) (by Neg, ComAdd, Zero).
+        Let us show that -abs(a[n]) < (-inv(2)) * abs(x).
+            (abs(x) - abs(a[n])) + (-abs(x)) < (inv(2) * abs(x)) + (-abs(x)) (by MixedAddInvariance). 
+            (abs(x) - abs(a[n])) + (-abs(x)) = -abs(a[n]) (by AssAdd, Neg, ComAdd, Zero).
+
             -abs(a[n]) < (inv(2) * abs(x)) + (-abs(x)) (by AssAdd, Neg, Zero).
             (inv(2) * abs(x)) + (-abs(x)) .= (inv(2) * abs(x)) + ((-1) * abs(x)) (by MinusRule4)
                                           .= (inv(2) + (-1)) * abs(x) (by DistribDummy)
@@ -640,19 +634,15 @@ Proof.
                                           .= (((1 * 1) + (2 * (-1))) * inv(2 * 1)) * abs(x) (by InvAdd)
                                           .= ((1 + ((-1) * 2)) * inv(2)) * abs(x) (by One, ComMult).
             1 + ((-1) * 2) .= 1 + -(1 * 2) (by MinusRule5)
-                           .= 1 + -2 (by OneDummy)
-                           .= -(2 - 1) (by MinusRule3)
+                           .= -(2 - 1) (by OneDummy, MinusRule3)
                            .= -1.
         qed.
 
-        Therefore abs(a[n]) > -(((-1) * inv(2)) * abs(x)) (by OrdMirror, MinusRule2).
-        -(((-1) * inv(2)) * abs(x)) .= ((-(-1)) * inv(2)) * abs(x) (by MinusRule5)
-                                    .= (1 * inv(2)) * abs(x) (by MinusRule2)
-                                    .= inv(2) * abs(x) (by OneDummy)
-                                    .= abs(x) * inv(2) (by ComMult).
+        Therefore abs(a[n]) > -((-inv(2)) * abs(x)) (by OrdMirror, MinusRule2).
+        -((-inv(2)) * abs(x)) = abs(x) * inv(2) (by MinusRule5, MinusRule2, ComMult).
         Therefore abs(a[n]) > abs(x) * inv(2) (by TransitivityOfOrder).
     qed.
-    
+   
     Take N1 such that for every n such that N1 < n dist(a[n],x) < (inv(2) * eps) * (abs(x) * abs(x)) (by Convergence). 
     Take N2 such that N2 = max(N1,m).
     Let us show that for every n such that N2 < n dist(inv(a[n]),inv(x)) < eps.

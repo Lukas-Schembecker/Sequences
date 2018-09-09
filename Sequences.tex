@@ -679,12 +679,12 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{subproof}
 	Hence $s2$ converges to $0$ (by SumConv).
 	\end{subproof}
-	(3) Define $s3[k] = (a[k] \cdot b[k]) - (x \cdot y)$ for $k$ in $\NN$.
+	(5) Define $s3[k] = (a[k] \cdot b[k]) - (x \cdot y)$ for $k$ in $\NN$.
 	\\Let us show that $s3$ converges to $0$.
 	\begin{subproof}
 	Let us show that for every $n \ s3[n] = s1[n] + s2[n]$.
 	\begin{subproof}
-	$s3[n] \dotequal (a[n] \cdot b[n]) - (x \cdot y)$ (by 3)
+	$s3[n] \dotequal (a[n] \cdot b[n]) - (x \cdot y)$ (by 5)
 	\\$\dotequal ((a[n] - x) \cdot (b[n] - y)) + ((x \cdot (b[n] - y)) + (y \cdot (a[n] - x)))$ (by Identity1)
 	\\$\dotequal s1[n] + s2[n]$ (by 1, 2).
 	\end{subproof}
@@ -696,7 +696,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\\Let us show that for every $n$ such that $N < n \ dist(a[n] \cdot b[n],x \cdot y) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$.
-	\\$dist(s3[n],0) \dotequal dist((a[n] \cdot b[n]) - (x \cdot y),0)$ (by 3)
+	\\$dist(s3[n],0) \dotequal dist((a[n] \cdot b[n]) - (x \cdot y),0)$ (by 5)
 	\\$\dotequal abs(((a[n] \cdot b[n]) - (x \cdot y)) - 0)$ (by DistDefinition)
 	\\$\dotequal abs((a[n] \cdot b[n]) - (x \cdot y))$ (by NegOfZero, Zero)
 	\\$\dotequal dist(a[n] \cdot b[n],x \cdot y)$ (by DistDefinition).
