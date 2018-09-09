@@ -528,7 +528,6 @@ Theorem ProdConv.
     Let a *' b be a sequence such that for every natural number n (a *' b)[n] = a[n] * b[n].
     Then a *' b converges to x * y.
 Proof.
-#Strategie: zerteile (s[n]*t[n]) - (x*y) = ((s[n] - x)*(t[n] - y)) + ((x*(t[n] - y)) + (y*(s[n] - x))) in Teilfolgen und zeige erst die Konvergenz der Teile um daraus die Konvergenz des Ganzen zu folgern.
     (1) Define s1[k] = (a[k] - x) * (b[k] - y) for k in NAT.
     Let us show that s1 converges to 0.
     proof.
@@ -1045,7 +1044,7 @@ Definition NegInf.
     Let a be a sequence. a converges to negative infinity iff for every real number K there exists N such that
     for every n such that N < n a[n] =< K.
 
-# limsup liminf
+### limsup liminf
 
 Let b denote a real number. 
 Let A, B, S denote a set.
@@ -1078,29 +1077,5 @@ Definition LimSup.
 
 Definition LimInf.
     Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. limsup(a) = inf(E) iff E is bounded below.
-
-
-
-###Eindeutigkeit von Sup und Inf?
-
-
-
-#Theorem LimSupInE.
-#    Let a be a sequence. 
-#    Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. 
-#    Assume E is bounded above and E is bounded below.
-#    Then limsup(a) is an element of E.
-#Proof.
-#    ### +inf, -inf umgegangen durch bounded above / below
-#    Assume E is bounded above and E is bounded below.
-    
-
-     
-
-           
-
-
-
-
 
 
