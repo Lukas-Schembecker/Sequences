@@ -64,7 +64,7 @@
 
 
 \section{Introduction}
-The present formalization deals with chapter 3 'Numerical Sequences and Series' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. In order to improve the readability, we moved most of these to a seperate file - 'helper.ftl'.
+The present formalization deals with chapter 3 'Numerical Sequences (and Series)' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. In order to improve the readability, we moved most of these to a seperate file - 'helper.ftl'.
 
 \section{The Formalization}
 \subsection{Sequences.ftl}
@@ -589,7 +589,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\begin{subproof}
 	$$(c \cdottwo a)[n] \dotequal c \cdot a[n]
 	\dotequal 0 \cdot a[n]
-	\dotequal 0 \text{ (by ZeroMult)}$$.
+	\dotequal 0 \text{ (by ZeroMult)}.$$
 	\end{subproof}
 	Hence $c \cdottwo a$ converges to $c \cdot x$ (by ConstConv).
 	\end{case}
@@ -618,6 +618,12 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{subproof}
 	\end{case}
 	\end{proof}
+	
+\end{forthel}
+
+\noindent The following lemma was developed for the purpose of working around to repeat one subproof in the proof of the theorem 'ProdConv' twice. Surprisingly, the eprover takes a long time to apply this lemma, although the lemma itself is proved really quickly and every precondition is provided.
+
+\begin{forthel}
 
 	\begin{lemma}[ConstMultSum]
 	Let $a,b$ be sequences. \\Let $x,y$ be real numbers such that for every $n\ b[n] = y \cdot (a[n] + (-x))$. \\Assume $a$ converges to $x$.
@@ -710,6 +716,13 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{subproof}
 	\end{proof}
 
+\end{forthel}
+
+\noindent The next theorem is a bit degenerate since the apparently "simple" equations used in Rudin took much more activity when trying to prove it with Alice. 
+We also tried to simplify this proof, but this was always at the cost of run-time - if it ran at all. 
+
+\begin{forthel}
+	
 	\begin{theorem}[DivConv]
 	Let $a$ be a sequence. Let $x$ be a real number \\such that $x \neq 0$. Assume $a$ converges to $x$. 
 	Assume for every $n \ a[n] \neq 0$.
