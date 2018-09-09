@@ -12,6 +12,8 @@
 \newenvironment{quoteenv}{\begin{quote} }{\end{quote}}
 \newenvironment{subproof}{\begin{list}{}{}
 		\item[\text{Proof}]}{\hfill $\surd$ \end{list}}
+\newenvironment{case}{\begin{list}{}{}
+		\item[]}{\hfill $\surd$ \end{list}}	
 \newtheorem{axiom}{Axiom}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
@@ -91,10 +93,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\\Let $a$ diverges stand for not ($a$ converges).
 	\\Let $a$ is divergent stand for $a$ diverges.
 	
-	\begin{definition}[Range] Let $a$ be a sequence. $ran(a) = \{a[n] \mid \text{n is a natural number} \}$. 
+	\begin{definition}[Range] Let $a$ be a sequence. \\ $ran(a) = \{a[n] \mid \text{n is a natural number} \}$. 
 	\end{definition}
 
-	\begin{definition}[RangeN] Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$. 
+	\begin{definition}[RangeN] Let $a$ be a sequence. \\ $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$. 
 	\end{definition}
 	
 	\begin{definition}[FiniteRange]	Let $a$ be a sequence. $a$ has finite range iff there exists an $N$ such that $ran(a) = ranN(a,N)$.
@@ -771,17 +773,13 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{proof}
 		We can show by induction that $n \leq i[n]$ for every $n$.
 		\begin{subproof}
-		Let $n$ be a natural number.
-		
-		Case $n = 0$. Obvious.
-		
-		Case $n \neq 0$.
-		
-		Take $m$ such that $n = m + 1$. Then $m \leq i[m]$. 
-		
-		We can show by induction that $i[k] + 1 \leq i[k + 1]$ for every $k$. Obvious.
-		
-		end.
+			Let $n$ be a natural number.\\
+			Case $n = 0$. Obvious.\\
+			Case $n \neq 0$.\\
+			\begin{case}
+				Take $m$ such that $n = m + 1$. Then $m \leq i[m]$.\\
+				We can show by induction that $i[k] + 1 \leq i[k + 1]$ for every $k$. Obvious.\\
+			\end{case}
 		\end{subproof}
 	\end{proof}
 	
@@ -792,30 +790,20 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		Let us show that if $a$ converges to $x$ then for every index sequence $i$ $Subseq(a,i)$ converges to $x$.
 		
 		\begin{subproof}
-			Assume $a$ converges to $x$.
-			
+			Assume $a$ converges to $x$. 
 			Let $i$ be an index sequence.
-			
 			Let $eps$ be a positive real number.
-			
 			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < eps$ (by Convergence).
 			
 			Let us show that for every $n$ such that $N < n$ $dist(Subseq(a,i)[n],x) < eps$.
-			
 			\begin{subproof}
-				Let $n$ be a natural number such that $N < n$.
-				
-				Then $n \leq i[n]$ (by SubSeqLeq). 
-				
-				Hence $N < i[n]$ (by MixedTransitivity). 
-				
+				Let $n$ be a natural number such that $N < n$.\\
+				Then $n \leq i[n]$ (by SubSeqLeq).\\
+				Hence $N < i[n]$ (by MixedTransitivity).\\
 				Hence $dist(Subseq(a,i)[n],x) = dist(a[i[n]],x) < eps$.
-
 			\end{subproof}
-			
 		\end{subproof}
-		
-		Let us show that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$. 
+		Let us show that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$.
 		
 		\begin{subproof}
 			Assume for every index sequence $i$ $Subseq(a,i)$ converges to $x$. 
