@@ -807,20 +807,18 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Then $n \leq i[n]$ (by SubSeqLeq). 
 				
-				Hence $N < i[n]$ (by MixedTransitivity).
+				Hence $N < i[n]$ (by MixedTransitivity). 
 				
 				Hence $dist(Subseq(a,i)[n],x) = dist(a[i[n]],x) < eps$.
-				
-				end.
+
 			\end{subproof}
 			
-			end.
 		\end{subproof}
 		
-		Let us show that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$.
+		Let us show that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$. 
 		
 		\begin{subproof}
-			Assume for every index sequence $i$ $Subseq(a,i)$ converges to $x$.
+			Assume for every index sequence $i$ $Subseq(a,i)$ converges to $x$. 
 			
 			Define $i[n] = n$ for $n$ in $\NN$.
 			
@@ -831,8 +829,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			Hence $a = Subseq(a,i)$ (by SequenceEq).
 			
 			Hence $a$ converges to $x$.
-			
-			end.
 		\end{subproof}
 	\end{proof}
 	
@@ -882,7 +878,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 					
 					Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
 					
-					end.
 				\end{subproof}	
 				
 				Case $n > N$.
@@ -912,15 +907,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 					
 					Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
 					
-					end.
 				\end{subproof}
-				
-				end.					
+									
 			\end{subproof}
 			
 			Hence $a$ is bounded by $K$ (by BoundedBy).		
 			
-			end.
 		\end{subproof}
 	\end{proof}
 	
@@ -929,7 +921,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{lemma}
 	
 	\begin{proof}
-		Take a index sequeInhaltnce $i$ such that $Subseq(a,i)$ converges.
+		Take a index sequence $i$ such that $Subseq(a,i)$ converges.
 		
 		Take a real number $x$ such that $Subseq(a,i)$ converges to $x$.
 		
@@ -989,10 +981,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Hence $dist(a[n],x) < eps$ (by TwoHalf).
 				
-				end.
 			\end{subproof}
 			
-			end.
 		\end{subproof}
 	\end{proof}
 	
@@ -1033,10 +1023,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Hence $dist(a[n],a[m]) < eps$ (by TwoHalf).
 				
-				end.
 			\end{subproof}
 			
-			end.
 		\end{subproof}
 		
 		Let us show that (If $a$ is a cauchy sequence then $a$ converges).
@@ -1050,7 +1038,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			
 			Hence $a$ converges (by CauchyConvSubSeq).
 			
-			end.
 		\end{subproof}
 	\end{proof}
 	
@@ -1110,7 +1097,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Hence $a[n] \leq (LeastUpper(a) - eps)$.
 				
-				end.
 			\end{subproof}
 			
 			Hence $(LeastUpper(a) - eps)$ is upper bound of $a$ (by UpperBoundSeq).
@@ -1131,7 +1117,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			
 			Contradiction (by LeastUpperBoundSeq).
 			
-			end.
 		\end{subproof}
 		
 		Let us show that $a$ converges to $LeastUpper(a)$.
@@ -1178,10 +1163,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Hence $dist(a[n],LeastUpper(a)) < eps$ (by MixedTransitivity).
 				
-				end.
 			\end{subproof}
 			
-			end.
 		\end{subproof}
 	\end{proof}
 	
@@ -1217,7 +1200,6 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Hence $((-1) \cdottwo a)[n] \leq ((-1) \cdottwo a)[m]$.
 				
-				end.
 			\end{subproof}
 			
 			Let us show that $(-1) \cdottwo a$ is bounded.
@@ -1236,12 +1218,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 					
 					Hence $abs(((-1) \cdottwo a)[n]) \leq K$.
 					
-					end.
 				\end{subproof}
 				
 				Hence $(-1) \cdottwo a$ is bounded by $K$ (by BoundedBy).
 				
-				end.
 			\end{subproof}
 			
 			Hence $(-1) \cdottwo a$ converges (by MonIncCon).
@@ -1263,20 +1243,17 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 					$.= -(-a[n])$ (by MinusRule4)
 					
 					$.= a[n]$ (by MinusRule2).
-					
-					end.					
+										
 				\end{subproof}
 				
 				Hence $(-1) \cdottwo ((-1) \cdottwo a) = a$ (by SequenceEq).
 				
-				end.
 			\end{subproof}
 			
 			Then $(-1) \cdottwo ((-1) \cdottwo a)$ converges to $(-1) \cdot x$ (by ProdConstConv).
 			
 			Hence $a$ converges (by Conv).
 			
-			end.
 		\end{subproof}
 		
 	\end{proof}
@@ -1287,9 +1264,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 \subsection{helper.ftl}
 
 \begin{forthel}
-	[read Sequences/Naturals.ftl]
-	
-	Let $n,m$ denote natural numbers.
+	\noindent [read Sequences/Naturals.ftl]\\
+	Let $n,m$ denote natural numbers.\\
 	Let $a,b,c,d$ denote real numbers.
 	
 	
