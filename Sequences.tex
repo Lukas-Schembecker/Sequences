@@ -69,7 +69,7 @@ The present formalization covers chapter 3 'Numerical Sequences (and Series)' (p
 \section{The Formalization}
 \subsection{Sequences.ftl}
 
-In order to improve the proof reading experience, we added two new enviroments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new enviroments, so we changed its Haskell code in 'Alice/Import/LaTeX.hs' accordingly. Besides some further small changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes to the parser.\\
+In order to improve the proof reading experience, we added two new environments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new environments, so we changed its Haskell code in 'Alice/Import/LaTeX.hs' accordingly. Besides some further small changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes to the parser.\\
 
 \noindent The definitions of sequences can be translated very closely to Rudin's text:
 
@@ -1504,7 +1504,7 @@ Both of our formalization files - the ForTheL and the LaTeX file - are able to g
 
 As proven by our formalization of a common mathematical text, it is possible to proofcheck fairly complex mathematical literature in the current SAD system. Although, we would like to propose a few suggestions, that could be incorporated in future iterations of the system:\\
 
-\noindent First of all, the whole LaTeX parser is really made up on the spot, so it lacks a lot of well needed features, for example being able to process functions as '$abs$' and '$inv$' which have parameters. Also its rigidness makes it really hard to add functionality. This is an expected outcome since the parser was written with its main language ForTheL in mind, which had the LaTeX enviroment added on top of that, but one could think about writing a parser from scratch, which considers LaTeX as its main input language.\\
+\noindent First of all, the whole LaTeX parser is really made up on the spot, so it lacks a lot of well needed features, for example being able to process functions as '$abs$' and '$inv$' which have parameters. Also its rigidness makes it really hard to add functionality. This is an expected outcome since the parser was written with its main language ForTheL in mind, which had the LaTeX environment added on top of that, but one could think about writing a parser from scratch, which considers LaTeX as its main input language.\\
 
 \noindent Secondly, we have seen in our example of 'ProdConv', where we had to provide hints that certain numbers are real numbers, that the prover has some problems deducing needed assumptions. Maybe this could handled by enforcing a soft typing system, which tags certain numbers as real numbers or with similar needed assumptions. This probably would help the prover a lot and such a system could also help improving the formalizability of algebraic structures, but one has to think about the theoretic consequences of a typing system. \\
 
