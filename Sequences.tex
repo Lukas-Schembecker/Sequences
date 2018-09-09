@@ -73,30 +73,30 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	natural number is an element of $Dom(f)$ and for every $n \ f[n]$ is a real number.
 	\end{definition}
 	
-	\begin{axiom} [SequenceEq] Let $a, b$ be sequences. \\ $a = b$ iff for every $n \ a[n] = b[n]$.
+	\begin{axiom}[SequenceEq] Let $a, b$ be sequences. \\ $a = b$ iff for every $n \ a[n] = b[n]$.
 	\end{axiom}
 	
-	\begin{definition} [Convergence] Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every positive real
+	\begin{definition}[Convergence] Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every positive real
 	number $eps$ there exists $N$ such that for every $n$ such that $N < n \ dist(a[n],x) < eps$.
 	\end{definition}
 	
-	\begin{definition} [Conv] Let $a$ be a sequence. $a$ converges iff there exists a real number $x$ such that $a$ converges to $x$.
+	\begin{definition}[Conv] Let $a$ be a sequence. $a$ converges iff there exists a real number $x$ such that $a$ converges to $x$.
 	\end{definition}
 	
 	\noindent Let $a$ is convergent stand for $a$ converges.
 	\\Let $a$ diverges stand for not ($a$ converges).
 	\\Let $a$ is divergent stand for $a$ diverges.
 	
-	\begin{definition} [Range] Let $a$ be a sequence. $ran(a) = \{a[n] \mid \text{n is a natural number}\}$. 
+	\begin{definition}[Range] Let $a$ be a sequence. $ran(a) = \{a[n] \mid \text{n is a natural number} \}$. 
 	\end{definition}
 
-	\begin{definition} [RangeN] Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$.
+	\begin{definition}[RangeN] Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$.
 	\end{definition}
 	
-	\begin{definition} [FiniteRange]	Let $a$ be a sequence. $a$ has finite range iff there exists an $N$ such that $ran(a) = ranN(a,N)$.
+	\begin{definition}[FiniteRange]	Let $a$ be a sequence. $a$ has finite range iff there exists an $N$ such that $ran(a) = ranN(a,N)$.
 	\end{definition}
 
-	\begin{definition} [InfiniteRange] Let $a$ be a sequence. $a$ has infinite range iff not ($a$ has finite range).
+	\begin{definition}[InfiniteRange] Let $a$ be a sequence. $a$ has infinite range iff not ($a$ has finite range).
 	\end{definition}
 	
 	\begin{lemma} Let $a$ be a sequence such that for every $n$
@@ -158,21 +158,21 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}
 	
-	\begin{signature} [Parity]
+	\begin{signature}[Parity]
 	$n$ is even is an atom.
 	\end{signature}
 	
 	\noindent Let $n$ is odd stand for not ($n$ is even).
 	
-	\begin{axiom} [ParityPlusOne]
+	\begin{axiom}[ParityPlusOne]
 	$n$ is even iff $n + 1$ is odd.
 	\end{axiom}
 
-	\begin{axiom} [ZeroEven]
+	\begin{axiom}[ZeroEven]
 	$0$ is even.
 	\end{axiom}
 	
-	\begin{lemma} [OneOdd]
+	\begin{lemma}[OneOdd]
 	$1$ is odd.
 	\end{lemma} 
 	
@@ -243,12 +243,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}
 	
-	\begin{definition} [Neighb]
+	\begin{definition}[Neighb]
 	Let $eps$ be a positive real number. Let $x$ be a real number.
 	$Neighb(x,eps) = \{y \mid y \text{ is a real number such that } dist(y,x) < eps\}$.
 	\end{definition}
 	
-	\begin{theorem} [ConvNeighborhood]
+	\begin{theorem}[ConvNeighborhood]
 	Let $a$ be a sequence. Let $x$ be a real number.
 	$a$ converges to $x$ iff for every positive real number $eps$ there exists a $N$
 	such that for every $n$ such that $N < n \ a[n]$ is an element of $Neighb(x,eps)$.
@@ -273,7 +273,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}	
 	
-	\begin{lemma} [DistEqual]
+	\begin{lemma}[DistEqual]
 	Let $x$ and $y$ be real numbers. Assume for every positive real number $eps$ $dist(x,y) < eps$.
 	Then $x = y$.
 	\end{lemma}
@@ -283,7 +283,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	A contradiction.
 	\end{proof}
 	
-	\begin{theorem} [LimitUnique]
+	\begin{theorem}[LimitUnique]
 	Let $a$ be a sequence. Let $x, y$ be real numbers. Assume $a$ converges to $x$ and $a$ converges to $y$.
 	Then $x = y$.
 	\end{theorem}
@@ -305,23 +305,23 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Therefore $x = y$ (by DistEqual).
 	\end{proof}
 	
-	\begin{definition} [BoundedBy]
+	\begin{definition}[BoundedBy]
 	Let $a$ be a sequence. Let $K$ be a real number. $a$ is bounded by $K$ iff
 	for every $n \ abs(a[n]) \leq K$.
 	\end{definition}
 	
-	\begin{definition} [BoundedSequence]
+	\begin{definition}[BoundedSequence]
 	Let $a$ be a sequence. $a$ is bounded iff there exists a real number $K$ such that
 	$a$ is bounded by $K$.
 	\end{definition}
 	
-	\begin{signature} [MaxN]
+	\begin{signature}[MaxN]
 	Let $a$ be a sequence. $maxN(a,N)$ is a real number such that
 	(there exists $n$ such that $n \leq N$ and $maxN(a,N) = a[n]$) and
 	(for every $n$ such that $n \leq N \ a[n] \leq maxN(a,N)$).
 	\end{signature}
 	
-	\begin{theorem} [ConvergentImpBounded]
+	\begin{theorem}[ConvergentImpBounded]
 	Let $a$ be a sequence. Assume that $a$ converges. Then $a$ is bounded.
 	\end{theorem}
 	\begin{proof}
@@ -358,13 +358,13 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}
 	
-	\begin{definition} [LimitPointOfSet]
+	\begin{definition}[LimitPointOfSet]
 	Let $E$ be a set. Assume every element of $E$ is a real number. A limit point of $E$
 	is a real number $x$ such that for every positive real number $eps$ there exists an element
 	$y$ of $E$ such that $y$ is an element of $Neighb(x,eps)$ and $y \neq x$.
 	\end{definition}
 	
-	\begin{theorem} [ConvLimitPoint]
+	\begin{theorem}[ConvLimitPoint]
 	Let $E$ be a set. Assume every element of $E$ is a real number. Let $x$ be a limit point of $E$.
 	Then there exists a sequence $a$ such that $a$ converges to $x$ and for every $n \ a[n]$ is an element of $E$.
 	\end{theorem}
@@ -377,9 +377,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Take an element $y$ of $E$ such that $y$ is an element of $Neighb(x,inv(n))$
 	and $y \neq x$ (by LimitPointOfSet).
 	\end{subproof}
-	Define $a[n] =$ Case $n = 0 ->$ Choose an element $y$ of $E$ such that $y$ is an element of
+	Define $a[n] =$ Case $n = 0 \rightarrow$ Choose an element $y$ of $E$ such that $y$ is an element of
 	$Neighb(x,1)$ and $y \neq x$ in $y$,
-	Case $n > 0 ->$ Choose an element $y$ of $E$ such that $y$ is an element of
+	Case $n > 0 \rightarrow$ Choose an element $y$ of $E$ such that $y$ is an element of
 	$Neighb(x,inv(n))$ and $y \neq x$ in $y$
 	for $n$ in $NAT$.
 	$a$ is a sequence.	
@@ -409,7 +409,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}
 	
-	\begin{definition} [SequenceSum]
+	\begin{definition}[SequenceSum]
 	Let $a,b$ be sequences. $a +' b$ is a sequence such that for every $n \ (a +' b)[n] = a[n] + b[n]$.
 	\end{definition}
 	
@@ -417,23 +417,23 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let $a,b$ be sequences. $a *' b$ is a sequence such that for every $n \ (a *' b)[n] = a[n] \cdot b[n]$.
 	\end{definition}
 	
-	\begin{definition} [SequenceConstSum]
+	\begin{definition}[SequenceConstSum]
 	Let $a$ be a sequence. Let $c$ be a real number. $c +'' a$ is a sequence such that for every $n \ (c +'' a)[n] = c + a[n]$.
 	\end{definition}
 	
-	\begin{definition} [SequenceConstProd]
+	\begin{definition}[SequenceConstProd]
 	Let $a$ be a sequence. Let $c$ be a real number. $c *'' a$ is a sequence such that for every $n \ (c *'' a)[n] = c \cdot a[n]$.
 	\end{definition}
 
-	\begin{definition} [SequenceDiv]
+	\begin{definition}[SequenceDiv]
 	Let $a$ be a sequence. Assume for every $n \ a[n] \neq 0$. $div(a)$ is a sequence such that for every $n \ (div(a))[n] = inv(a[n])$.
 	\end{definition}
 	
-	\begin{theorem} [SumConv]
+	\begin{theorem}[SumConv]
 	Let $a,b$ be sequences. Let $x,y$ be real numbers. Assume $a$ converges to $x$ and $b$ converges to $y$.
 	Then $a +' b$ converges to $x + y$.
 	\end{theorem}
-	\begin{proof}.
+	\begin{proof}
 	Let $eps$ be a positive real number.
 	Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
 	Take $N1$ such that for every $n$ such that $N1 < n \ dist(a[n],x) < halfeps$ (by Convergence).
@@ -459,7 +459,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}
 	
-	\begin{lemma} [ConstConv]
+	\begin{lemma}[ConstConv]
 	Let $c$ be a real number. Let $cn$ be a sequence such that for every $n \ cn[n] = c$.
 	Then $cn$ converges to $c$.
 	\end{lemma}
@@ -473,7 +473,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}
 	
-	\begin{theorem} [SumConstConv]
+	\begin{theorem}[SumConstConv]
 	Let $a$ be a sequence. Let $x,c$ be real numbers. Assume $a$ converges to $x$.
 	Then $c +'' a$ converges to $c + x$.
 	\end{theorem}
@@ -495,7 +495,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $c +'' a$ converges to $c + x$ (by SumConv).
 	\end{proof}
 	
-	\begin{theorem} [ProdConstConv]
+	\begin{theorem}[ProdConstConv]
 	Let $a$ be a sequence. Let $x,c$ be real numbers. Assume $a$ converges to $x$.
 	Then $c *'' a$ converges to $c \cdot x$.
 	\end{theorem}
@@ -535,7 +535,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	end.
 	\end{proof}
 
-	\begin{lemma} [ConstMultSum]
+	\begin{lemma}[ConstMultSum]
 	Let $a,b$ be sequences. Let $x,y$ be real numbers such that for every $n\ b[n] = y \cdot (a[n] + (-x))$. Assume $a$ converges to $x$.
 	Then $b$ converges to $0$.
 	\end{lemma}
@@ -558,7 +558,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Hence $b$ converges to $0$ (by ProdConstConv, ComMult, ZeroMult).
 	\end{proof}
 	
-	\begin{theorem} [ProdConv]
+	\begin{theorem}[ProdConv]
 	Let $a,b$ be sequences. Let $x,y$ be real numbers. Assume $a$ converges to $x$ and $b$ converges to $y$.
 	Let $a *' b$ be a sequence such that for every natural number $n (a *' b)[n] = a[n] * b[n]$.
 	Then $a *' b$ converges to $x * y$.
@@ -627,7 +627,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	\end{proof}
 
-	\begin{theorem} [DivConv]
+	\begin{theorem}[DivConv]
 	Let $a$ be a sequence. Let $x$ be a real number such that $x \neq 0$. Assume $a$ converges to $x$. 
 	Assume for every $n \ a[n] \neq 0$.
 	Let $div(a)$ be a sequence such that for every natural number $n \ (div(a))[n] = inv(a[n])$.
@@ -743,23 +743,23 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	
 	
-	\begin{lemma} [MaxIneqDummy]
+	\begin{lemma}[MaxIneqDummy]
 	Let $a,b$ be real numbers. Then $b \leq max(a,b)$.
 	\end{lemma}
 	
-	\begin{lemma} [NotRuleOrder]
+	\begin{lemma}[NotRuleOrder]
 	$a < b$ iff $not(a \geq b)$.
 	\end{lemma}
 	
-	\begin{lemma} [MixedAddInvariance]
-	$a < c \wedge b \leq d => a + b < c + d$.
+	\begin{lemma}[MixedAddInvariance]
+	$a < c \wedge b \leq d \Rightarrow a + b < c + d$.
 	\end{lemma}
 	
-	\begin{lemma} [TwoHalf]
+	\begin{lemma}[TwoHalf]
 	$(inv(2) \cdot a) + (inv(2) \cdot a) = a$.
 	\end{lemma}
 	
-	\begin{lemma} [MinusRule5]
+	\begin{lemma}[MinusRule5]
 	Let $a,b$ be real numbers. 
 	Then $(a \cdot (-b)) = -(a \cdot b) and ((-b) \cdot a) = -(b \cdot a)$.
 	\end{lemma}
@@ -773,7 +773,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$((-b) \cdot a) .= -(b \cdot a)$ (by ComMult, 1).
 	\end{proof}
 	
-	\begin{lemma} [MinusRule6]
+	\begin{lemma}[MinusRule6]
 	Let $a,b$ be real numbers. 
 	Then $((-a) \cdot (-b)) = a \cdot b$.
 	\end{lemma}
@@ -783,7 +783,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= a \cdot b$ (by MinusRule2).
 	\end{proof}
 	
-	\begin{lemma} [Binomi1]
+	\begin{lemma}[Binomi1]
 	Let $a,b,c,d$ be real numbers.
 	Then $(a + b) \cdot (c + d) = ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot* d))$.
 	\end{lemma}
@@ -792,7 +792,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$.= ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$ (by DistribDummy).
 	\end{proof}
 	
-	\begin{lemma} [Binomi2]
+	\begin{lemma}[Binomi2]
 	Let $a,b,c,d$ be real numbers.
 	Then $(a - b) \cdot (c - d) = ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$.
 	\end{lemma}
@@ -803,7 +803,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	
 	
-	\begin{lemma} [Identity1]
+	\begin{lemma}[Identity1]
 	Let $a,b,c,d$ be real numbers. 
 	Then $(a \cdot b) - (c \cdot d) = ((a - c) \cdot (b - d)) + ((c \cdot (b - d)) + (d \cdot (a - c)))$.
 	\end{lemma}
@@ -828,11 +828,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	
 	
-	\begin{signature} [Sqrt]
+	\begin{signature}[Sqrt]
 	Let $x$ be a positive real number. $sqrt(x)$ is a positive real number such that $sqrt(x) \cdot sqrt(x) = x$.
 	\end{signature}
 	
-	\begin{lemma} [AbsTriangleIneq2]
+	\begin{lemma}[AbsTriangleIneq2]
 	Let $x,y$ be real numbers. Then $abs(x) - abs(y) \leq abs(x - y)$.
 	\end{lemma}
 	\begin{proof}
@@ -846,7 +846,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	
-	\begin{lemma} [InvAdd]
+	\begin{lemma}[InvAdd]
 	Let $a,b,c,d$ be real numbers. Assume $(a \neq 0 and b \neq 0) and (c \neq 0 and d \neq 0)$. 
 	Then $(a \cdot inv(b)) + (c \cdot inv(d)) = ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$.
 	\end{lemma}
@@ -864,7 +864,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	
 	
-	\begin{lemma} [InvCanc]
+	\begin{lemma}[InvCanc]
 	Let $a, b$ be real numbers. Assume $a \neq 0$ and $b \neq 0$.
 	Then $(a \cdot inv(b)) \cdot (b \cdot inv(a)) = 1$.
 	\end{lemma}
@@ -877,9 +877,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	
-	\begin{lemma} [NegMultInvariance]
+	\begin{lemma}[NegMultInvariance]
 	Let $x, y, z$ be real numbers.
-	$(x < y \wedge z < 0) => z \cdot x > z \cdot y$.
+	$(x < y \wedge z < 0) \Rightarrow z \cdot x > z \cdot y$.
 	\end{lemma}
 	\begin{proof}
 	Assume $x < y \wedge z < 0$.
@@ -893,7 +893,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	
-	\begin{lemma} [InvSwapIneq]
+	\begin{lemma}[InvSwapIneq]
 	Let $a, b, c, d$ be positive real numbers. Assume $(a \neq 0$ and $b \neq 0)$ and $(c \neq 0 and d \neq 0)$. 
 	If $a \cdot inv(b) < c \cdot inv(d)$ then $b \cdot inv(a) > d \cdot inv(c)$.
 	\end{lemma}
@@ -913,7 +913,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	
 	
-	\begin{lemma} [AbsInv]
+	\begin{lemma}[AbsInv]
 	Let $x$ be a real number. Assume $x \neq 0$. Then $abs(inv(x)) = inv(abs(x))$.
 	\end{lemma}
 	\begin{proof}
@@ -932,7 +932,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	
-	\begin{lemma} [InvOne]
+	\begin{lemma}[InvOne]
 	$inv(1) = 1$.
 	\end{lemma}
 	\begin{proof}
