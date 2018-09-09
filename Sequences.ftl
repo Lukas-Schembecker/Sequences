@@ -1078,4 +1078,3 @@ Definition LimSup.
 Definition LimInf.
     Let a be a sequence. Let E be a set such that E = { x | x is a real number and there exists an index sequence i such that Subseq(a,i) converges to x }. limsup(a) = inf(E) iff E is bounded below.
 
-
