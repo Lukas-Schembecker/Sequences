@@ -63,7 +63,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\text{[read Sequences/helper.ftl]}\\
 	\text{[sequence/-s]}\\
 	\text{[converge/-s]}$\\
-	Let $n$, $m$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
+	Let $n$, $m$, $k$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
 	
 	\begin{definition}
 		$\NN$ is the set of natural numbers.
@@ -90,7 +90,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{definition}[Range] Let $a$ be a sequence. $ran(a) = \{a[n] \mid \text{n is a natural number} \}$. 
 	\end{definition}
 
-	\begin{definition}[RangeN] Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$.
+	\begin{definition}[RangeN] Let $a$ be a sequence. $ranN(a,N) = \{a[n] \mid \text{n is a natural number such that } n \leq N\}$. 
 	\end{definition}
 	
 	\begin{definition}[FiniteRange]	Let $a$ be a sequence. $a$ has finite range iff there exists an $N$ such that $ran(a) = ranN(a,N)$.
@@ -775,14 +775,14 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		
 		Take $m$ such that $n = m + 1$. Then $m \leq i[m]$. 
 		
-		We can show by induction that $i[k] + 1 \leq i[k + 1]$ for every k. Obvious.
+		We can show by induction that $i[k] + 1 \leq i[k + 1]$ for every $k$. Obvious.
 		
 		end.
 		\end{subproof}
 	\end{proof}
 	
 	\begin{lemma}[LimitSubSeq]
-		Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every index sequence $i$ $Subseq(a,i)$ converges to $x$.
+		Let $a$ be a sequence. Let $x$ be a real number. $a$ converges to $x$ iff for every index sequence $i$ $Subseq(a,i)$ converges to $x$. 
 	\end{lemma}
 	\begin{proof}
 		Let us show that if $a$ converges to $x$ then for every index sequence $i$ $Subseq(a,i)$ converges to $x$.
@@ -801,7 +801,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			\begin{subproof}
 				Let $n$ be a natural number such that $N < n$.
 				
-				Then $n \leq i[n]$ (by SubSeqLeq).
+				Then $n \leq i[n]$ (by SubSeqLeq). 
 				
 				Hence $N < i[n]$ (by MixedTransitivity).
 				
@@ -813,7 +813,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			end.
 		\end{subproof}
 		
-		Let us shoInhaltw that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$.
+		Let us show that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$.
 		
 		\begin{subproof}
 			Assume for every index sequence $i$ $Subseq(a,i)$ converges to $x$.
@@ -833,7 +833,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{proof}
 	
 	\begin{axiom}[BolzanoWeierstrass]
-		Let $a$ be a bounded sequence. Then $a$ has some convergent subsequence.
+		Let $a$ be a bounded sequence. Then $a$ has some convergent subsequence. 
 	\end{axiom}
 	
 	\begin{definition}[Cauchy]
