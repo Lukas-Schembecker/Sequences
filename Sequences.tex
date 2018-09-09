@@ -47,6 +47,8 @@
 \newcommand{\inveps}{\frac{1}{\epsilon}}
 \newcommand{\rooteps}{\sqrt{\epsilon}}
 \newcommand{\dotequal}{=}
+\newcommand{\abs}[1]{|{#1}|}
+\newcommand{\inv}[1]{\frac{1}{{#1}}}
 
 
 \begin{document}
@@ -63,7 +65,6 @@
 
 \section{Introduction}
 The present formalization deals with chapter 3 'Numerical Sequences and Series' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. In order to improve the readability, we moved most of these to a seperate file - 'helper.ftl'.
-
 
 \section{The Formalization}
 \subsection{Sequences.ftl}
