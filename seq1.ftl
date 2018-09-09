@@ -770,8 +770,7 @@ Proof.
     Let us show that if for every index sequence i Subseq(a,i) converges to x then a converges to x.
         Assume for every index sequence i Subseq(a,i) converges to x.
         Define i[k] = k for k in NAT.
-        i is a sequence and ((for every n i[n] is a natural number) and (for every n i[n] < i[n+1])).
-        Hence i is an index sequence.
+        i is an index sequence.
         Subseq(a,i) converges to x.
         For every n a[n] = Subseq(a,i)[n].
         Hence a = Subseq(a,i) (by SequenceEq).

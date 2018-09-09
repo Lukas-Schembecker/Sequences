@@ -13,7 +13,7 @@
 \newenvironment{subproof}{\begin{list}{}{}
 		\item[\text{Proof}]}{\hfill $\surd$ \end{list}}
 \newenvironment{case}{\begin{list}{}{}
-		\item[]}{\hfill $\surd$ \end{list}}	
+		\item[]}{\end{list}}	
 \newtheorem{axiom}{Axiom}
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
@@ -44,6 +44,7 @@
 \newcommand{\plusone}{+}
 \newcommand{\plustwo}{+}
 
+
 \begin{document}
 
 \title{An SAD3 Formalization of Real Sequences for Walter Rudin's
@@ -70,7 +71,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\text{[sequence/-s]}\\
 	\text{[converge/-s]}$\\
 	Let $n$, $m$, $k$, $N$, $N1$, $N2$, $N3$ denote natural numbers.
-	
+
 	\begin{definition}
 		$\NN$ is the set of natural numbers.
 	\end{definition}
@@ -736,8 +737,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 
 	
 	\begin{definition}[IndexSeq]
-		An index sequence is a sequence $i$ such that
-		
+		An index sequence is a sequence $i$ such that \\
 		(for every $n$ $i[n]$ is a natural number) and (for every $n$ $i[n] < i[n + 1]$).
 	\end{definition}
 	
@@ -751,15 +751,15 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{definition}
 	
 	\begin{axiom}[IndSucc]
-		$n$ $-<-$ $n + 1$. 
+		$n$ $\lessdot$ $n + 1$. 
 	\end{axiom}
 	
 	\begin{axiom}[IndPrec]
-		Assume $n \neq 0$. Then there exists $m$ such that $n = m + 1$.
+		Assume $n \neq 0$. Then there exists $m$ such that \\ $n = m + 1$.
 	\end{axiom}
 	
 	\begin{axiom}[IndNonNeg]
-		$n -<- 0$ for no $n$.
+		$n \lessdot 0$ for no $n$.
 	\end{axiom}
 	
 	\begin{axiom}[IndPlusOne]
@@ -795,7 +795,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			Let $eps$ be a positive real number.
 			Take $N$ such that for every $n$ such that $N < n$ $dist(a[n],x) < eps$ (by Convergence).
 			
-			Let us show that for every $n$ such that $N < n$ $dist(Subseq(a,i)[n],x) < eps$.
+			Let us show that for every $n$ such that $N < n$ \\ $dist(Subseq(a,i)[n],x) < eps$.
 			\begin{subproof}
 				Let $n$ be a natural number such that $N < n$.\\
 				Then $n \leq i[n]$ (by SubSeqLeq).\\
@@ -804,18 +804,13 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			\end{subproof}
 		\end{subproof}
 		Let us show that if for every index sequence $i$ $Subseq(a,i)$ converges to $x$ then $a$ converges to $x$.
-		
 		\begin{subproof}
-			Assume for every index sequence $i$ $Subseq(a,i)$ converges to $x$. 
-			
-			Define $i[n] = n$ for $n$ in $\NN$.
-			
-			$Subseq(a,i)$ converges to $x$.
-			
-			For every $n$ $a[n] = Subseq(a,i)[n]$.
-			
-			Hence $a = Subseq(a,i)$ (by SequenceEq).
-			
+			Assume for every index sequence $i$ $Subseq(a,i)$ converges to $x$. \\
+			Define $i[n] = n$ for $n$ in $\NN$.\\
+			$i$ is an index sequence.\\
+			$Subseq(a,i)$ converges to $x$. \\
+			For every $n$ $a[n] = Subseq(a,i)[n]$. \\
+			Hence $a = Subseq(a,i)$ (by SequenceEq). \\
 			Hence $a$ converges to $x$.
 		\end{subproof}
 	\end{proof}
@@ -833,74 +828,48 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 		Let $a$ be a cauchy sequence. Then $a$ is bounded.
 	\end{lemma}
 	\begin{proof}
-		Take $N$ such that for every $n$,$m$ such that ($N < n$ and $N < m$) $dist(a[n],a[m]) < 1$ (by Cauchy, OnePos).
+		Take $N$ such that for every $n$,$m$ such that ($N < n$ and $N < m$) $dist(a[n],a[m]) < 1$ (by Cauchy, OnePos). \\
+		$N + 1$ is a natural number and $N < N + 1$.\\
+		Hence for every $n$ such that $N < n$ $dist(a[n],a[N + 1]) < 1$.\\
+		Define $b[k] = abs(a[k])$ for $k$ in $\NN$.\\
+		$maxN(b,N)$, $1$, $a[N + 1]$, $abs(a[N + 1])$, $1 + abs(a[N + 1])$ are real numbers.\\
+		Take a real number $K$ such that $K = max(1 + abs(a[N + 1]), maxN(b,N))$.\\
 		
-		$N + 1$ is a natural number and $N < N + 1$.
-		
-		Hence for every $n$ such that $N < n$ $dist(a[n],a[N + 1]) < 1$.
-		
-		Define $b[k] = abs(a[k])$ for $k$ in $\NN$.
-		
-		$maxN(b,N)$, $1$, $a[N + 1]$, $abs(a[N + 1])$, $1 + abs(a[N + 1])$ are real numbers.
-		
-		Take a real number $K$ such that $K = max(1 + abs(a[N + 1]), maxN(b,N))$.
-		
-		Let us show that $a$ is bounded by $K$.
-		
+		\noindent Let us show that $a$ is bounded by $K$.		
 		\begin{subproof}
-			Let us show that for every $n$ $abs(a[n]) =< K$. 
-			
+			Let us show that for every $n$ $abs(a[n]) \leq K$. 
 			\begin{subproof}
-				Let $n$ be a natural number.
-				
-				$a[n]$, $abs(a[n])$, $b[n]$, $dist(a[n],a[N + 1])$, $a[n] - a[N + 1]$, $dist(a[n],a[N + 1]) + abs(a[N + 1])$ are real numbers.
-				
-				We have $n \leq N$ or $n > N$.
-				
+				Let $n$ be a natural number.\\				
+				$a[n]$, $abs(a[n])$, $b[n]$, $dist(a[n],a[N + 1])$, $a[n] - a[N + 1]$, $dist(a[n],a[N + 1]) + abs(a[N + 1])$ are real numbers.\\
+				We have $n \leq N$ or $n > N$.\\
 				Case $n \leq N$.
-				
-				\begin{subproof}
+				\begin{case}
 					We have $abs(a[n]) = b[n] \leq maxN(b,N)$ (by MaxN).
 					
 					We have $maxN(b,N) \leq K$ (by MaxIneqDummy).
 					
 					Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
 					
-				\end{subproof}	
+				\end{case}	
 				
 				Case $n > N$.
 				
 				\begin{subproof}
-					We have $dist(a[n],a[N + 1]) < 1$.
-					
-					We have $1 + abs(a[N + 1]) \leq K$ (by MaxIneq).
-					
-					$abs(a[n]) .= abs(a[n] + 0)$ (by Zero)
-					
-					$.= abs(a[n] + (a[N + 1] - a[N + 1]))$ (by Neg)
-					
-					$.= abs(a[n] + ((-a[N + 1]) + a[N + 1]))$ (by ComAdd)
-					
-					$.= abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).
-					
-					We have $abs((a[n] - a[N + 1]) + a[N + 1]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$ (by AbsTriangleIneq).
-					
-					Hence $abs(a[n]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$.
-					
-					Hence $abs(a[n]) \leq dist(a[n],a[N + 1]) + abs(a[N + 1])$.
-					
-					We have $dist(a[n],a[N + 1]) + abs(a[N + 1]) < 1 + abs(a[N + 1])$ (by MixedAddInvariance).
-					
-					Hence $abs(a[n]) \leq 1 + abs(a[N + 1])$ (by MixedTransitivity).
-					
+					We have $dist(a[n],a[N + 1]) < 1$.\\
+					We have $1 + abs(a[N + 1]) \leq K$ (by MaxIneq).\\
+					$abs(a[n]) .= abs(a[n] + 0)$ (by Zero)\\
+					$.= abs(a[n] + (a[N + 1] - a[N + 1]))$ (by Neg)\\
+					$.= abs(a[n] + ((-a[N + 1]) + a[N + 1]))$ (by ComAdd)\\
+					$.= abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).\\
+					We have $abs((a[n] - a[N + 1]) + a[N + 1]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$ (by AbsTriangleIneq).\\
+					Hence $abs(a[n]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$.\\
+					Hence $abs(a[n]) \leq dist(a[n],a[N + 1]) + abs(a[N + 1])$.\\
+					We have $dist(a[n],a[N + 1]) + abs(a[N + 1]) < 1 + abs(a[N + 1])$ (by MixedAddInvariance).\\
+					Hence $abs(a[n]) \leq 1 + abs(a[N + 1])$ (by MixedTransitivity).\\
 					Therefore $abs(a[n]) \leq K$ (by LeqTransitivity).
-					
 				\end{subproof}
-									
 			\end{subproof}
-			
-			Hence $a$ is bounded by $K$ (by BoundedBy).		
-			
+			Hence $a$ is bounded by $K$ (by BoundedBy).
 		\end{subproof}
 	\end{proof}
 	
@@ -910,65 +879,38 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	\begin{proof}
 		Take a index sequence $i$ such that $Subseq(a,i)$ converges.
-		
-		Take a real number $x$ such that $Subseq(a,i)$ converges to $x$.
+		Take a real number $x$ such that $Subseq(a,i)$ converges to $x$.\\
 		
 		Let us show that $a$ converges to $x$.
-		
 		\begin{subproof}
-			Let $eps$ be a positive real number.
-			
-			Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.
-			
-			Take $N1$ such that for every $n$,$m$ such that ($N1 < n$ and $N1 < m$) $dist(a[n],a[m]) < halfeps$ (by Cauchy).
-			
-			Take $N2$ such that for every $n$ such that $N2 < n$ $dist(Subseq(a,i)[n],x) < halfeps$ (by Convergence).
-			
-			Take $N$ such that $N = max(N1,N2)$.
-			
+			Let $eps$ be a positive real number.\\			
+			Take a positive real number $halfeps$ such that $halfeps = inv(2) \cdot eps$.\\
+			Take $N1$ such that for every $n$,$m$ such that ($N1 < n$ and $N1 < m$) $dist(a[n],a[m]) < halfeps$ (by Cauchy).\\
+			Take $N2$ such that for every $n$ such that $N2 < n$ $dist(Subseq(a,i)[n],x) < halfeps$ (by Convergence).\\
+			Take $N$ such that $N = max(N1,N2)$.\\
 			Then $N1 \leq N$ and $N2 \leq N$.
 			
 			Let us show that for every $n$ such that $N < n$ $dist(a[n],x) < eps$.
-			
 			\begin{subproof}
-				Assume $N < n$. Hence $N1 < n$ and $N2 < n$ (by MixedTransitivity).
-				
-				We have $n \leq i[n]$ (by SubSeqLeq).
-				
-				Hence $N1 < i[n]$ (by MixedTransitivity).
-				
-				$a[n]$, $a[i[n]]$, $dist(a[n],a[i[n]])$, $dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x$, $dist(a[n],a[i[n]]) + dist(a[i[n]],x)$ are real numbers.
-				
-				We have $Subseq(a,i)[n] = a[i[n]]$.
-				
-				We have $dist(a[n],a[i[n]]) < halfeps$.
-				
-				We have $dist(a[i[n]],x) < halfeps$.
-				
-				$dist(a[n],x) .= abs(a[n] - x)$ (by DistDefinition)
-				
-				$.= abs((a[n] + 0) - x)$ (by Zero)
-				
-				$.= abs((a[n] + (a[i[n]] - a[i[n]])) - x)$ (by Neg)
-				
-				$.= abs((a[n] + ((-a[i[n]]) + a[i[n]])) - x)$ (by ComAdd)
-				
-				$.= abs(((a[n] - a[i[n]]) + a[i[n]]) - x)$ (by AssAdd)
-				
-				$.= abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).
-				
-				We have $abs((a[n] - a[i[n]]) + (a[i[n]] - x)) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$ (by AbsTriangleIneq).
-				
-				Hence $dist(a[n],x) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$.
-				
-				Hence $dist(a[n],x) \leq dist(a[n],a[i[n]]) + dist(a[i[n]],x)$.
-				
-				We have $dist(a[n],a[i[n]]) + dist(a[i[n]],x) < halfeps + halfeps$ (by AddInvariance).
-				
-				Hence $dist(a[n],x) < halfeps + halfeps$ (by MixedTransitivity).
-				
+				Assume $N < n$. Hence $N1 < n$ and $N2 < n$ (by MixedTransitivity).\\
+				We have $n \leq i[n]$ (by SubSeqLeq).\\
+				Hence $N1 < i[n]$ (by MixedTransitivity).\\
+				$a[n]$, $a[i[n]]$, $dist(a[n],a[i[n]])$, $dist(a[n],x), a[n] - a[i[n]], a[i[n]] - x$, $dist(a[n],a[i[n]]) + dist(a[i[n]],x)$ are real numbers.\\
+				We have $Subseq(a,i)[n] = a[i[n]]$.\\
+				We have $dist(a[n],a[i[n]]) < halfeps$.\\
+				We have $dist(a[i[n]],x) < halfeps$.\\
+				$dist(a[n],x) .= abs(a[n] - x)$ (by DistDefinition)\\
+				$.= abs((a[n] + 0) - x)$ (by Zero)\\
+				$.= abs((a[n] + (a[i[n]] - a[i[n]])) - x)$ (by Neg)\\
+				$.= abs((a[n] + ((-a[i[n]]) + a[i[n]])) - x)$ (by ComAdd)\\
+				$.= abs(((a[n] - a[i[n]]) + a[i[n]]) - x)$ (by AssAdd)\\
+				$.= abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).\\
+				We have $abs((a[n] - a[i[n]]) + (a[i[n]] - x)) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$ (by AbsTriangleIneq).\\
+				Hence $dist(a[n],x) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$.\\
+				Hence $dist(a[n],x) \leq dist(a[n],a[i[n]]) + dist(a[i[n]],x)$.\\
+				We have $dist(a[n],a[i[n]]) + dist(a[i[n]],x) < halfeps + halfeps$ (by AddInvariance).\\
+				Hence $dist(a[n],x) < halfeps + halfeps$ (by MixedTransitivity).\\
 				Hence $dist(a[n],x) < eps$ (by TwoHalf).
-				
 			\end{subproof}
 			
 		\end{subproof}
