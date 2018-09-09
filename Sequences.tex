@@ -46,6 +46,7 @@
 \newcommand{\halfeps}{\frac{\epsilon}{2}}
 \newcommand{\inveps}{\frac{1}{\epsilon}}
 \newcommand{\rooteps}{\sqrt{\epsilon}}
+\newcommand{\dotequal}{=}
 
 
 \begin{document}
@@ -127,9 +128,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$inv(n)$ is positive.
 	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot \epsilon)$ (by MultInvariance).
 	We have $inv(n) \cdot 1 = inv(n)$ (by One).
-	$inv(n) \cdot (n \cdot \epsilon) .= (inv(n) \cdot n) \cdot \epsilon$ (by AssMult)
-	$.= 1 \cdot \epsilon$ (by InvDummy)
-	$.= \epsilon$ (by OneDummy).
+	$inv(n) \cdot (n \cdot \epsilon) \dotequal (inv(n) \cdot n) \cdot \epsilon$ (by AssMult)
+	$\dotequal 1 \cdot \epsilon$ (by InvDummy)
+	$\dotequal \epsilon$ (by OneDummy).
 	\end{subproof}
 	Hence $dist(a[n],0) = inv(n) < \epsilon$.
 	\end{subproof}
@@ -147,10 +148,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Take $n$ such that $n \leq N \text{ and } a[n] = a[N + 1]$.
 	Case $n = 0$.
 	We have $2 = inv(N + 1)$.
-	$(2 \cdot N) + 2 .= (2 \cdot N) + (2 \cdot 1)$ (by One)
-	$.= 2 \cdot (N + 1)$ (by Distrib)
-	$.= inv(N + 1) \cdot (N + 1)$
-	$.= 1$ (by InvDummy).
+	$(2 \cdot N) + 2 \dotequal (2 \cdot N) + (2 \cdot 1)$ (by One)
+	$\dotequal 2 \cdot (N + 1)$ (by Distrib)
+	$\dotequal inv(N + 1) \cdot (N + 1)$
+	$\dotequal 1$ (by InvDummy).
 	We have $(2 \cdot N) + 2 > 1$.
 	Contradiction.
 	end.
@@ -353,10 +354,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Case $n > N$.
 	We have $dist(a[n],x) < 1$.
 	We have $1 + abs(x) \leq K$ (by MaxIneq).
-	$abs(a[n]) .= abs(a[n] + 0)$ (by Zero)
-	$.= abs(a[n] + (x - x))$ (by Neg)
-	$.= abs(a[n] + ((-x) + x))$ (by ComAdd)
-	$.= abs((a[n] - x) + x)$ (by AssAdd).
+	$abs(a[n]) \dotequal abs(a[n] + 0)$ (by Zero)
+	$\dotequal abs(a[n] + (x - x))$ (by Neg)
+	$\dotequal abs(a[n] + ((-x) + x))$ (by ComAdd)
+	$\dotequal abs((a[n] - x) + x)$ (by AssAdd).
 	Hence $abs(a[n]) \leq abs(a[n] - x) + abs(x)$ (by AbsTriangleIneq).
 	Hence $abs(a[n]) \leq dist(a[n],x) + abs(x)$.
 	We have $dist(a[n],x) + abs(x) < 1 + abs(x)$ (by MixedAddInvariance).
@@ -410,9 +411,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$inv(n)$ is positive.
 	Hence $inv(n) \cdot 1 < inv(n) \cdot (n \cdot \epsilon)$ (by MultInvariance).
 	We have $inv(n) \cdot 1 = inv(n)$ (by One).
-	$inv(n) \cdot (n \cdot \epsilon) .= (inv(n) \cdot n) \cdot \epsilon$ (by AssMult)
-	$.= 1 \cdot \epsilon$ (by InvDummy)
-	$.= \epsilon$ (by OneDummy).
+	$inv(n) \cdot (n \cdot \epsilon) \dotequal (inv(n) \cdot n) \cdot \epsilon$ (by AssMult)
+	$\dotequal 1 \cdot \epsilon$ (by InvDummy)
+	$\dotequal \epsilon$ (by OneDummy).
 	\end{subproof}
 	Hence $dist(a[n],x) < \epsilon$ (by TransitivityOfOrder).
 	\end{subproof}
@@ -455,11 +456,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Assume $N < n$.
 	We have $dist(a[n],x) < \halfeps$.
 	We have $dist(b[n],y) < \halfeps$.
-	$abs((a[n] + b[n]) - (x + y)) .= abs((a[n] + b[n]) + ((-x) + (-y)))$ (by MinusRule1)
-	$.= abs((-x) + ((a[n] + b[n]) - y))$ (by BubbleAdd)
-	$.= abs((-x) + (a[n] + (b[n] - y)))$ (by AssAdd)
-	$.= abs(((-x) + a[n]) + (b[n] - y))$ (by AssAdd)
-	$.= abs((a[n] - x) + (b[n] - y))$ (by ComAdd).
+	$abs((a[n] + b[n]) - (x + y)) \dotequal abs((a[n] + b[n]) + ((-x) + (-y)))$ (by MinusRule1)
+	$\dotequal abs((-x) + ((a[n] + b[n]) - y))$ (by BubbleAdd)
+	$\dotequal abs((-x) + (a[n] + (b[n] - y)))$ (by AssAdd)
+	$\dotequal abs(((-x) + a[n]) + (b[n] - y))$ (by AssAdd)
+	$\dotequal abs((a[n] - x) + (b[n] - y))$ (by ComAdd).
 	We have $abs((a[n] - x) + (b[n] - y)) \leq abs(a[n] - x) + abs(b[n] - y)$  (by AbsTriangleIneq).
 	Hence $abs((a[n] + b[n]) - (x + y)) \leq dist(a[n],x) + dist(b[n],y)$.
 	Hence $dist(a[n],x) + dist(b[n],y) < \halfeps + \halfeps$ (by AddInvariance).
@@ -495,9 +496,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let us show that for every $n \ (c \plustwo a)[n] = (cn \plusone a)[n]$.
 	\begin{subproof}
 	Let $n$ be a natural number.
-	$(c \plustwo a)[n] .= c + a[n]
-	.= cn[n] + a[n]
-	.= (cn \plusone a)[n]$.
+	$(c \plustwo a)[n] \dotequal c + a[n]
+	\dotequal cn[n] + a[n]
+	\dotequal (cn \plusone a)[n]$.
 	\end{subproof}
 	Hence $c \plustwo a = (cn \plusone a)$ (by SequenceEq).
 	\end{subproof}
@@ -514,9 +515,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	We have $c \cdot x = 0$.
 	Let us show that for every $n \ (c \cdottwo a)[n] = 0$. 
 	\begin{subproof}
-	$(c \cdottwo a)[n] .= c \cdot a[n]
-	.= 0 \cdot a[n]
-	.= 0$ (by ZeroMult).
+	$(c \cdottwo a)[n] \dotequal c \cdot a[n]
+	\dotequal 0 \cdot a[n]
+	\dotequal 0$ (by ZeroMult).
 	\end{subproof}
 	Hence $c \cdottwo a$ converges to $c \cdot x$ (by ConstConv).
 	end.
@@ -527,19 +528,19 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let us show that for every $n$ such that $N < n \ dist(c \cdot a[n],c \cdot x) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$.
-	$abs((c \cdot a[n]) - (c \cdot x)) .= abs((c \cdot a[n]) +  ((-1) \cdot (c \cdot x))) (by MinusRule4)$ 
-	$.= abs((c \cdot a[n]) + (((-1) \cdot c) \cdot x))$ (by AssMult)
-	$.= abs((c \cdot a[n]) + ((c \cdot (-1)) \cdot x))$ (by ComMult)
-	$.= abs((c \cdot a[n]) + (c \cdot ((-1) \cdot x)))$ (by AssMult)
-	$.= abs((c \cdot a[n]) + (c \cdot (-x)))$ (by MinusRule4)
-	$.= abs(c \cdot (a[n] - x))$ (by Distrib)
-	$.= abs(c) \cdot abs(a[n] - x)$ (by AbsMult).
+	$abs((c \cdot a[n]) - (c \cdot x)) \dotequal abs((c \cdot a[n]) +  ((-1) \cdot (c \cdot x))) (by MinusRule4)$ 
+	$\dotequal abs((c \cdot a[n]) + (((-1) \cdot c) \cdot x))$ (by AssMult)
+	$\dotequal abs((c \cdot a[n]) + ((c \cdot (-1)) \cdot x))$ (by ComMult)
+	$\dotequal abs((c \cdot a[n]) + (c \cdot ((-1) \cdot x)))$ (by AssMult)
+	$\dotequal abs((c \cdot a[n]) + (c \cdot (-x)))$ (by MinusRule4)
+	$\dotequal abs(c \cdot (a[n] - x))$ (by Distrib)
+	$\dotequal abs(c) \cdot abs(a[n] - x)$ (by AbsMult).
 	$abs(c) \cdot dist(a[n],x) < abs(c) \cdot \inveps$ (by AbsPos, MultInvariance).
 	Hence $abs((c \cdot a[n]) - (c \cdot x)) < abs(c) \cdot \inveps$.
-	$abs(c) \cdot \inveps .= abs(c) \cdot (inv(abs(c)) \cdot \epsilon)$ (by 1)
-	$.= (abs(c) \cdot inv(abs(c))) \cdot \epsilon$ (by AssMult)
-	$.= 1 \cdot \epsilon$ (by Inverse)
-	$.= \epsilon$ (by OneDummy).
+	$abs(c) \cdot \inveps \dotequal abs(c) \cdot (inv(abs(c)) \cdot \epsilon)$ (by 1)
+	$\dotequal (abs(c) \cdot inv(abs(c))) \cdot \epsilon$ (by AssMult)
+	$\dotequal 1 \cdot \epsilon$ (by Inverse)
+	$\dotequal \epsilon$ (by OneDummy).
 	Hence $dist(c \cdot a[n],c \cdot x) < \epsilon$.
 	\end{subproof}
 	end.
@@ -560,9 +561,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{subproof}
 	Let us show that for every $n\ b[n] = y \cdot sum[n]$.
 	\begin{subproof}
-	$b[n] .= y \cdot (a[n] + (-x))$
-	$.= y \cdot ((-x) + a[n])$ (by ComAdd)
-	$.= y \cdot sum[n]$.
+	$b[n] \dotequal y \cdot (a[n] + (-x))$
+	$\dotequal y \cdot ((-x) + a[n])$ (by ComAdd)
+	$\dotequal y \cdot sum[n]$.
 	\end{subproof}
 	Hence $b = y \cdottwo sum$ (by SequenceEq).
 	Hence $b$ converges to $0$ (by ProdConstConv, ComMult, ZeroMult).
@@ -608,8 +609,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$s2a, s2b$ converge to $0$ (by ConstMultSum). 
 	Let us show that for every $n \ s2[n] = s2b[n] + s2a[n]$.
 	\begin{subproof}
-	$s2[n] .= (x \cdot (b[n] + (-y))) + (y \cdot (a[n] + (-x)))$ (by 2)
-	$.= s2b[n] + s2a[n]$ (by 3, 4).
+	$s2[n] \dotequal (x \cdot (b[n] + (-y))) + (y \cdot (a[n] + (-x)))$ (by 2)
+	$\dotequal s2b[n] + s2a[n]$ (by 3, 4).
 	\end{subproof}
 	Hence $s2$ converges to $0$ (by SumConv).
 	\end{subproof}
@@ -618,9 +619,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\begin{subproof}
 	Let us show that for every $n \ s3[n] = s1[n] + s2[n]$.
 	\begin{subproof}
-	$s3[n] .= (a[n] \cdot b[n]) - (x \cdot y)$ (by 3)
-	$.= ((a[n] - x) \cdot (b[n] - y)) + ((x \cdot (b[n] - y)) + (y \cdot (a[n] - x)))$ (by Identity1)
-	$.= s1[n] + s2[n]$ (by 1, 2).
+	$s3[n] \dotequal (a[n] \cdot b[n]) - (x \cdot y)$ (by 3)
+	$\dotequal ((a[n] - x) \cdot (b[n] - y)) + ((x \cdot (b[n] - y)) + (y \cdot (a[n] - x)))$ (by Identity1)
+	$\dotequal s1[n] + s2[n]$ (by 1, 2).
 	\end{subproof}
 	Hence $s3 = s1 \plusone s2$ (by SequenceEq).
 	Therefore the thesis (by SumConv, Zero).
@@ -630,10 +631,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let us show that for every $n$ such that $N < n \ dist(a[n] \cdot b[n],x \cdot y) < \epsilon$.
 	\begin{subproof}
 	Assume $N < n$.
-	$dist(s3[n],0) .= dist((a[n] \cdot b[n]) - (x \cdot y),0)$ (by 3)
-	$.= abs(((a[n] \cdot b[n]) - (x \cdot y)) - 0)$ (by DistDefinition)
-	$.= abs((a[n] \cdot b[n]) - (x \cdot y))$ (by NegOfZero, Zero)
-	$.= dist(a[n] \cdot b[n],x \cdot y)$ (by DistDefinition).
+	$dist(s3[n],0) \dotequal dist((a[n] \cdot b[n]) - (x \cdot y),0)$ (by 3)
+	$\dotequal abs(((a[n] \cdot b[n]) - (x \cdot y)) - 0)$ (by DistDefinition)
+	$\dotequal abs((a[n] \cdot b[n]) - (x \cdot y))$ (by NegOfZero, Zero)
+	$\dotequal dist(a[n] \cdot b[n],x \cdot y)$ (by DistDefinition).
 	\end{subproof}
 	\end{proof}
 
@@ -666,16 +667,16 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$(abs(x) - abs(a[n])) + (-abs(x)) < (inv(2) \cdot abs(x)) + (-abs(x))$ (by MixedAddInvariance). 
 	$(abs(x) - abs(a[n])) + (-abs(x)) = -abs(a[n])$ (by AssAdd, Neg, ComAdd, Zero).
 	$-abs(a[n]) < (inv(2) \cdot abs(x)) + (-abs(x))$ (by AssAdd, Neg, Zero).
-	$(inv(2) \cdot abs(x)) + (-abs(x)) .= (inv(2) \cdot abs(x)) + ((-1) \cdot abs(x))$ (by MinusRule4)
-	$.= (inv(2) + (-1)) \cdot abs(x)$ (by DistribDummy)
-	$.= ((1 \cdot inv(2)) + (-(1 \cdot inv(1)))) \cdot abs(x)$ (by OneDummy, Inverse)
-	$.= ((1 \cdot inv(2)) + ((-1) \cdot inv(1))) \cdot abs(x)$ (by OneDummy, MinusRule4)
-	$.= ((1 \cdot inv(2)) + ((-1) \cdot inv(1))) \cdot abs(x)$ (by MinusRule4)
-	$.= (((1 \cdot 1) + (2 \cdot (-1))) \cdot inv(2 \cdot 1)) \cdot abs(x)$ (by InvAdd)
-	$.= ((1 + ((-1) \cdot 2)) \cdot inv(2)) \cdot abs(x)$ (by One, ComMult).
-	$1 + ((-1) \cdot 2) .= 1 + -(1 \cdot 2)$ (by MinusRule5)
-	$.= -(2 - 1)$ (by OneDummy, MinusRule3)
-	$.= -1$. 
+	$(inv(2) \cdot abs(x)) + (-abs(x)) \dotequal (inv(2) \cdot abs(x)) + ((-1) \cdot abs(x))$ (by MinusRule4)
+	$\dotequal (inv(2) + (-1)) \cdot abs(x)$ (by DistribDummy)
+	$\dotequal ((1 \cdot inv(2)) + (-(1 \cdot inv(1)))) \cdot abs(x)$ (by OneDummy, Inverse)
+	$\dotequal ((1 \cdot inv(2)) + ((-1) \cdot inv(1))) \cdot abs(x)$ (by OneDummy, MinusRule4)
+	$\dotequal ((1 \cdot inv(2)) + ((-1) \cdot inv(1))) \cdot abs(x)$ (by MinusRule4)
+	$\dotequal (((1 \cdot 1) + (2 \cdot (-1))) \cdot inv(2 \cdot 1)) \cdot abs(x)$ (by InvAdd)
+	$\dotequal ((1 + ((-1) \cdot 2)) \cdot inv(2)) \cdot abs(x)$ (by One, ComMult).
+	$1 + ((-1) \cdot 2) \dotequal 1 + -(1 \cdot 2)$ (by MinusRule5)
+	$\dotequal -(2 - 1)$ (by OneDummy, MinusRule3)
+	$\dotequal -1$. 
 	\end{subproof}
     Therefore $abs(a[n]) > -((-inv(2)) \cdot abs(x))$ (by OrdMirror, MinusRule2).
     $-((-inv(2)) \cdot abs(x)) = abs(x) \cdot inv(2)$ (by MinusRule5, MinusRule2, ComMult).
@@ -689,27 +690,27 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then we have $N1 < n$ and $m < n$.
 	Let us show that $dist(inv(a[n]),inv(x)) < ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$.
 	\begin{subproof}
-	$dist(inv(a[n]),inv(x)) .= abs(inv(a[n]) - inv(x))$ (by DistDefinition)
-	$.= abs((1 \cdot inv(a[n])) - (1 \cdot inv(x)))$ (by OneDummy)
-	$.= abs((1 \cdot inv(a[n])) + ((-1) \cdot inv(x)))$ (by MinusRule5)
-	$.= abs(((1 \cdot x) + (a[n] \cdot (-1))) \cdot inv(a[n] \cdot x))$ (by InvAdd)
-	$.= abs((x + ((-1) \cdot a[n])) \cdot inv(a[n] \cdot x))$ (by OneDummy, ComMult)
-	$.= abs((x - a[n]) \cdot inv(a[n] \cdot x))$ (by MinusRule4)
-	$.= abs(x - a[n]) \cdot abs(inv(a[n]) \cdot inv(x))$ (by AbsMult, InvRule2)
-	$.= abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n])$ (by ComMult).
+	$dist(inv(a[n]),inv(x)) \dotequal abs(inv(a[n]) - inv(x))$ (by DistDefinition)
+	$\dotequal abs((1 \cdot inv(a[n])) - (1 \cdot inv(x)))$ (by OneDummy)
+	$\dotequal abs((1 \cdot inv(a[n])) + ((-1) \cdot inv(x)))$ (by MinusRule5)
+	$\dotequal abs(((1 \cdot x) + (a[n] \cdot (-1))) \cdot inv(a[n] \cdot x))$ (by InvAdd)
+	$\dotequal abs((x + ((-1) \cdot a[n])) \cdot inv(a[n] \cdot x))$ (by OneDummy, ComMult)
+	$\dotequal abs((x - a[n]) \cdot inv(a[n] \cdot x))$ (by MinusRule4)
+	$\dotequal abs(x - a[n]) \cdot abs(inv(a[n]) \cdot inv(x))$ (by AbsMult, InvRule2)
+	$\dotequal abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n])$ (by ComMult).
 	We have $pos(abs(inv(a[n]) \cdot inv(x)))$ (by AbsPos, InvNotZero, NoZeroDivisors).
 	$abs(x - a[n]) = dist(a[n],x)$ (by DistDefinition, DistSymm).
 	$abs(inv(a[n]) \cdot inv(x)) \cdot abs(x - a[n]) < abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x)))$ (by MultInvariance, DistDefinition).
-	$abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x))) .= (abs(inv(a[n])) \cdot abs(inv(x))) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x)))$ (by AbsMult)
-	$.= ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult)
-	$.= (inv(2) \cdot (\epsilon \cdot (abs(x) \cdot abs(x)))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by AssMult)
-	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(2)) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult) 
-	$.= (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(a[n])) \cdot abs(inv(x))))$ (by AssMult)
-	$.= (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(x)) \cdot abs(inv(a[n]))))$ (by ComMult)
-	$.= (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot ((inv(2) \cdot abs(inv(x))) \cdot abs(inv(a[n])))$ (by AssMult)
-	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot abs(inv(a[n]))$ (by AssMult)
-	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot inv(abs(a[n]))$ (by AbsInv)
-	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$ (by OneDummy).
+	$abs(inv(a[n]) \cdot inv(x)) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x))) \dotequal (abs(inv(a[n])) \cdot abs(inv(x))) \cdot ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x)))$ (by AbsMult)
+	$\dotequal ((inv(2) \cdot \epsilon) \cdot (abs(x) \cdot abs(x))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult)
+	$\dotequal (inv(2) \cdot (\epsilon \cdot (abs(x) \cdot abs(x)))) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by AssMult)
+	$\dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(2)) \cdot (abs(inv(a[n])) \cdot abs(inv(x)))$ (by ComMult) 
+	$\dotequal (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(a[n])) \cdot abs(inv(x))))$ (by AssMult)
+	$\dotequal (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot (abs(inv(x)) \cdot abs(inv(a[n]))))$ (by ComMult)
+	$\dotequal (\epsilon \cdot (abs(x) \cdot abs(x))) \cdot ((inv(2) \cdot abs(inv(x))) \cdot abs(inv(a[n])))$ (by AssMult)
+	$\dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot abs(inv(a[n]))$ (by AssMult)
+	$\dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot inv(abs(a[n]))$ (by AbsInv)
+	$\dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n])))$ (by OneDummy).
 	\end{subproof}
 	$(\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x))), 1 \cdot inv(abs(a[n])), 2 \cdot inv(abs(x)), dist(inv(a[n]), inv(x)),
 	((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))), ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ are real numbers.
@@ -724,15 +725,15 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $1 \cdot inv(abs(a[n])) < 2 \cdot inv(abs(x))$ (by InvSwapIneq).
 	\end{subproof}
 	$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (1 \cdot inv(abs(a[n]))) < ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x)))$ (by MultInvariance).
-	$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x))) .= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(abs(x)) \cdot inv(2))) \cdot (2 \cdot inv(abs(x)))$ (by ComMult, AbsInv)
-	$.= (((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot inv(2)) \cdot (2 \cdot inv(abs(x)))$ (by AssMult)
-	$.= ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot (inv(2) \cdot (2 \cdot inv(abs(x))))$ (by AssMult)
-	$.= (\epsilon \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot ((inv(2) \cdot 2) \cdot inv(abs(x)))$ (by AssMult)
-	$.= (\epsilon \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot inv(abs(x))$ (by InvDummy, OneDummy)
-	$.= (\epsilon \cdot (abs(x) \cdot (abs(x) \cdot inv(abs(x))))) \cdot inv(abs(x))$ (by AssMult)
-	$.= (\epsilon \cdot abs(x)) \cdot inv(abs(x))$ (by Inverse, One)
-	$.= \epsilon \cdot (abs(x) \cdot inv(abs(x)))$ (by AssMult)
-	$.= \epsilon$ (by Inverse, One).
+	$((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(2) \cdot abs(inv(x)))) \cdot (2 \cdot inv(abs(x))) \dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot (inv(abs(x)) \cdot inv(2))) \cdot (2 \cdot inv(abs(x)))$ (by ComMult, AbsInv)
+	$\dotequal (((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot inv(2)) \cdot (2 \cdot inv(abs(x)))$ (by AssMult)
+	$\dotequal ((\epsilon \cdot (abs(x) \cdot abs(x))) \cdot inv(abs(x))) \cdot (inv(2) \cdot (2 \cdot inv(abs(x))))$ (by AssMult)
+	$\dotequal (\epsilon \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot ((inv(2) \cdot 2) \cdot inv(abs(x)))$ (by AssMult)
+	$\dotequal (\epsilon \cdot ((abs(x) \cdot abs(x)) \cdot inv(abs(x)))) \cdot inv(abs(x))$ (by InvDummy, OneDummy)
+	$\dotequal (\epsilon \cdot (abs(x) \cdot (abs(x) \cdot inv(abs(x))))) \cdot inv(abs(x))$ (by AssMult)
+	$\dotequal (\epsilon \cdot abs(x)) \cdot inv(abs(x))$ (by Inverse, One)
+	$\dotequal \epsilon \cdot (abs(x) \cdot inv(abs(x)))$ (by AssMult)
+	$\dotequal \epsilon$ (by Inverse, One).
 	\end{subproof}
 	Hence the thesis (by TransitivityOfOrder).
 	\end{subproof}
@@ -860,10 +861,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				\begin{subproof}
 					We have $dist(a[n],a[N + 1]) < 1$.\\
 					We have $1 + abs(a[N + 1]) \leq K$ (by MaxIneq).\\
-					$abs(a[n]) .= abs(a[n] + 0)$ (by Zero)\\
-					$.= abs(a[n] + (a[N + 1] - a[N + 1]))$ (by Neg)\\
-					$.= abs(a[n] + ((-a[N + 1]) + a[N + 1]))$ (by ComAdd)\\
-					$.= abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).\\
+					$abs(a[n]) \dotequal abs(a[n] + 0)$ (by Zero)\\
+					$\dotequal abs(a[n] + (a[N + 1] - a[N + 1]))$ (by Neg)\\
+					$\dotequal abs(a[n] + ((-a[N + 1]) + a[N + 1]))$ (by ComAdd)\\
+					$\dotequal abs((a[n] - a[N + 1]) + a[N + 1])$ (by AssAdd).\\
 					We have $abs((a[n] - a[N + 1]) + a[N + 1]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$ (by AbsTriangleIneq).\\
 					Hence $abs(a[n]) \leq abs(a[n] - a[N + 1]) + abs(a[N + 1])$.\\
 					Hence $abs(a[n]) \leq dist(a[n],a[N + 1]) + abs(a[N + 1])$.\\
@@ -902,12 +903,12 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				We have $Subseq(a,i)[n] = a[i[n]]$.\\
 				We have $dist(a[n],a[i[n]]) < \halfeps$.\\
 				We have $dist(a[i[n]],x) < \halfeps$.\\
-				$dist(a[n],x) .= abs(a[n] - x)$ (by DistDefinition)\\
-				$.= abs((a[n] + 0) - x)$ (by Zero)\\
-				$.= abs((a[n] + (a[i[n]] - a[i[n]])) - x)$ (by Neg)\\
-				$.= abs((a[n] + ((-a[i[n]]) + a[i[n]])) - x)$ (by ComAdd)\\
-				$.= abs(((a[n] - a[i[n]]) + a[i[n]]) - x)$ (by AssAdd)\\
-				$.= abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).\\
+				$dist(a[n],x) \dotequal abs(a[n] - x)$ (by DistDefinition)\\
+				$\dotequal abs((a[n] + 0) - x)$ (by Zero)\\
+				$\dotequal abs((a[n] + (a[i[n]] - a[i[n]])) - x)$ (by Neg)\\
+				$\dotequal abs((a[n] + ((-a[i[n]]) + a[i[n]])) - x)$ (by ComAdd)\\
+				$\dotequal abs(((a[n] - a[i[n]]) + a[i[n]]) - x)$ (by AssAdd)\\
+				$\dotequal abs((a[n] - a[i[n]]) + (a[i[n]] - x))$ (by AssAdd).\\
 				We have $abs((a[n] - a[i[n]]) + (a[i[n]] - x)) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$ (by AbsTriangleIneq).\\
 				Hence $dist(a[n],x) \leq abs(a[n] - a[i[n]]) + abs(a[i[n]] - x)$.\\
 				Hence $dist(a[n],x) \leq dist(a[n],a[i[n]]) + dist(a[i[n]],x)$.\\
@@ -1034,15 +1035,15 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 			
 			Hence $(LeastUpper(a) - \epsilon)$ is upper bound of $a$ (by UpperBoundSeq).
 			
-			$LeastUpper(a) - (LeastUpper(a) - \epsilon) .= LeastUpper(a) + (-LeastUpper(a) + \epsilon)$ (by MinusRule1, MinusRule2)
+			$LeastUpper(a) - (LeastUpper(a) - \epsilon) \dotequal LeastUpper(a) + (-LeastUpper(a) + \epsilon)$ (by MinusRule1, MinusRule2)
 			
-			$.= (LeastUpper(a) - LeastUpper(a)) + \epsilon$ (by AssAdd)
+			$\dotequal (LeastUpper(a) - LeastUpper(a)) + \epsilon$ (by AssAdd)
 			
-			$.= 0 + \epsilon$ (by Neg)
+			$\dotequal 0 + \epsilon$ (by Neg)
 			
-			$.= \epsilon + 0$ (by ComAdd)
+			$\dotequal \epsilon + 0$ (by ComAdd)
 			
-			$.= \epsilon$ (by Zero).
+			$\dotequal \epsilon$ (by Zero).
 			
 			Hence $(LeastUpper(a) - \epsilon) < LeastUpper(a)$.
 			
@@ -1074,21 +1075,21 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				We have $((LeastUpper(a) - \epsilon) + \epsilon) - a[N] < (a[N] + \epsilon) - a[N]$ (by MixedAddInvariance).
 				
-				$((LeastUpper(a) - \epsilon) + \epsilon) - a[N] .= (LeastUpper(a) + (-\epsilon + \epsilon)) - a[N]$ (by AssAdd)
+				$((LeastUpper(a) - \epsilon) + \epsilon) - a[N] \dotequal (LeastUpper(a) + (-\epsilon + \epsilon)) - a[N]$ (by AssAdd)
 				
-				$.= (LeastUpper(a) + (\epsilon - \epsilon)) - a[N]$ (by ComAdd)
+				$\dotequal (LeastUpper(a) + (\epsilon - \epsilon)) - a[N]$ (by ComAdd)
 				
-				$.= (LeastUpper(a) + 0) - a[N]$ (by Neg)
+				$\dotequal (LeastUpper(a) + 0) - a[N]$ (by Neg)
 				
-				$.= LeastUpper(a) - a[N]$ (by Zero).
+				$\dotequal LeastUpper(a) - a[N]$ (by Zero).
 				
-				$(a[N] + \epsilon) - a[N] .= (\epsilon + a[N]) - a[N]$ (by ComAdd)
+				$(a[N] + \epsilon) - a[N] \dotequal (\epsilon + a[N]) - a[N]$ (by ComAdd)
 				
-				$.= \epsilon + (a[N] - a[N])$ (by AssAdd)
+				$\dotequal \epsilon + (a[N] - a[N])$ (by AssAdd)
 				
-				$.= \epsilon + 0$ (by Neg)
+				$\dotequal \epsilon + 0$ (by Neg)
 				
-				$.= \epsilon$ (by Zero).
+				$\dotequal \epsilon$ (by Zero).
 				
 				Hence $LeastUpper(a) - a[N] < \epsilon$.
 				
@@ -1125,11 +1126,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				
 				Then $-a[n] \leq -a[m]$ (by OrdMirrorLeq).
 				
-				$((-1) \cdottwo a)[n] .= (-1) \cdot a[n]
-				.= -a[n]$ (by MinusRule4).
+				$((-1) \cdottwo a)[n] \dotequal (-1) \cdot a[n]
+				\dotequal -a[n]$ (by MinusRule4).
 				
-				$((-1) \cdottwo a)[m] .= (-1) \cdot a[m]
-				.= -a[m]$ (by MinusRule4).
+				$((-1) \cdottwo a)[m] \dotequal (-1) \cdot a[m]
+				\dotequal -a[m]$ (by MinusRule4).
 				
 				Hence $((-1) \cdottwo a)[n] \leq ((-1) \cdottwo a)[m]$.
 				
@@ -1143,11 +1144,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				Let us show that for every $n$ $abs(((-1) \cdottwo a)[n]) \leq K$.
 				
 				\begin{subproof}
-					$abs(((-1) \cdottwo a)[n]) .= abs((-1) \cdot a[n])$ (by SequenceConstProd)
+					$abs(((-1) \cdottwo a)[n]) \dotequal abs((-1) \cdot a[n])$ (by SequenceConstProd)
 					
-					$.= abs(-a[n])$ (by MinusRule4)
+					$\dotequal abs(-a[n])$ (by MinusRule4)
 					
-					$.= abs(a[n])$ (by AbsPosNeg).
+					$\dotequal abs(a[n])$ (by AbsPosNeg).
 					
 					Hence $abs(((-1) \cdottwo a)[n]) \leq K$.
 					
@@ -1169,13 +1170,13 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 				\begin{subproof}
 					Let $n$ be a natural number.
 					
-					$((-1) \cdottwo ((-1) \cdottwo a))[n] .= (-1) \cdot ((-1) \cdottwo a)[n]$ (by SequenceConstProd)
+					$((-1) \cdottwo ((-1) \cdottwo a))[n] \dotequal (-1) \cdot ((-1) \cdottwo a)[n]$ (by SequenceConstProd)
 					
-					$.= (-1) \cdot ((-1) \cdot a[n])$ (by SequenceConstProd)
+					$\dotequal (-1) \cdot ((-1) \cdot a[n])$ (by SequenceConstProd)
 					
-					$.= -(-a[n])$ (by MinusRule4)
+					$\dotequal -(-a[n])$ (by MinusRule4)
 					
-					$.= a[n]$ (by MinusRule2).
+					$\dotequal a[n]$ (by MinusRule2).
 										
 				\end{subproof}
 				
@@ -1224,13 +1225,13 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $(a \cdot (-b)) = -(a \cdot b) and ((-b) \cdot a) = -(b \cdot a)$.
 	\end{lemma}
 	\begin{proof}
-	(1) $a \cdot (-b) .= a \cdot ((-1) \cdot b)$ (by MinusRule4)
-	$.= (a \cdot (-1)) \cdot b$ (by AssMult)
-	$.= ((-1) \cdot a) \cdot b$ (by ComMult)
-	$.= (-1) \cdot (a \cdot b)$ (by AssMult)
-	$.= -(a \cdot b)$ (by MinusRule4).
+	(1) $a \cdot (-b) \dotequal a \cdot ((-1) \cdot b)$ (by MinusRule4)
+	$\dotequal (a \cdot (-1)) \cdot b$ (by AssMult)
+	$\dotequal ((-1) \cdot a) \cdot b$ (by ComMult)
+	$\dotequal (-1) \cdot (a \cdot b)$ (by AssMult)
+	$\dotequal -(a \cdot b)$ (by MinusRule4).
 	
-	$((-b) \cdot a) .= -(b \cdot a)$ (by ComMult, 1).
+	$((-b) \cdot a) \dotequal -(b \cdot a)$ (by ComMult, 1).
 	\end{proof}
 	
 	\begin{lemma}[MinusRule6]
@@ -1238,9 +1239,9 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $((-a) \cdot (-b)) = a \cdot b$.
 	\end{lemma}
 	\begin{proof}
-	$((-a) \cdot (-b)) .= -(a \cdot (-b))$ (by MinusRule5)
-	$.= -(-(a \cdot b))$ (by MinusRule5)
-	$.= a \cdot b$ (by MinusRule2).
+	$((-a) \cdot (-b)) \dotequal -(a \cdot (-b))$ (by MinusRule5)
+	$\dotequal -(-(a \cdot b))$ (by MinusRule5)
+	$\dotequal a \cdot b$ (by MinusRule2).
 	\end{proof}
 	
 	\begin{lemma}[Binomi1]
@@ -1248,8 +1249,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $(a + b) \cdot (c + d) = ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$.
 	\end{lemma}
 	\begin{proof}
-	$(a + b) \cdot (c + d) .= ((a + b) \cdot c) + ((a + b) \cdot d)$ (by Distrib)
-	$.= ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$ (by DistribDummy).
+	$(a + b) \cdot (c + d) \dotequal ((a + b) \cdot c) + ((a + b) \cdot d)$ (by Distrib)
+	$\dotequal ((a \cdot c) + (b \cdot c)) + ((a \cdot d) + (b \cdot d))$ (by DistribDummy).
 	\end{proof}
 	
 	\begin{lemma}[Binomi2]
@@ -1257,8 +1258,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $(a - b) \cdot (c - d) = ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$.
 	\end{lemma}
 	\begin{proof}
-	$(a - b) \cdot (c - d) .= ((a \cdot c) + ((-b) \cdot c)) + ((a \cdot (-d)) + ((-b) \cdot (-d)))$ (by Binomi1)
-	$.= ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$ (by MinusRule5, MinusRule6).
+	$(a - b) \cdot (c - d) \dotequal ((a \cdot c) + ((-b) \cdot c)) + ((a \cdot (-d)) + ((-b) \cdot (-d)))$ (by Binomi1)
+	$\dotequal ((a \cdot c) - (b \cdot c)) + (-(a \cdot d) + (b \cdot d))$ (by MinusRule5, MinusRule6).
 	\end{proof}
 	
 	
@@ -1269,21 +1270,21 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	\end{lemma}
 	\begin{proof}
 	$((a - c) \cdot (b - d)) + ((c \cdot (b - d)) + (d \cdot (a - c))) 
-	.= (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((c \cdot (b - d)) + (d \cdot (a - c)))$ (by Binomi2)
-	$.= (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (c \cdot (-d))) + ((d \cdot a) + (d \cdot (-c))))$ (by Distrib)
-	$.= (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (-(c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by MinusRule5)
-	$.= ((c \cdot b) + (-(c \cdot d))) + ((((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by BubbleAdd)
-	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + ((a \cdot d) + (-(c \cdot d)))))$ (by AssAdd, ComMult)
-	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-((a \cdot d) + (-(c \cdot d)))))))$ (by MinusRule2)
-	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-(a \cdot d) + (c \cdot d)))))$ (by ComAdd, MinusRule3)
-	$.= ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + 0)$ (by Neg)
-	$.= ((-(c \cdot d)) + (c \cdot b)) + (-(c \cdot b) + (a \cdot b))$ (by ComAdd, Zero)
-	$.= (-(c \cdot d)) + ((c \cdot b) + (-(c \cdot b) + (a \cdot b)))$ (by AssAdd)
-	$.= (-(c \cdot d)) + (((c \cdot b) -(c \cdot b)) + (a \cdot b))$ (by AssAdd)
-	$.= -(c \cdot d) + (0 + (a \cdot b))$ (by Neg)
-	$.= -(c \cdot d) + ((a \cdot b) + 0)$ (by ComAdd)
-	$.= -(c \cdot d) + (a \cdot b)$ (by Zero)
-	$.= (a \cdot b) - (c \cdot d)$ (by ComAdd).
+	\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((c \cdot (b - d)) + (d \cdot (a - c)))$ (by Binomi2)
+	$\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (c \cdot (-d))) + ((d \cdot a) + (d \cdot (-c))))$ (by Distrib)
+	$\dotequal (((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + (((c \cdot b) + (-(c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by MinusRule5)
+	$\dotequal ((c \cdot b) + (-(c \cdot d))) + ((((a \cdot b) - (c \cdot b)) + (-(a \cdot d) + (c \cdot d))) + ((d \cdot a) + (-(d \cdot c))))$ (by BubbleAdd)
+	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + ((a \cdot d) + (-(c \cdot d)))))$ (by AssAdd, ComMult)
+	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-((a \cdot d) + (-(c \cdot d)))))))$ (by MinusRule2)
+	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + ((-(a \cdot d) + (c \cdot d)) + (-(-(a \cdot d) + (c \cdot d)))))$ (by ComAdd, MinusRule3)
+	$\dotequal ((c \cdot b) + (-(c \cdot d))) + (((a \cdot b) - (c \cdot b)) + 0)$ (by Neg)
+	$\dotequal ((-(c \cdot d)) + (c \cdot b)) + (-(c \cdot b) + (a \cdot b))$ (by ComAdd, Zero)
+	$\dotequal (-(c \cdot d)) + ((c \cdot b) + (-(c \cdot b) + (a \cdot b)))$ (by AssAdd)
+	$\dotequal (-(c \cdot d)) + (((c \cdot b) -(c \cdot b)) + (a \cdot b))$ (by AssAdd)
+	$\dotequal -(c \cdot d) + (0 + (a \cdot b))$ (by Neg)
+	$\dotequal -(c \cdot d) + ((a \cdot b) + 0)$ (by ComAdd)
+	$\dotequal -(c \cdot d) + (a \cdot b)$ (by Zero)
+	$\dotequal (a \cdot b) - (c \cdot d)$ (by ComAdd).
 	\end{proof}
 	
 	
@@ -1296,8 +1297,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Let $x,y$ be real numbers. Then $abs(x) - abs(y) \leq abs(x - y)$.
 	\end{lemma}
 	\begin{proof}
-	$abs(x) .= abs(x + ((-y) + y))$ (by Zero, Neg, ComAdd)
-	$.= abs((x + (-y)) + y)$ (by AssAdd).
+	$abs(x) \dotequal abs(x + ((-y) + y))$ (by Zero, Neg, ComAdd)
+	$\dotequal abs((x + (-y)) + y)$ (by AssAdd).
 	$abs((x + (-y)) + y) \leq abs(x - y) + abs(y)$ (by AbsTriangleIneq).
 	Hence $abs(x) \leq abs(x + (-y)) + abs(y)$.
 	$abs(x) + (-abs(y)) \leq (abs(x - y) + abs(y)) + (-abs(y))$ (by LeqAddInvariance).
@@ -1311,15 +1312,15 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $(a \cdot inv(b)) + (c \cdot inv(d)) = ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$.
 	\end{lemma}
 	\begin{proof}
-	$(a \cdot inv(b)) + (c \cdot inv(d)) .= ((a \cdot inv(b)) \cdot 1) + (1 \cdot (c \cdot inv(d)))$ (by One, OneDummy)
-	$.= ((a \cdot inv(b)) \cdot (d \cdot inv(d))) + ((b \cdot inv(b)) \cdot (c \cdot inv(d)))$ (by Inverse)
-	$.= (a \cdot (inv(b) \cdot (d \cdot inv(d)))) + (b \cdot (inv(b) \cdot (c \cdot inv(d))))$ (by AssMult)
-	$.= (a \cdot ((inv(b) \cdot d) \cdot inv(d))) + (b \cdot ((inv(b) \cdot c) \cdot inv(d)))$ (by AssMult)
-	$.= (a \cdot ((d \cdot inv(b)) \cdot inv(d))) + (b \cdot ((c \cdot inv(b)) \cdot inv(d)))$ (by ComMult)
-	$.= (a \cdot (d \cdot (inv(b) \cdot inv(d)))) + (b \cdot (c \cdot (inv(b) \cdot inv(d))))$ (by AssMult)
-	$.= ((a \cdot d) \cdot (inv(b) \cdot inv(d))) + ((b \cdot c) \cdot (inv(b) \cdot inv(d)))$ (by AssMult)
-	$.= ((a \cdot d) \cdot inv(b \cdot d)) + ((b \cdot c) \cdot inv(b \cdot d)) $(by InvRule2)
-	$.= ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$ (by DistribDummy).
+	$(a \cdot inv(b)) + (c \cdot inv(d)) \dotequal ((a \cdot inv(b)) \cdot 1) + (1 \cdot (c \cdot inv(d)))$ (by One, OneDummy)
+	$\dotequal ((a \cdot inv(b)) \cdot (d \cdot inv(d))) + ((b \cdot inv(b)) \cdot (c \cdot inv(d)))$ (by Inverse)
+	$\dotequal (a \cdot (inv(b) \cdot (d \cdot inv(d)))) + (b \cdot (inv(b) \cdot (c \cdot inv(d))))$ (by AssMult)
+	$\dotequal (a \cdot ((inv(b) \cdot d) \cdot inv(d))) + (b \cdot ((inv(b) \cdot c) \cdot inv(d)))$ (by AssMult)
+	$\dotequal (a \cdot ((d \cdot inv(b)) \cdot inv(d))) + (b \cdot ((c \cdot inv(b)) \cdot inv(d)))$ (by ComMult)
+	$\dotequal (a \cdot (d \cdot (inv(b) \cdot inv(d)))) + (b \cdot (c \cdot (inv(b) \cdot inv(d))))$ (by AssMult)
+	$\dotequal ((a \cdot d) \cdot (inv(b) \cdot inv(d))) + ((b \cdot c) \cdot (inv(b) \cdot inv(d)))$ (by AssMult)
+	$\dotequal ((a \cdot d) \cdot inv(b \cdot d)) + ((b \cdot c) \cdot inv(b \cdot d)) $(by InvRule2)
+	$\dotequal ((a \cdot d) + (b \cdot c)) \cdot inv(b \cdot d)$ (by DistribDummy).
 	\end{proof}
 	
 	
@@ -1329,11 +1330,11 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Then $(a \cdot inv(b)) \cdot (b \cdot inv(a)) = 1$.
 	\end{lemma}
 	\begin{proof}
-	$(a \cdot inv(b)) \cdot (b \cdot inv(a)) .= ((a \cdot inv(b)) \cdot b) \cdot inv(a)$ (by AssMult)
-	$.= (a \cdot (inv(b) \cdot b)) \cdot inv(a)$ (by AssMult)
-	$.= (a \cdot 1) \cdot inv(a)$ (by InvDummy)
-	$.= a \cdot inv(a)$ (by One)
-	$.= 1$ (by Inverse).
+	$(a \cdot inv(b)) \cdot (b \cdot inv(a)) \dotequal ((a \cdot inv(b)) \cdot b) \cdot inv(a)$ (by AssMult)
+	$\dotequal (a \cdot (inv(b) \cdot b)) \cdot inv(a)$ (by AssMult)
+	$\dotequal (a \cdot 1) \cdot inv(a)$ (by InvDummy)
+	$\dotequal a \cdot inv(a)$ (by One)
+	$\dotequal 1$ (by Inverse).
 	\end{proof}
 	
 	
@@ -1346,10 +1347,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Therefore $pos(-z)$.    
 	Hence $(-z) \cdot x < (-z) \cdot y$.
 	Hence $-((-z) \cdot x) > -((-z) \cdot y)$ (by OrdMirror).
-	$-((-z) \cdot x) .= (-(-z)) \cdot x$ (by MinusRule5)
-	$.= z \cdot x$ (by MinusRule2).
-	$-((-z) \cdot y) .= (-(-z)) \cdot y$ (by MinusRule5)
-	$.= z \cdot y$ (by MinusRule2).
+	$-((-z) \cdot x) \dotequal (-(-z)) \cdot x$ (by MinusRule5)
+	$\dotequal z \cdot x$ (by MinusRule2).
+	$-((-z) \cdot y) \dotequal (-(-z)) \cdot y$ (by MinusRule5)
+	$\dotequal z \cdot y$ (by MinusRule2).
 	\end{proof}
 	
 	
@@ -1365,10 +1366,10 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	Hence $1 < (b \cdot inv(a)) \cdot (c \cdot inv(d))$.
 	$(d \cdot inv(c)) \cdot 1 < (d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d)))$ (by MultInvariance).
 	$d \cdot inv(c) < (d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d)))$ (by One).
-	$(d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d))) .= ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \cdot (d \cdot inv(c))$ (by ComMult)
-	$.= (b \cdot inv(a)) \cdot ((c \cdot inv(d)) \cdot (d \cdot inv(c)))$ (by AssMult)
-	$.= (b \cdot inv(a)) \cdot 1$ (by InvCanc)
-	$.= b \cdot inv(a)$ (by One).   
+	$(d \cdot inv(c)) \cdot ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \dotequal ((b \cdot inv(a)) \cdot (c \cdot inv(d))) \cdot (d \cdot inv(c))$ (by ComMult)
+	$\dotequal (b \cdot inv(a)) \cdot ((c \cdot inv(d)) \cdot (d \cdot inv(c)))$ (by AssMult)
+	$\dotequal (b \cdot inv(a)) \cdot 1$ (by InvCanc)
+	$\dotequal b \cdot inv(a)$ (by One).   
 	\end{proof}
 	
 	
@@ -1380,15 +1381,15 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	We have $pos(abs(inv(x)))$ and $pos(inv(abs(x)))$.
 	$pos(1)$ (by OnePos).
 	(1) Hence $( abs(inv(x)) = abs(abs(inv(x)))$ and $inv(abs(x)) = abs(inv(abs(x))) )$ and $abs(1) = 1$ (by AbsValue).
-	$abs(inv(x)) .= abs(abs(inv(x)))$ (by 1)
-	$.= abs(abs(inv(x)) \cdot 1)$ (by One)
-	$.= abs(abs(inv(x)) \cdot (abs(x) \cdot inv(abs(x))))$ (by Inverse)
-	$.= abs((abs(inv(x)) \cdot abs(x)) \cdot inv(abs(x)))$ (by AssMult)
-	$.= abs(abs(inv(x) \cdot x) \cdot inv(abs(x)))$ (by AbsMult)
-	$.= abs(abs(1) \cdot inv(abs(x)))$ (by InvDummy)
-	$.= abs(1 \cdot inv(abs(x)))$ (by 1) 
-	$.= abs(inv(abs(x)))$ (by OneDummy)
-	$.= inv(abs(x))$ (by 1).    
+	$abs(inv(x)) \dotequal abs(abs(inv(x)))$ (by 1)
+	$\dotequal abs(abs(inv(x)) \cdot 1)$ (by One)
+	$\dotequal abs(abs(inv(x)) \cdot (abs(x) \cdot inv(abs(x))))$ (by Inverse)
+	$\dotequal abs((abs(inv(x)) \cdot abs(x)) \cdot inv(abs(x)))$ (by AssMult)
+	$\dotequal abs(abs(inv(x) \cdot x) \cdot inv(abs(x)))$ (by AbsMult)
+	$\dotequal abs(abs(1) \cdot inv(abs(x)))$ (by InvDummy)
+	$\dotequal abs(1 \cdot inv(abs(x)))$ (by 1) 
+	$\dotequal abs(inv(abs(x)))$ (by OneDummy)
+	$\dotequal inv(abs(x))$ (by 1).    
 	\end{proof}
 	
 	
@@ -1396,8 +1397,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$inv(1) = 1$.
 	\end{lemma}
 	\begin{proof}
-	$1 .= 1 \cdot inv(1)$ (by Inverse)
-	$.= inv(1)$ (by OneDummy).
+	$1 \dotequal 1 \cdot inv(1)$ (by Inverse)
+	$\dotequal inv(1)$ (by OneDummy).
 	\end{proof}   
 	
 \end{forthel}
