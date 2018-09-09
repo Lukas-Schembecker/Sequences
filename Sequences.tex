@@ -592,8 +592,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	(2) Define $s2[k] = (x \cdot (b[k] + (-y))) + (y \cdot (a[k] + (-x)))$ for $k$ in $\NN$.
 	Let us show that $s2$ converges to $0$.
 	\begin{subproof}
-	Define $s2a[k] = y \cdot (a[k] + (-x))$ for $k$ in $\NN$.
-	Define $s2b[k] = x \cdot (b[k] + (-y))$ for $k$ in $\NN$.
+	(3) Define $s2a[k] = y \cdot (a[k] + (-x))$ for $k$ in $\NN$.
+	(4) Define $s2b[k] = x \cdot (b[k] + (-y))$ for $k$ in $\NN$.
 	$s2a, s2b$ are sequences.
 	Define $sum1[k] = a[k] + (-x)$ for $k$ in $\NN$.
 	Define $sum2[k] = b[k] + (-y)$ for $k$ in $\NN$.
@@ -604,8 +604,8 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	$s2a, s2b$ converge to $0$ (by ConstMultSum). 
 	Let us show that for every $n \ s2[n] = s2b[n] + s2a[n]$.
 	\begin{subproof}
-	$s2[n] .= (x \cdot (b[n] + (-y))) + (y \cdot (a[n] + (-x)))
-	.= s2b[n] + s2a[n]$.
+	$s2[n] .= (x \cdot (b[n] + (-y))) + (y \cdot (a[n] + (-x)))$ (by 2)
+	$.= s2b[n] + s2a[n]$ (by 3, 4).
 	\end{subproof}
 	Hence $s2$ converges to $0$ (by SumConv).
 	\end{subproof}
@@ -1066,7 +1066,7 @@ The present formalization deals with chapter 3 'Numerical Sequences and Series' 
 	
 	\begin{proof}
 		For every $n$ $a[n] \leq LeastUpper(a)$ (by UpperBoundSeq, LeastUpperBoundSeq).
-		
+
 		Let us show that for every positive real number $eps$ there exists $N$ such that $(LeastUpper(a) - eps) < a[N]$.
 		
 		\begin{subproof}
