@@ -64,12 +64,12 @@
 
 
 \section{Introduction}
-The present formalization covers chapter 3 'Numerical Sequences (and Series)' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. To improve readability, we moved most of these to a seperate file - 'helper.ftl'.
+The present formalization covers chapter 3 'Numerical Sequences (and Series)' (pages 47 to 58) of the {\it Principles of Mathematical Analysis} by Walter \linebreak Rudin \cite{Rudin}. We only focus on the part about Sequences and regard the special case of the metric space $\mathbb{R}$. We use the formalization of real numbers found in 'examples/Forster/Reals.ftl' and added a few more simple general real number facts, which the prover uses as auxiliary lemmata. To improve readability, we moved most of these to a separate file - 'helper.ftl'.
 
 \section{The Formalization}
 \subsection{Sequences.ftl}
 
-In order to improve the proof reading experience, we added two new enviroments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new enviroments, so we changed it's Haskell code in 'Alice/Import/LaTeX.hs' accordingly. Besides some further small changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes to the parser.\\
+In order to improve the proof reading experience, we added two new environments 'subproof' and 'case' in LaTeX. These allow proofs being structured by further indentations. The parser needs to ignore these new environments, so we changed its Haskell code in 'Alice/Import/LaTeX.hs' accordingly. Besides some further small changes, like changing the appearance of ' $+'$ ' to '$+$', we also tried to change the appearance of the absolute function 'abs' and the inverse function 'inv' to their standard representation, but to get them properly parsed one needs to do some more elaborate changes to the parser.\\
 
 \noindent The definitions of sequences can be translated very closely to Rudin's text:
 
@@ -119,7 +119,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{definition}
 \end{forthel}
 
-\noindent The following properties of $\frac{1}{n}$ and $(-1)^{n}$ are said to be trivial by Rudin as they only need 'common math' to be proven. A rigerous formalization needs to address these common facts seperately, so they text gets naturally longer.\\
+\noindent The following properties of $\frac{1}{n}$ and $(-1)^{n}$ are said to be trivial by Rudin as they only need 'common math' to be proven. A rigorous formalization needs to address these common facts separately, so the text is naturally longer.\\
 
 \noindent Here we also have to consider the special case of $n=0$. Rudin does not consider 0 as a natural number.
 
@@ -194,7 +194,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{proof}
 \end{forthel}
 
-\noindent Instead of formalizing exponentiation, we think it is easier to define $(-1)^{n}$ using parity and provide some simple axioms.
+\noindent Instead of formalizing exponentiation, we thought it was easier to define $(-1)^{n}$ using parity and providing some simple axioms.
 
 \begin{forthel}
 	\begin{signature}[Parity]
@@ -291,7 +291,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{proof}
 \end{forthel}
 
-\noindent The following translations of the next few theorems are almost identical to their counterpart in Rudin's text:
+\noindent The translations of the next few theorems are almost identical to their counterpart in Rudin's text:
 
 \begin{forthel}
 	\begin{definition}[Neighb]
@@ -338,7 +338,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{proof}
 \end{forthel}
 
-\noindent Here we should note that we added the symbol $\halfeps$ for the variable 'halfeps' in ForTheL. Thus the strangly looking line $\halfeps = inv(2) \cdot \epsilon$ in the next proof. We used similar symbols $\inveps$ and $\rooteps$ throughout the remaining formalization.
+\noindent Here we should note that we added the symbol $\halfeps$ for the variable 'halfeps' in ForTheL. Thus the strangely looking line $\halfeps = inv(2) \cdot \epsilon$ in the next proof. We used similar symbols $\inveps$ and $\rooteps$ throughout the remaining formalization.
 
 \begin{forthel}
 	\begin{theorem}[LimitUnique]
@@ -369,7 +369,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 
 \fbox{\includegraphics[width=0.9 \textwidth]{3_2b}}\\
 
-\noindent As we can see, the two proofs are almost identical, with some minor additions in our formalization and a seperate lemma for the last statement. This is only possible due to the low complexity of the calculations involved. As we get to more elaborate proofs, these calculations will take a lot more space, so we have to further seperate from the original text.
+\noindent As we can see, the two proofs are almost identical, with some minor additions in our formalization and a separate lemma for the last statement. This is only possible due to the low complexity of the calculations involved. As we get to more elaborate proofs, these calculations will take a lot more space, so we have to further separate from the original text.
 
 \begin{forthel}
 	\begin{definition}[BoundedBy]
@@ -490,7 +490,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	\end{proof}
 \end{forthel}
 
-\noindent In LaTeX it is possible to overload the plus operator by adding a simple replacement command. On the other hand in ForTheL one has to use slightly different operators like ' $+'$ ' instead of ' $+$ ':
+\noindent In LaTeX it is possible to overload the plus operator by adding a simple replacement command. Conversely, in ForTheL one has to use slightly different operators like ' $+'$ ' instead of ' $+$ ':
 
 \begin{forthel}	
 	\begin{definition}[SequenceSum]
@@ -626,7 +626,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 	
 \end{forthel}
 
-\noindent The following lemma was developed for the purpose of working around repeating one subproof in the proof of the theorem 'ProdConv' twice. Surprisingly, the eprover takes a long time to apply this lemma, although the lemma itself is proved really quickly and every precondition is provided.
+\noindent The following lemma was introduced for the purpose of working around repeating one subproof in the proof of the theorem 'ProdConv' twice. Surprisingly, the eprover takes a long time to apply this lemma, although the lemma itself is proved really quickly and every precondition is provided.
 
 \begin{forthel}
 
@@ -723,7 +723,7 @@ In order to improve the proof reading experience, we added two new enviroments '
 
 \end{forthel}
 
-\noindent The next theorem is a bit degenerate since the apparently "simple" equations used in Rudin took much more concretisation when trying to prove it with Alice. 
+\noindent The next theorem is a bit degenerate since the apparently "simple" equations used in Rudin took far more concretisation when trying to prove it with Alice. 
 We simplified the proof as much as possible - the prover did not accept further simplifications.
 
 \begin{forthel}
@@ -830,7 +830,7 @@ We simplified the proof as much as possible - the prover did not accept further 
 	\end{proof}
 \end{forthel}
 
-\noindent The next excerpt of Rudin's book shows how big the differences are in length. This is the most extreme case of additional concretisation we have to provide the prover.
+\noindent This is the most extreme case of additional concretisation we have to provide the prover. The next excerpt of Rudin's book shows the great differences in length of the mathematical script and our formalization: 
 
 \fbox{\includegraphics[width=0.9 \textwidth]{3_3d}}\\
 
@@ -914,7 +914,7 @@ We simplified the proof as much as possible - the prover did not accept further 
 	\end{proof}
 \end{forthel}
 
-\noindent Rudin considers arbitrary metric spaces, so he shows that every convergent sequence is a cauchy sequence for all metric spaces and vice versa for $\RR^{n}$. We only consider the case of $\RR$, so we directly show the completeness of $\RR$. To achieve this we followed the proof found in \cite{Cauchy}.
+\noindent Rudin considers arbitrary metric spaces, so he shows that every convergent sequence is a cauchy sequence for all metric spaces and vice versa for $\RR^{n}$. \linebreak We only consider the case of $\RR$, so we directly show the completeness of $\RR$. To achieve this we followed the proof found in \cite{Cauchy}.
 
 \begin{forthel}
 	\begin{axiom}[BolzanoWeierstrass]
@@ -1155,7 +1155,7 @@ We simplified the proof as much as possible - the prover did not accept further 
 	\end{proof}
 \end{forthel}
 	
-\noindent Rudin writes that the other case of monotonically decreasing sequences works analogously, but obviously this is not possible in a strict proof system. Instead we decided to prove the other case by using that the negation of a monotonically decreasing sequence is monotonically increasing. Hence we can deduce the general case from the special case.
+\noindent Rudin asserts that the other case of monotonically decreasing sequences works analogously, but obviously this is not possible in a strict proof system. Instead we decided to prove the other case by using that the negation of a monotonically decreasing sequence is monotonically increasing. Hence we can deduce the general case from the special case.
 	
 \begin{forthel}
 	\begin{theorem}[MonCon]
@@ -1295,7 +1295,7 @@ In the following part we display basic propositions with rather technical proofs
 	
 \end{forthel}
 
-\noindent In the following two lemmata we extended the minusrules from 'Reals.ftl'. Therefore the apparently strange enumeration.
+\noindent In the following two lemmata we extended the minus rules from 'Reals.ftl'. Therefore the apparently strange enumeration.
 
 \begin{forthel}
 		
@@ -1343,7 +1343,7 @@ In the following part we display basic propositions with rather technical proofs
 	
 \end{forthel}
 
-\noindent The next identity is used in the theorem 'ProdConv', but in Rudin it was only mentioned without a proof. Since this is not an obvious result, we decided to prove it though. In the ForTheL-text we used the '.='-syntax in which one has to tell the eprover every rule he should use in each equation.
+\noindent The next identity is used in the theorem 'ProdConv', but in Rudin it was only mentioned without a proof. Since this is not an obvious result, we decided to prove it nonetheless. In the ForTheL-text we used the '.='-syntax in which one has to tell the eprover every rule he should use in each equation.
 So this is a great example to visualize the amount of commands the eprover uses to transform simple algebraic equations (furthermore, the use of the rules Binomi2, MinusRule5 and MinusRule2 hides the use of plenty further rules).
 
 \begin{forthel}
@@ -1498,17 +1498,17 @@ So this is a great example to visualize the amount of commands the eprover uses 
 
 \section{Results}
 
-Both of our formalization files - the ForTheL and the LaTeX file - are able to get proofchecked completely. We tried to get the the newest iteration of the SAD system to work on one of our laptops (which had a new bugfix added), but after updating, the prover decided not to work at all anymore. Thus we decided to stay with the older version on the other laptop in order to keep a working prover. However, now one still has to verify, that the formalization also works in the newest SAD version. Unfortunatly now with only one working prover, we can only present the running times of the slower laptop which has a Intel Pentium CPU N3700 @ 1.60 GHz x 4 with 4 GB RAM. There the ForTheL text needs a total time of 4 minutes with 3 minutes and 43 seconds used by the prover and the LaTeX document needs a total time of 6 minutes and 6 seconds and 3 minutes 55 seconds by the prover. As one can see, the time needed to parse the LaTeX document is way to high at the moment and needs to be shortened greatly.
+Both of our formalization files - the ForTheL and the LaTeX file - are able to get proofchecked completely. We tried to get the newest iteration of the SAD system to work on one of our laptops (which had a new bugfix added), but after updating, the prover decided not to work at all anymore. Thus we decided to stay with the older version on the other laptop in order to keep a working prover. However, now one still has to verify, that the formalization also works in the newest SAD version. Unfortunately, now with only one working prover, we can only present the running times of the slower laptop which has a Intel Pentium CPU N3700 @ 1.60 GHz x 4 with 4 GB RAM. There the ForTheL text needs a total time of 4 minutes with 3 minutes and 43 seconds used by the prover and the LaTeX document needs a total time of 6 minutes and 6 seconds and 3 minutes 55 seconds used by the prover. As one can see, the time needed to parse the LaTeX document is way too high at the moment and needs to be shortened greatly.
 
 \section{Discussion}
 
 As proven by our formalization of a common mathematical text, it is possible to proofcheck fairly complex mathematical literature in the current SAD system. Although, we would like to propose a few suggestions, that could be incorporated in future iterations of the system:\\
 
-\noindent First of all, the whole LaTeX parser is really made up on the spot, so it lacks a lot of well needed features, for example being able to process functions as '$abs$' and '$inv$' which have parameters. Also its rigidness makes it really hard to add functionality. This is an expected outcome since the parser was written with its main language ForTheL in mind, which had the LaTeX environment added on top of that, but one could think about writing a parser from scratch, which considers LaTeX as its main input language.\\
+\noindent First of all, the whole LaTeX parser is really made up on the spot, so it lacks a lot of well needed features, for example being able to process functions like '$abs$' and '$inv$' which have parameters. Also its rigidness makes it really hard to add further functionality. This is an expected outcome since the parser was written with its main language ForTheL in mind, which had the LaTeX environment added on top of that, but one could think about writing a parser from scratch, which considers LaTeX as its main input language.\\
 
-\noindent Secondly, we have seen in our example of 'ProdConv', where we had to provide hints that certain numbers are real numbers, that the prover has some problems deducing needed assumptions. Maybe this could handled by enforcing a soft typing system, which tags certain numbers as real numbers or with similar needed assumptions. This probably would help the prover a lot and such a system could also help improving the formalizability of algebraic structures, but one has to think about the theoretic consequences of a typing system. \\
+\noindent Secondly, the prover sometimes has problems deducing needed assumptions, as we have seen in our example of 'ProdConv', where we had to provide hints that certain numbers are real numbers. Maybe this could be improved by enforcing a soft typing system, which tags certain numbers as real numbers or with similar needed assumptions. This probably would help the prover a lot and such a system could also help improving the formalizability of algebraic structures, but one has to think about the theoretic consequences of such a typing system. \\
 
-\noindent Furthermore, we would like two more features, that would make formalizing in SAD alot more convenient: On the one hand being able to overload operators, as we already did in our LaTeX formalization, would reduce the number of redundant operators like ' $+'$ ', and on the other hand the ability to create chains of inequalities (and maybe even mixing equalities and inequalities) would result in immensely shorter proofs, because application of transitivity basically require both sides of the inequality to be copied at the moment (for example at the end of 'ConvergentImpBounded').\\
+\noindent Furthermore, we would like to suggest two more features, that would make formalizing in SAD alot more convenient: On the one hand, being able to overload operators - as we already did in our LaTeX formalization - would reduce the number of redundant operators like ' $+'$ ', and on the other hand, the ability to create chains of inequalities (and maybe even mixing equalities and inequalities) would result in immensely shorter proofs, because application of transitivity basically requires both sides of the inequality being copied at the moment (for example at the end of 'ConvergentImpBounded').\\
 
 \noindent Last but not least, the input language ForTheL could be more flexible, for example it does not allow 'Then' or similar words in signatures and sometimes one is not allowed to add a 'a' to a definition as in '$K$ is lower bound of $a$' instead of '$K$ is a lower bound of $a$'.
 
